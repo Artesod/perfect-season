@@ -5,25 +5,25 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 ## Phase 0 — Project foundation
 
 - [x] Create base folder structure and planning docs
-- [ ] `git init`, first commit, push to remote (GitHub)
-- [ ] Scaffold Vite + React + TypeScript app in `apps/web`
-- [ ] Set up monorepo tooling (npm/pnpm workspaces) so `apps/web` can import `packages/shared` and `packages/sim`
-- [ ] Linting/formatting (ESLint + Prettier) and a basic test runner (Vitest)
-- [ ] CI workflow: build + test on every push
-- [ ] Deploy workflow: pushing a git tag (e.g. `v0.1.0`) deploys to live site (Vercel/Netlify/Cloudflare Pages — pick one)
-- [ ] Decide simulation language: **TypeScript recommended** (shares types with frontend, can run client-side in a Web Worker for instant sims, no separate backend needed early). Python only if we later want heavy stats/ML tooling.
+- [~] `git init`, first commit — still todo: create GitHub repo and push
+- [x] Scaffold Vite + React + TypeScript app in `apps/web`
+- [x] Set up monorepo tooling (npm workspaces) so `apps/web` can import `packages/shared` and `packages/sim`
+- [x] Linting/formatting (oxlint + Prettier — Vite template ships oxlint now) and Vitest as test runner
+- [x] CI workflow: lint + typecheck + test + build on every push (`.github/workflows/ci.yml`)
+- [x] Deploy workflow: pushing a `v*` tag deploys `apps/web` to GitHub Pages (`.github/workflows/deploy.yml`) — requires one-time repo setting: Settings → Pages → Source → "GitHub Actions"
+- [x] Decide simulation language: **TypeScript** (shares types with frontend, can run client-side in a Web Worker for instant sims, no separate backend needed early). Python only if we later want heavy stats/ML tooling.
 
 ## Phase 1 — Core data & simulation engine (`packages/sim`, `packages/shared`)
 
-- [ ] Define core types: `Player`, `Team`, `Contract`, `GameResult`, `SeasonState`, `RunState`
+- [~] Define core types: `Player`, `Team`, `GameResult`, `RunState` sketched in `packages/shared` — still todo: `Contract`, `SeasonState`, chemistry/event types
 - [ ] Source player dataset (real NBA stats or generated players) into `data/`
 - [ ] Player rating model — derive a per-player value (e.g. simplified BPM/WAR-style rating) from stats
-- [ ] Game simulation v1: team-strength model (ratings + home court + variance) → win probability → result
+- [x] Game simulation v1: team-strength model (ratings + home court + variance) → win probability → result (`packages/sim/src/game.ts`)
 - [ ] Season simulation: 82-game schedule against 29 CPU teams
 - [ ] Playoff simulation: bracket, best-of-7 series
 - [ ] Projected Wins Above Replacement (pWAR) calculation for roster-building guidance
-- [ ] Deterministic seeded RNG (replayable/sharable runs)
-- [ ] Unit tests for sim engine (distributions sanity checks, edge cases)
+- [x] Deterministic seeded RNG (replayable/sharable runs) — mulberry32 in `packages/shared/src/rng.ts`
+- [~] Unit tests for sim engine — game sim covered; grow alongside new sim features
 
 ## Phase 2 — Roster building (draft / free agency / salary cap)
 
@@ -72,9 +72,10 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## Decisions log
 
-| Date | Decision | Rationale |
-| --- | --- | --- |
+| Date       | Decision                                          | Rationale                                          |
+| ---------- | ------------------------------------------------- | -------------------------------------------------- |
 | 2026-07-01 | Monorepo: `apps/` + `packages/` + `db/` + `data/` | Keeps sim engine separate from UI, shareable types |
-| | Sim language: TBD (TS recommended) | See Phase 0 |
-| | Database: TBD (SQLite/Postgres) | Not needed until leaderboards/accounts |
-| | Hosting: TBD | Needs tag-based deploy support |
+| 2026-07-01 | Sim language: TypeScript                          | Shared types with frontend, runs client-side       |
+| 2026-07-01 | Lint: oxlint (not ESLint)                         | Ships with the Vite template, fast, zero config    |
+| 2026-07-01 | Hosting: GitHub Pages via tag-triggered Action    | Free, zero setup beyond one repo setting           |
+|            | Database: TBD (SQLite/Postgres)                   | Not needed until leaderboards/accounts             |

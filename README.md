@@ -4,11 +4,11 @@ A roguelike NBA team-builder web game. Draft a 15-man roster under a salary cap,
 
 ## Documents
 
-| Doc | Purpose |
-| --- | --- |
-| [docs/ROADMAP.md](docs/ROADMAP.md) | Task tracking — what's done, in progress, and planned |
-| [docs/GAME_DESIGN.md](docs/GAME_DESIGN.md) | Game mechanics: drafting, chemistry, RNG events, win conditions |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Tech stack, repo layout, data model, deployment strategy |
+| Doc                                          | Purpose                                                         |
+| -------------------------------------------- | --------------------------------------------------------------- |
+| [docs/ROADMAP.md](docs/ROADMAP.md)           | Task tracking — what's done, in progress, and planned           |
+| [docs/GAME_DESIGN.md](docs/GAME_DESIGN.md)   | Game mechanics: drafting, chemistry, RNG events, win conditions |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Tech stack, repo layout, data model, deployment strategy        |
 
 ## Repo layout
 

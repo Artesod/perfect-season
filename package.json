@@ -1,0 +1,25 @@
+{
+  "name": "perfect-season",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Roguelike NBA team-builder: draft a roster, chase 82-0 and a championship",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace apps/web",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "oxlint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "oxlint": "^1.71.0",
+    "prettier": "^3.6.2",
+    "typescript": "~6.0.2",
+    "vitest": "^4.0.6"
+  }
+}
