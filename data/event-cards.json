@@ -1,0 +1,221 @@
+[
+  {
+    "id": "locker-room-dispute",
+    "title": "Locker Room Dispute",
+    "text": "{player} got into a heated argument with a teammate after practice. The tension is spilling into the film room.",
+    "choices": [
+      {
+        "id": "team-meeting",
+        "label": "Call a players-only meeting to clear the air",
+        "effects": [{ "type": "rating", "delta": 1, "games": 5, "target": "team" }]
+      },
+      {
+        "id": "bench-them",
+        "label": "Bench both of them a game to send a message",
+        "effects": [{ "type": "rating", "delta": -2, "games": 3, "target": "involved" }]
+      }
+    ]
+  },
+  {
+    "id": "media-circus",
+    "title": "Media Circus",
+    "text": "A national reporter published a story questioning whether {player} deserves their contract. Cameras are everywhere.",
+    "choices": [
+      {
+        "id": "shield",
+        "label": "Shut down media access and shield the player",
+        "effects": [{ "type": "rating", "delta": 2, "games": 4, "target": "involved" }]
+      },
+      {
+        "id": "let-talk",
+        "label": "Let them answer the critics themselves",
+        "effects": [
+          { "type": "rating", "delta": 3, "games": 3, "target": "involved" },
+          { "type": "rating", "delta": -1, "games": 3, "target": "team" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "birthday-bash",
+    "title": "Birthday Bash",
+    "text": "{player} is throwing a big birthday party the night before a game and the whole roster is invited.",
+    "choices": [
+      {
+        "id": "curfew",
+        "label": "Enforce curfew — everyone home by 11",
+        "effects": [{ "type": "rating", "delta": -1, "games": 2, "target": "involved" }]
+      },
+      {
+        "id": "let-loose",
+        "label": "Let the team bond and blow off steam",
+        "effects": [
+          { "type": "rating", "delta": 2, "games": 4, "target": "team" },
+          { "type": "rating", "delta": -3, "games": 1, "target": "involved" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "film-session",
+    "title": "Marathon Film Session",
+    "text": "The coaching staff wants a grueling 4-hour film session after a sloppy win. {player} is visibly checked out.",
+    "choices": [
+      {
+        "id": "run-it",
+        "label": "Run the full session — details win games",
+        "effects": [{ "type": "rating", "delta": 2, "games": 6, "target": "team" }]
+      },
+      {
+        "id": "cut-short",
+        "label": "Cut it short and give everyone the afternoon off",
+        "effects": [{ "type": "rating", "delta": 1, "games": 2, "target": "involved" }]
+      }
+    ]
+  },
+  {
+    "id": "rookie-hazing",
+    "title": "Rookie Carrying Bags",
+    "text": "Veterans have {player} carrying equipment bags and buying donuts. It's mostly good-natured... mostly.",
+    "choices": [
+      {
+        "id": "tradition",
+        "label": "It's tradition — builds character",
+        "effects": [{ "type": "none" }]
+      },
+      {
+        "id": "shut-down",
+        "label": "Shut it down before it goes too far",
+        "effects": [{ "type": "rating", "delta": 1, "games": 4, "target": "involved" }]
+      }
+    ]
+  },
+  {
+    "id": "hometown-return",
+    "title": "Hometown Return",
+    "text": "Next week {player} plays in their hometown for the first time. Forty ticket requests and counting.",
+    "choices": [
+      {
+        "id": "embrace",
+        "label": "Embrace the moment — feature them in the game plan",
+        "effects": [{ "type": "rating", "delta": 3, "games": 2, "target": "involved" }]
+      },
+      {
+        "id": "business-trip",
+        "label": "Treat it like a business trip, no distractions",
+        "effects": [{ "type": "rating", "delta": 1, "games": 3, "target": "team" }]
+      }
+    ]
+  },
+  {
+    "id": "viral-highlight",
+    "title": "Viral Highlight",
+    "text": "{player}'s poster dunk has 40 million views. Every arena wants a repeat and they know it.",
+    "choices": [
+      {
+        "id": "ride-wave",
+        "label": "Ride the wave — confidence is contagious",
+        "effects": [
+          { "type": "rating", "delta": 2, "games": 3, "target": "involved" },
+          { "type": "rating", "delta": 1, "games": 3, "target": "team" }
+        ]
+      },
+      {
+        "id": "stay-humble",
+        "label": "Remind them highlights don't win rings",
+        "effects": [{ "type": "rating", "delta": 1, "games": 6, "target": "involved" }]
+      }
+    ]
+  },
+  {
+    "id": "sneaker-deal",
+    "title": "Sneaker Deal Drama",
+    "text": "{player}'s new signature shoe deal comes with appearance obligations that clash with practice times.",
+    "choices": [
+      {
+        "id": "accommodate",
+        "label": "Work around it — happy star, happy team",
+        "effects": [{ "type": "rating", "delta": 1, "games": 4, "target": "involved" }]
+      },
+      {
+        "id": "team-first",
+        "label": "Practice comes first, renegotiate the appearances",
+        "effects": [
+          { "type": "rating", "delta": -2, "games": 2, "target": "involved" },
+          { "type": "rating", "delta": 1, "games": 5, "target": "team" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "minutes-complaint",
+    "title": "Minutes Complaint",
+    "text": "{player}'s agent called the front office about their role. They want more minutes or a bigger role in the offense.",
+    "choices": [
+      {
+        "id": "expand-role",
+        "label": "Promise them a bigger role",
+        "effects": [
+          { "type": "rating", "delta": 3, "games": 5, "target": "involved" },
+          { "type": "rating", "delta": -1, "games": 5, "target": "team" }
+        ]
+      },
+      {
+        "id": "hold-line",
+        "label": "Hold the line — the rotation is earned",
+        "effects": [{ "type": "rating", "delta": -2, "games": 4, "target": "involved" }]
+      }
+    ]
+  },
+  {
+    "id": "charity-event",
+    "title": "Community Day",
+    "text": "{player} organized a charity event at a local school and asked the whole roster to show up on the off day.",
+    "choices": [
+      {
+        "id": "all-in",
+        "label": "Everyone goes — this is what teams do",
+        "effects": [{ "type": "rating", "delta": 2, "games": 5, "target": "team" }]
+      },
+      {
+        "id": "optional",
+        "label": "Make it optional, rest matters too",
+        "effects": [{ "type": "rating", "delta": 1, "games": 3, "target": "involved" }]
+      }
+    ]
+  },
+  {
+    "id": "trade-rumors",
+    "title": "Trade Rumors",
+    "text": "A rumor has {player} being shopped at the deadline. It's baseless, but they saw the tweet mid-shootaround.",
+    "choices": [
+      {
+        "id": "public-commit",
+        "label": "Publicly commit to them as untouchable",
+        "effects": [{ "type": "rating", "delta": 2, "games": 6, "target": "involved" }]
+      },
+      {
+        "id": "no-comment",
+        "label": "No comment — never dignify rumors",
+        "effects": [{ "type": "rating", "delta": -2, "games": 3, "target": "involved" }]
+      }
+    ]
+  },
+  {
+    "id": "lucky-shorts",
+    "title": "Lucky Shorts",
+    "text": "{player} refuses to let the equipment staff wash their 'lucky' shorts during the win streak. It's becoming a thing.",
+    "choices": [
+      {
+        "id": "respect-streak",
+        "label": "Respect the streak. Nobody touches the shorts",
+        "effects": [{ "type": "rating", "delta": 1, "games": 3, "target": "team" }]
+      },
+      {
+        "id": "wash-them",
+        "label": "Wash them. This is a professional organization",
+        "effects": [{ "type": "rating", "delta": -1, "games": 2, "target": "involved" }]
+      }
+    ]
+  }
+]

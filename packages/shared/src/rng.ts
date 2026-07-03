@@ -25,3 +25,25 @@ export function randInt(rng: Rng, min: number, max: number): number {
 export function pick<T>(rng: Rng, items: readonly T[]): T {
   return items[Math.floor(rng() * items.length)];
 }
+
+/**
+ * Derive an independent child seed from a run seed and a stream id (e.g. one
+ * stream per game). Keeps every subsystem deterministic regardless of how
+ * many random draws other subsystems consumed.
+ */
+export function deriveSeed(seed: number, stream: number): number {
+  let h = (seed ^ Math.imul(stream + 1, 0x9e3779b9)) >>> 0;
+  h = Math.imul(h ^ (h >>> 16), 0x85ebca6b) >>> 0;
+  h = Math.imul(h ^ (h >>> 13), 0xc2b2ae35) >>> 0;
+  return (h ^ (h >>> 16)) >>> 0;
+}
+
+/** Fisher-Yates shuffle into a new array */
+export function shuffle<T>(rng: Rng, items: readonly T[]): T[] {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = randInt(rng, 0, i);
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}

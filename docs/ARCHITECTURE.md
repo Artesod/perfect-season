@@ -2,14 +2,14 @@
 
 ## Tech stack
 
-| Layer        | Choice                                    | Notes                                                                 |
-| ------------ | ----------------------------------------- | --------------------------------------------------------------------- |
-| Frontend     | Vite + React + TypeScript                 | `apps/web`                                                            |
-| Simulation   | TypeScript                                | `packages/sim` — see rationale below                                  |
-| Shared types | TypeScript                                | `packages/shared` — used by web, sim, and (later) API                 |
-| Database     | SQL, TBD (SQLite → Postgres)              | Not needed until leaderboards/accounts; runs persist in browser first |
-| Hosting      | GitHub Pages                              | Tag-triggered deploy via GitHub Actions                               |
-| CI/CD        | GitHub Actions                            | Build+test on push; deploy on tag                                     |
+| Layer        | Choice                       | Notes                                                                 |
+| ------------ | ---------------------------- | --------------------------------------------------------------------- |
+| Frontend     | Vite + React + TypeScript    | `apps/web`                                                            |
+| Simulation   | TypeScript                   | `packages/sim` — see rationale below                                  |
+| Shared types | TypeScript                   | `packages/shared` — used by web, sim, and (later) API                 |
+| Database     | SQL, TBD (SQLite → Postgres) | Not needed until leaderboards/accounts; runs persist in browser first |
+| Hosting      | GitHub Pages                 | Tag-triggered deploy via GitHub Actions                               |
+| CI/CD        | GitHub Actions               | Build+test on push; deploy on tag                                     |
 
 ### Why TypeScript for the sim (recommendation)
 

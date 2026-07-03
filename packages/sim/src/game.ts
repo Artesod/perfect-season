@@ -1,16 +1,18 @@
 import type { GameResult, Rng, Team } from '@perfect-season/shared';
+import { chemistryDelta } from './chemistry';
 
 /**
- * Game simulation v1: team strength from the top of the rotation, a logistic
- * win-probability model with home-court advantage, and a plausible score.
- * This is a deliberately simple placeholder — see docs/GAME_DESIGN.md for
- * where this is headed (chemistry modifiers, fatigue, events).
+ * Game simulation: team strength from the top of the rotation plus chemistry
+ * modifiers, a logistic win-probability model with home-court advantage, and
+ * a plausible score. See docs/GAME_DESIGN.md for where this is headed
+ * (fatigue, in-game events).
  */
 
 const HOME_COURT_BONUS = 1.5;
 /** Rating-difference scale for the logistic curve; higher = upsets more likely */
 const UPSET_FACTOR = 6;
 
+/** Rotation-weighted rating aggregate, before chemistry. */
 export function teamStrength(team: Team): number {
   // Weight the best players heaviest, mimicking a real rotation.
   const sorted = [...team.players].sort((a, b) => b.overall - a.overall);
@@ -24,8 +26,13 @@ export function teamStrength(team: Team): number {
   return weightSum > 0 ? total / weightSum : 0;
 }
 
+/** Ratings plus chemistry — what games are actually decided on. */
+export function effectiveStrength(team: Team): number {
+  return teamStrength(team) + chemistryDelta(team.players);
+}
+
 export function homeWinProbability(home: Team, away: Team): number {
-  const diff = teamStrength(home) + HOME_COURT_BONUS - teamStrength(away);
+  const diff = effectiveStrength(home) + HOME_COURT_BONUS - effectiveStrength(away);
   return 1 / (1 + Math.exp(-diff / UPSET_FACTOR));
 }
 
