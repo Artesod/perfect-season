@@ -2,6 +2,7 @@ import {
   createRng,
   deriveSeed,
   type EventCard,
+  type NbaDataset,
   type PendingCard,
   type Player,
   type RunState,
@@ -22,6 +23,7 @@ import {
 } from './events';
 import { canSign, generateFreeAgents, signPlayer, waivePlayer } from './freeAgency';
 import { generateLeague } from './league';
+import { buildRealLeague, sampleRealFreeAgents } from './realPlayers';
 import { generateSchedule, simulateScheduledGame } from './season';
 
 /**
@@ -44,23 +46,42 @@ export const USER_TEAM_ID = 'user';
 /** Free-agent pool refreshes every this many games. */
 export const FA_REFRESH_INTERVAL = 10;
 
-export function createRun(seed: number, ascension = 0): RunState {
+/**
+ * Start a run. With a real-player dataset, the league and draft pool come
+ * from real NBA rosters (one seeded franchise is replaced by the user's
+ * team); without one, everything is procedurally generated. Same seed +
+ * same dataset = same run either way.
+ */
+export function createRun(seed: number, ascension = 0, dataset?: NbaDataset): RunState {
   const mods = difficultyFor(ascension);
+  const base = {
+    seed,
+    ascension,
+    livesRemaining: mods.lives,
+    roster: [],
+    season: null,
+    wins: 0,
+    losses: 0,
+    status: 'drafting' as const,
+  };
+
+  if (dataset) {
+    const setup = buildRealLeague(
+      dataset,
+      createRng(deriveSeed(seed, LEAGUE_STREAM)),
+      mods.cpuOverallBonus,
+    );
+    return { ...base, league: setup.league, draft: { pool: setup.draftPool, roster: [] } };
+  }
+
   const league = generateLeague(createRng(deriveSeed(seed, LEAGUE_STREAM)), {
     minOverall: 55 + mods.cpuOverallBonus,
     maxOverall: 92 + mods.cpuOverallBonus,
   });
   return {
-    seed,
-    ascension,
-    livesRemaining: mods.lives,
+    ...base,
     league,
     draft: startDraft(createRng(deriveSeed(seed, DRAFT_STREAM))),
-    roster: [],
-    season: null,
-    wins: 0,
-    losses: 0,
-    status: 'drafting',
   };
 }
 
@@ -210,11 +231,22 @@ export function resolvePendingCard(
   return { ...run, season: { ...season, effects, pendingCard: null } };
 }
 
-/** Current free-agent pool; refreshes deterministically every few games. */
-export function currentFreeAgents(run: RunState): Player[] {
+/**
+ * Current free-agent pool; refreshes deterministically every few games.
+ * Pass the same dataset the run was created with so real-mode runs draw
+ * free agents from real players (undrafted, waived, or unrostered).
+ */
+export function currentFreeAgents(run: RunState, dataset?: NbaDataset): Player[] {
   requireStatus(run, 'in-season', 'browse free agents');
   const poolIndex = Math.floor(run.season!.results.length / FA_REFRESH_INTERVAL);
-  return generateFreeAgents(createRng(deriveSeed(run.seed, FREE_AGENT_STREAM_BASE + poolIndex)));
+  const rng = createRng(deriveSeed(run.seed, FREE_AGENT_STREAM_BASE + poolIndex));
+  if (dataset) {
+    const excludeIds = new Set(
+      [...run.roster, ...run.league.flatMap((t) => t.players)].map((p) => p.id),
+    );
+    return sampleRealFreeAgents(dataset, rng, excludeIds);
+  }
+  return generateFreeAgents(rng);
 }
 
 export function runWaivePlayer(run: RunState, playerId: string): RunState {

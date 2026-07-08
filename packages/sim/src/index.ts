@@ -7,5 +7,6 @@ export * from './freeAgency';
 export * from './game';
 export * from './league';
 export * from './meta';
+export * from './realPlayers';
 export * from './run';
 export * from './season';

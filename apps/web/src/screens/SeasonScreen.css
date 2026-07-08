@@ -1,0 +1,269 @@
+.season {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.season-topbar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.stat-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.stat-inline-value {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--heading);
+  line-height: 1.1;
+}
+
+.stat-inline-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+}
+
+.season-topbar-actions {
+  margin-left: auto;
+}
+
+.season-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 1000px) {
+  .season-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.season-main,
+.season-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.matchup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0 18px;
+}
+
+.matchup-team {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.matchup-team:last-child {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.matchup-name {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--heading);
+}
+
+.matchup-strength {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.matchup-strength::before {
+  content: 'STR ';
+  letter-spacing: 0.6px;
+}
+
+.matchup-vs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.matchup-prob {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.next-game-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.result-win {
+  color: var(--good);
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.result-loss {
+  color: var(--bad);
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.box-score {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.box-score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 10px;
+  background: var(--surface-2);
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--heading);
+}
+
+.box-score-pts {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.schedule-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.schedule-cell {
+  width: 12px;
+  height: 18px;
+  border-radius: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.schedule-cell.win {
+  background: var(--good);
+  border-color: var(--good);
+}
+
+.schedule-cell.loss {
+  background: var(--bad);
+  border-color: var(--bad);
+}
+
+.event-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.event-line {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 14px;
+  padding: 6px 10px;
+  background: var(--surface-2);
+  border-radius: 6px;
+}
+
+.event-icon {
+  flex-shrink: 0;
+}
+
+.row-injured {
+  opacity: 0.6;
+}
+
+.status-tag {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-injured {
+  background: rgba(224, 82, 82, 0.15);
+  color: var(--bad);
+}
+
+.status-hot {
+  background: rgba(96, 190, 120, 0.15);
+  color: var(--good);
+}
+
+.status-cold {
+  background: rgba(110, 150, 220, 0.15);
+  color: #7ea8e8;
+}
+
+.rankings {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 340px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rankings-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.rankings-row.user {
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-dim);
+  font-weight: 700;
+  color: var(--heading);
+}
+
+.rankings-rank {
+  width: 22px;
+  text-align: right;
+  color: var(--muted);
+  font-family: var(--display);
+}
+
+.rankings-name {
+  flex: 1;
+}
+
+.rankings-strength {
+  font-family: var(--display);
+  color: var(--muted);
+}

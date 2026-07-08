@@ -17,6 +17,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 
 - [x] Define core types: `Player`, `Team`, `GameResult`, `RunState`, `Contract`, `SeasonState`, `SeasonEvent`, `ChemistryEffect` in `packages/shared`
 - [x] Player source: procedurally generated players (`packages/sim/src/league.ts`) — seeded generator for players, rosters, and the 29-team CPU league. Real NBA data can augment/replace it later behind the same interfaces.
+- [x] Real NBA player mode: rosters + 2K ratings scraped from 2kratings.com into `data/nba-players.json` (`scripts/fetch-nba-data.ts`, refreshed weekly by `.github/workflows/refresh-data.yml`); `createRun(seed, ascension, dataset)` builds the draft pool (rank-tiered seeded sampling) and CPU league from real players (`packages/sim/src/realPlayers.ts`) — salary/pWAR/traits derived from ratings, toggleable on the home screen
 - [~] Player rating model — overall → salary and overall → pWAR curves exist; refine once chemistry/traits feed in
 - [x] Game simulation v1: team-strength model (ratings + home court + variance) → win probability → result (`packages/sim/src/game.ts`)
 - [x] Season simulation: 82-game schedule against 29 CPU teams (`packages/sim/src/season.ts`) — perfect-season mode stops at first loss
@@ -52,13 +53,13 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## Phase 4 — Frontend (`apps/web`)
 
-- [ ] App shell, routing, state management (Zustand or similar)
-- [ ] Draft screen: player pool, cap sheet, roster board
-- [ ] Season dashboard: schedule, record, standings, next opponent
-- [ ] Game result screen: box-score-style summary, key events
-- [ ] Event/decision modals (injury news, event cards)
-- [ ] Run summary screen (win/loss, stats, seed sharing)
-- [ ] Visual design pass: theme, typography, polish
+- [x] App shell, routing, state management — Zustand store wrapping sim transitions (`apps/web/src/store.ts`), screens switch on `run.status` (no router); meta-progression persisted to localStorage
+- [x] Draft screen: player pool (sort/filter), cap sheet, roster board with undo, chemistry readout, start-season gate
+- [x] Season dashboard: schedule strip, record, next opponent with win probability, power rankings (by strength — CPU teams don't play each other yet), free agency drawer, event log
+- [x] Game result screen: last-game panel with score + events (team-level summary; per-player box scores need sim support first)
+- [x] Event/decision modals: injuries/streaks in the event log, event cards as a blocking modal (`EventCardModal`)
+- [x] Run summary screen (win/loss banner, run stats, new badges, seed sharing)
+- [x] Visual design pass: dark hardwood theme via CSS variables in `index.css`, per-screen stylesheets, no UI framework
 
 ## Phase 5 — Persistence & backend
 
@@ -89,4 +90,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 | 2026-07-03 | Salary cap: $155M flat cap, 50% dead cap on waive | NBA-ish number; tight enough that 3 max contracts is infeasible, forcing stars-vs-depth trade-offs. Dead cap makes roster churn costly.                                      |
 | 2026-07-03 | RNG: per-stream derived seeds (`deriveSeed`)      | Each subsystem (league, draft, each game, each event roll) gets its own seed derived from run seed + stream id, so saves/loads and UI call patterns can't desync a replay.   |
 | 2026-07-03 | AI/LLMs: design-time content only, not runtime    | Runtime LLM calls would break seeded determinism, offline play, and zero-backend hosting. Use AI to author event cards/flavor text into `data/`; engine stays deterministic. |
+| 2026-07-07 | Frontend: Zustand + status-driven screens         | The game is one linear flow (home → draft → season → summary) driven by `run.status`, so a router adds nothing; one store holds `RunState` + persisted `MetaProgress`.       |
+| 2026-07-07 | Real player data: 2kratings.com, design-time only | Only free source with a ready quality rating per player. Scraped into `data/` and bundled at build; no runtime fetches, so seeds stay deterministic and hosting stays static. |
+| 2026-07-07 | Data refresh: weekly scheduled GitHub Action      | "Latest rosters over time" without a backend: the Action re-scrapes, validates (min teams/players + sim schema tests), and commits. A refresh changes what a seed produces; the dataset date is shown in the UI. |
 |            | Database: TBD (SQLite/Postgres)                   | Not needed until leaderboards/accounts                                                                                                                                       |

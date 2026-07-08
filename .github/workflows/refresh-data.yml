@@ -1,0 +1,44 @@
+name: Refresh NBA data
+
+on:
+  schedule:
+    # Mondays 09:00 UTC — after the weekend's roster moves
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The scraper exits non-zero on an implausible scrape (site redesign,
+      # partial outage), so a bad dataset can never be committed.
+      - name: Scrape latest rosters and ratings
+        run: npm run fetch:nba
+
+      - name: Verify dataset against the sim's schema
+        run: npm test --workspace @perfect-season/sim
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet data/nba-players.json; then
+            echo "No roster changes this week."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/nba-players.json
+          git commit -m "chore(data): refresh NBA rosters and ratings"
+          git push

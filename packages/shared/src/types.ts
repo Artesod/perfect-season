@@ -117,6 +117,36 @@ export interface EventCard {
   choices: EventCardChoice[];
 }
 
+/**
+ * A real NBA player as scraped from 2kratings.com (see scripts/fetch-nba-data.ts).
+ * Raw source data, distinct from the in-game Player shape — the sim maps it via
+ * toPlayer() in packages/sim, deriving salary/pWAR/traits deterministically.
+ */
+export interface RealPlayerRecord {
+  name: string;
+  /** Primary position (first listed for dual-position players) */
+  position: Position;
+  /** 2K overall rating */
+  overall: number;
+  /** 2K three-point rating, used to derive shooting traits and off/def lean */
+  threePoint: number;
+  /** 2K dunk rating, used to derive athletic traits and off/def lean */
+  dunk: number;
+}
+
+export interface RealTeamRecord {
+  name: string;
+  players: RealPlayerRecord[];
+}
+
+/** The bundled real-player dataset in data/nba-players.json. */
+export interface NbaDataset {
+  /** ISO date the data was scraped; a refresh changes what a seed produces */
+  fetchedAt: string;
+  source: string;
+  teams: RealTeamRecord[];
+}
+
 /** Temporary player modifiers accumulated from events, ticked down per game. */
 export interface ActiveEffects {
   /** playerId -> games still sidelined */

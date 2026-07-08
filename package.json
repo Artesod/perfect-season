@@ -14,12 +14,15 @@
     "lint": "oxlint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "npm run typecheck --workspaces --if-present"
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "fetch:nba": "tsx scripts/fetch-nba-data.ts"
   },
   "devDependencies": {
     "@types/node": "^26.1.0",
+    "cheerio": "^1.2.0",
     "oxlint": "^1.71.0",
     "prettier": "^3.6.2",
+    "tsx": "^4.23.0",
     "typescript": "~6.0.2",
     "vitest": "^4.0.6"
   }
