@@ -14,6 +14,10 @@ export interface Player {
   pWAR: number;
   /** Playstyle traits used by the chemistry system, e.g. "playmaker", "rim-protector" */
   traits: string[];
+  /** Headshot URL (real players only); UI falls back to a generic avatar */
+  imageUrl?: string;
+  /** Real-world per-game stats from last season (real players only), display-only */
+  stats?: RealPlayerStats;
 }
 
 export interface Team {
@@ -122,6 +126,23 @@ export interface EventCard {
  * Raw source data, distinct from the in-game Player shape — the sim maps it via
  * toPlayer() in packages/sim, deriving salary/pWAR/traits deterministically.
  */
+/** Per-game averages from the most recent NBA season (Basketball-Reference). */
+export interface RealPlayerStats {
+  /** e.g. "2025-26" */
+  season: string;
+  gamesPlayed: number;
+  minutes: number;
+  points: number;
+  rebounds: number;
+  assists: number;
+  steals: number;
+  blocks: number;
+  /** Field-goal percentage, 0-1 */
+  fgPct: number;
+  /** Three-point percentage, 0-1 */
+  threePct: number;
+}
+
 export interface RealPlayerRecord {
   name: string;
   /** Primary position (first listed for dual-position players) */
@@ -132,6 +153,10 @@ export interface RealPlayerRecord {
   threePoint: number;
   /** 2K dunk rating, used to derive athletic traits and off/def lean */
   dunk: number;
+  /** Absolute headshot URL scraped alongside the ratings, when the site has one */
+  imageUrl?: string;
+  /** Last season's per-game averages, when the stats source has the player */
+  stats?: RealPlayerStats;
 }
 
 export interface RealTeamRecord {
@@ -160,8 +185,23 @@ export interface ScheduledGame {
   isHome: boolean;
 }
 
+/** What a draft round demands: a specific position, or any player. */
+export type DraftSlot = Position | 'flex';
+
+/**
+ * Team-roll draft (82-0 style): each round a random team is rolled and the
+ * player picks one of its players for that round's slot. Rounds 1-10 cover
+ * every position twice (so the 2-per-position minimum holds by
+ * construction); rounds 11-15 are flex.
+ */
 export interface DraftState {
-  pool: Player[];
+  /** Slot requirement per round; the current round is roster.length */
+  slots: DraftSlot[];
+  /** Id of the team currently offering its roster */
+  rolledTeamId: string;
+  /** Total rolls made (picks + rerolls); indexes the seeded roll stream */
+  rollIndex: number;
+  rerollsLeft: number;
   roster: Player[];
 }
 

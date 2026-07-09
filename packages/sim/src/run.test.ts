@@ -1,20 +1,17 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import {
-  MIN_PER_POSITION,
-  POSITIONS,
-  ROSTER_SIZE,
-  type EventCard,
-  type RunState,
-} from '@perfect-season/shared';
+import { ROSTER_SIZE, type EventCard, type RunState } from '@perfect-season/shared';
 import { MAX_ASCENSION } from './difficulty';
+import { draftCandidates } from './draft';
 import {
   createRun,
   currentFreeAgents,
   playNextGame,
   resolvePendingCard,
-  runDraftPlayer,
+  runCanPick,
+  runPickPlayer,
+  runRerollTeam,
   runSignPlayer,
   runWaivePlayer,
   startSeason,
@@ -25,30 +22,18 @@ const CARDS: EventCard[] = JSON.parse(
   readFileSync(join(__dirname, '../../../data/event-cards.json'), 'utf-8'),
 );
 
-/** Draft a strong-but-legal roster: best affordable per position first. */
+/** Draft a strong-but-legal roster: best legal pick each round, reroll if none. */
 function draftStrongRoster(run: RunState): RunState {
-  for (const position of POSITIONS) {
-    const options = run
-      .draft!.pool.filter((p) => p.position === position)
-      .sort((a, b) => a.salary - b.salary)
-      .slice(0, MIN_PER_POSITION);
-    for (const player of options) {
-      run = runDraftPlayer(run, player.id);
+  let guard = 0;
+  while (run.draft!.roster.length < ROSTER_SIZE && guard++ < 200) {
+    const legal = draftCandidates(run.draft!, run.league)
+      .filter((p) => runCanPick(run, p.id).ok)
+      .sort((a, b) => b.overall - a.overall);
+    if (legal.length === 0) {
+      run = runRerollTeam(run);
+      continue;
     }
-  }
-  while (run.draft!.roster.length < ROSTER_SIZE) {
-    // Best remaining player that the feasibility guard allows.
-    const affordable = [...run.draft!.pool]
-      .sort((a, b) => b.overall - a.overall)
-      .find((p) => {
-        try {
-          runDraftPlayer(run, p.id);
-          return true;
-        } catch {
-          return false;
-        }
-      });
-    run = runDraftPlayer(run, affordable!.id);
+    run = runPickPlayer(run, legal[0].id);
   }
   return run;
 }
@@ -67,13 +52,14 @@ function playUntilDone(run: RunState, maxGames = 100): RunState {
 }
 
 describe('createRun', () => {
-  it('is deterministic and starts in drafting', () => {
+  it('is deterministic and starts in drafting with a rolled team', () => {
     const a = createRun(42);
     const b = createRun(42);
     expect(a).toEqual(b);
     expect(a.status).toBe('drafting');
     expect(a.league).toHaveLength(29);
-    expect(a.draft!.pool.length).toBeGreaterThan(0);
+    expect(a.league.some((t) => t.id === a.draft!.rolledTeamId)).toBe(true);
+    expect(a.draft!.slots).toHaveLength(ROSTER_SIZE);
   });
 
   it('higher ascension produces stronger CPU teams', () => {
@@ -90,6 +76,17 @@ describe('run lifecycle', () => {
   it('cannot start the season with an illegal roster', () => {
     const run = createRun(1);
     expect(() => startSeason(run)).toThrow(/not legal/);
+  });
+
+  it('removes drafted players from their CPU teams at season start', () => {
+    const run = startSeason(draftStrongRoster(createRun(2024)));
+    const draftedIds = new Set(run.roster.map((p) => p.id));
+    const leagueIds = run.league.flatMap((t) => t.players.map((p) => p.id));
+    expect(leagueIds.some((id) => draftedIds.has(id))).toBe(false);
+    // Fill-ins keep every CPU roster at rotation depth.
+    for (const team of run.league) {
+      expect(team.players.length).toBeGreaterThanOrEqual(10);
+    }
   });
 
   it('plays a full run to a terminal status, deterministically', () => {

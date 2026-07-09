@@ -4,9 +4,9 @@ import {
   playNextGame,
   recordRun,
   resolvePendingCard,
-  runDraftPlayer,
+  runPickPlayer,
+  runRerollTeam,
   runSignPlayer,
-  runUndraftPlayer,
   runWaivePlayer,
   startSeason,
   emptyMetaProgress,
@@ -28,8 +28,8 @@ interface GameStore {
 
   newRun: (seed: number, ascension: number, dataset: NbaDataset | null) => void;
   exitRun: () => void;
-  draftPlayer: (playerId: string) => void;
-  undraftPlayer: (playerId: string) => void;
+  pickPlayer: (playerId: string) => void;
+  rerollTeam: () => void;
   beginSeason: () => void;
   playGame: () => void;
   simToNextEvent: () => void;
@@ -67,9 +67,9 @@ export const useGameStore = create<GameStore>()(
 
       exitRun: () => set({ run: null, runDataset: null, lastGameEvents: [] }),
 
-      draftPlayer: (playerId) => set({ run: runDraftPlayer(get().run!, playerId) }),
+      pickPlayer: (playerId) => set({ run: runPickPlayer(get().run!, playerId) }),
 
-      undraftPlayer: (playerId) => set({ run: runUndraftPlayer(get().run!, playerId) }),
+      rerollTeam: () => set({ run: runRerollTeam(get().run!) }),
 
       beginSeason: () => set({ run: startSeason(get().run!) }),
 

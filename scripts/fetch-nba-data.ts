@@ -13,7 +13,13 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
-import type { NbaDataset, Position, RealPlayerRecord, RealTeamRecord } from '@perfect-season/shared';
+import type {
+  NbaDataset,
+  Position,
+  RealPlayerRecord,
+  RealPlayerStats,
+  RealTeamRecord,
+} from '@perfect-season/shared';
 
 const TEAM_SLUGS = [
   'atlanta-hawks',
@@ -115,12 +121,22 @@ async function fetchTeam(slug: string): Promise<RealTeamRecord> {
     const threePoint = Number.parseInt($row.attr('data-shot-3pt') ?? '', 10);
     const dunk = Number.parseInt($row.attr('data-driving-dunk') ?? '', 10);
 
+    // Headshot: lazy-loaded via data-src; skip the generic placeholder image.
+    const rawImage = $row.find('img.entry-photo').first().attr('data-src') ?? '';
+    const imageUrl =
+      rawImage.startsWith('http') && !rawImage.includes('player.png')
+        ? rawImage
+        : rawImage.startsWith('/') && !rawImage.includes('player.png')
+          ? `https://www.2kratings.com${rawImage}`
+          : undefined;
+
     players.push({
       name,
       position,
       overall,
       threePoint: Number.isFinite(threePoint) ? clampRating(threePoint) : 50,
       dunk: Number.isFinite(dunk) ? clampRating(dunk) : 50,
+      ...(imageUrl ? { imageUrl } : {}),
     });
   });
 
@@ -128,6 +144,67 @@ async function fetchTeam(slug: string): Promise<RealTeamRecord> {
     throw new Error(`${slug}: only parsed ${players.length} players — page layout may have changed`);
   }
   return { name: teamName, players };
+}
+
+/** Normalized name key for matching across sources: no case/accents/suffixes. */
+function nameKey(name: string): string {
+  return name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z\s]/g, '')
+    .split(/\s+/)
+    .filter((token) => !['jr', 'sr', 'ii', 'iii', 'iv', 'v'].includes(token))
+    .join(' ');
+}
+
+/**
+ * The NBA season identified by its Basketball-Reference year: the 2025-26
+ * season is "2026". From October the in-progress season is the current one.
+ */
+function seasonYear(date: Date): number {
+  return date.getMonth() >= 9 ? date.getFullYear() + 1 : date.getFullYear();
+}
+
+/**
+ * Last season's per-game stats for every player, keyed by normalized name,
+ * from Basketball-Reference's single league-wide per-game page. Players
+ * traded mid-season appear once as a combined row (which comes first), so
+ * the first row per name wins.
+ */
+async function fetchPerGameStats(year: number): Promise<Map<string, RealPlayerStats>> {
+  const url = `https://www.basketball-reference.com/leagues/NBA_${year}_per_game.html`;
+  const $ = load(await fetchHtml(url));
+  const season = `${year - 1}-${String(year % 100).padStart(2, '0')}`;
+
+  const stats = new Map<string, RealPlayerStats>();
+  $('table#per_game_stats tbody tr').each((_, row) => {
+    const $row = $(row);
+    const name = $row.find('[data-stat="name_display"]').first().text().trim();
+    if (!name) return; // repeated header rows
+
+    const key = nameKey(name);
+    if (stats.has(key)) return; // combined multi-team row already captured
+
+    const num = (stat: string) => {
+      const value = Number.parseFloat($row.find(`[data-stat="${stat}"]`).first().text());
+      return Number.isFinite(value) ? value : 0;
+    };
+
+    stats.set(key, {
+      season,
+      gamesPlayed: num('games'),
+      minutes: num('mp_per_g'),
+      points: num('pts_per_g'),
+      rebounds: num('trb_per_g'),
+      assists: num('ast_per_g'),
+      steals: num('stl_per_g'),
+      blocks: num('blk_per_g'),
+      fgPct: num('fg_pct'),
+      threePct: num('fg3_pct'),
+    });
+  });
+  return stats;
 }
 
 async function main(): Promise<void> {
@@ -144,6 +221,32 @@ async function main(): Promise<void> {
     throw new Error(
       `Scrape looks incomplete (${teams.length} teams, ${totalPlayers} players) — not writing`,
     );
+  }
+
+  // Per-game stats are optional garnish: a failed or thin stats scrape must
+  // never block the roster refresh. Early in a season the current year's
+  // page is sparse, so fall back to the season before.
+  try {
+    const year = seasonYear(new Date());
+    let stats = await fetchPerGameStats(year);
+    if (stats.size < 200) {
+      console.warn(`  stats: only ${stats.size} rows for ${year}, trying ${year - 1}`);
+      await delay(2000);
+      stats = await fetchPerGameStats(year - 1);
+    }
+    let matched = 0;
+    for (const team of teams) {
+      for (const player of team.players) {
+        const playerStats = stats.get(nameKey(player.name));
+        if (playerStats) {
+          player.stats = playerStats;
+          matched++;
+        }
+      }
+    }
+    console.log(`  stats: matched ${matched}/${totalPlayers} players (${stats.size} rows)`);
+  } catch (error) {
+    console.warn(`  stats: skipped (${error instanceof Error ? error.message : error})`);
   }
 
   const dataset: NbaDataset = {

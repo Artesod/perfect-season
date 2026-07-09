@@ -14,6 +14,28 @@ function buildTeam(teamIndex: number): RealTeamRecord {
       overall: 55 + spread,
       threePoint: 50 + ((teamIndex * 11 + i * 17) % 45),
       dunk: 40 + ((teamIndex * 5 + i * 23) % 55),
+      // Half the fixture players have a headshot, half exercise the fallback.
+      ...(i % 2 === 0
+        ? { imageUrl: `https://example.com/headshots/${teamIndex + 1}-${i + 1}.png` }
+        : {}),
+      // Every third player has real per-game stats; the rest exercise the
+      // "no stats available" path.
+      ...(i % 3 === 0
+        ? {
+            stats: {
+              season: '2025-26',
+              gamesPlayed: 40 + (spread % 40),
+              minutes: 12 + (spread % 24),
+              points: 4 + (spread % 26),
+              rebounds: 2 + (spread % 10),
+              assists: 1 + (spread % 9),
+              steals: (spread % 20) / 10,
+              blocks: (spread % 15) / 10,
+              fgPct: 0.4 + (spread % 15) / 100,
+              threePct: 0.3 + (spread % 12) / 100,
+            },
+          }
+        : {}),
     };
   });
   return { name: `Fixture Team ${teamIndex + 1}`, players };

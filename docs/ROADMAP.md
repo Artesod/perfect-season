@@ -17,7 +17,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 
 - [x] Define core types: `Player`, `Team`, `GameResult`, `RunState`, `Contract`, `SeasonState`, `SeasonEvent`, `ChemistryEffect` in `packages/shared`
 - [x] Player source: procedurally generated players (`packages/sim/src/league.ts`) — seeded generator for players, rosters, and the 29-team CPU league. Real NBA data can augment/replace it later behind the same interfaces.
-- [x] Real NBA player mode: rosters + 2K ratings scraped from 2kratings.com into `data/nba-players.json` (`scripts/fetch-nba-data.ts`, refreshed weekly by `.github/workflows/refresh-data.yml`); `createRun(seed, ascension, dataset)` builds the draft pool (rank-tiered seeded sampling) and CPU league from real players (`packages/sim/src/realPlayers.ts`) — salary/pWAR/traits derived from ratings, toggleable on the home screen
+- [x] Real NBA player mode: rosters + 2K ratings + headshot URLs scraped from 2kratings.com, plus last season's per-game stats (PPG/RPG/APG/etc.) name-matched from Basketball-Reference's league per-game page, into `data/nba-players.json`; stats surface in a per-player info modal (`PlayerInfoModal`) and are display-only — the stats scrape failing never blocks a roster refresh (`scripts/fetch-nba-data.ts`, refreshed weekly by `.github/workflows/refresh-data.yml`); `createRun(seed, ascension, dataset)` builds the CPU league from real players (`packages/sim/src/realPlayers.ts`) — salary (rank-mapped)/pWAR/traits derived from ratings, toggleable on the home screen. Headshots are hot-linked with `referrerPolicy="no-referrer"` (the CDN 403s foreign referers) and fall back to a generic gray avatar (`PlayerAvatar`)
 - [~] Player rating model — overall → salary and overall → pWAR curves exist; refine once chemistry/traits feed in
 - [x] Game simulation v1: team-strength model (ratings + home court + variance) → win probability → result (`packages/sim/src/game.ts`)
 - [x] Season simulation: 82-game schedule against 29 CPU teams (`packages/sim/src/season.ts`) — perfect-season mode stops at first loss
@@ -29,8 +29,8 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 ## Phase 2 — Roster building (draft / free agency / salary cap)
 
 - [x] Salary cap model: $155M cap, cap math + dead cap support (`packages/sim/src/cap.ts`, constants in `packages/shared/src/constants.ts`)
-- [x] Draft pool generation: seeded 72-player tiered pool per run — 4 superstars → 24 minimum-salary players, position coverage per tier (`packages/sim/src/draft.ts`)
-- [x] Draft flow: pick/undo with cap feasibility guard (a pick is blocked if it would make the roster impossible to finish under the cap)
+- [x] Team-roll draft (82-0 style): each of 15 rounds rolls a random league team and you pick one of its players — rounds 1–10 demand each position twice, rounds 11–15 are flex; 2 reroll tokens per draft plus a free reroll whenever the rolled team has no legal pick (`packages/sim/src/draft.ts`)
+- [x] Cap feasibility guard: a pick is blocked if it would make the roster impossible to finish under the cap; drafted players leave their CPU teams at season start (seeded fill-ins keep rosters at rotation depth)
 - [x] Free agency: seeded FA pool (no superstars), sign with cap/roster checks, waive with 50% dead-cap penalty (`packages/sim/src/freeAgency.ts`)
 - [x] Roster validation rules: exactly 15 players, min 2 per position, cap compliance, no duplicates (`validateRoster` in `cap.ts`)
 - [x] Wire draft/free agency into `RunState` transitions (drafting → in-season) — done in `packages/sim/src/run.ts` (Phase 3 run loop)
@@ -54,7 +54,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 ## Phase 4 — Frontend (`apps/web`)
 
 - [x] App shell, routing, state management — Zustand store wrapping sim transitions (`apps/web/src/store.ts`), screens switch on `run.status` (no router); meta-progression persisted to localStorage
-- [x] Draft screen: player pool (sort/filter), cap sheet, roster board with undo, chemistry readout, start-season gate
+- [x] Draft screen: team-roll flow (round/slot header, rolled-team roster, reroll button, slot progress strip), cap sheet, roster board, chemistry readout, start-season gate
 - [x] Season dashboard: schedule strip, record, next opponent with win probability, power rankings (by strength — CPU teams don't play each other yet), free agency drawer, event log
 - [x] Game result screen: last-game panel with score + events (team-level summary; per-player box scores need sim support first)
 - [x] Event/decision modals: injuries/streaks in the event log, event cards as a blocking modal (`EventCardModal`)
@@ -93,4 +93,5 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 | 2026-07-07 | Frontend: Zustand + status-driven screens         | The game is one linear flow (home → draft → season → summary) driven by `run.status`, so a router adds nothing; one store holds `RunState` + persisted `MetaProgress`.       |
 | 2026-07-07 | Real player data: 2kratings.com, design-time only | Only free source with a ready quality rating per player. Scraped into `data/` and bundled at build; no runtime fetches, so seeds stay deterministic and hosting stays static. |
 | 2026-07-07 | Data refresh: weekly scheduled GitHub Action      | "Latest rosters over time" without a backend: the Action re-scrapes, validates (min teams/players + sim schema tests), and commits. A refresh changes what a seed produces; the dataset date is shown in the UI. |
+| 2026-07-08 | Draft: team-roll (82-0 style), no undo            | More run-to-run variance than a flat pool: you draft whoever the rolled team offers. Position slots (each ×2, then 5 flex) keep 15 picks legal by construction; 2 reroll tokens + free reroll on dead offers prevent soft-locks. Rolls are seed-indexed so replays match. |
 |            | Database: TBD (SQLite/Postgres)                   | Not needed until leaderboards/accounts                                                                                                                                       |

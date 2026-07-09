@@ -10,7 +10,7 @@ import {
 } from '@perfect-season/shared';
 import { validateRoster } from './cap';
 import { difficultyFor } from './difficulty';
-import { canDraft, draftPlayer, startDraft, undraftPlayer } from './draft';
+import { canPickPlayer, canReroll, createRollDraft, pickPlayer, rerollTeam } from './draft';
 import {
   applyEvent,
   availableRoster,
@@ -22,7 +22,7 @@ import {
   tickEffects,
 } from './events';
 import { canSign, generateFreeAgents, signPlayer, waivePlayer } from './freeAgency';
-import { generateLeague } from './league';
+import { generateLeague, generatePlayer } from './league';
 import { buildRealLeague, sampleRealFreeAgents } from './realPlayers';
 import { generateSchedule, simulateScheduledGame } from './season';
 
@@ -33,9 +33,10 @@ import { generateSchedule, simulateScheduledGame } from './season';
  * happen or how the UI batches calls.
  */
 
-// Seed streams. Games use GAME_STREAM_BASE + gameIndex.
+// Seed streams. Games use GAME_STREAM_BASE + gameIndex; draft team rolls
+// live at 30_000+ (see draft.ts).
 const LEAGUE_STREAM = 0;
-const DRAFT_STREAM = 1;
+const LEAGUE_TOPUP_STREAM = 1;
 const SCHEDULE_STREAM = 2;
 const GAME_STREAM_BASE = 100;
 const EVENT_STREAM_BASE = 10_000;
@@ -47,41 +48,31 @@ export const USER_TEAM_ID = 'user';
 export const FA_REFRESH_INTERVAL = 10;
 
 /**
- * Start a run. With a real-player dataset, the league and draft pool come
- * from real NBA rosters (one seeded franchise is replaced by the user's
- * team); without one, everything is procedurally generated. Same seed +
- * same dataset = same run either way.
+ * Start a run. With a real-player dataset, the league comes from real NBA
+ * rosters (one seeded franchise is replaced by the user's team); without
+ * one, everything is procedurally generated. Drafting is the same in both
+ * modes: teams are rolled from the league and picked from directly. Same
+ * seed + same dataset = same run.
  */
 export function createRun(seed: number, ascension = 0, dataset?: NbaDataset): RunState {
   const mods = difficultyFor(ascension);
-  const base = {
+  const league = dataset
+    ? buildRealLeague(dataset, createRng(deriveSeed(seed, LEAGUE_STREAM)), mods.cpuOverallBonus)
+    : generateLeague(createRng(deriveSeed(seed, LEAGUE_STREAM)), {
+        minOverall: 55 + mods.cpuOverallBonus,
+        maxOverall: 92 + mods.cpuOverallBonus,
+      });
+  return {
     seed,
     ascension,
     livesRemaining: mods.lives,
+    league,
+    draft: createRollDraft(seed, league),
     roster: [],
     season: null,
     wins: 0,
     losses: 0,
-    status: 'drafting' as const,
-  };
-
-  if (dataset) {
-    const setup = buildRealLeague(
-      dataset,
-      createRng(deriveSeed(seed, LEAGUE_STREAM)),
-      mods.cpuOverallBonus,
-    );
-    return { ...base, league: setup.league, draft: { pool: setup.draftPool, roster: [] } };
-  }
-
-  const league = generateLeague(createRng(deriveSeed(seed, LEAGUE_STREAM)), {
-    minOverall: 55 + mods.cpuOverallBonus,
-    maxOverall: 92 + mods.cpuOverallBonus,
-  });
-  return {
-    ...base,
-    league,
-    draft: startDraft(createRng(deriveSeed(seed, DRAFT_STREAM))),
+    status: 'drafting',
   };
 }
 
@@ -91,22 +82,39 @@ function requireStatus(run: RunState, status: RunState['status'], action: string
   }
 }
 
-export function runDraftPlayer(run: RunState, playerId: string): RunState {
+/** Draft the given player from the currently rolled team. */
+export function runPickPlayer(run: RunState, playerId: string): RunState {
   requireStatus(run, 'drafting', 'draft');
   const mods = difficultyFor(run.ascension);
-  return { ...run, draft: draftPlayer(run.draft!, playerId, mods.capReduction) };
+  return {
+    ...run,
+    draft: pickPlayer(run.draft!, run.league, run.seed, playerId, mods.capReduction),
+  };
 }
 
-export function runUndraftPlayer(run: RunState, playerId: string): RunState {
-  requireStatus(run, 'drafting', 'undraft');
-  return { ...run, draft: undraftPlayer(run.draft!, playerId) };
+export function runCanPick(run: RunState, playerId: string) {
+  return canPickPlayer(run.draft!, run.league, playerId, difficultyFor(run.ascension).capReduction);
 }
 
-export function runCanDraft(run: RunState, playerId: string) {
-  return canDraft(run.draft!, playerId, difficultyFor(run.ascension).capReduction);
+export function runCanReroll(run: RunState) {
+  return canReroll(run.draft!, run.league, difficultyFor(run.ascension).capReduction);
 }
 
-/** Lock the drafted roster and generate the season schedule. */
+/** Roll a different team for the current round (free if no legal pick exists). */
+export function runRerollTeam(run: RunState): RunState {
+  requireStatus(run, 'drafting', 'reroll');
+  const mods = difficultyFor(run.ascension);
+  return { ...run, draft: rerollTeam(run.draft!, run.league, run.seed, mods.capReduction) };
+}
+
+/** CPU rosters below this get seeded fill-ins (teamStrength weighs a 10-man rotation). */
+const CPU_MIN_ROSTER = 10;
+
+/**
+ * Lock the drafted roster and generate the season schedule. Drafted players
+ * leave their CPU teams — taking a star weakens the team you'll face — with
+ * seeded fill-ins keeping every roster at rotation depth.
+ */
 export function startSeason(run: RunState): RunState {
   requireStatus(run, 'drafting', 'start the season');
   const roster = run.draft!.roster;
@@ -114,12 +122,24 @@ export function startSeason(run: RunState): RunState {
   if (!validation.valid) {
     throw new Error(`Roster is not legal: ${validation.errors.join('; ')}`);
   }
+
+  const draftedIds = new Set(roster.map((p) => p.id));
+  const topUpRng = createRng(deriveSeed(run.seed, LEAGUE_TOPUP_STREAM));
+  const league = run.league.map((team) => {
+    const players = team.players.filter((p) => !draftedIds.has(p.id));
+    while (players.length < CPU_MIN_ROSTER) {
+      players.push(generatePlayer(topUpRng, { minOverall: 55, maxOverall: 70 }));
+    }
+    return players.length === team.players.length ? team : { ...team, players };
+  });
+
   const schedule = generateSchedule(
     createRng(deriveSeed(run.seed, SCHEDULE_STREAM)),
-    run.league.map((t) => t.id),
+    league.map((t) => t.id),
   );
   return {
     ...run,
+    league,
     draft: null,
     roster,
     season: {

@@ -3,8 +3,15 @@
  * (draft -> season -> free agency -> cards -> terminal) across several seeds
  * to verify the wiring end to end. Run with: npx tsx apps/web/scripts/smoke.ts
  */
-import { MIN_PER_POSITION, ROSTER_SIZE } from '@perfect-season/shared';
-import { canSign, currentFreeAgents, runCanDraft, validateRoster } from '@perfect-season/sim';
+import { ROSTER_SIZE } from '@perfect-season/shared';
+import {
+  canSign,
+  currentFreeAgents,
+  draftCandidates,
+  runCanPick,
+  runCanReroll,
+  validateRoster,
+} from '@perfect-season/sim';
 import { EVENT_CARDS } from '../src/cards';
 import { NBA_DATASET } from '../src/nbaData';
 import { useGameStore } from '../src/store';
@@ -19,39 +26,60 @@ assert(EVENT_CARDS.length === 12, `expected 12 cards, got ${EVENT_CARDS.length}`
 let totalCardsResolved = 0;
 let totalEvents = 0;
 let bestWins = 0;
+let totalRerolls = 0;
+let runsPlayed = 0;
 let triedFreeAgency = false;
+let triedTokenReroll = false;
 
-const SEEDS = Array.from({ length: 20 }, (_, i) => i + 1);
+const BASE_SEEDS = 20;
+// Runs at ascension 0 end on the first loss, so most are only a few games
+// long and whether a morale card fires in a given seed is luck. After the
+// base seeds, keep trying until one has fired so the card path is always
+// exercised.
+const MAX_SEEDS = 500;
 
 assert(NBA_DATASET !== null, 'bundled NBA dataset should validate');
 
-for (const seed of SEEDS) {
+function playSeed(seed: number): void {
+  runsPlayed++;
   // Alternate between real-NBA and procedural runs to exercise both paths.
   store.getState().newRun(seed, 0, seed % 2 === 0 ? NBA_DATASET : null);
   assert(store.getState().run!.status === 'drafting', 'run should start in drafting');
 
-  // Greedy legal draft: cover positions first, then best affordable player.
-  while (store.getState().run!.draft!.roster.length < ROSTER_SIZE) {
+  // Team-roll draft: pick the best legal player from each rolled team,
+  // rerolling when a round offers no legal pick (or, once overall, to
+  // exercise the token path).
+  let draftGuard = 0;
+  while (store.getState().run!.draft!.roster.length < ROSTER_SIZE && draftGuard++ < 200) {
     const state = store.getState().run!;
-    const draft = state.draft!;
-    const byNeed = [...draft.pool].sort((a, b) => {
-      const needA =
-        draft.roster.filter((p) => p.position === a.position).length < MIN_PER_POSITION;
-      const needB =
-        draft.roster.filter((p) => p.position === b.position).length < MIN_PER_POSITION;
-      if (needA !== needB) return needA ? -1 : 1;
-      return b.overall - a.overall;
-    });
-    const pickable = byNeed.find((p) => runCanDraft(state, p.id).ok);
-    assert(pickable !== undefined, 'no draftable player found');
-    store.getState().draftPlayer(pickable!.id);
-  }
+    const legal = draftCandidates(state.draft!, state.league)
+      .filter((p) => runCanPick(state, p.id).ok)
+      .sort((a, b) => b.overall - a.overall);
 
-  // Exercise undo + redraft once.
-  const drafted = store.getState().run!.draft!.roster[14];
-  store.getState().undraftPlayer(drafted.id);
-  assert(store.getState().run!.draft!.roster.length === 14, 'undo should shrink roster');
-  store.getState().draftPlayer(drafted.id);
+    const reroll = runCanReroll(state);
+    if (legal.length === 0) {
+      assert(reroll.allowed && reroll.free, 'reroll should be free when no legal pick exists');
+      store.getState().rerollTeam();
+      totalRerolls++;
+      continue;
+    }
+    if (!triedTokenReroll && state.draft!.rerollsLeft > 0 && state.draft!.roster.length === 3) {
+      const before = state.draft!.rerollsLeft;
+      store.getState().rerollTeam();
+      assert(
+        store.getState().run!.draft!.rerollsLeft === before - 1,
+        'token reroll should spend a token',
+      );
+      triedTokenReroll = true;
+      totalRerolls++;
+      continue;
+    }
+    store.getState().pickPlayer(legal[0].id);
+  }
+  assert(
+    store.getState().run!.draft!.roster.length === ROSTER_SIZE,
+    'draft should complete a 15-man roster',
+  );
 
   const validation = validateRoster(store.getState().run!.draft!.roster);
   assert(validation.valid, `drafted roster should be legal: ${validation.errors.join('; ')}`);
@@ -59,6 +87,19 @@ for (const seed of SEEDS) {
   store.getState().beginSeason();
   assert(store.getState().run!.status === 'in-season', 'season should have started');
   assert(store.getState().run!.season!.schedule.length === 82, 'schedule should be 82 games');
+  {
+    // Drafted players must be gone from CPU rosters once the season starts.
+    const started = store.getState().run!;
+    const draftedIds = new Set(started.roster.map((p) => p.id));
+    const stillRostered = started.league
+      .flatMap((t) => t.players)
+      .some((p) => draftedIds.has(p.id));
+    assert(!stillRostered, 'drafted players should leave their CPU teams');
+    assert(
+      started.league.every((t) => t.players.length >= 10),
+      'CPU teams should keep rotation depth',
+    );
+  }
 
   // Once, mid-first-run: waive a player and sign a free agent. Waive someone
   // pricey enough that the freed half-salary can actually afford a signing.
@@ -108,14 +149,22 @@ for (const seed of SEEDS) {
   bestWins = Math.max(bestWins, run.wins);
 }
 
+for (let seed = 1; seed <= BASE_SEEDS; seed++) {
+  playSeed(seed);
+}
+for (let seed = BASE_SEEDS + 1; seed <= MAX_SEEDS && totalCardsResolved === 0; seed++) {
+  playSeed(seed);
+}
+
 const meta = store.getState().meta;
-assert(meta.totalRuns === SEEDS.length, `all runs should be recorded (got ${meta.totalRuns})`);
+assert(meta.totalRuns === runsPlayed, `all runs should be recorded (got ${meta.totalRuns})`);
 assert(meta.badges.includes('first-steps'), 'first-steps badge should be earned');
 assert(meta.bestWins === bestWins, 'meta bestWins should track the deepest run');
 assert(totalEvents > 0, 'at least one event should have fired across all runs');
 assert(totalCardsResolved > 0, 'at least one event card should have been resolved');
+assert(triedTokenReroll, 'token reroll path should have been exercised');
 
 console.log(
-  `SMOKE OK: ${SEEDS.length} runs, best ${bestWins} wins, ${totalEvents} events, ` +
-    `${totalCardsResolved} cards resolved, badges: ${meta.badges.join(', ')}`,
+  `SMOKE OK: ${runsPlayed} runs, best ${bestWins} wins, ${totalEvents} events, ` +
+    `${totalCardsResolved} cards resolved, ${totalRerolls} rerolls, badges: ${meta.badges.join(', ')}`,
 );

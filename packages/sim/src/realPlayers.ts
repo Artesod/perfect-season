@@ -4,7 +4,6 @@ import {
   shuffle,
   type NbaDataset,
   type Player,
-  type Position,
   type RealPlayerRecord,
   type Rng,
   type Team,
@@ -12,12 +11,12 @@ import {
 import { generatePlayer, pWarForOverall, salaryForOverall } from './league';
 
 /**
- * Real-NBA mode: builds the draft pool and CPU league from the scraped
- * dataset in data/nba-players.json instead of generating players. Salary,
- * pWAR, and traits are derived (real contract data is paywalled and would
- * upset cap balance), so real players plug into the existing cap and
- * chemistry systems unchanged. Everything is seeded: same seed + same
- * dataset = same run.
+ * Real-NBA mode: builds the CPU league (which the team-roll draft picks
+ * from) out of the scraped dataset in data/nba-players.json instead of
+ * generating players. Salary, pWAR, and traits are derived (real contract
+ * data is paywalled and would upset cap balance), so real players plug into
+ * the existing cap and chemistry systems unchanged. Everything is seeded:
+ * same seed + same dataset = same run.
  */
 
 const clamp = (n: number) => Math.min(99, Math.max(40, n));
@@ -90,6 +89,8 @@ function toPlayer(record: RealPlayerRecord, id: string, salaryOverall: number): 
     salary: Math.round(salaryForOverall(salaryOverall) * 10) / 10,
     pWAR: Math.round(pWarForOverall(overall) * 10) / 10,
     traits: deriveTraits(record),
+    ...(record.imageUrl ? { imageUrl: record.imageUrl } : {}),
+    ...(record.stats ? { stats: record.stats } : {}),
   };
 }
 
@@ -99,40 +100,38 @@ interface MappedPlayer {
 }
 
 /**
- * League-wide rank bands. Both the draft-pool tiers (4/8/16/20/24 scarcity,
- * like the procedural POOL_TIERS) and salaries hang off these: the 2K rating
- * distribution is compressed (roughly 67-99) versus the procedural league
- * (55-95), so feeding raw 2K overalls into the salary curve would price
- * end-of-bench players like starters and make a legal 15-man roster
- * impossible under the cap. Instead each rank band maps onto the matching
- * procedural overall range for salary purposes: the depth band is genuinely
- * minimum-salary, superstars are supermax. The real 2K overall is kept for
- * display and on-court strength.
+ * League-wide rank bands for salaries. The 2K rating distribution is
+ * compressed (roughly 67-99) versus the procedural league (55-95), so
+ * feeding raw 2K overalls into the salary curve would price end-of-bench
+ * players like starters and make a legal 15-man roster impossible under the
+ * cap. Instead each rank band maps onto the matching procedural overall
+ * range for salary purposes: the depth band is genuinely minimum-salary,
+ * superstars are supermax. The real 2K overall is kept for display and
+ * on-court strength.
  */
-const RANK_TIERS: readonly {
-  count: number;
+const SALARY_RANK_BANDS: readonly {
   endRank: number;
   maxSalaryOverall: number;
   minSalaryOverall: number;
 }[] = [
-  { count: 4, endRank: 12, maxSalaryOverall: 95, minSalaryOverall: 88 }, // superstars
-  { count: 8, endRank: 48, maxSalaryOverall: 87, minSalaryOverall: 80 }, // stars
-  { count: 16, endRank: 140, maxSalaryOverall: 79, minSalaryOverall: 72 }, // starters
-  { count: 20, endRank: 300, maxSalaryOverall: 71, minSalaryOverall: 64 }, // rotation
-  { count: 24, endRank: Number.POSITIVE_INFINITY, maxSalaryOverall: 63, minSalaryOverall: 55 }, // depth
+  { endRank: 12, maxSalaryOverall: 95, minSalaryOverall: 88 }, // superstars
+  { endRank: 48, maxSalaryOverall: 87, minSalaryOverall: 80 }, // stars
+  { endRank: 140, maxSalaryOverall: 79, minSalaryOverall: 72 }, // starters
+  { endRank: 300, maxSalaryOverall: 71, minSalaryOverall: 64 }, // rotation
+  { endRank: Number.POSITIVE_INFINITY, maxSalaryOverall: 63, minSalaryOverall: 55 }, // depth
 ];
 
 function salaryOverallForRank(rank: number, total: number): number {
   let start = 0;
-  for (const tier of RANK_TIERS) {
-    const end = Math.min(tier.endRank, total);
+  for (const band of SALARY_RANK_BANDS) {
+    const end = Math.min(band.endRank, total);
     if (rank < end) {
       const t = (rank - start) / Math.max(1, end - start);
-      return tier.maxSalaryOverall - t * (tier.maxSalaryOverall - tier.minSalaryOverall);
+      return band.maxSalaryOverall - t * (band.maxSalaryOverall - band.minSalaryOverall);
     }
     start = end;
   }
-  return RANK_TIERS[RANK_TIERS.length - 1].minSalaryOverall;
+  return SALARY_RANK_BANDS[SALARY_RANK_BANDS.length - 1].minSalaryOverall;
 }
 
 /** Pure mapping of the whole dataset with stable, unique ids. */
@@ -160,68 +159,23 @@ export function mapDatasetPlayers(dataset: NbaDataset): MappedPlayer[] {
   });
 }
 
-/** CPU rosters below this are topped up (teamStrength weighs a 10-man rotation). */
-const CPU_MIN_ROSTER = 10;
-
 /** Free agents skew weaker, matching generateFreeAgents' ceiling — no unsigned superstars. */
 export const REAL_FA_MAX_OVERALL = 82;
 
-export interface RealLeagueSetup {
-  draftPool: Player[];
-  league: Team[];
-}
-
-export function buildRealLeague(
-  dataset: NbaDataset,
-  rng: Rng,
-  cpuOverallBonus = 0,
-): RealLeagueSetup {
+/**
+ * The 29-team CPU league from real rosters. The user's franchise replaces
+ * one seeded real team; that team's players skip the league (they surface
+ * through free agency instead). Drafting picks directly from these rosters
+ * — removal of drafted players happens at startSeason.
+ */
+export function buildRealLeague(dataset: NbaDataset, rng: Rng, cpuOverallBonus = 0): Team[] {
   const mapped = mapDatasetPlayers(dataset);
-
-  // The user's franchise replaces one seeded real team; its players become
-  // draft candidates (and leftovers refill shorthanded CPU rosters).
   const removedIndex = randInt(rng, 0, dataset.teams.length - 1);
-
-  const sorted = [...mapped].sort(
-    (a, b) => b.player.overall - a.player.overall || a.player.id.localeCompare(b.player.id),
-  );
-
-  // Sample the pool tier by tier, cycling positions (with a seeded offset)
-  // like the procedural pool so every run can field a legal roster.
-  const taken = new Set<string>();
-  const draftPool: Player[] = [];
-  let bandStart = 0;
-  for (const tier of RANK_TIERS) {
-    const band = sorted.slice(bandStart, Math.min(tier.endRank, sorted.length));
-    bandStart = Math.min(tier.endRank, sorted.length);
-    const candidates = shuffle(rng, band);
-    const offset = randInt(rng, 0, POSITIONS.length - 1);
-    for (let i = 0; i < tier.count; i++) {
-      const desired: Position = POSITIONS[(i + offset) % POSITIONS.length];
-      const choice =
-        candidates.find((m) => !taken.has(m.player.id) && m.player.position === desired) ??
-        candidates.find((m) => !taken.has(m.player.id));
-      if (!choice) continue;
-      taken.add(choice.player.id);
-      draftPool.push(choice.player);
-    }
-  }
-
-  const leftovers = shuffle(
-    rng,
-    mapped.filter((m) => m.teamIndex === removedIndex && !taken.has(m.player.id)),
-  );
 
   const league: Team[] = [];
   dataset.teams.forEach((team, teamIndex) => {
     if (teamIndex === removedIndex) return;
-    let players = mapped
-      .filter((m) => m.teamIndex === teamIndex && !taken.has(m.player.id))
-      .map((m) => m.player);
-    while (players.length < CPU_MIN_ROSTER) {
-      const next = leftovers.pop();
-      players.push(next ? next.player : generatePlayer(rng));
-    }
+    let players = mapped.filter((m) => m.teamIndex === teamIndex).map((m) => m.player);
     if (cpuOverallBonus !== 0) {
       players = players.map((p) => ({
         ...p,
@@ -233,7 +187,7 @@ export function buildRealLeague(
     league.push({ id: `cpu-${league.length + 1}`, name: team.name, players });
   });
 
-  return { draftPool, league };
+  return league;
 }
 
 /**

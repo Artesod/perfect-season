@@ -17,6 +17,8 @@ import {
 import { ChemistryPanel } from '../components/ChemistryPanel';
 import { EventCardModal } from '../components/EventCardModal';
 import { EventLine } from '../components/EventLine';
+import { PlayerAvatar } from '../components/PlayerAvatar';
+import { PlayerInfoModal } from '../components/PlayerInfoModal';
 import { money, pct } from '../format';
 import { useGameStore } from '../store';
 import './SeasonScreen.css';
@@ -33,6 +35,7 @@ export function SeasonScreen() {
   const waivePlayer = useGameStore((s) => s.waivePlayer);
 
   const [showFreeAgency, setShowFreeAgency] = useState(false);
+  const [infoPlayer, setInfoPlayer] = useState<Player | null>(null);
 
   const season = run.season!;
   const gameNumber = season.results.length + 1;
@@ -77,6 +80,7 @@ export function SeasonScreen() {
   return (
     <div className="season">
       <EventCardModal />
+      {infoPlayer && <PlayerInfoModal player={infoPlayer} onClose={() => setInfoPlayer(null)} />}
 
       <div className="season-topbar panel">
         <div className="stat-inline">
@@ -134,7 +138,20 @@ export function SeasonScreen() {
                 const check = canSign(run.roster, player, effectiveDeadCap);
                 return (
                   <tr key={player.id}>
-                    <td className="strong">{player.name}</td>
+                    <td>
+                      <span className="player-cell">
+                        <PlayerAvatar player={player} size={26} />
+                        <span className="strong">{player.name}</span>
+                        <button
+                          type="button"
+                          className="info-btn"
+                          title={`About ${player.name}`}
+                          onClick={() => setInfoPlayer(player)}
+                        >
+                          i
+                        </button>
+                      </span>
+                    </td>
                     <td>{player.position}</td>
                     <td className="num rating">{player.overall}</td>
                     <td className="num">{money(player.salary)}</td>
@@ -303,6 +320,7 @@ export function SeasonScreen() {
                     player={player}
                     injuredGames={season.effects.injuries[player.id]}
                     ratingMod={season.effects.ratingMods[player.id]}
+                    onInfo={() => setInfoPlayer(player)}
                     onWaive={() => {
                       const deadCap = (player.salary * DEAD_CAP_FRACTION).toFixed(1);
                       if (
@@ -346,18 +364,26 @@ function RosterRow({
   player,
   injuredGames,
   ratingMod,
+  onInfo,
   onWaive,
 }: {
   player: Player;
   injuredGames: number | undefined;
   ratingMod: { delta: number; gamesRemaining: number } | undefined;
+  onInfo: () => void;
   onWaive: () => void;
 }) {
   return (
     <tr className={injuredGames ? 'row-injured' : ''}>
       <td>
-        <span className="strong">{player.name}</span>{' '}
-        <span className="muted small">{player.position}</span>
+        <span className="player-cell">
+          <PlayerAvatar player={player} size={26} />
+          <span className="strong">{player.name}</span>{' '}
+          <span className="muted small">{player.position}</span>
+          <button type="button" className="info-btn" title={`About ${player.name}`} onClick={onInfo}>
+            i
+          </button>
+        </span>
       </td>
       <td className="num rating">{player.overall}</td>
       <td>

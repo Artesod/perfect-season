@@ -14,7 +14,11 @@ export function playerName(players: readonly Player[], playerId: string): string
 
 /** Player lookup across roster and league (events can outlive a waived player). */
 export function anyPlayerName(run: RunState, playerId: string): string {
-  const everyone = [...run.roster, ...(run.draft?.pool ?? []), ...run.league.flatMap((t) => t.players)];
+  const everyone = [
+    ...run.roster,
+    ...(run.draft?.roster ?? []),
+    ...run.league.flatMap((t) => t.players),
+  ];
   return playerName(everyone, playerId);
 }
 
