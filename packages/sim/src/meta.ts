@@ -25,6 +25,22 @@ export function unlockedAscension(meta: MetaProgress): number {
   return Math.min(meta.highestAscensionBeaten + 1, MAX_ASCENSION);
 }
 
+/**
+ * Merge two MetaProgress snapshots — e.g. local guest progress with cloud
+ * progress at sign-in. Badges and high-water marks union/max cleanly; run
+ * counters take the max of the two sides (summing would double-count runs
+ * present in both snapshots), so counters are a floor, never inflated.
+ */
+export function mergeMetaProgress(a: MetaProgress, b: MetaProgress): MetaProgress {
+  return {
+    totalRuns: Math.max(a.totalRuns, b.totalRuns),
+    runsWon: Math.max(a.runsWon, b.runsWon),
+    bestWins: Math.max(a.bestWins, b.bestWins),
+    highestAscensionBeaten: Math.max(a.highestAscensionBeaten, b.highestAscensionBeaten),
+    badges: [...new Set([...a.badges, ...b.badges])].sort(),
+  };
+}
+
 export interface BadgeDefinition {
   id: string;
   label: string;

@@ -1,4 +1,5 @@
 import { useGameStore } from './store';
+import { AccountBar } from './components/AccountBar';
 import { DraftScreen } from './screens/DraftScreen';
 import { HomeScreen } from './screens/HomeScreen';
 import { RunSummaryScreen } from './screens/RunSummaryScreen';
@@ -31,23 +32,26 @@ function App() {
         <h1 className="app-title">
           Perfect <span className="accent">Season</span>
         </h1>
-        {run && (
-          <div className="app-header-run">
-            <span className="tag">Seed {run.seed}</span>
-            <span className="tag">Ascension {run.ascension}</span>
-            {inProgress && (
-              <button
-                type="button"
-                className="btn btn-ghost"
-                onClick={() => {
-                  if (window.confirm('Abandon this run? Progress will be lost.')) exitRun();
-                }}
-              >
-                Abandon run
-              </button>
-            )}
-          </div>
-        )}
+        <div className="app-header-run">
+          {run && (
+            <>
+              <span className="tag">Seed {run.seed}</span>
+              <span className="tag">Ascension {run.ascension}</span>
+              {inProgress && (
+                <button
+                  type="button"
+                  className="btn btn-ghost"
+                  onClick={() => {
+                    if (window.confirm('Abandon this run? Progress will be lost.')) exitRun();
+                  }}
+                >
+                  Abandon run
+                </button>
+              )}
+            </>
+          )}
+          <AccountBar />
+        </div>
       </header>
       <main className="app-main">
         <CurrentScreen />

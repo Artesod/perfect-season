@@ -1,0 +1,19 @@
+.account-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.account-name {
+  font-weight: 600;
+  color: var(--heading);
+  white-space: nowrap;
+}
+
+.account-synced {
+  color: var(--good);
+}
+
+.account-sync-error {
+  color: var(--warn);
+}

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { RunState } from '@perfect-season/shared';
 import { MAX_ASCENSION } from './difficulty';
-import { emptyMetaProgress, recordRun, unlockedAscension } from './meta';
+import { emptyMetaProgress, mergeMetaProgress, recordRun, unlockedAscension } from './meta';
 
 function finishedRun(overrides: Partial<RunState> = {}): RunState {
   return {
@@ -54,5 +54,44 @@ describe('recordRun', () => {
   it('losing does not unlock ascensions', () => {
     const meta = recordRun(emptyMetaProgress(), finishedRun());
     expect(unlockedAscension(meta)).toBe(0);
+  });
+});
+
+describe('mergeMetaProgress', () => {
+  it('unions badges and takes the max of every counter', () => {
+    const local = {
+      totalRuns: 5,
+      runsWon: 1,
+      bestWins: 70,
+      highestAscensionBeaten: 0,
+      badges: ['first-steps', 'seventy'],
+    };
+    const cloud = {
+      totalRuns: 3,
+      runsWon: 2,
+      bestWins: 82,
+      highestAscensionBeaten: 1,
+      badges: ['first-steps', 'banner'],
+    };
+    const merged = mergeMetaProgress(local, cloud);
+    expect(merged).toEqual({
+      totalRuns: 5,
+      runsWon: 2,
+      bestWins: 82,
+      highestAscensionBeaten: 1,
+      badges: ['banner', 'first-steps', 'seventy'],
+    });
+  });
+
+  it('merging with empty progress is a no-op apart from badge order', () => {
+    const meta = recordRun(emptyMetaProgress(), finishedRun({ status: 'won', wins: 82 }));
+    const merged = mergeMetaProgress(meta, emptyMetaProgress());
+    expect(merged).toEqual({ ...meta, badges: [...meta.badges].sort() });
+  });
+
+  it('is commutative', () => {
+    const a = { totalRuns: 2, runsWon: 0, bestWins: 30, highestAscensionBeaten: -1, badges: ['x'] };
+    const b = { totalRuns: 1, runsWon: 1, bestWins: 82, highestAscensionBeaten: 2, badges: ['y'] };
+    expect(mergeMetaProgress(a, b)).toEqual(mergeMetaProgress(b, a));
   });
 });

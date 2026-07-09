@@ -13,6 +13,7 @@
   "dependencies": {
     "@perfect-season/shared": "*",
     "@perfect-season/sim": "*",
+    "@supabase/supabase-js": "^2.110.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "zustand": "^5.0.14"

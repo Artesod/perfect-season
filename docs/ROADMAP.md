@@ -61,20 +61,29 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] Run summary screen (win/loss banner, run stats, new badges, seed sharing)
 - [x] Visual design pass: dark hardwood theme via CSS variables in `index.css`, per-screen stylesheets, no UI framework
 
-## Phase 5 — Persistence & backend
+## Phase 5 — Accounts, persistence & leaderboards
 
-- [ ] Decide persistence strategy: start with localStorage/IndexedDB for runs; add SQL database when accounts/leaderboards are needed
-- [ ] SQL schema in `db/`: players, runs, run_events, leaderboard
-- [ ] Backend/API layer (only if/when needed — e.g. Hono/Express or serverless functions)
-- [ ] Leaderboards (best runs, fewest losses, hardest modifiers)
-- [ ] User accounts (optional, late)
+- [x] Decide persistence strategy: localStorage stays the offline source of truth; Supabase (Postgres + auth + RLS, no server to host) adds sync/leaderboards without giving up static GitHub Pages hosting. The whole cloud layer is env-gated: no `VITE_SUPABASE_*` vars → local-only mode, zero network calls
+- [x] User accounts: guest-first — signed out, the game is exactly as before (localStorage only); signing in adds sync + leaderboard eligibility. Guest progress survives sign-in via merge (no anonymous Supabase sessions needed — local meta merges into the account at first sign-in)
+- [x] Google OAuth as the only sign-in method (no passwords → no reset/verification flows) — `apps/web/src/account.ts`
+- [x] SQL schema in `db/schema.sql`: profiles (auto-created by trigger), meta_progress, runs (stores seed + ascension + dataset version for later server-side verification), leaderboard view; RLS: users write only their own rows, leaderboard data publicly readable. Setup guide in `db/README.md` — **one-time manual setup required** (Supabase project, schema apply, Google OAuth config, env vars/repo secrets)
+- [x] Cloud sync of meta-progression: `mergeMetaProgress` (max counters, union badges — commutative, tested) merges local + cloud at sign-in and writes both sides; finished runs upsert meta + insert a run row, fire-and-forget so cloud failures never touch local play
+- [x] Leaderboards: top runs (wins desc, ascension desc) with display names on the home screen — client-submitted; seeded determinism means entries can be re-verified from seed + choices later if cheating becomes a problem
+- [ ] Backend/API layer beyond the BaaS (only if/when needed — e.g. serverless run verification)
+
+## Phase 6 — Era player pools
+
+- [ ] Scrape Classic Teams (~66 rosters, 1965–2019) and All-Time franchise teams (30) from 2kratings.com into `data/` using the existing pipeline — same rating format, salary already rank-mapped from ratings so historical players price themselves
+- [ ] Dataset/mode selector on the home screen: Current / Classic eras / All-Time / Mixed (extends the existing real-vs-procedural toggle)
+- [ ] Duplicate handling: same person on multiple classic teams becomes distinct era versions ("'91 Jordan" vs "'96 Jordan"); roster validation forbids two versions of the same person on one roster
+- [ ] Balance pass: era pools skew high-rated — verify rank-mapped salaries keep the cap squeeze honest, tune if needed
+- [ ] (Stretch) era-based chemistry flavor (e.g. same-team-same-era synergy)
 
 ## Ideas backlog (unscoped)
 
 - Trades with CPU teams
 - Coach/scheme selection affecting team style
 - In-game decision points (timeouts, rotations) for close games
-- Historical player pools (draft from the 90s, etc.)
 - Daily challenge seed shared by all players
 - AI "beat reporter" post-game recaps — live LLM flavor layer, purely cosmetic (never affects outcomes), opt-in since it needs network/API key
 
@@ -94,4 +103,5 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 | 2026-07-07 | Real player data: 2kratings.com, design-time only | Only free source with a ready quality rating per player. Scraped into `data/` and bundled at build; no runtime fetches, so seeds stay deterministic and hosting stays static. |
 | 2026-07-07 | Data refresh: weekly scheduled GitHub Action      | "Latest rosters over time" without a backend: the Action re-scrapes, validates (min teams/players + sim schema tests), and commits. A refresh changes what a seed produces; the dataset date is shown in the UI. |
 | 2026-07-08 | Draft: team-roll (82-0 style), no undo            | More run-to-run variance than a flat pool: you draft whoever the rolled team offers. Position slots (each ×2, then 5 flex) keep 15 picks legal by construction; 2 reroll tokens + free reroll on dead offers prevent soft-locks. Rolls are seed-indexed so replays match. |
-|            | Database: TBD (SQLite/Postgres)                   | Not needed until leaderboards/accounts                                                                                                                                       |
+| 2026-07-09 | Accounts/DB: Supabase (Postgres + auth), guest-first | Adds Google OAuth + SQL leaderboards without a server to run, so static GitHub Pages hosting survives. Game stays fully playable offline; login only adds sync/leaderboards. Google is the sole sign-in method to skip password flows. |
+| 2026-07-09 | Eras: promoted from backlog, sourced from 2kratings classic/all-time pages | Same site/format as the current scrape, so the pipeline mostly reuses; rank-mapped salaries price historical players automatically. Distinct era versions of the same player are allowed in the pool but not on one roster. |

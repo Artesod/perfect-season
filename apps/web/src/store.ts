@@ -15,6 +15,7 @@ import {
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { EVENT_CARDS } from './cards';
+import { syncFinishedRun } from './cloud';
 
 interface GameStore {
   run: RunState | null;
@@ -38,13 +39,19 @@ interface GameStore {
   waivePlayer: (playerId: string) => void;
 }
 
-/** Fold a terminal run into meta and report which badges are new. */
+/**
+ * Fold a terminal run into meta and report which badges are new. Also pushes
+ * the run + updated meta to the cloud, fire-and-forget: a no-op when signed
+ * out, and failures never affect local state.
+ */
 function finishRun(
   run: RunState,
   meta: MetaProgress,
+  dataset: NbaDataset | null,
 ): { meta: MetaProgress; newBadges: string[] } {
   const next = recordRun(meta, run);
   const before = new Set(meta.badges);
+  void syncFinishedRun(run, next, dataset?.fetchedAt ?? null);
   return { meta: next, newBadges: next.badges.filter((id) => !before.has(id)) };
 }
 
@@ -74,11 +81,13 @@ export const useGameStore = create<GameStore>()(
       beginSeason: () => set({ run: startSeason(get().run!) }),
 
       playGame: () => {
-        const { run, meta } = get();
+        const { run, meta, runDataset } = get();
         const eventsBefore = run!.season!.events.length;
         const next = playNextGame(run!, EVENT_CARDS);
         const finished =
-          next.status === 'won' || next.status === 'lost' ? finishRun(next, meta) : null;
+          next.status === 'won' || next.status === 'lost'
+            ? finishRun(next, meta, runDataset)
+            : null;
         set({
           run: next,
           lastGameEvents: next.season!.events.slice(eventsBefore),
@@ -87,14 +96,16 @@ export const useGameStore = create<GameStore>()(
       },
 
       simToNextEvent: () => {
-        const { run, meta } = get();
+        const { run, meta, runDataset } = get();
         const eventsBefore = run!.season!.events.length;
         let next = run!;
         while (next.status === 'in-season' && !next.season!.pendingCard) {
           next = playNextGame(next, EVENT_CARDS);
         }
         const finished =
-          next.status === 'won' || next.status === 'lost' ? finishRun(next, meta) : null;
+          next.status === 'won' || next.status === 'lost'
+            ? finishRun(next, meta, runDataset)
+            : null;
         set({
           run: next,
           lastGameEvents: next.season!.events.slice(eventsBefore),

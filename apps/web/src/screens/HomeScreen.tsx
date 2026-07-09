@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BADGES, difficultyFor, unlockedAscension } from '@perfect-season/sim';
+import { LeaderboardPanel } from '../components/LeaderboardPanel';
 import { NBA_DATASET } from '../nbaData';
 import { useGameStore } from '../store';
 import './HomeScreen.css';
@@ -152,6 +153,8 @@ export function HomeScreen() {
           </ul>
         </section>
       </div>
+
+      <LeaderboardPanel />
     </div>
   );
 }

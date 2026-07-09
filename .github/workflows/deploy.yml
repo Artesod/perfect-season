@@ -33,7 +33,12 @@ jobs:
         run: npm ci
 
       - name: Build
-        # GitHub Pages serves the site from /<repo-name>/, so set Vite's base accordingly
+        # GitHub Pages serves the site from /<repo-name>/, so set Vite's base accordingly.
+        # Supabase vars are optional: absent secrets build the game in local-only
+        # mode (no accounts/leaderboards). Setup: db/README.md
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: npm run build --workspace apps/web -- --base "/${{ github.event.repository.name }}/"
 
       - name: Upload site
