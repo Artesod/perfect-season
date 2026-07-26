@@ -10,10 +10,11 @@ import {
   draftCandidates,
   runCanPick,
   runCanReroll,
+  runCapReduction,
   validateRoster,
 } from '@perfect-season/sim';
 import { EVENT_CARDS } from '../src/cards';
-import { NBA_DATASET } from '../src/nbaData';
+import { ERA_DATASET, NBA_DATASET, poolForMode } from '../src/nbaData';
 import { useGameStore } from '../src/store';
 
 function assert(cond: boolean, msg: string): void {
@@ -39,11 +40,15 @@ const BASE_SEEDS = 20;
 const MAX_SEEDS = 500;
 
 assert(NBA_DATASET !== null, 'bundled NBA dataset should validate');
+assert(ERA_DATASET !== null, 'bundled era dataset should validate');
+
+// Cycle every player pool so all league-building paths get exercised.
+const POOL_MODES = ['current', 'procedural', 'classic', 'all-time', 'mixed'] as const;
 
 function playSeed(seed: number): void {
   runsPlayed++;
-  // Alternate between real-NBA and procedural runs to exercise both paths.
-  store.getState().newRun(seed, 0, seed % 2 === 0 ? NBA_DATASET : null);
+  // Alternate cap style so casual (relaxed-cap) runs get exercised too.
+  store.getState().newRun(seed, 0, poolForMode(POOL_MODES[seed % POOL_MODES.length]), seed % 2 === 1);
   assert(store.getState().run!.status === 'drafting', 'run should start in drafting');
 
   // Team-roll draft: pick the best legal player from each rolled team,
@@ -81,7 +86,11 @@ function playSeed(seed: number): void {
     'draft should complete a 15-man roster',
   );
 
-  const validation = validateRoster(store.getState().run!.draft!.roster);
+  // Validate at the run's effective cap: casual runs get CASUAL_CAP_BONUS room.
+  const validation = validateRoster(
+    store.getState().run!.draft!.roster,
+    runCapReduction(store.getState().run!),
+  );
   assert(validation.valid, `drafted roster should be legal: ${validation.errors.join('; ')}`);
 
   store.getState().beginSeason();
@@ -114,7 +123,8 @@ function playSeed(seed: number): void {
     assert(afterWaive.season!.deadCap > 0, 'waive should incur dead cap');
 
     const agents = currentFreeAgents(afterWaive);
-    const deadCap = afterWaive.season!.deadCap;
+    // Match the store's cap math: dead cap plus the run's effective squeeze.
+    const deadCap = afterWaive.season!.deadCap + runCapReduction(afterWaive);
     const signable = [...agents]
       .sort((a, b) => b.overall - a.overall)
       .find((p) => canSign(afterWaive.roster, p, deadCap).ok);

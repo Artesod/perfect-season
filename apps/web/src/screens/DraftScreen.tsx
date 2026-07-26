@@ -11,10 +11,10 @@ import {
   computeChemistry,
   chemistryDelta,
   currentSlot,
-  difficultyFor,
   draftCandidates,
   runCanPick,
   runCanReroll,
+  runCapReduction,
   totalSalary,
   validateRoster,
 } from '@perfect-season/sim';
@@ -36,7 +36,7 @@ export function DraftScreen() {
   const beginSeason = useGameStore((s) => s.beginSeason);
 
   const draft = run.draft!;
-  const capReduction = difficultyFor(run.ascension).capReduction;
+  const capReduction = runCapReduction(run);
   const effectiveCap = SALARY_CAP - capReduction;
   const committed = totalSalary(draft.roster);
   const space = effectiveCap - committed;
@@ -230,6 +230,7 @@ export function DraftScreen() {
               <dd>
                 {money(effectiveCap)}
                 {capReduction > 0 && <span className="muted"> (−{money(capReduction)})</span>}
+                {capReduction < 0 && <span className="muted"> (+{money(-capReduction)} casual)</span>}
               </dd>
             </div>
             <div>

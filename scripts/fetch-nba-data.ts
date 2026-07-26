@@ -1,11 +1,15 @@
 /**
- * Scrapes current NBA rosters + 2K ratings from 2kratings.com into
- * data/nba-players.json. Run with: npm run fetch:nba
+ * Scrapes NBA rosters + 2K ratings from 2kratings.com into data/.
+ *
+ * - `npm run fetch:nba` — current rosters into data/nba-players.json
+ *   (refreshed weekly by .github/workflows/refresh-data.yml)
+ * - `npm run fetch:nba-eras` — classic season teams (~66, 1965-2019) and
+ *   all-time franchise teams (30) into data/nba-players-eras.json. Historical
+ *   rosters only change with new 2K releases, so this runs manually.
  *
  * Design-time data pipeline (see docs/ROADMAP.md decisions log): the game
  * bundles this JSON at build time; nothing is fetched at runtime, so runs
- * stay seeded and deterministic. A weekly GitHub Action re-runs this script
- * and commits the diff.
+ * stay seeded and deterministic.
  */
 import { load } from 'cheerio';
 import { execFile } from 'node:child_process';
@@ -14,6 +18,9 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import type {
+  EraCategory,
+  EraDataset,
+  EraTeamRecord,
   NbaDataset,
   Position,
   RealPlayerRecord,
@@ -67,6 +74,8 @@ const POSITION_BY_LIST_SLUG: Record<string, Position> = {
 const MIN_TEAMS = 30;
 const MIN_TOTAL_PLAYERS = 300;
 const MIN_PLAYERS_PER_TEAM = 8;
+// 2K rates as few as 7 players on some 1960s-70s classic rosters.
+const MIN_PLAYERS_PER_ERA_TEAM = 5;
 
 const USER_AGENT =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';
@@ -92,7 +101,10 @@ async function fetchHtml(url: string): Promise<string> {
   return stdout;
 }
 
-async function fetchTeam(slug: string): Promise<RealTeamRecord> {
+async function fetchTeam(
+  slug: string,
+  minPlayers = MIN_PLAYERS_PER_TEAM,
+): Promise<RealTeamRecord> {
   const url = `https://www.2kratings.com/teams/${slug}`;
   const $ = load(await fetchHtml(url));
 
@@ -140,7 +152,7 @@ async function fetchTeam(slug: string): Promise<RealTeamRecord> {
     });
   });
 
-  if (players.length < MIN_PLAYERS_PER_TEAM) {
+  if (players.length < minPlayers) {
     throw new Error(`${slug}: only parsed ${players.length} players — page layout may have changed`);
   }
   return { name: teamName, players };
@@ -207,6 +219,74 @@ async function fetchPerGameStats(year: number): Promise<Map<string, RealPlayerSt
   return stats;
 }
 
+// Guard thresholds for the era scrape (66 classic + 30 all-time as of 2K27).
+const MIN_CLASSIC_TEAMS = 55;
+const MIN_ALL_TIME_TEAMS = 28;
+
+/**
+ * Discover era team slugs from the listing pages instead of hardcoding
+ * them: 2K adds new classic teams with each release. Classic slugs start
+ * with the season ("1985-86-chicago-bulls"), all-time slugs with "all-time-".
+ * The listing pages also link current/G-League/all-star teams, so filter by
+ * prefix.
+ */
+async function discoverEraSlugs(listPage: string, pattern: RegExp): Promise<string[]> {
+  const html = await fetchHtml(`https://www.2kratings.com/${listPage}`);
+  const slugs = new Set<string>();
+  for (const match of html.matchAll(/https:\/\/www\.2kratings\.com\/teams\/([a-z0-9-]+)"/g)) {
+    if (pattern.test(match[1])) slugs.add(match[1]);
+  }
+  return [...slugs];
+}
+
+async function fetchEraTeams(): Promise<EraTeamRecord[]> {
+  const sources: { listPage: string; pattern: RegExp; category: EraCategory; min: number }[] = [
+    { listPage: 'classic-teams', pattern: /^\d{4}-\d{2}-/, category: 'classic', min: MIN_CLASSIC_TEAMS },
+    { listPage: 'all-time-teams', pattern: /^all-time-/, category: 'all-time', min: MIN_ALL_TIME_TEAMS },
+  ];
+
+  const teams: EraTeamRecord[] = [];
+  for (const { listPage, pattern, category, min } of sources) {
+    const slugs = await discoverEraSlugs(listPage, pattern);
+    if (slugs.length < min) {
+      throw new Error(`${listPage}: only found ${slugs.length} team links — page layout may have changed`);
+    }
+    console.log(`${listPage}: ${slugs.length} teams`);
+    for (const slug of slugs) {
+      const team = await fetchTeam(slug, MIN_PLAYERS_PER_ERA_TEAM);
+      const season = /^(\d{4}-\d{2})-/.exec(slug)?.[1];
+      teams.push({
+        ...team,
+        category,
+        era: category === 'classic' ? season! : 'All-Time',
+        slug,
+      });
+      console.log(`  ${team.name}: ${team.players.length} players`);
+      await delay(300);
+    }
+  }
+  return teams;
+}
+
+async function mainEras(): Promise<void> {
+  const teams = await fetchEraTeams();
+  const dataset: EraDataset = {
+    fetchedAt: new Date().toISOString().slice(0, 10),
+    source: 'https://www.2kratings.com',
+    teams,
+  };
+  const outPath = join(
+    dirname(fileURLToPath(import.meta.url)),
+    '..',
+    'data',
+    'nba-players-eras.json',
+  );
+  mkdirSync(dirname(outPath), { recursive: true });
+  writeFileSync(outPath, `${JSON.stringify(dataset, null, 2)}\n`);
+  const totalPlayers = teams.reduce((sum, t) => sum + t.players.length, 0);
+  console.log(`Wrote ${totalPlayers} players on ${teams.length} era teams to ${outPath}`);
+}
+
 async function main(): Promise<void> {
   const teams: RealTeamRecord[] = [];
   for (const slug of TEAM_SLUGS) {
@@ -261,7 +341,8 @@ async function main(): Promise<void> {
   console.log(`Wrote ${totalPlayers} players on ${teams.length} teams to ${outPath}`);
 }
 
-main().catch((error) => {
+const entry = process.argv[2] === 'eras' ? mainEras : main;
+entry().catch((error) => {
   console.error(error);
   process.exit(1);
 });

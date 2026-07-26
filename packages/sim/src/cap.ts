@@ -50,5 +50,17 @@ export function validateRoster(players: readonly Player[], deadCap = 0): RosterV
     errors.push('Roster contains duplicate players');
   }
 
+  // Era pools offer the same person as several versions ('91 vs '96 Jordan);
+  // only one version of a person may be rostered.
+  const byPerson = new Map<string, Player>();
+  for (const player of players) {
+    if (!player.personKey) continue;
+    const other = byPerson.get(player.personKey);
+    if (other && other.id !== player.id) {
+      errors.push(`${player.name} and ${other.name} are versions of the same player`);
+    }
+    byPerson.set(player.personKey, player);
+  }
+
   return { valid: errors.length === 0, errors };
 }

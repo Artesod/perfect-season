@@ -3,7 +3,7 @@ import type { Player } from '@perfect-season/shared';
 import { chemistryDelta, computeChemistry } from './chemistry';
 
 let counter = 0;
-function makePlayer(traits: string[]): Player {
+function makePlayer(traits: string[], eraTeam?: string): Player {
   counter++;
   return {
     id: `p${counter}`,
@@ -15,6 +15,7 @@ function makePlayer(traits: string[]): Player {
     salary: 10,
     pWAR: 4,
     traits,
+    ...(eraTeam ? { eraTeam } : {}),
   };
 }
 
@@ -57,5 +58,28 @@ describe('computeChemistry', () => {
     const players = Array.from({ length: 5 }, () => makePlayer([]));
     expect(computeChemistry(players)).toEqual([]);
     expect(chemistryDelta(players)).toBe(0);
+  });
+
+  it('rewards teammates from the same era roster, scaling with the group', () => {
+    const duo = computeChemistry([
+      makePlayer([], '1995-96 Chicago Bulls'),
+      makePlayer([], '1995-96 Chicago Bulls'),
+      makePlayer([]),
+    ]).find((e) => e.id === 'ran-it-back');
+    expect(duo).toMatchObject({ strengthDelta: 1 });
+    expect(duo!.playerIds).toHaveLength(2);
+
+    const trio = computeChemistry([
+      makePlayer([], '1995-96 Chicago Bulls'),
+      makePlayer([], '1995-96 Chicago Bulls'),
+      makePlayer([], '1995-96 Chicago Bulls'),
+      makePlayer([]),
+    ]).find((e) => e.id === 'ran-it-back');
+    expect(trio).toMatchObject({ strengthDelta: 2 });
+  });
+
+  it('gives an intact era team no ran-it-back bonus (CPU teams stay baseline)', () => {
+    const players = Array.from({ length: 10 }, () => makePlayer([], 'All-Time Lakers'));
+    expect(computeChemistry(players).some((e) => e.id === 'ran-it-back')).toBe(false);
   });
 });

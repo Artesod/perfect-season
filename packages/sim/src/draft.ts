@@ -73,7 +73,12 @@ export function draftCandidates(state: DraftState, league: readonly Team[]): Pla
   return team.players.filter((p) => !draftedIds.has(p.id));
 }
 
-export type PickBlockReason = 'draft-complete' | 'not-offered' | 'wrong-position' | 'cannot-afford';
+export type PickBlockReason =
+  | 'draft-complete'
+  | 'not-offered'
+  | 'wrong-position'
+  | 'duplicate-person'
+  | 'cannot-afford';
 
 export type PickCheck = { ok: true } | { ok: false; reason: PickBlockReason; detail: string };
 
@@ -105,6 +110,16 @@ export function canPickPlayer(
       ok: false,
       reason: 'wrong-position',
       detail: `This round needs a ${slot}, ${player.name} is a ${player.position}`,
+    };
+  }
+  const samePerson = player.personKey
+    ? state.roster.find((p) => p.personKey === player.personKey)
+    : undefined;
+  if (samePerson) {
+    return {
+      ok: false,
+      reason: 'duplicate-person',
+      detail: `${samePerson.name} is already rostered — only one version of a player is allowed`,
     };
   }
   const spaceAfter = capSpace([...state.roster, player], capReduction);

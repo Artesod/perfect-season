@@ -2,14 +2,16 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { ROSTER_SIZE, type EventCard, type RunState } from '@perfect-season/shared';
-import { MAX_ASCENSION } from './difficulty';
+import { difficultyFor, MAX_ASCENSION } from './difficulty';
 import { draftCandidates } from './draft';
 import {
+  CASUAL_CAP_BONUS,
   createRun,
   currentFreeAgents,
   playNextGame,
   resolvePendingCard,
   runCanPick,
+  runCapReduction,
   runPickPlayer,
   runRerollTeam,
   runSignPlayer,
@@ -69,6 +71,21 @@ describe('createRun', () => {
       run.league.flatMap((t) => t.players).reduce((s, p) => s + p.overall, 0) /
       run.league.flatMap((t) => t.players).length;
     expect(avg(hard)).toBeGreaterThan(avg(base));
+  });
+
+  it('casual mode relaxes the effective cap without changing the generated league', () => {
+    const standard = createRun(9, 0);
+    const casual = createRun(9, 0, undefined, true);
+    expect(standard.casual).toBe(false);
+    expect(casual.casual).toBe(true);
+    // Same seed, same world — casual only changes cap checks, not RNG streams.
+    expect(casual.league).toEqual(standard.league);
+    expect(runCapReduction(standard)).toBe(0);
+    expect(runCapReduction(casual)).toBe(-CASUAL_CAP_BONUS);
+    // At max ascension the relief exactly cancels the squeeze.
+    expect(runCapReduction(createRun(9, MAX_ASCENSION, undefined, true))).toBe(
+      difficultyFor(MAX_ASCENSION).capReduction - CASUAL_CAP_BONUS,
+    );
   });
 });
 

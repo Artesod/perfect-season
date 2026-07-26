@@ -23,7 +23,7 @@ export function RunSummaryScreen() {
       return best === null ? userProb : Math.min(best, userProb);
     }, null);
 
-  const shareText = `Perfect Season — seed ${run.seed}, ascension ${run.ascension}`;
+  const shareText = `Perfect Season — seed ${run.seed}, ascension ${run.ascension}${run.casual ? ', casual' : ''}`;
 
   const copyShare = async () => {
     try {
@@ -42,6 +42,7 @@ export function RunSummaryScreen() {
         <h2>{won ? '82–0. Immortality.' : `The dream dies at ${run.wins}–${run.losses}.`}</h2>
         <p className="muted">
           Ascension {run.ascension} · seed {run.seed}
+          {run.casual && ' · casual (relaxed cap)'}
         </p>
       </section>
 

@@ -1,4 +1,4 @@
-import type { NbaDataset, Player, RunState, SeasonEvent } from '@perfect-season/shared';
+import type { Player, PlayerPool, RunState, SeasonEvent } from '@perfect-season/shared';
 import {
   createRun,
   playNextGame,
@@ -19,15 +19,15 @@ import { syncFinishedRun } from './cloud';
 
 interface GameStore {
   run: RunState | null;
-  /** Real-NBA dataset the current run was created with; null = procedural run */
-  runDataset: NbaDataset | null;
+  /** Real-player pool the current run was created with; null = procedural run */
+  runPool: PlayerPool | null;
   meta: MetaProgress;
   /** Badges earned by the most recently finished run */
   newBadges: string[];
   /** Events that fired during the last play action (single game or sim burst) */
   lastGameEvents: SeasonEvent[];
 
-  newRun: (seed: number, ascension: number, dataset: NbaDataset | null) => void;
+  newRun: (seed: number, ascension: number, pool: PlayerPool | null, casual?: boolean) => void;
   exitRun: () => void;
   pickPlayer: (playerId: string) => void;
   rerollTeam: () => void;
@@ -40,6 +40,18 @@ interface GameStore {
 }
 
 /**
+ * Version tag stored with cloud runs so seeds can be re-verified against the
+ * exact datasets later. Current-only runs keep the bare date (the pre-era
+ * format); era modes prefix the mode.
+ */
+function poolVersion(pool: PlayerPool | null): string | null {
+  if (!pool) return null;
+  if (pool.mode === 'current') return pool.nba?.fetchedAt ?? null;
+  const dates = [pool.nba?.fetchedAt, pool.eras?.fetchedAt].filter(Boolean).join('+');
+  return `${pool.mode}@${dates}`;
+}
+
+/**
  * Fold a terminal run into meta and report which badges are new. Also pushes
  * the run + updated meta to the cloud, fire-and-forget: a no-op when signed
  * out, and failures never affect local state.
@@ -47,11 +59,12 @@ interface GameStore {
 function finishRun(
   run: RunState,
   meta: MetaProgress,
-  dataset: NbaDataset | null,
+  pool: PlayerPool | null,
 ): { meta: MetaProgress; newBadges: string[] } {
   const next = recordRun(meta, run);
   const before = new Set(meta.badges);
-  void syncFinishedRun(run, next, dataset?.fetchedAt ?? null);
+  // Casual (relaxed-cap) runs are leaderboard-ineligible: never posted.
+  if (!run.casual) void syncFinishedRun(run, next, poolVersion(pool));
   return { meta: next, newBadges: next.badges.filter((id) => !before.has(id)) };
 }
 
@@ -59,20 +72,20 @@ export const useGameStore = create<GameStore>()(
   persist(
     (set, get) => ({
       run: null,
-      runDataset: null,
+      runPool: null,
       meta: emptyMetaProgress(),
       newBadges: [],
       lastGameEvents: [],
 
-      newRun: (seed, ascension, dataset) =>
+      newRun: (seed, ascension, pool, casual = false) =>
         set({
-          run: createRun(seed, ascension, dataset ?? undefined),
-          runDataset: dataset,
+          run: createRun(seed, ascension, pool ?? undefined, casual),
+          runPool: pool,
           newBadges: [],
           lastGameEvents: [],
         }),
 
-      exitRun: () => set({ run: null, runDataset: null, lastGameEvents: [] }),
+      exitRun: () => set({ run: null, runPool: null, lastGameEvents: [] }),
 
       pickPlayer: (playerId) => set({ run: runPickPlayer(get().run!, playerId) }),
 
@@ -81,12 +94,12 @@ export const useGameStore = create<GameStore>()(
       beginSeason: () => set({ run: startSeason(get().run!) }),
 
       playGame: () => {
-        const { run, meta, runDataset } = get();
+        const { run, meta, runPool } = get();
         const eventsBefore = run!.season!.events.length;
         const next = playNextGame(run!, EVENT_CARDS);
         const finished =
           next.status === 'won' || next.status === 'lost'
-            ? finishRun(next, meta, runDataset)
+            ? finishRun(next, meta, runPool)
             : null;
         set({
           run: next,
@@ -96,7 +109,7 @@ export const useGameStore = create<GameStore>()(
       },
 
       simToNextEvent: () => {
-        const { run, meta, runDataset } = get();
+        const { run, meta, runPool } = get();
         const eventsBefore = run!.season!.events.length;
         let next = run!;
         while (next.status === 'in-season' && !next.season!.pendingCard) {
@@ -104,7 +117,7 @@ export const useGameStore = create<GameStore>()(
         }
         const finished =
           next.status === 'won' || next.status === 'lost'
-            ? finishRun(next, meta, runDataset)
+            ? finishRun(next, meta, runPool)
             : null;
         set({
           run: next,

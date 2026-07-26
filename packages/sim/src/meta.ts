@@ -75,23 +75,30 @@ export const BADGES: readonly BadgeDefinition[] = [
   },
 ];
 
-/** Fold a finished run (status 'won' or 'lost') into the meta progress. */
+/**
+ * Fold a finished run (status 'won' or 'lost') into the meta progress.
+ * Casual (relaxed-cap) runs count toward career counters but earn no badges
+ * and unlock no ascensions — those mark achievements at the real cap.
+ */
 export function recordRun(meta: MetaProgress, run: RunState): MetaProgress {
   if (run.status !== 'won' && run.status !== 'lost') {
     throw new Error(`Cannot record a run that is still '${run.status}'`);
   }
   const won = run.status === 'won';
   const badges = new Set(meta.badges);
-  for (const badge of BADGES) {
-    if (badge.earned(run, meta)) badges.add(badge.id);
+  if (!run.casual) {
+    for (const badge of BADGES) {
+      if (badge.earned(run, meta)) badges.add(badge.id);
+    }
   }
   return {
     totalRuns: meta.totalRuns + 1,
     runsWon: meta.runsWon + (won ? 1 : 0),
     bestWins: Math.max(meta.bestWins, run.wins),
-    highestAscensionBeaten: won
-      ? Math.max(meta.highestAscensionBeaten, run.ascension)
-      : meta.highestAscensionBeaten,
+    highestAscensionBeaten:
+      won && !run.casual
+        ? Math.max(meta.highestAscensionBeaten, run.ascension)
+        : meta.highestAscensionBeaten,
     badges: [...badges],
   };
 }

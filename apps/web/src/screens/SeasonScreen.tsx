@@ -8,7 +8,7 @@ import {
   computeChemistry,
   currentFreeAgents,
   DEAD_CAP_FRACTION,
-  difficultyFor,
+  runCapReduction,
   effectiveStrength,
   FA_REFRESH_INTERVAL,
   homeWinProbability,
@@ -27,7 +27,7 @@ const EVENT_LOG_LENGTH = 15;
 
 export function SeasonScreen() {
   const run = useGameStore((s) => s.run)!;
-  const runDataset = useGameStore((s) => s.runDataset);
+  const runPool = useGameStore((s) => s.runPool);
   const lastGameEvents = useGameStore((s) => s.lastGameEvents);
   const playGame = useGameStore((s) => s.playGame);
   const simToNextEvent = useGameStore((s) => s.simToNextEvent);
@@ -39,7 +39,7 @@ export function SeasonScreen() {
 
   const season = run.season!;
   const gameNumber = season.results.length + 1;
-  const capReduction = difficultyFor(run.ascension).capReduction;
+  const capReduction = runCapReduction(run);
   const effectiveDeadCap = season.deadCap + capReduction;
   const pendingCard = season.pendingCard !== null;
 
@@ -71,7 +71,7 @@ export function SeasonScreen() {
     .map((team) => ({ team, strength: effectiveStrength(team) }))
     .sort((a, b) => b.strength - a.strength);
 
-  const freeAgents = useMemo(() => currentFreeAgents(run, runDataset ?? undefined), [run, runDataset]);
+  const freeAgents = useMemo(() => currentFreeAgents(run, runPool ?? undefined), [run, runPool]);
   const gamesUntilRefresh =
     FA_REFRESH_INTERVAL - (season.results.length % FA_REFRESH_INTERVAL);
 

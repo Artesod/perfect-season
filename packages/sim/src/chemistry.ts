@@ -67,6 +67,36 @@ const RULES: readonly ChemistryRule[] = [
     }
     return null;
   },
+  (players) => {
+    // Era pools: teammates from the same historical roster click instantly.
+    // Only strict subsets count — an intact era team (every CPU team in era
+    // modes) is baseline, its familiarity already priced into the ratings.
+    const groups = new Map<string, Player[]>();
+    for (const player of players) {
+      if (!player.eraTeam) continue;
+      const list = groups.get(player.eraTeam) ?? [];
+      list.push(player);
+      groups.set(player.eraTeam, list);
+    }
+    let best: { team: string; members: Player[] } | null = null;
+    for (const [team, members] of groups) {
+      if (members.length < 2 || members.length >= players.length) continue;
+      if (
+        !best ||
+        members.length > best.members.length ||
+        (members.length === best.members.length && team < best.team)
+      ) {
+        best = { team, members };
+      }
+    }
+    if (!best) return null;
+    return {
+      id: 'ran-it-back',
+      label: `Ran it back: ${best.members.length} teammates from the ${best.team}`,
+      strengthDelta: Math.min(2, best.members.length - 1),
+      playerIds: ids(best.members),
+    };
+  },
   // Anti-synergies
   (players) => {
     const dominant = withTrait(players, 'ball-dominant');

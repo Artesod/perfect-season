@@ -18,6 +18,17 @@ export interface Player {
   imageUrl?: string;
   /** Real-world per-game stats from last season (real players only), display-only */
   stats?: RealPlayerStats;
+  /**
+   * Real players only: normalized identity of the underlying person, shared
+   * by every era version of them (e.g. '91 and '96 Jordan). Roster rules use
+   * it to forbid two versions of the same person on one roster.
+   */
+  personKey?: string;
+  /**
+   * Era players only: the historical roster they came from (e.g. "1985-86
+   * Chicago Bulls"), for display and era-based chemistry.
+   */
+  eraTeam?: string;
 }
 
 export interface Team {
@@ -172,6 +183,40 @@ export interface NbaDataset {
   teams: RealTeamRecord[];
 }
 
+/** Which historical listing an era team was scraped from. */
+export type EraCategory = 'classic' | 'all-time';
+
+/** A historical roster from 2kratings.com (classic season or all-time franchise team). */
+export interface EraTeamRecord extends RealTeamRecord {
+  category: EraCategory;
+  /** Season label for classic teams (e.g. "1985-86"); "All-Time" otherwise */
+  era: string;
+  /** Scraped URL slug (e.g. "1985-86-chicago-bulls"), used for stable player ids */
+  slug: string;
+}
+
+/** The bundled era dataset in data/nba-players-eras.json. */
+export interface EraDataset {
+  fetchedAt: string;
+  source: string;
+  teams: EraTeamRecord[];
+}
+
+/**
+ * Which pool of real players a run draws from: the current season's rosters,
+ * classic historical teams, all-time franchise teams, or all of them mixed.
+ */
+export type PoolMode = 'current' | 'classic' | 'all-time' | 'mixed';
+
+/** The datasets a run's league and free agents are built from. */
+export interface PlayerPool {
+  mode: PoolMode;
+  /** Required for 'current' and 'mixed' */
+  nba?: NbaDataset;
+  /** Required for 'classic', 'all-time', and 'mixed' */
+  eras?: EraDataset;
+}
+
 /** Temporary player modifiers accumulated from events, ticked down per game. */
 export interface ActiveEffects {
   /** playerId -> games still sidelined */
@@ -229,6 +274,12 @@ export interface RunState {
   seed: number;
   /** Difficulty level; 0 is the base game */
   ascension: number;
+  /**
+   * Casual mode: a relaxed salary cap for players struggling with cap
+   * management. Casual runs count in career stats but earn no badges,
+   * unlock no ascensions, and never post to the leaderboard.
+   */
+  casual: boolean;
   /** Losses left before the run ends (1 in classic perfect-season mode) */
   livesRemaining: number;
   /** The 29 CPU teams, generated from the seed */

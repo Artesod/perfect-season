@@ -7,6 +7,7 @@ function finishedRun(overrides: Partial<RunState> = {}): RunState {
   return {
     seed: 1,
     ascension: 0,
+    casual: false,
     livesRemaining: 0,
     league: [],
     draft: null,
@@ -53,6 +54,18 @@ describe('recordRun', () => {
 
   it('losing does not unlock ascensions', () => {
     const meta = recordRun(emptyMetaProgress(), finishedRun());
+    expect(unlockedAscension(meta)).toBe(0);
+  });
+
+  it('casual runs count in career stats but earn no badges or unlocks', () => {
+    const meta = recordRun(
+      emptyMetaProgress(),
+      finishedRun({ status: 'won', wins: 82, casual: true }),
+    );
+    expect(meta.totalRuns).toBe(1);
+    expect(meta.runsWon).toBe(1);
+    expect(meta.bestWins).toBe(82);
+    expect(meta.badges).toEqual([]);
     expect(unlockedAscension(meta)).toBe(0);
   });
 });

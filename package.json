@@ -15,7 +15,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "fetch:nba": "tsx scripts/fetch-nba-data.ts"
+    "fetch:nba": "tsx scripts/fetch-nba-data.ts",
+    "fetch:nba-eras": "tsx scripts/fetch-nba-data.ts eras"
   },
   "devDependencies": {
     "@types/node": "^26.1.0",

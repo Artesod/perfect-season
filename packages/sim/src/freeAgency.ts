@@ -29,7 +29,7 @@ export function generateFreeAgents(rng: Rng, options: GenerateFreeAgentsOptions 
   );
 }
 
-export type SignBlockReason = 'roster-full' | 'cannot-afford';
+export type SignBlockReason = 'roster-full' | 'duplicate-person' | 'cannot-afford';
 
 export type SignCheck = { ok: true } | { ok: false; reason: SignBlockReason; detail: string };
 
@@ -39,6 +39,16 @@ export function canSign(roster: readonly Player[], player: Player, deadCap = 0):
       ok: false,
       reason: 'roster-full',
       detail: `Roster is full (${ROSTER_SIZE}); waive someone first`,
+    };
+  }
+  const samePerson = player.personKey
+    ? roster.find((p) => p.personKey === player.personKey)
+    : undefined;
+  if (samePerson) {
+    return {
+      ok: false,
+      reason: 'duplicate-person',
+      detail: `${samePerson.name} is already rostered — only one version of a player is allowed`,
     };
   }
   const space = capSpace(roster, deadCap);

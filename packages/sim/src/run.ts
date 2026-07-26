@@ -2,7 +2,6 @@ import {
   createRng,
   deriveSeed,
   type EventCard,
-  type NbaDataset,
   type PendingCard,
   type Player,
   type RunState,
@@ -23,7 +22,7 @@ import {
 } from './events';
 import { canSign, generateFreeAgents, signPlayer, waivePlayer } from './freeAgency';
 import { generateLeague, generatePlayer } from './league';
-import { buildRealLeague, sampleRealFreeAgents } from './realPlayers';
+import { buildRealLeague, sampleRealFreeAgents, type PoolSource } from './realPlayers';
 import { generateSchedule, simulateScheduledGame } from './season';
 
 /**
@@ -48,13 +47,35 @@ export const USER_TEAM_ID = 'user';
 export const FA_REFRESH_INTERVAL = 10;
 
 /**
- * Start a run. With a real-player dataset, the league comes from real NBA
- * rosters (one seeded franchise is replaced by the user's team); without
- * one, everything is procedurally generated. Drafting is the same in both
- * modes: teams are rolled from the league and picked from directly. Same
- * seed + same dataset = same run.
+ * Extra cap room in casual mode, in millions. Sized to cancel out even the
+ * max-ascension squeeze; at ascension 0 it still leaves a real trade-off
+ * (three supermax deals eat ~$150M of the $180M effective cap).
  */
-export function createRun(seed: number, ascension = 0, dataset?: NbaDataset): RunState {
+export const CASUAL_CAP_BONUS = 25;
+
+/**
+ * Effective cap tightening for this run: ascension squeeze minus casual
+ * relief. Negative means extra room. Every cap check (draft, signing,
+ * validation) and the UI's cap math must go through this.
+ */
+export function runCapReduction(run: RunState): number {
+  return difficultyFor(run.ascension).capReduction - (run.casual ? CASUAL_CAP_BONUS : 0);
+}
+
+/**
+ * Start a run. With a real-player pool (current rosters, classic teams,
+ * all-time teams, or mixed — a bare NbaDataset means current), the league
+ * comes from real rosters and one seeded team is replaced by the user's;
+ * without one, everything is procedurally generated. Drafting is the same
+ * in both modes: teams are rolled from the league and picked from directly.
+ * Same seed + same pool = same run.
+ */
+export function createRun(
+  seed: number,
+  ascension = 0,
+  dataset?: PoolSource,
+  casual = false,
+): RunState {
   const mods = difficultyFor(ascension);
   const league = dataset
     ? buildRealLeague(dataset, createRng(deriveSeed(seed, LEAGUE_STREAM)), mods.cpuOverallBonus)
@@ -65,6 +86,7 @@ export function createRun(seed: number, ascension = 0, dataset?: NbaDataset): Ru
   return {
     seed,
     ascension,
+    casual,
     livesRemaining: mods.lives,
     league,
     draft: createRollDraft(seed, league),
@@ -85,26 +107,24 @@ function requireStatus(run: RunState, status: RunState['status'], action: string
 /** Draft the given player from the currently rolled team. */
 export function runPickPlayer(run: RunState, playerId: string): RunState {
   requireStatus(run, 'drafting', 'draft');
-  const mods = difficultyFor(run.ascension);
   return {
     ...run,
-    draft: pickPlayer(run.draft!, run.league, run.seed, playerId, mods.capReduction),
+    draft: pickPlayer(run.draft!, run.league, run.seed, playerId, runCapReduction(run)),
   };
 }
 
 export function runCanPick(run: RunState, playerId: string) {
-  return canPickPlayer(run.draft!, run.league, playerId, difficultyFor(run.ascension).capReduction);
+  return canPickPlayer(run.draft!, run.league, playerId, runCapReduction(run));
 }
 
 export function runCanReroll(run: RunState) {
-  return canReroll(run.draft!, run.league, difficultyFor(run.ascension).capReduction);
+  return canReroll(run.draft!, run.league, runCapReduction(run));
 }
 
 /** Roll a different team for the current round (free if no legal pick exists). */
 export function runRerollTeam(run: RunState): RunState {
   requireStatus(run, 'drafting', 'reroll');
-  const mods = difficultyFor(run.ascension);
-  return { ...run, draft: rerollTeam(run.draft!, run.league, run.seed, mods.capReduction) };
+  return { ...run, draft: rerollTeam(run.draft!, run.league, run.seed, runCapReduction(run)) };
 }
 
 /** CPU rosters below this get seeded fill-ins (teamStrength weighs a 10-man rotation). */
@@ -118,7 +138,7 @@ const CPU_MIN_ROSTER = 10;
 export function startSeason(run: RunState): RunState {
   requireStatus(run, 'drafting', 'start the season');
   const roster = run.draft!.roster;
-  const validation = validateRoster(roster, difficultyFor(run.ascension).capReduction);
+  const validation = validateRoster(roster, runCapReduction(run));
   if (!validation.valid) {
     throw new Error(`Roster is not legal: ${validation.errors.join('; ')}`);
   }
@@ -127,10 +147,13 @@ export function startSeason(run: RunState): RunState {
   const topUpRng = createRng(deriveSeed(run.seed, LEAGUE_TOPUP_STREAM));
   const league = run.league.map((team) => {
     const players = team.players.filter((p) => !draftedIds.has(p.id));
+    // Length comparison alone can't detect changes: a short era roster that
+    // loses a pick gets topped back up to the same size.
+    const untouched = players.length === team.players.length;
     while (players.length < CPU_MIN_ROSTER) {
       players.push(generatePlayer(topUpRng, { minOverall: 55, maxOverall: 70 }));
     }
-    return players.length === team.players.length ? team : { ...team, players };
+    return untouched && players.length === team.players.length ? team : { ...team, players };
   });
 
   const schedule = generateSchedule(
@@ -253,10 +276,10 @@ export function resolvePendingCard(
 
 /**
  * Current free-agent pool; refreshes deterministically every few games.
- * Pass the same dataset the run was created with so real-mode runs draw
+ * Pass the same pool the run was created with so real-mode runs draw
  * free agents from real players (undrafted, waived, or unrostered).
  */
-export function currentFreeAgents(run: RunState, dataset?: NbaDataset): Player[] {
+export function currentFreeAgents(run: RunState, dataset?: PoolSource): Player[] {
   requireStatus(run, 'in-season', 'browse free agents');
   const poolIndex = Math.floor(run.season!.results.length / FA_REFRESH_INTERVAL);
   const rng = createRng(deriveSeed(run.seed, FREE_AGENT_STREAM_BASE + poolIndex));
@@ -292,7 +315,7 @@ export function runWaivePlayer(run: RunState, playerId: string): RunState {
 export function runSignPlayer(run: RunState, player: Player): RunState {
   requireStatus(run, 'in-season', 'sign');
   const season = run.season!;
-  const capReduction = difficultyFor(run.ascension).capReduction;
+  const capReduction = runCapReduction(run);
   const check = canSign(run.roster, player, season.deadCap + capReduction);
   if (!check.ok) {
     throw new Error(`Cannot sign: ${check.detail}`);

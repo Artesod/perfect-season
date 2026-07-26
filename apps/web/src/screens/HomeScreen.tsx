@@ -1,13 +1,44 @@
 import { useState } from 'react';
-import { BADGES, difficultyFor, unlockedAscension } from '@perfect-season/sim';
+import type { PoolMode } from '@perfect-season/shared';
+import { BADGES, CASUAL_CAP_BONUS, difficultyFor, unlockedAscension } from '@perfect-season/sim';
 import { LeaderboardPanel } from '../components/LeaderboardPanel';
-import { NBA_DATASET } from '../nbaData';
+import { ERA_DATASET, NBA_DATASET, poolForMode } from '../nbaData';
 import { useGameStore } from '../store';
 import './HomeScreen.css';
 
 function randomSeed(): number {
   return Math.floor(Math.random() * 1_000_000);
 }
+
+type PoolChoice = PoolMode | 'procedural';
+
+const POOL_CHOICES: { mode: PoolChoice; label: string; hint: string }[] = [
+  {
+    mode: 'current',
+    label: 'Current NBA',
+    hint: '2K ratings for this season’s rosters — your team replaces one real franchise',
+  },
+  {
+    mode: 'classic',
+    label: 'Classic eras',
+    hint: 'Historical season teams (1965–2019) — draft era versions like Jordan ’96',
+  },
+  {
+    mode: 'all-time',
+    label: 'All-Time',
+    hint: 'Every franchise’s all-time roster — a league of nothing but legends',
+  },
+  {
+    mode: 'mixed',
+    label: 'Mixed',
+    hint: 'Current, classic, and all-time teams in one giant pool — only one version of a player may be rostered',
+  },
+  {
+    mode: 'procedural',
+    label: 'Fictional',
+    hint: 'Procedurally generated league, unique to each seed',
+  },
+];
 
 export function HomeScreen() {
   const meta = useGameStore((s) => s.meta);
@@ -16,11 +47,21 @@ export function HomeScreen() {
   const maxUnlocked = unlockedAscension(meta);
   const [seedText, setSeedText] = useState(() => String(randomSeed()));
   const [ascension, setAscension] = useState(0);
-  const [useRealPlayers, setUseRealPlayers] = useState(NBA_DATASET !== null);
+  const [poolMode, setPoolMode] = useState<PoolChoice>(NBA_DATASET ? 'current' : 'procedural');
+  const [casual, setCasual] = useState(false);
 
   const seed = Number.parseInt(seedText, 10);
   const seedValid = Number.isFinite(seed);
   const mods = difficultyFor(ascension);
+  const selectedChoice = POOL_CHOICES.find((c) => c.mode === poolMode)!;
+  const datasetDates = [
+    NBA_DATASET && poolMode !== 'procedural' && poolMode !== 'classic' && poolMode !== 'all-time'
+      ? NBA_DATASET.fetchedAt
+      : null,
+    ERA_DATASET && (poolMode === 'classic' || poolMode === 'all-time' || poolMode === 'mixed')
+      ? ERA_DATASET.fetchedAt
+      : null,
+  ].filter(Boolean);
 
   return (
     <div className="home">
@@ -59,27 +100,25 @@ export function HomeScreen() {
           <div className="field">
             <span className="field-label">Player pool</span>
             <div className="seg">
-              <button
-                type="button"
-                className={`seg-btn ${useRealPlayers ? 'selected' : ''}`}
-                disabled={NBA_DATASET === null}
-                title={NBA_DATASET === null ? 'Real player data unavailable' : undefined}
-                onClick={() => setUseRealPlayers(true)}
-              >
-                Real NBA rosters
-              </button>
-              <button
-                type="button"
-                className={`seg-btn ${useRealPlayers ? '' : 'selected'}`}
-                onClick={() => setUseRealPlayers(false)}
-              >
-                Fictional players
-              </button>
+              {POOL_CHOICES.map((choice) => {
+                const available = choice.mode === 'procedural' || poolForMode(choice.mode) !== null;
+                return (
+                  <button
+                    key={choice.mode}
+                    type="button"
+                    className={`seg-btn ${poolMode === choice.mode ? 'selected' : ''}`}
+                    disabled={!available}
+                    title={available ? undefined : 'Player data unavailable'}
+                    onClick={() => setPoolMode(choice.mode)}
+                  >
+                    {choice.label}
+                  </button>
+                );
+              })}
             </div>
             <span className="field-hint">
-              {useRealPlayers && NBA_DATASET
-                ? `2K ratings as of ${NBA_DATASET.fetchedAt} — your team replaces one real franchise`
-                : 'Procedurally generated league, unique to each seed'}
+              {selectedChoice.hint}
+              {datasetDates.length > 0 ? ` · ratings as of ${datasetDates.join(' / ')}` : ''}
             </span>
           </div>
 
@@ -105,18 +144,50 @@ export function HomeScreen() {
             <ul className="mods-list">
               <li>CPU teams: {mods.cpuOverallBonus > 0 ? `+${mods.cpuOverallBonus} overall` : 'baseline'}</li>
               <li>Event chance: ×{mods.eventChanceMultiplier}</li>
-              <li>Salary cap: {mods.capReduction > 0 ? `−$${mods.capReduction}M` : 'full'}</li>
+              <li>
+                Salary cap:{' '}
+                {casual
+                  ? `+$${CASUAL_CAP_BONUS - mods.capReduction}M (casual)`
+                  : mods.capReduction > 0
+                    ? `−$${mods.capReduction}M`
+                    : 'full'}
+              </li>
               <li>
                 Lives: {mods.lives} — {mods.lives === 1 ? 'one loss ends the run' : `${mods.lives} losses allowed`}
               </li>
             </ul>
           </div>
 
+          <div className="field">
+            <span className="field-label">Cap style</span>
+            <div className="seg">
+              <button
+                type="button"
+                className={`seg-btn ${casual ? '' : 'selected'}`}
+                onClick={() => setCasual(false)}
+              >
+                Standard
+              </button>
+              <button
+                type="button"
+                className={`seg-btn ${casual ? 'selected' : ''}`}
+                onClick={() => setCasual(true)}
+              >
+                Casual
+              </button>
+            </div>
+            <span className="field-hint">
+              {casual
+                ? `Relaxed cap (+$${CASUAL_CAP_BONUS}M) — counts in career stats, but no badges, ascension unlocks, or leaderboard entries`
+                : 'The full cap squeeze — badges, unlocks, and leaderboard entries at stake'}
+            </span>
+          </div>
+
           <button
             type="button"
             className="btn btn-primary btn-lg"
             disabled={!seedValid}
-            onClick={() => newRun(seed, ascension, useRealPlayers ? NBA_DATASET : null)}
+            onClick={() => newRun(seed, ascension, poolForMode(poolMode), casual)}
           >
             Start run
           </button>
