@@ -211,18 +211,18 @@
 }
 
 .status-injured {
-  background: rgba(224, 82, 82, 0.15);
+  background: rgba(255, 77, 94, 0.15);
   color: var(--bad);
 }
 
 .status-hot {
-  background: rgba(96, 190, 120, 0.15);
+  background: rgba(46, 230, 168, 0.15);
   color: var(--good);
 }
 
 .status-cold {
-  background: rgba(110, 150, 220, 0.15);
-  color: #7ea8e8;
+  background: var(--accent-2-bg);
+  color: var(--accent-2);
 }
 
 .rankings {

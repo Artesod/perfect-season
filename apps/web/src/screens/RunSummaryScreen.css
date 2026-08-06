@@ -14,12 +14,12 @@
 
 .summary-banner.won {
   border-color: var(--good);
-  background: linear-gradient(180deg, rgba(96, 190, 120, 0.12), var(--surface));
+  background: linear-gradient(180deg, rgba(46, 230, 168, 0.12), var(--surface));
 }
 
 .summary-banner.lost {
   border-color: var(--bad);
-  background: linear-gradient(180deg, rgba(224, 82, 82, 0.1), var(--surface));
+  background: linear-gradient(180deg, rgba(255, 77, 94, 0.1), var(--surface));
 }
 
 .summary-kicker {

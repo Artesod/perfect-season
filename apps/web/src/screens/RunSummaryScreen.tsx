@@ -42,7 +42,7 @@ export function RunSummaryScreen() {
         <h2>{won ? '82–0. Immortality.' : `The dream dies at ${run.wins}–${run.losses}.`}</h2>
         <p className="muted">
           Ascension {run.ascension} · seed {run.seed}
-          {run.casual && ' · casual (relaxed cap)'}
+          {run.casual && ' · casual (no cap)'}
         </p>
       </section>
 

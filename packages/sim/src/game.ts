@@ -8,9 +8,16 @@ import { chemistryDelta } from './chemistry';
  * (fatigue, in-game events).
  */
 
-const HOME_COURT_BONUS = 1.5;
-/** Rating-difference scale for the logistic curve; higher = upsets more likely */
-const UPSET_FACTOR = 6;
+const HOME_COURT_BONUS = 1;
+/**
+ * Rating-difference scale for the logistic curve; higher = upsets more
+ * likely. At 3.5, a +9 strength edge (a stacked roster vs an average
+ * opponent) wins ~92% of games and near-equal matchups stay tense; the old
+ * value of 6 capped even the best rosters near ~82% per game, which made
+ * every run die early regardless of draft quality. Home bonus of 1 puts
+ * equal-team home games at ~57%, matching real NBA home-court advantage.
+ */
+const UPSET_FACTOR = 3.5;
 
 /** Rotation-weighted rating aggregate, before chemistry. */
 export function teamStrength(team: Team): number {

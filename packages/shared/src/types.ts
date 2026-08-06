@@ -3,7 +3,14 @@ export type Position = 'PG' | 'SG' | 'SF' | 'PF' | 'C';
 export interface Player {
   id: string;
   name: string;
+  /** The position this player occupies (drafting a dual-position player assigns one) */
   position: Position;
+  /**
+   * Other positions the player can play (dual-position players on
+   * 2kratings). At draft time the user chooses which eligible position the
+   * pick fills; `position` is reassigned and this list re-derived.
+   */
+  altPositions?: Position[];
   /** Overall rating, roughly 40-99 like 2K scale */
   overall: number;
   offense: number;
@@ -156,8 +163,10 @@ export interface RealPlayerStats {
 
 export interface RealPlayerRecord {
   name: string;
-  /** Primary position (first listed for dual-position players) */
+  /** Primary position (first listed on 2kratings) */
   position: Position;
+  /** Other listed positions for dual-position players */
+  altPositions?: Position[];
   /** 2K overall rating */
   overall: number;
   /** 2K three-point rating, used to derive shooting traits and off/def lean */
@@ -230,18 +239,14 @@ export interface ScheduledGame {
   isHome: boolean;
 }
 
-/** What a draft round demands: a specific position, or any player. */
-export type DraftSlot = Position | 'flex';
-
 /**
- * Team-roll draft (82-0 style): each round a random team is rolled and the
- * player picks one of its players for that round's slot. Rounds 1-10 cover
- * every position twice (so the 2-per-position minimum holds by
- * construction); rounds 11-15 are flex.
+ * Team-roll draft (82-0 style): each of 15 rounds a random team is rolled
+ * and the player picks any of its players. Position minimums (2 per
+ * position) are enforced by a feasibility check instead of a fixed slot
+ * order: a pick is blocked if it would leave too few remaining rounds to
+ * cover the positions still short.
  */
 export interface DraftState {
-  /** Slot requirement per round; the current round is roster.length */
-  slots: DraftSlot[];
   /** Id of the team currently offering its roster */
   rolledTeamId: string;
   /** Total rolls made (picks + rerolls); indexes the seeded roll stream */
@@ -275,9 +280,9 @@ export interface RunState {
   /** Difficulty level; 0 is the base game */
   ascension: number;
   /**
-   * Casual mode: a relaxed salary cap for players struggling with cap
-   * management. Casual runs count in career stats but earn no badges,
-   * unlock no ascensions, and never post to the leaderboard.
+   * Casual mode: no salary cap at all — draft and sign anyone. Casual runs
+   * count in career stats but earn no badges, unlock no ascensions, and
+   * never post to the leaderboard.
    */
   casual: boolean;
   /** Losses left before the run ends (1 in classic perfect-season mode) */

@@ -47,7 +47,7 @@ const POOL_MODES = ['current', 'procedural', 'classic', 'all-time', 'mixed'] as 
 
 function playSeed(seed: number): void {
   runsPlayed++;
-  // Alternate cap style so casual (relaxed-cap) runs get exercised too.
+  // Alternate cap style so casual (no-cap) runs get exercised too.
   store.getState().newRun(seed, 0, poolForMode(POOL_MODES[seed % POOL_MODES.length]), seed % 2 === 1);
   assert(store.getState().run!.status === 'drafting', 'run should start in drafting');
 
@@ -86,7 +86,7 @@ function playSeed(seed: number): void {
     'draft should complete a 15-man roster',
   );
 
-  // Validate at the run's effective cap: casual runs get CASUAL_CAP_BONUS room.
+  // Validate at the run's effective cap: casual runs have no cap at all.
   const validation = validateRoster(
     store.getState().run!.draft!.roster,
     runCapReduction(store.getState().run!),

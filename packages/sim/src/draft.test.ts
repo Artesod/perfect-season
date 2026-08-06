@@ -4,17 +4,19 @@ import {
   POSITIONS,
   ROSTER_SIZE,
   type DraftState,
+  type Player,
+  type Position,
   type Team,
 } from '@perfect-season/shared';
 import {
   canPickPlayer,
   canReroll,
   createRollDraft,
-  currentSlot,
-  DRAFT_SLOTS,
   draftCandidates,
+  eligiblePositions,
   hasLegalPick,
   pickPlayer,
+  positionsNeeded,
   rerollTeam,
   validateDraft,
 } from './draft';
@@ -40,17 +42,32 @@ function draftGreedy(seed: number, teams: readonly Team[]): DraftState {
   return state;
 }
 
+/**
+ * A 14-man roster (from teams other than the rolled one, so its candidates
+ * stay offerable) with exactly one PG: the 15th pick must be a PG.
+ */
+function fourteenWithOnePG(rolledTeamId: string): Player[] {
+  const pool = league.filter((t) => t.id !== rolledTeamId).flatMap((t) => t.players);
+  const take = (pos: Position, n: number) =>
+    pool.filter((p) => p.position === pos).slice(0, n);
+  return [
+    ...take('PG', 1),
+    ...take('SG', 4),
+    ...take('SF', 3),
+    ...take('PF', 3),
+    ...take('C', 3),
+  ];
+}
+
+/** Huge cap slack, to isolate position rules from cap rules. */
+const NO_CAP = -100_000;
+
 describe('createRollDraft', () => {
-  it('has 15 slots covering every position twice then flex, with a team rolled', () => {
+  it('starts empty with a rolled team and reroll tokens', () => {
     const state = createRollDraft(SEED, league);
-    expect(state.slots).toHaveLength(ROSTER_SIZE);
-    for (const position of POSITIONS) {
-      expect(state.slots.filter((s) => s === position)).toHaveLength(2);
-    }
-    expect(state.slots.filter((s) => s === 'flex')).toHaveLength(5);
-    expect(state.slots).toEqual([...DRAFT_SLOTS]);
+    expect(state.roster).toHaveLength(0);
+    expect(state.rerollsLeft).toBe(2);
     expect(league.some((t) => t.id === state.rolledTeamId)).toBe(true);
-    expect(currentSlot(state)).toBe(state.slots[0]);
   });
 
   it('is deterministic for the same seed', () => {
@@ -58,14 +75,36 @@ describe('createRollDraft', () => {
   });
 });
 
+describe('positionsNeeded', () => {
+  it('starts at the full minimum and shrinks as positions fill', () => {
+    expect(positionsNeeded([])).toEqual({ PG: 2, SG: 2, SF: 2, PF: 2, C: 2 });
+    const pg = league[0].players.find((p) => p.position === 'PG')!;
+    expect(positionsNeeded([pg]).PG).toBe(1);
+  });
+});
+
 describe('canPickPlayer', () => {
-  it('enforces the slot position in rounds 1-10', () => {
+  it('allows any position while there are rounds to spare', () => {
     const state = createRollDraft(SEED, league);
-    const slot = currentSlot(state)!;
-    const wrong = draftCandidates(state, league).find((p) => p.position !== slot)!;
-    const check = canPickPlayer(state, league, wrong.id);
+    // Round 1 of 15: every candidate is pickable regardless of position.
+    for (const player of draftCandidates(state, league)) {
+      expect(canPickPlayer(state, league, player.id, NO_CAP).ok).toBe(true);
+    }
+  });
+
+  it('blocks picks that would make position minimums unfillable', () => {
+    const base = createRollDraft(SEED, league);
+    const state: DraftState = { ...base, roster: fourteenWithOnePG(base.rolledTeamId) };
+    const candidates = draftCandidates(state, league);
+    const nonPG = candidates.find((p) => p.position !== 'PG')!;
+    const check = canPickPlayer(state, league, nonPG.id, NO_CAP);
     expect(check.ok).toBe(false);
-    if (!check.ok) expect(check.reason).toBe('wrong-position');
+    if (!check.ok) expect(check.reason).toBe('position-need');
+
+    const pg = candidates.find((p) => p.position === 'PG');
+    if (pg) {
+      expect(canPickPlayer(state, league, pg.id, NO_CAP).ok).toBe(true);
+    }
   });
 
   it('rejects players not on the rolled team', () => {
@@ -77,29 +116,24 @@ describe('canPickPlayer', () => {
   });
 
   it('blocks picks that make the roster impossible to finish under the cap', () => {
-    // A tiny cap reduction squeeze: reserve rule must reject pricey picks late.
+    // Greedily draft the priciest legal player; at some point the reserve
+    // rule must reject an expensive candidate.
     let state = createRollDraft(SEED, league);
     let blocked = false;
     let guard = 0;
     while (state.roster.length < ROSTER_SIZE && guard++ < 200) {
-      const candidates = draftCandidates(state, league)
-        .filter((p) => {
-          const slot = currentSlot(state)!;
-          return slot === 'flex' || p.position === slot;
-        })
-        .sort((a, b) => b.salary - a.salary);
-      const priciest = candidates[0];
-      if (priciest) {
-        const check = canPickPlayer(state, league, priciest.id);
-        if (!check.ok) {
-          expect(check.reason).toBe('cannot-afford');
-          blocked = true;
-          break;
-        }
-        state = pickPlayer(state, league, SEED, priciest.id);
-      } else {
-        state = rerollTeam(state, league, SEED);
+      const byPrice = draftCandidates(state, league).sort((a, b) => b.salary - a.salary);
+      const checks = byPrice.map((p) => ({ p, check: canPickPlayer(state, league, p.id) }));
+      if (checks.some(({ check }) => !check.ok && check.reason === 'cannot-afford')) {
+        blocked = true;
+        break;
       }
+      const legal = checks.find(({ check }) => check.ok);
+      if (!legal) {
+        state = rerollTeam(state, league, SEED);
+        continue;
+      }
+      state = pickPlayer(state, league, SEED, legal.p.id);
     }
     expect(blocked).toBe(true);
   });
@@ -108,16 +142,14 @@ describe('canPickPlayer', () => {
 describe('pickPlayer', () => {
   it('advances the round and rolls a new team deterministically', () => {
     const state = createRollDraft(SEED, league);
-    const slot = currentSlot(state)!;
     const player = draftCandidates(state, league).find(
-      (p) => canPickPlayer(state, league, p.id).ok && (slot === 'flex' || p.position === slot),
+      (p) => canPickPlayer(state, league, p.id).ok,
     )!;
     const a = pickPlayer(state, league, SEED, player.id);
     const b = pickPlayer(state, league, SEED, player.id);
     expect(a).toEqual(b);
     expect(a.roster).toContainEqual(player);
     expect(a.rollIndex).toBe(state.rollIndex + 1);
-    expect(currentSlot(a)).toBe(a.slots[1]);
   });
 
   it('excludes already-drafted players from later offers of the same team', () => {
@@ -153,20 +185,81 @@ describe('rerollTeam', () => {
   });
 
   it('is free when the rolled team offers no legal pick', () => {
-    // Craft a state where the rolled team has no player at the needed slot.
-    const state = createRollDraft(SEED, league);
-    const slot = currentSlot(state)!;
-    const team = league.find((t) => t.id === state.rolledTeamId)!;
+    // 14 rostered with one PG: the last pick must be a PG. Gut the rolled
+    // team of PGs and every candidate is position-blocked.
+    const base = createRollDraft(SEED, league);
+    const team = league.find((t) => t.id === base.rolledTeamId)!;
     const gutted: Team = {
       ...team,
-      players: team.players.filter((p) => p.position !== slot),
+      players: team.players.filter((p) => p.position !== 'PG'),
     };
     const guttedLeague = league.map((t) => (t.id === team.id ? gutted : t));
-    const noTokens = { ...state, rerollsLeft: 0 };
-    expect(hasLegalPick(noTokens, guttedLeague)).toBe(false);
-    expect(canReroll(noTokens, guttedLeague)).toEqual({ allowed: true, free: true });
-    const rerolled = rerollTeam(noTokens, guttedLeague, SEED);
+    const noTokens: DraftState = {
+      ...base,
+      roster: fourteenWithOnePG(base.rolledTeamId),
+      rerollsLeft: 0,
+    };
+    expect(draftCandidates(noTokens, guttedLeague).length).toBeGreaterThan(0);
+    expect(hasLegalPick(noTokens, guttedLeague, NO_CAP)).toBe(false);
+    expect(canReroll(noTokens, guttedLeague, NO_CAP)).toEqual({ allowed: true, free: true });
+    const rerolled = rerollTeam(noTokens, guttedLeague, SEED, NO_CAP);
     expect(rerolled.rerollsLeft).toBe(0);
+  });
+});
+
+describe('dual-position players', () => {
+  /** The rolled team with its first player made a dual SG/PG. */
+  function leagueWithDual(state: DraftState): { league: Team[]; dualId: string } {
+    const team = league.find((t) => t.id === state.rolledTeamId)!;
+    const dual: Player = { ...team.players[0], position: 'SG', altPositions: ['PG'] };
+    const patched: Team = { ...team, players: [dual, ...team.players.slice(1)] };
+    return {
+      league: league.map((t) => (t.id === team.id ? patched : t)),
+      dualId: dual.id,
+    };
+  }
+
+  it('lists eligible positions primary-first', () => {
+    const state = createRollDraft(SEED, league);
+    const { league: patched, dualId } = leagueWithDual(state);
+    const dual = draftCandidates(state, patched).find((p) => p.id === dualId)!;
+    expect(eligiblePositions(dual)).toEqual(['SG', 'PG']);
+  });
+
+  it('assigns the chosen position and re-derives the alternates', () => {
+    const state = createRollDraft(SEED, league);
+    const { league: patched, dualId } = leagueWithDual(state);
+    const picked = pickPlayer(state, patched, SEED, dualId, NO_CAP, 'PG');
+    const rostered = picked.roster.find((p) => p.id === dualId)!;
+    expect(rostered.position).toBe('PG');
+    expect(rostered.altPositions).toEqual(['SG']);
+    expect(positionsNeeded(picked.roster).PG).toBe(1);
+  });
+
+  it('rejects an ineligible position', () => {
+    const state = createRollDraft(SEED, league);
+    const { league: patched, dualId } = leagueWithDual(state);
+    const check = canPickPlayer(state, patched, dualId, NO_CAP, 'C');
+    expect(check.ok).toBe(false);
+    if (!check.ok) expect(check.reason).toBe('not-eligible');
+  });
+
+  it('is pickable when only the alternate position keeps the roster completable', () => {
+    // 14 rostered with one PG: the last pick must be a PG. A dual SG/PG is
+    // blocked as SG but legal as PG — and defaults to PG without asPosition.
+    const base = createRollDraft(SEED, league);
+    const { league: patched, dualId } = leagueWithDual(base);
+    const state: DraftState = { ...base, roster: fourteenWithOnePG(base.rolledTeamId) };
+
+    const asSG = canPickPlayer(state, patched, dualId, NO_CAP, 'SG');
+    expect(asSG.ok).toBe(false);
+    if (!asSG.ok) expect(asSG.reason).toBe('position-need');
+    expect(canPickPlayer(state, patched, dualId, NO_CAP, 'PG').ok).toBe(true);
+    expect(canPickPlayer(state, patched, dualId, NO_CAP).ok).toBe(true);
+
+    const picked = pickPlayer(state, patched, SEED, dualId, NO_CAP);
+    expect(picked.roster.find((p) => p.id === dualId)!.position).toBe('PG');
+    expect(validateDraft(picked).errors.some((e) => e.includes('PG'))).toBe(false);
   });
 });
 
@@ -178,12 +271,18 @@ describe('full draft', () => {
       expect(validateDraft(state).valid).toBe(true);
       const ids = new Set(state.roster.map((p) => p.id));
       expect(ids.size).toBe(ROSTER_SIZE);
+      // The feasibility guard must have covered every position minimum.
+      for (const position of POSITIONS) {
+        expect(state.roster.filter((p) => p.position === position).length).toBeGreaterThanOrEqual(
+          2,
+        );
+      }
     }
   });
 
   it('blocks picks after the roster is full', () => {
     const done = draftGreedy(SEED, league);
-    expect(currentSlot(done)).toBeNull();
+    expect(done.roster).toHaveLength(ROSTER_SIZE);
     const anyPlayer = draftCandidates(done, league)[0];
     if (anyPlayer) {
       const check = canPickPlayer(done, league, anyPlayer.id);

@@ -1,4 +1,4 @@
-import type { Player, PlayerPool, RunState, SeasonEvent } from '@perfect-season/shared';
+import type { Player, PlayerPool, Position, RunState, SeasonEvent } from '@perfect-season/shared';
 import {
   createRun,
   playNextGame,
@@ -29,7 +29,8 @@ interface GameStore {
 
   newRun: (seed: number, ascension: number, pool: PlayerPool | null, casual?: boolean) => void;
   exitRun: () => void;
-  pickPlayer: (playerId: string) => void;
+  /** Draft a player; asPosition picks which role a dual-position player fills */
+  pickPlayer: (playerId: string, asPosition?: Position) => void;
   rerollTeam: () => void;
   beginSeason: () => void;
   playGame: () => void;
@@ -63,7 +64,7 @@ function finishRun(
 ): { meta: MetaProgress; newBadges: string[] } {
   const next = recordRun(meta, run);
   const before = new Set(meta.badges);
-  // Casual (relaxed-cap) runs are leaderboard-ineligible: never posted.
+  // Casual (no-cap) runs are leaderboard-ineligible: never posted.
   if (!run.casual) void syncFinishedRun(run, next, poolVersion(pool));
   return { meta: next, newBadges: next.badges.filter((id) => !before.has(id)) };
 }
@@ -87,7 +88,8 @@ export const useGameStore = create<GameStore>()(
 
       exitRun: () => set({ run: null, runPool: null, lastGameEvents: [] }),
 
-      pickPlayer: (playerId) => set({ run: runPickPlayer(get().run!, playerId) }),
+      pickPlayer: (playerId, asPosition) =>
+        set({ run: runPickPlayer(get().run!, playerId, asPosition) }),
 
       rerollTeam: () => set({ run: runRerollTeam(get().run!) }),
 

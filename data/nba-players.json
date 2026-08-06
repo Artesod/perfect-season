@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-08",
+  "fetchedAt": "2026-08-06",
   "source": "https://www.2kratings.com",
   "teams": [
     {
@@ -8,6 +8,9 @@
         {
           "name": "Jalen Johnson",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 89,
           "threePoint": 77,
           "dunk": 96,
@@ -26,28 +29,34 @@
           }
         },
         {
-          "name": "Nickeil Alexander-Walker",
-          "position": "SG",
+          "name": "CJ McCollum",
+          "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 83,
-          "threePoint": 86,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Nickeil-Alexander-Walker-2K-Rating-80x80.png",
+          "threePoint": 82,
+          "dunk": 40,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/CJ-McCollum-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 78,
-            "minutes": 33.4,
-            "points": 20.8,
-            "rebounds": 3.4,
-            "assists": 3.7,
-            "steals": 1.3,
+            "gamesPlayed": 76,
+            "minutes": 29.8,
+            "points": 18.7,
+            "rebounds": 3.3,
+            "assists": 3.9,
+            "steals": 0.8,
             "blocks": 0.5,
-            "fgPct": 0.459,
-            "threePct": 0.399
+            "fgPct": 0.455,
+            "threePct": 0.375
           }
         },
         {
           "name": "Dyson Daniels",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 83,
           "threePoint": 50,
           "dunk": 75,
@@ -66,23 +75,26 @@
           }
         },
         {
-          "name": "CJ McCollum",
-          "position": "PG",
+          "name": "Nickeil Alexander-Walker",
+          "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 83,
-          "threePoint": 82,
-          "dunk": 40,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/CJ-McCollum-2K-Rating-80x80.png",
+          "threePoint": 86,
+          "dunk": 60,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Nickeil-Alexander-Walker-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 76,
-            "minutes": 29.8,
-            "points": 18.7,
-            "rebounds": 3.3,
-            "assists": 3.9,
-            "steals": 0.8,
+            "gamesPlayed": 78,
+            "minutes": 33.4,
+            "points": 20.8,
+            "rebounds": 3.4,
+            "assists": 3.7,
+            "steals": 1.3,
             "blocks": 0.5,
-            "fgPct": 0.455,
-            "threePct": 0.375
+            "fgPct": 0.459,
+            "threePct": 0.399
           }
         },
         {
@@ -106,6 +118,29 @@
           }
         },
         {
+          "name": "Luguentz Dort",
+          "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 80,
+          "threePoint": 77,
+          "dunk": 85,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Luguentz-Dort-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 69,
+            "minutes": 26.8,
+            "points": 8.3,
+            "rebounds": 3.6,
+            "assists": 1.2,
+            "steals": 0.9,
+            "blocks": 0.4,
+            "fgPct": 0.385,
+            "threePct": 0.344
+          }
+        },
+        {
           "name": "Jock Landale",
           "position": "C",
           "overall": 78,
@@ -126,28 +161,34 @@
           }
         },
         {
-          "name": "Zaccharie Risacher",
+          "name": "Aaron Wiggins",
           "position": "SF",
-          "overall": 77,
-          "threePoint": 81,
+          "altPositions": [
+            "PF"
+          ],
+          "overall": 78,
+          "threePoint": 79,
           "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Zaccharie-Risacher-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Aaron-Wiggins-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 67,
-            "minutes": 22.4,
-            "points": 9.6,
-            "rebounds": 3.8,
-            "assists": 1.1,
+            "gamesPlayed": 65,
+            "minutes": 21.8,
+            "points": 9.4,
+            "rebounds": 3.1,
+            "assists": 1.7,
             "steals": 0.9,
-            "blocks": 0.5,
-            "fgPct": 0.455,
-            "threePct": 0.368
+            "blocks": 0.4,
+            "fgPct": 0.431,
+            "threePct": 0.356
           }
         },
         {
           "name": "Devin Carter",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 77,
           "threePoint": 73,
           "dunk": 80,
@@ -168,6 +209,9 @@
         {
           "name": "Corey Kispert",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 76,
           "threePoint": 80,
           "dunk": 60,
@@ -188,6 +232,9 @@
         {
           "name": "Buddy Hield",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 75,
           "threePoint": 84,
           "dunk": 65,
@@ -208,6 +255,9 @@
         {
           "name": "Asa Newell",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 75,
           "threePoint": 86,
           "dunk": 85,
@@ -226,8 +276,31 @@
           }
         },
         {
+          "name": "Ryan Nembhard",
+          "position": "PG",
+          "overall": 75,
+          "threePoint": 80,
+          "dunk": 40,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Ryan-Nembhard-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 60,
+            "minutes": 19.5,
+            "points": 6.6,
+            "rebounds": 2.2,
+            "assists": 5.3,
+            "steals": 0.4,
+            "blocks": 0,
+            "fgPct": 0.415,
+            "threePct": 0.356
+          }
+        },
+        {
           "name": "Mouhamed Gueye",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 74,
           "threePoint": 73,
           "dunk": 80,
@@ -246,88 +319,34 @@
           }
         },
         {
-          "name": "Tony Bradley",
-          "position": "C",
-          "overall": 73,
-          "threePoint": 40,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Tony-Bradley-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 41,
-            "minutes": 11,
-            "points": 4,
-            "rebounds": 2.8,
-            "assists": 0.5,
-            "steals": 0.1,
-            "blocks": 0.2,
-            "fgPct": 0.547,
-            "threePct": 0.5
-          }
-        },
-        {
-          "name": "Gabe Vincent",
-          "position": "PG",
-          "overall": 73,
-          "threePoint": 76,
-          "dunk": 45,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Gabe-Vincent-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 53,
-            "minutes": 16.6,
-            "points": 4.4,
-            "rebounds": 1,
-            "assists": 1.4,
-            "steals": 0.5,
-            "blocks": 0.1,
-            "fgPct": 0.352,
-            "threePct": 0.341
-          }
-        },
-        {
-          "name": "Christian Koloko",
-          "position": "C",
-          "overall": 73,
-          "threePoint": 40,
+          "name": "Jalen Wilson",
+          "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
+          "overall": 74,
+          "threePoint": 79,
           "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Christian-Koloko-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jalen-Wilson-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 27,
-            "minutes": 13.2,
-            "points": 2.7,
-            "rebounds": 3,
-            "assists": 0.7,
-            "steals": 0.5,
-            "blocks": 0.9,
-            "fgPct": 0.419,
-            "threePct": 0.111
-          }
-        },
-        {
-          "name": "Keaton Wallace",
-          "position": "PG",
-          "overall": 72,
-          "threePoint": 85,
-          "dunk": 50,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Keaton-Wallace-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 53,
-            "minutes": 10.1,
-            "points": 3.5,
-            "rebounds": 1.1,
-            "assists": 1.8,
-            "steals": 0.5,
-            "blocks": 0.1,
-            "fgPct": 0.398,
-            "threePct": 0.373
+            "gamesPlayed": 54,
+            "minutes": 15.9,
+            "points": 6.4,
+            "rebounds": 2.1,
+            "assists": 0.9,
+            "steals": 0.4,
+            "blocks": 0,
+            "fgPct": 0.396,
+            "threePct": 0.355
           }
         },
         {
           "name": "RayJ Dennis",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 71,
           "threePoint": 75,
           "dunk": 55,
@@ -348,6 +367,9 @@
         {
           "name": "Keshon Gilbert",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 68,
           "threePoint": 73,
           "dunk": 60,
@@ -373,6 +395,9 @@
         {
           "name": "Jayson Tatum",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 93,
           "threePoint": 85,
           "dunk": 89,
@@ -393,6 +418,9 @@
         {
           "name": "Derrick White",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 85,
           "threePoint": 75,
           "dunk": 55,
@@ -413,6 +441,9 @@
         {
           "name": "Paul George",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 83,
           "threePoint": 83,
           "dunk": 80,
@@ -493,6 +524,9 @@
         {
           "name": "Luka Garza",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 78,
           "threePoint": 87,
           "dunk": 45,
@@ -513,6 +547,9 @@
         {
           "name": "Sam Hauser",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 78,
           "threePoint": 86,
           "dunk": 60,
@@ -553,6 +590,9 @@
         {
           "name": "Jordan Walsh",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 76,
           "threePoint": 83,
           "dunk": 80,
@@ -573,6 +613,9 @@
         {
           "name": "Baylor Scheierman",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 76,
           "threePoint": 82,
           "dunk": 55,
@@ -593,6 +636,9 @@
         {
           "name": "Hugo Gonzalez",
           "position": "SF",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 75,
           "threePoint": 79,
           "dunk": 75,
@@ -611,28 +657,11 @@
           }
         },
         {
-          "name": "Dalano Banton",
-          "position": "PG",
-          "overall": 73,
-          "threePoint": 77,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dalano-Banton-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 6,
-            "minutes": 10.3,
-            "points": 2,
-            "rebounds": 0.8,
-            "assists": 1.8,
-            "steals": 0.3,
-            "blocks": 0.8,
-            "fgPct": 0.333,
-            "threePct": 0
-          }
-        },
-        {
           "name": "Ron Harper Jr.",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 73,
           "threePoint": 78,
           "dunk": 70,
@@ -653,6 +682,9 @@
         {
           "name": "Amari Williams",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 69,
           "threePoint": 55,
           "dunk": 80,
@@ -669,46 +701,6 @@
             "fgPct": 0.5,
             "threePct": 0
           }
-        },
-        {
-          "name": "John Tonje",
-          "position": "SF",
-          "overall": 69,
-          "threePoint": 81,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/John-Tonje-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 6,
-            "minutes": 7,
-            "points": 2.5,
-            "rebounds": 1,
-            "assists": 0.3,
-            "steals": 0.3,
-            "blocks": 0,
-            "fgPct": 0.286,
-            "threePct": 0.3
-          }
-        },
-        {
-          "name": "Max Shulga",
-          "position": "PG",
-          "overall": 68,
-          "threePoint": 80,
-          "dunk": 45,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Max-Shulga-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 11,
-            "minutes": 3.3,
-            "points": 0.6,
-            "rebounds": 0.5,
-            "assists": 0.2,
-            "steals": 0.1,
-            "blocks": 0,
-            "fgPct": 0.25,
-            "threePct": 0.25
-          }
         }
       ]
     },
@@ -718,6 +710,9 @@
         {
           "name": "Michael Porter Jr.",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 86,
           "threePoint": 84,
           "dunk": 80,
@@ -738,6 +733,9 @@
         {
           "name": "Julius Randle",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 85,
           "threePoint": 73,
           "dunk": 80,
@@ -753,26 +751,6 @@
             "blocks": 0.2,
             "fgPct": 0.481,
             "threePct": 0.315
-          }
-        },
-        {
-          "name": "Ziaire Williams",
-          "position": "SF",
-          "overall": 78,
-          "threePoint": 77,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Ziaire-Williams-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 56,
-            "minutes": 22.9,
-            "points": 10.2,
-            "rebounds": 2.4,
-            "assists": 1.1,
-            "steals": 1.4,
-            "blocks": 0.4,
-            "fgPct": 0.425,
-            "threePct": 0.343
           }
         },
         {
@@ -796,16 +774,11 @@
           }
         },
         {
-          "name": "Egor Demin",
-          "position": "SG",
-          "overall": 78,
-          "threePoint": 82,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Egor-Demin-2K-Rating-80x80.png"
-        },
-        {
           "name": "Josh Minott",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 78,
           "threePoint": 85,
           "dunk": 80,
@@ -824,8 +797,22 @@
           }
         },
         {
+          "name": "Egor Demin",
+          "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
+          "overall": 78,
+          "threePoint": 82,
+          "dunk": 65,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Egor-Demin-2K-Rating-80x80.png"
+        },
+        {
           "name": "Moritz Wagner",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 77,
           "threePoint": 75,
           "dunk": 65,
@@ -844,28 +831,11 @@
           }
         },
         {
-          "name": "Danny Wolf",
-          "position": "PF",
-          "overall": 77,
-          "threePoint": 75,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Danny-Wolf-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 57,
-            "minutes": 20.8,
-            "points": 8.9,
-            "rebounds": 4.9,
-            "assists": 2.2,
-            "steals": 0.5,
-            "blocks": 0.6,
-            "fgPct": 0.405,
-            "threePct": 0.322
-          }
-        },
-        {
           "name": "Keon Ellis",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 77,
           "threePoint": 80,
           "dunk": 65,
@@ -884,28 +854,11 @@
           }
         },
         {
-          "name": "Nolan Traore",
-          "position": "PG",
-          "overall": 77,
-          "threePoint": 74,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Nolan-Traore-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 56,
-            "minutes": 22.2,
-            "points": 8.9,
-            "rebounds": 1.8,
-            "assists": 3.8,
-            "steals": 0.8,
-            "blocks": 0.4,
-            "fgPct": 0.38,
-            "threePct": 0.318
-          }
-        },
-        {
           "name": "Noah Clowney",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 77,
           "threePoint": 76,
           "dunk": 80,
@@ -924,8 +877,57 @@
           }
         },
         {
+          "name": "Nolan Traore",
+          "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 77,
+          "threePoint": 74,
+          "dunk": 70,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Nolan-Traore-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 56,
+            "minutes": 22.2,
+            "points": 8.9,
+            "rebounds": 1.8,
+            "assists": 3.8,
+            "steals": 0.8,
+            "blocks": 0.4,
+            "fgPct": 0.38,
+            "threePct": 0.318
+          }
+        },
+        {
+          "name": "Danny Wolf",
+          "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 77,
+          "threePoint": 75,
+          "dunk": 70,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Danny-Wolf-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 57,
+            "minutes": 20.8,
+            "points": 8.9,
+            "rebounds": 4.9,
+            "assists": 2.2,
+            "steals": 0.5,
+            "blocks": 0.6,
+            "fgPct": 0.405,
+            "threePct": 0.322
+          }
+        },
+        {
           "name": "Terance Mann",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 76,
           "threePoint": 80,
           "dunk": 75,
@@ -944,28 +946,11 @@
           }
         },
         {
-          "name": "Ochai Agbaji",
-          "position": "SF",
-          "overall": 75,
-          "threePoint": 65,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Ochai-Agbaji-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 62,
-            "minutes": 15.7,
-            "points": 5.1,
-            "rebounds": 2.3,
-            "assists": 0.8,
-            "steals": 0.4,
-            "blocks": 0.3,
-            "fgPct": 0.436,
-            "threePct": 0.266
-          }
-        },
-        {
           "name": "Ben Saraf",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 75,
           "threePoint": 67,
           "dunk": 60,
@@ -984,28 +969,11 @@
           }
         },
         {
-          "name": "Jalen Wilson",
-          "position": "SF",
-          "overall": 74,
-          "threePoint": 79,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jalen-Wilson-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 54,
-            "minutes": 15.9,
-            "points": 6.4,
-            "rebounds": 2.1,
-            "assists": 0.9,
-            "steals": 0.4,
-            "blocks": 0,
-            "fgPct": 0.396,
-            "threePct": 0.355
-          }
-        },
-        {
           "name": "Drake Powell",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 73,
           "threePoint": 72,
           "dunk": 85,
@@ -1026,6 +994,9 @@
         {
           "name": "Chaney Johnson",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 73,
           "threePoint": 72,
           "dunk": 85,
@@ -1042,74 +1013,6 @@
             "fgPct": 0.543,
             "threePct": 0.3
           }
-        },
-        {
-          "name": "Tyson Etienne",
-          "position": "PG",
-          "overall": 72,
-          "threePoint": 86,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Tyson-Etienne-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 24,
-            "minutes": 15.8,
-            "points": 7.9,
-            "rebounds": 1.1,
-            "assists": 1.7,
-            "steals": 0.5,
-            "blocks": 0,
-            "fgPct": 0.4,
-            "threePct": 0.398
-          }
-        },
-        {
-          "name": "Malachi Smith",
-          "position": "PG",
-          "overall": 72,
-          "threePoint": 83,
-          "dunk": 55,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Malachi-Smith-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 15,
-            "minutes": 23.9,
-            "points": 8.3,
-            "rebounds": 3.4,
-            "assists": 3.3,
-            "steals": 0.8,
-            "blocks": 0.3,
-            "fgPct": 0.485,
-            "threePct": 0.435
-          }
-        },
-        {
-          "name": "E.J. Liddell",
-          "position": "PF",
-          "overall": 70,
-          "threePoint": 70,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/EJ-Liddell-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 26,
-            "minutes": 13.4,
-            "points": 5.7,
-            "rebounds": 2.7,
-            "assists": 0.9,
-            "steals": 0.2,
-            "blocks": 0.4,
-            "fgPct": 0.486,
-            "threePct": 0.346
-          }
-        },
-        {
-          "name": "Trevon Scott",
-          "position": "PF",
-          "overall": 67,
-          "threePoint": 73,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Trevon-Scott-2K-Rating-80x80.png"
         }
       ]
     },
@@ -1119,6 +1022,9 @@
         {
           "name": "Brandon Miller",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 87,
           "threePoint": 85,
           "dunk": 87,
@@ -1139,6 +1045,9 @@
         {
           "name": "Kon Knueppel",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 86,
           "threePoint": 94,
           "dunk": 55,
@@ -1159,6 +1068,9 @@
         {
           "name": "Naz Reid",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 82,
           "threePoint": 81,
           "dunk": 80,
@@ -1179,6 +1091,9 @@
         {
           "name": "Coby White",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 81,
           "threePoint": 80,
           "dunk": 65,
@@ -1199,6 +1114,9 @@
         {
           "name": "Grayson Allen",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 81,
           "threePoint": 85,
           "dunk": 70,
@@ -1219,6 +1137,9 @@
         {
           "name": "Moussa Diabate",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 80,
           "threePoint": 67,
           "dunk": 80,
@@ -1259,6 +1180,9 @@
         {
           "name": "Royce O’Neale",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 77,
           "threePoint": 84,
           "dunk": 70,
@@ -1279,6 +1203,9 @@
         {
           "name": "Grant Williams",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 76,
           "threePoint": 82,
           "dunk": 60,
@@ -1297,28 +1224,11 @@
           }
         },
         {
-          "name": "Tidjane Salaun",
-          "position": "PF",
-          "overall": 75,
-          "threePoint": 86,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Tidjane-Salaun-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 37,
-            "minutes": 15.5,
-            "points": 6,
-            "rebounds": 4,
-            "assists": 0.7,
-            "steals": 0.4,
-            "blocks": 0.2,
-            "fgPct": 0.503,
-            "threePct": 0.434
-          }
-        },
-        {
           "name": "Dorian Finney-Smith",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 75,
           "threePoint": 73,
           "dunk": 84,
@@ -1337,8 +1247,34 @@
           }
         },
         {
+          "name": "Tidjane Salaun",
+          "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 75,
+          "threePoint": 86,
+          "dunk": 80,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Tidjane-Salaun-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 37,
+            "minutes": 15.5,
+            "points": 6,
+            "rebounds": 4,
+            "assists": 0.7,
+            "steals": 0.4,
+            "blocks": 0.2,
+            "fgPct": 0.503,
+            "threePct": 0.434
+          }
+        },
+        {
           "name": "Sion James",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 75,
           "threePoint": 80,
           "dunk": 70,
@@ -1359,6 +1295,9 @@
         {
           "name": "Tre Mann",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 74,
           "threePoint": 76,
           "dunk": 60,
@@ -1379,6 +1318,9 @@
         {
           "name": "Pat Connaughton",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 73,
           "threePoint": 79,
           "dunk": 86,
@@ -1397,28 +1339,11 @@
           }
         },
         {
-          "name": "Xavier Tillman",
-          "position": "C",
-          "overall": 72,
-          "threePoint": 62,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Xavier-Tillman-Sr-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 30,
-            "minutes": 6.1,
-            "points": 1.5,
-            "rebounds": 1.4,
-            "assists": 0.4,
-            "steals": 0.3,
-            "blocks": 0.2,
-            "fgPct": 0.435,
-            "threePct": 0.167
-          }
-        },
-        {
           "name": "PJ Hall",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 72,
           "threePoint": 74,
           "dunk": 75,
@@ -1439,6 +1364,9 @@
         {
           "name": "Liam McNeeley",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 72,
           "threePoint": 82,
           "dunk": 60,
@@ -1455,26 +1383,6 @@
             "fgPct": 0.4,
             "threePct": 0.4
           }
-        },
-        {
-          "name": "Antonio Reeves",
-          "position": "SG",
-          "overall": 70,
-          "threePoint": 86,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Antonio-Reeves-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 10,
-            "minutes": 6.8,
-            "points": 2.7,
-            "rebounds": 0.8,
-            "assists": 0.3,
-            "steals": 0.1,
-            "blocks": 0,
-            "fgPct": 0.5,
-            "threePct": 0.538
-          }
         }
       ]
     },
@@ -1484,6 +1392,9 @@
         {
           "name": "Norman Powell",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 85,
           "threePoint": 82,
           "dunk": 80,
@@ -1504,6 +1415,9 @@
         {
           "name": "Josh Giddey",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 83,
           "threePoint": 80,
           "dunk": 65,
@@ -1524,6 +1438,9 @@
         {
           "name": "Matas Buzelis",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 82,
           "threePoint": 80,
           "dunk": 89,
@@ -1584,6 +1501,9 @@
         {
           "name": "Jalen Smith",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 79,
           "threePoint": 81,
           "dunk": 80,
@@ -1624,6 +1544,9 @@
         {
           "name": "Isaac Okoro",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 77,
           "threePoint": 77,
           "dunk": 75,
@@ -1644,6 +1567,9 @@
         {
           "name": "Leonard Miller",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 76,
           "threePoint": 73,
           "dunk": 85,
@@ -1664,6 +1590,9 @@
         {
           "name": "Patrick Williams",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 75,
           "threePoint": 77,
           "dunk": 65,
@@ -1704,6 +1633,9 @@
         {
           "name": "Rob Dillingham",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 73,
           "threePoint": 74,
           "dunk": 75,
@@ -1722,28 +1654,11 @@
           }
         },
         {
-          "name": "Yuki Kawamura",
-          "position": "PG",
-          "overall": 72,
-          "threePoint": 76,
-          "dunk": 40,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Yuki-Kawamura-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 18,
-            "minutes": 11.6,
-            "points": 3.4,
-            "rebounds": 1.8,
-            "assists": 2.6,
-            "steals": 0.5,
-            "blocks": 0,
-            "fgPct": 0.327,
-            "threePct": 0.297
-          }
-        },
-        {
           "name": "Noa Essengue",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 72,
           "threePoint": 70,
           "dunk": 80,
@@ -1760,46 +1675,6 @@
             "fgPct": 0,
             "threePct": 0
           }
-        },
-        {
-          "name": "Mac McClung",
-          "position": "SG",
-          "overall": 71,
-          "threePoint": 75,
-          "dunk": 94,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Mac-McClung-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 11,
-            "minutes": 12.3,
-            "points": 6.1,
-            "rebounds": 0.9,
-            "assists": 0.9,
-            "steals": 1,
-            "blocks": 0.3,
-            "fgPct": 0.39,
-            "threePct": 0.233
-          }
-        },
-        {
-          "name": "Lachlan Olbrich",
-          "position": "C",
-          "overall": 70,
-          "threePoint": 61,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Lachlan-Olbrich-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 37,
-            "minutes": 9.3,
-            "points": 2.4,
-            "rebounds": 3,
-            "assists": 1.1,
-            "steals": 0.3,
-            "blocks": 0.2,
-            "fgPct": 0.468,
-            "threePct": 0.105
-          }
         }
       ]
     },
@@ -1809,6 +1684,9 @@
         {
           "name": "Donovan Mitchell",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 93,
           "threePoint": 85,
           "dunk": 92,
@@ -1829,6 +1707,9 @@
         {
           "name": "Evan Mobley",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 87,
           "threePoint": 75,
           "dunk": 85,
@@ -1869,8 +1750,11 @@
         {
           "name": "Max Strus",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 79,
-          "threePoint": 89,
+          "threePoint": 91,
           "dunk": 65,
           "imageUrl": "https://www.2kratings.com/wp-content/uploads/Max-Strus-2K-Rating-80x80.png",
           "stats": {
@@ -1889,8 +1773,11 @@
         {
           "name": "Sam Merrill",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 78,
-          "threePoint": 87,
+          "threePoint": 91,
           "dunk": 45,
           "imageUrl": "https://www.2kratings.com/wp-content/uploads/Sam-Merrill-2K-Rating-1-80x80.png",
           "stats": {
@@ -1909,6 +1796,9 @@
         {
           "name": "Dennis Schroder",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 77,
           "threePoint": 76,
           "dunk": 45,
@@ -1929,6 +1819,9 @@
         {
           "name": "Jaylon Tyson",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 77,
           "threePoint": 84,
           "dunk": 75,
@@ -1989,6 +1882,9 @@
         {
           "name": "Nae’Qwan Tomlin",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 74,
           "threePoint": 64,
           "dunk": 80,
@@ -2007,28 +1903,22 @@
           }
         },
         {
-          "name": "Larry Nance Jr.",
-          "position": "C",
+          "name": "Mario Hezonja",
+          "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 73,
-          "threePoint": 71,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Larry-Nance-Jr-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 35,
-            "minutes": 12.8,
-            "points": 3.7,
-            "rebounds": 2.7,
-            "assists": 1,
-            "steals": 0.6,
-            "blocks": 0.2,
-            "fgPct": 0.419,
-            "threePct": 0.333
-          }
+          "threePoint": 76,
+          "dunk": 75,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Mario-Hezonja-2K-Rating-80x80.png"
         },
         {
           "name": "Tyrese Proctor",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 73,
           "threePoint": 79,
           "dunk": 65,
@@ -2047,28 +1937,11 @@
           }
         },
         {
-          "name": "Olivier Sarr",
-          "position": "C",
-          "overall": 68,
-          "threePoint": 69,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Olivier-Sarr-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 4,
-            "minutes": 9.8,
-            "points": 3.5,
-            "rebounds": 2.8,
-            "assists": 1.3,
-            "steals": 0.5,
-            "blocks": 0.8,
-            "fgPct": 0.714,
-            "threePct": 0.667
-          }
-        },
-        {
           "name": "Tristan Enaruna",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 68,
           "threePoint": 72,
           "dunk": 80,
@@ -2089,6 +1962,9 @@
         {
           "name": "Riley Minix",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 67,
           "threePoint": 76,
           "dunk": 60,
@@ -2114,6 +1990,9 @@
         {
           "name": "Kyrie Irving",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 90,
           "threePoint": 86,
           "dunk": 40,
@@ -2122,6 +2001,9 @@
         {
           "name": "Cooper Flagg",
           "position": "SF",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 88,
           "threePoint": 71,
           "dunk": 80,
@@ -2142,6 +2024,9 @@
         {
           "name": "Naji Marshall",
           "position": "SF",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 81,
           "threePoint": 71,
           "dunk": 70,
@@ -2162,6 +2047,9 @@
         {
           "name": "Santi Aldama",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 81,
           "threePoint": 78,
           "dunk": 65,
@@ -2182,6 +2070,9 @@
         {
           "name": "P.J. Washington",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 80,
           "threePoint": 75,
           "dunk": 80,
@@ -2242,6 +2133,9 @@
         {
           "name": "Klay Thompson",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 78,
           "threePoint": 88,
           "dunk": 65,
@@ -2262,6 +2156,9 @@
         {
           "name": "Max Christie",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 77,
           "threePoint": 84,
           "dunk": 80,
@@ -2280,8 +2177,57 @@
           }
         },
         {
+          "name": "Zaccharie Risacher",
+          "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 77,
+          "threePoint": 81,
+          "dunk": 70,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Zaccharie-Risacher-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 67,
+            "minutes": 22.4,
+            "points": 9.6,
+            "rebounds": 3.8,
+            "assists": 1.1,
+            "steals": 0.9,
+            "blocks": 0.5,
+            "fgPct": 0.455,
+            "threePct": 0.368
+          }
+        },
+        {
+          "name": "Marcus Sasser",
+          "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 76,
+          "threePoint": 87,
+          "dunk": 50,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Marcus-Sasser-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 38,
+            "minutes": 12,
+            "points": 5.2,
+            "rebounds": 1,
+            "assists": 2,
+            "steals": 0.5,
+            "blocks": 0.1,
+            "fgPct": 0.39,
+            "threePct": 0.415
+          }
+        },
+        {
           "name": "Caleb Martin",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 75,
           "threePoint": 78,
           "dunk": 70,
@@ -2297,26 +2243,6 @@
             "blocks": 0.3,
             "fgPct": 0.45,
             "threePct": 0.351
-          }
-        },
-        {
-          "name": "Ryan Nembhard",
-          "position": "PG",
-          "overall": 75,
-          "threePoint": 80,
-          "dunk": 40,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Ryan-Nembhard-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 60,
-            "minutes": 19.5,
-            "points": 6.6,
-            "rebounds": 2.2,
-            "assists": 5.3,
-            "steals": 0.4,
-            "blocks": 0,
-            "fgPct": 0.415,
-            "threePct": 0.356
           }
         },
         {
@@ -2337,6 +2263,29 @@
             "blocks": 0.3,
             "fgPct": 0.644,
             "threePct": 0.286
+          }
+        },
+        {
+          "name": "Jett Howard",
+          "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 74,
+          "threePoint": 81,
+          "dunk": 65,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jett-Howard-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 55,
+            "minutes": 12.6,
+            "points": 5.5,
+            "rebounds": 1.6,
+            "assists": 0.8,
+            "steals": 0.2,
+            "blocks": 0.2,
+            "fgPct": 0.418,
+            "threePct": 0.372
           }
         },
         {
@@ -2362,6 +2311,9 @@
         {
           "name": "John Poulakidas",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 71,
           "threePoint": 80,
           "dunk": 60,
@@ -2377,26 +2329,6 @@
             "blocks": 0.3,
             "fgPct": 0.429,
             "threePct": 0.403
-          }
-        },
-        {
-          "name": "Tyler Smith",
-          "position": "C",
-          "overall": 69,
-          "threePoint": 73,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Tyler-Smith-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 12,
-            "minutes": 13.8,
-            "points": 4.7,
-            "rebounds": 2.8,
-            "assists": 0.4,
-            "steals": 0.5,
-            "blocks": 0,
-            "fgPct": 0.42,
-            "threePct": 0.286
           }
         }
       ]
@@ -2427,6 +2359,9 @@
         {
           "name": "Jamal Murray",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 89,
           "threePoint": 88,
           "dunk": 82,
@@ -2447,6 +2382,9 @@
         {
           "name": "Aaron Gordon",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 83,
           "threePoint": 81,
           "dunk": 94,
@@ -2465,48 +2403,11 @@
           }
         },
         {
-          "name": "Peyton Watson",
-          "position": "SF",
-          "overall": 82,
-          "threePoint": 85,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Peyton-Watson-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 54,
-            "minutes": 29.6,
-            "points": 14.6,
-            "rebounds": 4.9,
-            "assists": 2.1,
-            "steals": 0.9,
-            "blocks": 1.1,
-            "fgPct": 0.491,
-            "threePct": 0.411
-          }
-        },
-        {
-          "name": "Cameron Johnson",
-          "position": "SF",
-          "overall": 80,
-          "threePoint": 89,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Cameron-Johnson-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 54,
-            "minutes": 30.5,
-            "points": 12.2,
-            "rebounds": 3.8,
-            "assists": 2.4,
-            "steals": 0.7,
-            "blocks": 0.4,
-            "fgPct": 0.48,
-            "threePct": 0.43
-          }
-        },
-        {
           "name": "Tim Hardaway Jr.",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 80,
           "threePoint": 86,
           "dunk": 78,
@@ -2525,8 +2426,34 @@
           }
         },
         {
+          "name": "Cameron Johnson",
+          "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 80,
+          "threePoint": 89,
+          "dunk": 60,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Cameron-Johnson-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 54,
+            "minutes": 30.5,
+            "points": 12.2,
+            "rebounds": 3.8,
+            "assists": 2.4,
+            "steals": 0.7,
+            "blocks": 0.4,
+            "fgPct": 0.48,
+            "threePct": 0.43
+          }
+        },
+        {
           "name": "Christian Braun",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 80,
           "threePoint": 78,
           "dunk": 85,
@@ -2545,28 +2472,11 @@
           }
         },
         {
-          "name": "Jonas Valanciunas",
-          "position": "C",
-          "overall": 79,
-          "threePoint": 72,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jonas-Valanciunas-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 65,
-            "minutes": 13.4,
-            "points": 8.7,
-            "rebounds": 5.1,
-            "assists": 1.2,
-            "steals": 0.2,
-            "blocks": 0.6,
-            "fgPct": 0.582,
-            "threePct": 0.308
-          }
-        },
-        {
           "name": "Marvin Bagley III",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 79,
           "threePoint": 80,
           "dunk": 75,
@@ -2587,6 +2497,9 @@
         {
           "name": "Julian Strawther",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 77,
           "threePoint": 81,
           "dunk": 70,
@@ -2607,6 +2520,9 @@
         {
           "name": "Bruce Brown",
           "position": "SF",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 75,
           "threePoint": 83,
           "dunk": 70,
@@ -2622,106 +2538,6 @@
             "blocks": 0.2,
             "fgPct": 0.475,
             "threePct": 0.385
-          }
-        },
-        {
-          "name": "Zeke Nnaji",
-          "position": "C",
-          "overall": 73,
-          "threePoint": 72,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Zeke-Nnaji-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 52,
-            "minutes": 12,
-            "points": 3.7,
-            "rebounds": 2.6,
-            "assists": 0.6,
-            "steals": 0.3,
-            "blocks": 0.5,
-            "fgPct": 0.47,
-            "threePct": 0.259
-          }
-        },
-        {
-          "name": "Spencer Jones",
-          "position": "PF",
-          "overall": 73,
-          "threePoint": 83,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Spencer-Jones-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 64,
-            "minutes": 22.1,
-            "points": 5.5,
-            "rebounds": 3.3,
-            "assists": 0.8,
-            "steals": 0.8,
-            "blocks": 0.5,
-            "fgPct": 0.504,
-            "threePct": 0.396
-          }
-        },
-        {
-          "name": "KJ Simpson",
-          "position": "PG",
-          "overall": 73,
-          "threePoint": 74,
-          "dunk": 50,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/KJ-Simpson-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 20,
-            "minutes": 12.9,
-            "points": 4.6,
-            "rebounds": 1.9,
-            "assists": 2.2,
-            "steals": 0.8,
-            "blocks": 0,
-            "fgPct": 0.343,
-            "threePct": 0.3
-          }
-        },
-        {
-          "name": "DaRon Holmes II",
-          "position": "C",
-          "overall": 73,
-          "threePoint": 78,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/DaRon-Holmes-II-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 25,
-            "minutes": 8.4,
-            "points": 3.7,
-            "rebounds": 1.4,
-            "assists": 0.6,
-            "steals": 0,
-            "blocks": 0.2,
-            "fgPct": 0.508,
-            "threePct": 0.444
-          }
-        },
-        {
-          "name": "Jalen Pickett",
-          "position": "PG",
-          "overall": 73,
-          "threePoint": 85,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jalen-Pickett-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 50,
-            "minutes": 16.1,
-            "points": 5.2,
-            "rebounds": 2.3,
-            "assists": 2.3,
-            "steals": 0.3,
-            "blocks": 0.1,
-            "fgPct": 0.422,
-            "threePct": 0.386
           }
         },
         {
@@ -2745,43 +2561,92 @@
           }
         },
         {
-          "name": "David Roddy",
-          "position": "PF",
-          "overall": 71,
-          "threePoint": 82,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/David-Roddy-2K-Rating-80x80.png",
+          "name": "Zeke Nnaji",
+          "position": "C",
+          "altPositions": [
+            "PF"
+          ],
+          "overall": 73,
+          "threePoint": 72,
+          "dunk": 70,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Zeke-Nnaji-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 5,
-            "minutes": 14.6,
-            "points": 8,
-            "rebounds": 4,
-            "assists": 0.8,
-            "steals": 0.8,
-            "blocks": 0.2,
-            "fgPct": 0.5,
-            "threePct": 0.273
+            "gamesPlayed": 52,
+            "minutes": 12,
+            "points": 3.7,
+            "rebounds": 2.6,
+            "assists": 0.6,
+            "steals": 0.3,
+            "blocks": 0.5,
+            "fgPct": 0.47,
+            "threePct": 0.259
           }
         },
         {
-          "name": "Curtis Jones",
-          "position": "SG",
-          "overall": 68,
-          "threePoint": 79,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Curtis-Jones-2K-Rating-80x80.png",
+          "name": "DaRon Holmes II",
+          "position": "C",
+          "altPositions": [
+            "PF"
+          ],
+          "overall": 73,
+          "threePoint": 78,
+          "dunk": 75,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/DaRon-Holmes-II-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 10,
-            "minutes": 8.8,
-            "points": 2.9,
-            "rebounds": 1.1,
-            "assists": 1,
-            "steals": 0.4,
+            "gamesPlayed": 25,
+            "minutes": 8.4,
+            "points": 3.7,
+            "rebounds": 1.4,
+            "assists": 0.6,
+            "steals": 0,
+            "blocks": 0.2,
+            "fgPct": 0.508,
+            "threePct": 0.444
+          }
+        },
+        {
+          "name": "KJ Simpson",
+          "position": "PG",
+          "overall": 73,
+          "threePoint": 74,
+          "dunk": 50,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/KJ-Simpson-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 20,
+            "minutes": 12.9,
+            "points": 4.6,
+            "rebounds": 1.9,
+            "assists": 2.2,
+            "steals": 0.8,
             "blocks": 0,
-            "fgPct": 0.407,
-            "threePct": 0.333
+            "fgPct": 0.343,
+            "threePct": 0.3
+          }
+        },
+        {
+          "name": "Spencer Jones",
+          "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 73,
+          "threePoint": 83,
+          "dunk": 65,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Spencer-Jones-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 64,
+            "minutes": 22.1,
+            "points": 5.5,
+            "rebounds": 3.3,
+            "assists": 0.8,
+            "steals": 0.8,
+            "blocks": 0.5,
+            "fgPct": 0.504,
+            "threePct": 0.396
           }
         }
       ]
@@ -2792,6 +2657,9 @@
         {
           "name": "Cade Cunningham",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 95,
           "threePoint": 86,
           "dunk": 75,
@@ -2812,6 +2680,9 @@
         {
           "name": "Ausar Thompson",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 86,
           "threePoint": 70,
           "dunk": 91,
@@ -2852,6 +2723,9 @@
         {
           "name": "John Collins",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 81,
           "threePoint": 83,
           "dunk": 90,
@@ -2872,6 +2746,9 @@
         {
           "name": "Daniss Jenkins",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 80,
           "threePoint": 83,
           "dunk": 60,
@@ -2892,8 +2769,11 @@
         {
           "name": "Duncan Robinson",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 80,
-          "threePoint": 88,
+          "threePoint": 93,
           "dunk": 70,
           "imageUrl": "https://www.2kratings.com/wp-content/uploads/Duncan-Robinson-2K-Rating-80x80.png",
           "stats": {
@@ -2912,6 +2792,9 @@
         {
           "name": "Paul Reed",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 79,
           "threePoint": 76,
           "dunk": 75,
@@ -2932,6 +2815,9 @@
         {
           "name": "Isaiah Joe",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 79,
           "threePoint": 85,
           "dunk": 60,
@@ -2952,6 +2838,9 @@
         {
           "name": "Javonte Green",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 78,
           "threePoint": 81,
           "dunk": 85,
@@ -2972,6 +2861,9 @@
         {
           "name": "Ronald Holland II",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 78,
           "threePoint": 70,
           "dunk": 80,
@@ -2980,6 +2872,9 @@
         {
           "name": "Kevin Huerter",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 77,
           "threePoint": 75,
           "dunk": 65,
@@ -2998,28 +2893,11 @@
           }
         },
         {
-          "name": "Marcus Sasser",
-          "position": "PG",
-          "overall": 76,
-          "threePoint": 87,
-          "dunk": 50,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Marcus-Sasser-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 38,
-            "minutes": 12,
-            "points": 5.2,
-            "rebounds": 1,
-            "assists": 2,
-            "steals": 0.5,
-            "blocks": 0.1,
-            "fgPct": 0.39,
-            "threePct": 0.415
-          }
-        },
-        {
           "name": "Taurean Prince",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 76,
           "threePoint": 84,
           "dunk": 70,
@@ -3040,6 +2918,9 @@
         {
           "name": "Gary Harris",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 73,
           "threePoint": 87,
           "dunk": 50,
@@ -3058,8 +2939,34 @@
           }
         },
         {
+          "name": "Elijah Harkless",
+          "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 72,
+          "threePoint": 75,
+          "dunk": 50,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Elijah-Harkless-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 26,
+            "minutes": 21,
+            "points": 6.8,
+            "rebounds": 2,
+            "assists": 2.9,
+            "steals": 1.2,
+            "blocks": 0.2,
+            "fgPct": 0.335,
+            "threePct": 0.239
+          }
+        },
+        {
           "name": "Isaac Jones",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 71,
           "threePoint": 49,
           "dunk": 75,
@@ -3078,28 +2985,11 @@
           }
         },
         {
-          "name": "Wendell Moore Jr.",
-          "position": "SF",
-          "overall": 70,
-          "threePoint": 76,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Wendell-Moore-Jr-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 6,
-            "minutes": 10,
-            "points": 1.7,
-            "rebounds": 1,
-            "assists": 0.7,
-            "steals": 0.3,
-            "blocks": 0.3,
-            "fgPct": 0.571,
-            "threePct": 0
-          }
-        },
-        {
           "name": "Chaz Lanier",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 68,
           "threePoint": 75,
           "dunk": 60,
@@ -3120,6 +3010,9 @@
         {
           "name": "Tolu Smith",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 67,
           "threePoint": 40,
           "dunk": 70,
@@ -3145,6 +3038,9 @@
         {
           "name": "Stephen Curry",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 95,
           "threePoint": 99,
           "dunk": 40,
@@ -3165,6 +3061,9 @@
         {
           "name": "Jimmy Butler",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 88,
           "threePoint": 81,
           "dunk": 75,
@@ -3185,6 +3084,9 @@
         {
           "name": "Kristaps Porzingis",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 83,
           "threePoint": 80,
           "dunk": 75,
@@ -3205,6 +3107,9 @@
         {
           "name": "Brandin Podziemski",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 81,
           "threePoint": 81,
           "dunk": 60,
@@ -3225,6 +3130,9 @@
         {
           "name": "Gui Santos",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 80,
           "threePoint": 79,
           "dunk": 65,
@@ -3245,6 +3153,9 @@
         {
           "name": "Draymond Green",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 79,
           "threePoint": 75,
           "dunk": 65,
@@ -3265,6 +3176,9 @@
         {
           "name": "De’Anthony Melton",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 79,
           "threePoint": 70,
           "dunk": 70,
@@ -3285,6 +3199,9 @@
         {
           "name": "Al Horford",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 79,
           "threePoint": 80,
           "dunk": 65,
@@ -3305,6 +3222,9 @@
         {
           "name": "Gary Payton II",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 79,
           "threePoint": 72,
           "dunk": 75,
@@ -3325,6 +3245,9 @@
         {
           "name": "Moses Moody",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 79,
           "threePoint": 86,
           "dunk": 70,
@@ -3345,6 +3268,9 @@
         {
           "name": "Will Richard",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 75,
           "threePoint": 77,
           "dunk": 75,
@@ -3360,46 +3286,6 @@
             "blocks": 0.1,
             "fgPct": 0.468,
             "threePct": 0.335
-          }
-        },
-        {
-          "name": "Seth Curry",
-          "position": "SG",
-          "overall": 74,
-          "threePoint": 89,
-          "dunk": 40,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Seth-Curry-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 10,
-            "minutes": 13.3,
-            "points": 7.1,
-            "rebounds": 1.2,
-            "assists": 1,
-            "steals": 0.3,
-            "blocks": 0,
-            "fgPct": 0.49,
-            "threePct": 0.48
-          }
-        },
-        {
-          "name": "Nate Williams",
-          "position": "SF",
-          "overall": 74,
-          "threePoint": 83,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Nate-Williams-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 14,
-            "minutes": 17.1,
-            "points": 8,
-            "rebounds": 2.1,
-            "assists": 1,
-            "steals": 0.4,
-            "blocks": 0,
-            "fgPct": 0.489,
-            "threePct": 0.433
           }
         },
         {
@@ -3445,6 +3331,9 @@
         {
           "name": "Malevy Leons",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 70,
           "threePoint": 74,
           "dunk": 65,
@@ -3470,8 +3359,11 @@
         {
           "name": "Kevin Durant",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 93,
-          "threePoint": 91,
+          "threePoint": 92,
           "dunk": 85,
           "imageUrl": "https://www.2kratings.com/wp-content/uploads/Kevin-Durant-2K-Rating-80x80.png",
           "stats": {
@@ -3490,6 +3382,9 @@
         {
           "name": "Alperen Sengun",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 88,
           "threePoint": 74,
           "dunk": 80,
@@ -3510,6 +3405,9 @@
         {
           "name": "Amen Thompson",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 87,
           "threePoint": 56,
           "dunk": 96,
@@ -3530,6 +3428,9 @@
         {
           "name": "Jabari Smith Jr.",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 82,
           "threePoint": 81,
           "dunk": 85,
@@ -3548,36 +3449,11 @@
           }
         },
         {
-          "name": "Reed Sheppard",
-          "position": "PG",
-          "overall": 80,
-          "threePoint": 83,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Reed-Sheppard-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 82,
-            "minutes": 26.2,
-            "points": 13.5,
-            "rebounds": 2.9,
-            "assists": 3.4,
-            "steals": 1.5,
-            "blocks": 0.7,
-            "fgPct": 0.43,
-            "threePct": 0.394
-          }
-        },
-        {
-          "name": "Fred VanVleet",
-          "position": "PG",
-          "overall": 80,
-          "threePoint": 78,
-          "dunk": 40,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Fred-VanVleet-2K-Rating-80x80.png"
-        },
-        {
           "name": "Marcus Smart",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 80,
           "threePoint": 80,
           "dunk": 50,
@@ -3596,8 +3472,42 @@
           }
         },
         {
+          "name": "Fred VanVleet",
+          "position": "PG",
+          "overall": 80,
+          "threePoint": 78,
+          "dunk": 40,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Fred-VanVleet-2K-Rating-80x80.png"
+        },
+        {
+          "name": "Reed Sheppard",
+          "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 80,
+          "threePoint": 83,
+          "dunk": 70,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Reed-Sheppard-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 82,
+            "minutes": 26.2,
+            "points": 13.5,
+            "rebounds": 2.9,
+            "assists": 3.4,
+            "steals": 1.5,
+            "blocks": 0.7,
+            "fgPct": 0.43,
+            "threePct": 0.394
+          }
+        },
+        {
           "name": "Tari Eason",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 79,
           "threePoint": 80,
           "dunk": 80,
@@ -3656,28 +3566,11 @@
           }
         },
         {
-          "name": "Aaron Holiday",
-          "position": "SG",
-          "overall": 74,
-          "threePoint": 82,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Aaron-Holiday-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 57,
-            "minutes": 13.7,
-            "points": 5.5,
-            "rebounds": 1,
-            "assists": 1.1,
-            "steals": 0.5,
-            "blocks": 0.1,
-            "fgPct": 0.417,
-            "threePct": 0.394
-          }
-        },
-        {
           "name": "Bogdan Bogdanovic",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 74,
           "threePoint": 76,
           "dunk": 65,
@@ -3698,6 +3591,9 @@
         {
           "name": "Jae’Sean Tate",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 73,
           "threePoint": 72,
           "dunk": 75,
@@ -3716,48 +3612,57 @@
           }
         },
         {
-          "name": "Jeff Green",
-          "position": "PF",
+          "name": "Oscar Tshiebwe",
+          "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 73,
-          "threePoint": 76,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jeff-Green-2K-Rating-80x80.png",
+          "threePoint": 40,
+          "dunk": 75,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Oscar-Tshiebwe-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 30,
-            "minutes": 5.8,
-            "points": 2.2,
-            "rebounds": 0.8,
-            "assists": 0.3,
-            "steals": 0.1,
-            "blocks": 0.1,
-            "fgPct": 0.368,
-            "threePct": 0.273
+            "gamesPlayed": 27,
+            "minutes": 16.6,
+            "points": 7.8,
+            "rebounds": 6.6,
+            "assists": 1.2,
+            "steals": 0.6,
+            "blocks": 0.2,
+            "fgPct": 0.634,
+            "threePct": 0
           }
         },
         {
-          "name": "JD Davison",
-          "position": "PG",
-          "overall": 69,
-          "threePoint": 71,
-          "dunk": 85,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/JD-Davison-2K-Rating-80x80.png",
+          "name": "Julian Phillips",
+          "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
+          "overall": 72,
+          "threePoint": 75,
+          "dunk": 80,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Julian-Phillips-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 28,
-            "minutes": 7.8,
-            "points": 2.5,
-            "rebounds": 1.2,
-            "assists": 1.3,
-            "steals": 0.2,
-            "blocks": 0.2,
-            "fgPct": 0.375,
-            "threePct": 0.25
+            "gamesPlayed": 48,
+            "minutes": 8.9,
+            "points": 2.9,
+            "rebounds": 1,
+            "assists": 0.2,
+            "steals": 0.5,
+            "blocks": 0.1,
+            "fgPct": 0.421,
+            "threePct": 0.308
           }
         },
         {
           "name": "Tristen Newton",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 68,
           "threePoint": 73,
           "dunk": 50,
@@ -3774,26 +3679,6 @@
             "fgPct": 0.444,
             "threePct": 0.4
           }
-        },
-        {
-          "name": "Isaiah Crawford",
-          "position": "SF",
-          "overall": 68,
-          "threePoint": 78,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Isaiah-Crawford-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 14,
-            "minutes": 6.6,
-            "points": 2,
-            "rebounds": 1.1,
-            "assists": 0.4,
-            "steals": 0.1,
-            "blocks": 0.2,
-            "fgPct": 0.417,
-            "threePct": 0.231
-          }
         }
       ]
     },
@@ -3803,6 +3688,9 @@
         {
           "name": "Tyrese Haliburton",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 93,
           "threePoint": 84,
           "dunk": 65,
@@ -3811,6 +3699,9 @@
         {
           "name": "Pascal Siakam",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 87,
           "threePoint": 80,
           "dunk": 80,
@@ -3851,6 +3742,9 @@
         {
           "name": "Andrew Nembhard",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 82,
           "threePoint": 80,
           "dunk": 60,
@@ -3891,6 +3785,9 @@
         {
           "name": "Jarace Walker",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 81,
           "threePoint": 82,
           "dunk": 85,
@@ -3909,28 +3806,11 @@
           }
         },
         {
-          "name": "Obi Toppin",
-          "position": "PF",
-          "overall": 80,
-          "threePoint": 75,
-          "dunk": 90,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Obi-Toppin-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 24,
-            "minutes": 17.7,
-            "points": 11.6,
-            "rebounds": 4.4,
-            "assists": 2.3,
-            "steals": 0.5,
-            "blocks": 0,
-            "fgPct": 0.503,
-            "threePct": 0.352
-          }
-        },
-        {
           "name": "Kelly Oubre Jr.",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 80,
           "threePoint": 80,
           "dunk": 84,
@@ -3949,8 +3829,34 @@
           }
         },
         {
+          "name": "Obi Toppin",
+          "position": "PF",
+          "altPositions": [
+            "C"
+          ],
+          "overall": 80,
+          "threePoint": 75,
+          "dunk": 90,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Obi-Toppin-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 24,
+            "minutes": 17.7,
+            "points": 11.6,
+            "rebounds": 4.4,
+            "assists": 2.3,
+            "steals": 0.5,
+            "blocks": 0,
+            "fgPct": 0.503,
+            "threePct": 0.352
+          }
+        },
+        {
           "name": "Aaron Nesmith",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 80,
           "threePoint": 82,
           "dunk": 55,
@@ -3989,28 +3895,11 @@
           }
         },
         {
-          "name": "Micah Potter",
-          "position": "C",
-          "overall": 76,
-          "threePoint": 85,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Micah-Potter-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 47,
-            "minutes": 19.3,
-            "points": 9.7,
-            "rebounds": 5,
-            "assists": 1.5,
-            "steals": 0.5,
-            "blocks": 0.3,
-            "fgPct": 0.515,
-            "threePct": 0.423
-          }
-        },
-        {
           "name": "Quenton Jackson",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 76,
           "threePoint": 82,
           "dunk": 80,
@@ -4031,6 +3920,9 @@
         {
           "name": "Kobe Brown",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 76,
           "threePoint": 81,
           "dunk": 65,
@@ -4051,6 +3943,9 @@
         {
           "name": "Ben Sheppard",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 75,
           "threePoint": 81,
           "dunk": 60,
@@ -4071,6 +3966,9 @@
         {
           "name": "Johnny Furphy",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 74,
           "threePoint": 79,
           "dunk": 60,
@@ -4089,8 +3987,34 @@
           }
         },
         {
+          "name": "Larry Nance Jr.",
+          "position": "C",
+          "altPositions": [
+            "PF"
+          ],
+          "overall": 73,
+          "threePoint": 71,
+          "dunk": 80,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Larry-Nance-Jr-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 35,
+            "minutes": 12.8,
+            "points": 3.7,
+            "rebounds": 2.7,
+            "assists": 1,
+            "steals": 0.6,
+            "blocks": 0.2,
+            "fgPct": 0.419,
+            "threePct": 0.333
+          }
+        },
+        {
           "name": "Jalen Slawson",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 73,
           "threePoint": 76,
           "dunk": 80,
@@ -4111,6 +4035,9 @@
         {
           "name": "Ethan Thompson",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 73,
           "threePoint": 78,
           "dunk": 60,
@@ -4127,26 +4054,6 @@
             "fgPct": 0.378,
             "threePct": 0.328
           }
-        },
-        {
-          "name": "Taelon Peter",
-          "position": "PG",
-          "overall": 73,
-          "threePoint": 76,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Taelon-Peter-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 38,
-            "minutes": 12.9,
-            "points": 4.5,
-            "rebounds": 1.6,
-            "assists": 1.1,
-            "steals": 0.7,
-            "blocks": 0.1,
-            "fgPct": 0.38,
-            "threePct": 0.328
-          }
         }
       ]
     },
@@ -4156,6 +4063,9 @@
         {
           "name": "Brandon Ingram",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 86,
           "threePoint": 81,
           "dunk": 80,
@@ -4176,6 +4086,9 @@
         {
           "name": "Darius Garland",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 85,
           "threePoint": 88,
           "dunk": 40,
@@ -4194,28 +4107,11 @@
           }
         },
         {
-          "name": "Bennedict Mathurin",
-          "position": "SG",
-          "overall": 82,
-          "threePoint": 75,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Bennedict-Mathurin-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 54,
-            "minutes": 30,
-            "points": 17.6,
-            "rebounds": 5.4,
-            "assists": 2.4,
-            "steals": 0.8,
-            "blocks": 0.2,
-            "fgPct": 0.43,
-            "threePct": 0.315
-          }
-        },
-        {
           "name": "Rui Hachimura",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 81,
           "threePoint": 88,
           "dunk": 80,
@@ -4236,6 +4132,9 @@
         {
           "name": "Derrick Jones Jr.",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 79,
           "threePoint": 79,
           "dunk": 94,
@@ -4276,6 +4175,9 @@
         {
           "name": "Kris Dunn",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 77,
           "threePoint": 81,
           "dunk": 55,
@@ -4294,28 +4196,11 @@
           }
         },
         {
-          "name": "Jordan Miller",
-          "position": "SF",
-          "overall": 77,
-          "threePoint": 75,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jordan-Miller-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 60,
-            "minutes": 22.1,
-            "points": 10,
-            "rebounds": 3,
-            "assists": 2.3,
-            "steals": 0.8,
-            "blocks": 0.2,
-            "fgPct": 0.531,
-            "threePct": 0.345
-          }
-        },
-        {
           "name": "Isaiah Jackson",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 77,
           "threePoint": 59,
           "dunk": 70,
@@ -4334,28 +4219,34 @@
           }
         },
         {
-          "name": "Bradley Beal",
-          "position": "SG",
+          "name": "Jordan Miller",
+          "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 77,
-          "threePoint": 80,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Bradley-Beal-2K-Rating-80x80.png",
+          "threePoint": 75,
+          "dunk": 80,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jordan-Miller-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 6,
-            "minutes": 20.2,
-            "points": 8.2,
-            "rebounds": 0.8,
-            "assists": 1.7,
-            "steals": 0.5,
-            "blocks": 0,
-            "fgPct": 0.375,
-            "threePct": 0.368
+            "gamesPlayed": 60,
+            "minutes": 22.1,
+            "points": 10,
+            "rebounds": 3,
+            "assists": 2.3,
+            "steals": 0.8,
+            "blocks": 0.2,
+            "fgPct": 0.531,
+            "threePct": 0.345
           }
         },
         {
           "name": "Gradey Dick",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 76,
           "threePoint": 72,
           "dunk": 75,
@@ -4376,6 +4267,9 @@
         {
           "name": "Kobe Sanders",
           "position": "PG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 76,
           "threePoint": 84,
           "dunk": 85,
@@ -4396,6 +4290,9 @@
         {
           "name": "Yanic Konan Niederhauser",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 75,
           "threePoint": 40,
           "dunk": 80,
@@ -4416,6 +4313,9 @@
         {
           "name": "Nicolas Batum",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 74,
           "threePoint": 83,
           "dunk": 60,
@@ -4434,28 +4334,34 @@
           }
         },
         {
-          "name": "TyTy Washington Jr.",
+          "name": "Jalen Pickett",
           "position": "PG",
-          "overall": 70,
-          "threePoint": 70,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/TyTy-Washington-2K-Rating-80x80.png",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 73,
+          "threePoint": 85,
+          "dunk": 60,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jalen-Pickett-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 16,
-            "minutes": 5.5,
-            "points": 1.3,
-            "rebounds": 0.4,
-            "assists": 1.1,
-            "steals": 0.4,
-            "blocks": 0.2,
-            "fgPct": 0.474,
-            "threePct": 0.375
+            "gamesPlayed": 50,
+            "minutes": 16.1,
+            "points": 5.2,
+            "rebounds": 2.3,
+            "assists": 2.3,
+            "steals": 0.3,
+            "blocks": 0.1,
+            "fgPct": 0.422,
+            "threePct": 0.386
           }
         },
         {
           "name": "Cam Christie",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 70,
           "threePoint": 70,
           "dunk": 75,
@@ -4474,22 +4380,25 @@
           }
         },
         {
-          "name": "Norchad Omier",
+          "name": "Johni Broome",
           "position": "PF",
-          "overall": 68,
-          "threePoint": 71,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Norchad-Omier-2K-Rating-80x80.png",
+          "altPositions": [
+            "C"
+          ],
+          "overall": 70,
+          "threePoint": 69,
+          "dunk": 60,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Johni-Broome-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 6,
-            "minutes": 4,
-            "points": 2.8,
-            "rebounds": 1.2,
-            "assists": 0.3,
-            "steals": 0.2,
-            "blocks": 0,
-            "fgPct": 0.7,
+            "gamesPlayed": 11,
+            "minutes": 5,
+            "points": 0.9,
+            "rebounds": 1.5,
+            "assists": 0.4,
+            "steals": 0.3,
+            "blocks": 0.2,
+            "fgPct": 0.167,
             "threePct": 0
           }
         },
@@ -4521,8 +4430,11 @@
         {
           "name": "Luka Doncic",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 97,
-          "threePoint": 89,
+          "threePoint": 92,
           "dunk": 75,
           "imageUrl": "https://www.2kratings.com/wp-content/uploads/Luka-Doncic-2K-Rating-80x80.png",
           "stats": {
@@ -4541,6 +4453,9 @@
         {
           "name": "Austin Reaves",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 87,
           "threePoint": 82,
           "dunk": 70,
@@ -4581,6 +4496,9 @@
         {
           "name": "Collin Sexton",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 81,
           "threePoint": 84,
           "dunk": 75,
@@ -4601,6 +4519,9 @@
         {
           "name": "Quentin Grimes",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 79,
           "threePoint": 76,
           "dunk": 70,
@@ -4621,6 +4542,9 @@
         {
           "name": "Sandro Mamukelashvili",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 79,
           "threePoint": 82,
           "dunk": 65,
@@ -4639,8 +4563,34 @@
           }
         },
         {
+          "name": "Ziaire Williams",
+          "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 78,
+          "threePoint": 77,
+          "dunk": 80,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Ziaire-Williams-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 56,
+            "minutes": 22.9,
+            "points": 10.2,
+            "rebounds": 2.4,
+            "assists": 1.1,
+            "steals": 1.4,
+            "blocks": 0.4,
+            "fgPct": 0.425,
+            "threePct": 0.343
+          }
+        },
+        {
           "name": "Jarred Vanderbilt",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 76,
           "threePoint": 72,
           "dunk": 75,
@@ -4659,8 +4609,34 @@
           }
         },
         {
+          "name": "Matisse Thybulle",
+          "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 76,
+          "threePoint": 83,
+          "dunk": 70,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Matisse-Thybulle-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 30,
+            "minutes": 16,
+            "points": 5.8,
+            "rebounds": 2,
+            "assists": 0.9,
+            "steals": 2,
+            "blocks": 0.5,
+            "fgPct": 0.433,
+            "threePct": 0.398
+          }
+        },
+        {
           "name": "Jaden Hardy",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 76,
           "threePoint": 84,
           "dunk": 80,
@@ -4681,6 +4657,9 @@
         {
           "name": "Jake LaRavia",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 76,
           "threePoint": 75,
           "dunk": 75,
@@ -4696,46 +4675,6 @@
             "blocks": 0.5,
             "fgPct": 0.459,
             "threePct": 0.321
-          }
-        },
-        {
-          "name": "Maxi Kleber",
-          "position": "C",
-          "overall": 74,
-          "threePoint": 67,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Maxi-Kleber-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 43,
-            "minutes": 10.7,
-            "points": 2,
-            "rebounds": 2,
-            "assists": 0.6,
-            "steals": 0.4,
-            "blocks": 0.3,
-            "fgPct": 0.452,
-            "threePct": 0.231
-          }
-        },
-        {
-          "name": "Dalton Knecht",
-          "position": "SF",
-          "overall": 74,
-          "threePoint": 79,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dalton-Knecht-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 54,
-            "minutes": 10.2,
-            "points": 4.2,
-            "rebounds": 1.4,
-            "assists": 0.4,
-            "steals": 0.2,
-            "blocks": 0.2,
-            "fgPct": 0.455,
-            "threePct": 0.342
           }
         },
         {
@@ -4759,52 +4698,38 @@
           }
         },
         {
-          "name": "Nick Smith Jr.",
-          "position": "PG",
-          "overall": 73,
-          "threePoint": 83,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Nick-Smith-Jr-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 30,
-            "minutes": 12.5,
-            "points": 6.2,
-            "rebounds": 0.8,
-            "assists": 1,
-            "steals": 0.3,
-            "blocks": 0.1,
-            "fgPct": 0.435,
-            "threePct": 0.395
-          }
-        },
-        {
-          "name": "Drew Timme",
-          "position": "C",
-          "overall": 72,
-          "threePoint": 75,
+          "name": "Dalton Knecht",
+          "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 74,
+          "threePoint": 79,
           "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Drew-Timme-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dalton-Knecht-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 27,
-            "minutes": 8.7,
-            "points": 3.4,
-            "rebounds": 1.2,
-            "assists": 0.9,
+            "gamesPlayed": 54,
+            "minutes": 10.2,
+            "points": 4.2,
+            "rebounds": 1.4,
+            "assists": 0.4,
             "steals": 0.2,
-            "blocks": 0,
-            "fgPct": 0.576,
-            "threePct": 0.44
+            "blocks": 0.2,
+            "fgPct": 0.455,
+            "threePct": 0.342
           }
         },
         {
           "name": "Bronny James",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 71,
           "threePoint": 79,
           "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Bronny-James-Jr-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Bronny-James-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
             "gamesPlayed": 42,
@@ -4821,6 +4746,9 @@
         {
           "name": "Adou Thiero",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 70,
           "threePoint": 71,
           "dunk": 88,
@@ -4841,6 +4769,9 @@
         {
           "name": "Chris Manon",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 68,
           "threePoint": 69,
           "dunk": 85,
@@ -4866,6 +4797,9 @@
         {
           "name": "Ty Jerome",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 83,
           "threePoint": 86,
           "dunk": 45,
@@ -4906,6 +4840,9 @@
         {
           "name": "Jerami Grant",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 81,
           "threePoint": 82,
           "dunk": 80,
@@ -4926,6 +4863,9 @@
         {
           "name": "Cedric Coward",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 80,
           "threePoint": 76,
           "dunk": 80,
@@ -4946,6 +4886,9 @@
         {
           "name": "GG Jackson",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 80,
           "threePoint": 76,
           "dunk": 85,
@@ -4964,28 +4907,11 @@
           }
         },
         {
-          "name": "Jaylen Wells",
-          "position": "SF",
-          "overall": 79,
-          "threePoint": 79,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jaylen-Wells-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 69,
-            "minutes": 26.4,
-            "points": 12.5,
-            "rebounds": 3.2,
-            "assists": 1.6,
-            "steals": 0.9,
-            "blocks": 0.1,
-            "fgPct": 0.431,
-            "threePct": 0.353
-          }
-        },
-        {
           "name": "Cam Spencer",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 79,
           "threePoint": 88,
           "dunk": 55,
@@ -5004,8 +4930,34 @@
           }
         },
         {
+          "name": "Jaylen Wells",
+          "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 79,
+          "threePoint": 79,
+          "dunk": 70,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jaylen-Wells-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 69,
+            "minutes": 26.4,
+            "points": 12.5,
+            "rebounds": 3.2,
+            "assists": 1.6,
+            "steals": 0.9,
+            "blocks": 0.1,
+            "fgPct": 0.431,
+            "threePct": 0.353
+          }
+        },
+        {
           "name": "Isaiah Stewart",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 78,
           "threePoint": 77,
           "dunk": 70,
@@ -5026,6 +4978,9 @@
         {
           "name": "Olivier-Maxence Prosper",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 78,
           "threePoint": 83,
           "dunk": 85,
@@ -5046,6 +5001,9 @@
         {
           "name": "Javon Small",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 77,
           "threePoint": 87,
           "dunk": 80,
@@ -5066,6 +5024,9 @@
         {
           "name": "Scotty Pippen Jr.",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 77,
           "threePoint": 75,
           "dunk": 65,
@@ -5086,6 +5047,9 @@
         {
           "name": "D’Angelo Russell",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 76,
           "threePoint": 76,
           "dunk": 45,
@@ -5124,28 +5088,11 @@
           }
         },
         {
-          "name": "Taylor Hendricks",
-          "position": "PF",
-          "overall": 75,
-          "threePoint": 76,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Taylor-Hendricks-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 59,
-            "minutes": 18.9,
-            "points": 7.4,
-            "rebounds": 3.7,
-            "assists": 0.9,
-            "steals": 0.8,
-            "blocks": 0.5,
-            "fgPct": 0.459,
-            "threePct": 0.342
-          }
-        },
-        {
           "name": "Walter Clayton Jr.",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 75,
           "threePoint": 71,
           "dunk": 60,
@@ -5164,28 +5111,34 @@
           }
         },
         {
-          "name": "Kentavious Caldwell-Pope",
-          "position": "SG",
+          "name": "Taylor Hendricks",
+          "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 75,
-          "threePoint": 80,
-          "dunk": 73,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Kentavious-Caldwell-Pope-2K-Rating-80x80.png",
+          "threePoint": 76,
+          "dunk": 75,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Taylor-Hendricks-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 51,
-            "minutes": 21.3,
-            "points": 8.4,
-            "rebounds": 2.5,
-            "assists": 2.7,
+            "gamesPlayed": 59,
+            "minutes": 18.9,
+            "points": 7.4,
+            "rebounds": 3.7,
+            "assists": 0.9,
             "steals": 0.8,
-            "blocks": 0.2,
-            "fgPct": 0.41,
-            "threePct": 0.316
+            "blocks": 0.5,
+            "fgPct": 0.459,
+            "threePct": 0.342
           }
         },
         {
           "name": "Kris Murray",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 74,
           "threePoint": 66,
           "dunk": 75,
@@ -5206,6 +5159,9 @@
         {
           "name": "Jahmai Mashack",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 73,
           "threePoint": 67,
           "dunk": 70,
@@ -5226,6 +5182,9 @@
         {
           "name": "AJ Johnson",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 72,
           "threePoint": 68,
           "dunk": 80,
@@ -5241,26 +5200,6 @@
             "blocks": 0.1,
             "fgPct": 0.324,
             "threePct": 0.211
-          }
-        },
-        {
-          "name": "Dariq Whitehead",
-          "position": "SG",
-          "overall": 72,
-          "threePoint": 84,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dariq-Whitehead-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 6,
-            "minutes": 30.5,
-            "points": 16.3,
-            "rebounds": 4,
-            "assists": 1.5,
-            "steals": 0.7,
-            "blocks": 0,
-            "fgPct": 0.398,
-            "threePct": 0.317
           }
         },
         {
@@ -5282,14 +5221,6 @@
             "fgPct": 0.462,
             "threePct": 0.5
           }
-        },
-        {
-          "name": "Adama Bal",
-          "position": "SG",
-          "overall": 68,
-          "threePoint": 76,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Adam-Bal-2K-Rating-80x80.png"
         }
       ]
     },
@@ -5299,6 +5230,9 @@
         {
           "name": "Giannis Antetokounmpo",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 97,
           "threePoint": 76,
           "dunk": 91,
@@ -5319,6 +5253,9 @@
         {
           "name": "Bam Adebayo",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 89,
           "threePoint": 74,
           "dunk": 80,
@@ -5339,6 +5276,9 @@
         {
           "name": "Andrew Wiggins",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 81,
           "threePoint": 86,
           "dunk": 85,
@@ -5359,6 +5299,9 @@
         {
           "name": "Bobby Portis",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 80,
           "threePoint": 89,
           "dunk": 70,
@@ -5379,6 +5322,9 @@
         {
           "name": "Pelle Larsson",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 80,
           "threePoint": 75,
           "dunk": 75,
@@ -5399,6 +5345,9 @@
         {
           "name": "Davion Mitchell",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 79,
           "threePoint": 83,
           "dunk": 40,
@@ -5419,6 +5368,9 @@
         {
           "name": "Simone Fontecchio",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 77,
           "threePoint": 82,
           "dunk": 65,
@@ -5439,6 +5391,9 @@
         {
           "name": "Dru Smith",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 75,
           "threePoint": 71,
           "dunk": 45,
@@ -5459,6 +5414,9 @@
         {
           "name": "Myron Gardner",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 75,
           "threePoint": 83,
           "dunk": 70,
@@ -5479,6 +5437,9 @@
         {
           "name": "Nikola Jovic",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 74,
           "threePoint": 73,
           "dunk": 60,
@@ -5499,6 +5460,9 @@
         {
           "name": "Keshad Johnson",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 72,
           "threePoint": 71,
           "dunk": 86,
@@ -5555,26 +5519,6 @@
             "fgPct": 0.75,
             "threePct": 0
           }
-        },
-        {
-          "name": "Jahmir Young",
-          "position": "PG",
-          "overall": 67,
-          "threePoint": 72,
-          "dunk": 40,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jahmir-Young-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 14,
-            "minutes": 4.1,
-            "points": 1.8,
-            "rebounds": 0.3,
-            "assists": 0.6,
-            "steals": 0.1,
-            "blocks": 0,
-            "fgPct": 0.4,
-            "threePct": 0.333
-          }
         }
       ]
     },
@@ -5584,6 +5528,9 @@
         {
           "name": "Tyler Herro",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 87,
           "threePoint": 83,
           "dunk": 60,
@@ -5604,6 +5551,9 @@
         {
           "name": "Kevin Porter Jr.",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 82,
           "threePoint": 76,
           "dunk": 80,
@@ -5624,6 +5574,9 @@
         {
           "name": "Ryan Rollins",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 82,
           "threePoint": 84,
           "dunk": 65,
@@ -5644,6 +5597,9 @@
         {
           "name": "Kyle Kuzma",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 80,
           "threePoint": 78,
           "dunk": 75,
@@ -5664,6 +5620,9 @@
         {
           "name": "Jaime Jaquez Jr.",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 80,
           "threePoint": 73,
           "dunk": 88,
@@ -5684,6 +5643,9 @@
         {
           "name": "Kel’el Ware",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 80,
           "threePoint": 82,
           "dunk": 86,
@@ -5704,6 +5666,9 @@
         {
           "name": "Caris LeVert",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 79,
           "threePoint": 79,
           "dunk": 75,
@@ -5744,6 +5709,9 @@
         {
           "name": "Ousmane Dieng",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 77,
           "threePoint": 80,
           "dunk": 75,
@@ -5764,6 +5732,9 @@
         {
           "name": "AJ Green",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 76,
           "threePoint": 85,
           "dunk": 40,
@@ -5784,6 +5755,9 @@
         {
           "name": "Kasparas Jakucionis",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 76,
           "threePoint": 85,
           "dunk": 70,
@@ -5804,6 +5778,9 @@
         {
           "name": "Gary Trent Jr.",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 75,
           "threePoint": 82,
           "dunk": 75,
@@ -5842,8 +5819,34 @@
           }
         },
         {
+          "name": "Pete Nance",
+          "position": "PF",
+          "altPositions": [
+            "C"
+          ],
+          "overall": 74,
+          "threePoint": 85,
+          "dunk": 75,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Pete-Nance-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 47,
+            "minutes": 15.7,
+            "points": 5.4,
+            "rebounds": 2.7,
+            "assists": 1,
+            "steals": 0.3,
+            "blocks": 0.3,
+            "fgPct": 0.515,
+            "threePct": 0.42
+          }
+        },
+        {
           "name": "Kam Jones",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 74,
           "threePoint": 73,
           "dunk": 60,
@@ -5862,28 +5865,11 @@
           }
         },
         {
-          "name": "Andre Jackson Jr.",
-          "position": "SF",
-          "overall": 72,
-          "threePoint": 81,
-          "dunk": 87,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Andre-Jackson-Jr-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 48,
-            "minutes": 8.5,
-            "points": 2.4,
-            "rebounds": 1.5,
-            "assists": 0.9,
-            "steals": 0.4,
-            "blocks": 0.1,
-            "fgPct": 0.328,
-            "threePct": 0.25
-          }
-        },
-        {
           "name": "Cormac Ryan",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 72,
           "threePoint": 84,
           "dunk": 60,
@@ -5900,46 +5886,6 @@
             "fgPct": 0.52,
             "threePct": 0.458
           }
-        },
-        {
-          "name": "Thanasis Antetokounmpo",
-          "position": "PF",
-          "overall": 69,
-          "threePoint": 66,
-          "dunk": 85,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Thanasis-Antetokounmpo-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 34,
-            "minutes": 4.4,
-            "points": 1.4,
-            "rebounds": 0.9,
-            "assists": 0.4,
-            "steals": 0.4,
-            "blocks": 0.2,
-            "fgPct": 0.469,
-            "threePct": 0
-          }
-        },
-        {
-          "name": "Alex Antetokounmpo",
-          "position": "SF",
-          "overall": 68,
-          "threePoint": 66,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Alex-Antetokounmpo-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 6,
-            "minutes": 3.5,
-            "points": 3.2,
-            "rebounds": 1,
-            "assists": 0.2,
-            "steals": 0,
-            "blocks": 0.2,
-            "fgPct": 0.375,
-            "threePct": 0.286
-          }
         }
       ]
     },
@@ -5949,8 +5895,11 @@
         {
           "name": "Anthony Edwards",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 96,
-          "threePoint": 89,
+          "threePoint": 92,
           "dunk": 97,
           "imageUrl": "https://www.2kratings.com/wp-content/uploads/Anthony-Edwards-2K-Rating-1-80x80.png",
           "stats": {
@@ -5969,6 +5918,9 @@
         {
           "name": "LaMelo Ball",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 88,
           "threePoint": 84,
           "dunk": 75,
@@ -6009,6 +5961,9 @@
         {
           "name": "Jaden McDaniels",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 85,
           "threePoint": 85,
           "dunk": 75,
@@ -6029,6 +5984,9 @@
         {
           "name": "Ayo Dosunmu",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 83,
           "threePoint": 88,
           "dunk": 75,
@@ -6049,6 +6007,9 @@
         {
           "name": "Donte DiVincenzo",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 80,
           "threePoint": 84,
           "dunk": 75,
@@ -6069,6 +6030,9 @@
         {
           "name": "Terrence Shannon Jr.",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 77,
           "threePoint": 82,
           "dunk": 85,
@@ -6089,6 +6053,9 @@
         {
           "name": "Bones Hyland",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 76,
           "threePoint": 82,
           "dunk": 60,
@@ -6109,6 +6076,9 @@
         {
           "name": "Josh Green",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 75,
           "threePoint": 86,
           "dunk": 80,
@@ -6129,6 +6099,9 @@
         {
           "name": "Trey Lyles",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 74,
           "threePoint": 77,
           "dunk": 65,
@@ -6137,6 +6110,9 @@
         {
           "name": "Jaylen Clark",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 73,
           "threePoint": 73,
           "dunk": 70,
@@ -6152,46 +6128,6 @@
             "blocks": 0.1,
             "fgPct": 0.434,
             "threePct": 0.327
-          }
-        },
-        {
-          "name": "Joe Ingles",
-          "position": "PF",
-          "overall": 73,
-          "threePoint": 86,
-          "dunk": 45,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Joe-Ingles-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 27,
-            "minutes": 5.7,
-            "points": 1.5,
-            "rebounds": 0.7,
-            "assists": 1.3,
-            "steals": 0.3,
-            "blocks": 0.1,
-            "fgPct": 0.593,
-            "threePct": 0.438
-          }
-        },
-        {
-          "name": "Julian Phillips",
-          "position": "SF",
-          "overall": 72,
-          "threePoint": 75,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Julian-Phillips-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 48,
-            "minutes": 8.9,
-            "points": 2.9,
-            "rebounds": 1,
-            "assists": 0.2,
-            "steals": 0.5,
-            "blocks": 0.1,
-            "fgPct": 0.421,
-            "threePct": 0.308
           }
         },
         {
@@ -6217,6 +6153,9 @@
         {
           "name": "Enrique Freeman",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 69,
           "threePoint": 66,
           "dunk": 80,
@@ -6255,28 +6194,11 @@
           }
         },
         {
-          "name": "Mouhamadou Gueye",
-          "position": "C",
-          "overall": 67,
-          "threePoint": 60,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Mouhamadou-Gueye-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 2,
-            "minutes": 22.5,
-            "points": 8,
-            "rebounds": 3,
-            "assists": 3,
-            "steals": 1,
-            "blocks": 0.5,
-            "fgPct": 0.545,
-            "threePct": 0.2
-          }
-        },
-        {
           "name": "Zyon Pullin",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 67,
           "threePoint": 75,
           "dunk": 45,
@@ -6302,6 +6224,9 @@
         {
           "name": "Zion Williamson",
           "position": "PF",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 86,
           "threePoint": 67,
           "dunk": 93,
@@ -6322,6 +6247,9 @@
         {
           "name": "Trey Murphy III",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 85,
           "threePoint": 81,
           "dunk": 88,
@@ -6342,6 +6270,9 @@
         {
           "name": "Dejounte Murray",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 84,
           "threePoint": 74,
           "dunk": 75,
@@ -6362,6 +6293,9 @@
         {
           "name": "Saddiq Bey",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 84,
           "threePoint": 82,
           "dunk": 75,
@@ -6382,6 +6316,9 @@
         {
           "name": "Jeremiah Fears",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 80,
           "threePoint": 77,
           "dunk": 70,
@@ -6402,6 +6339,9 @@
         {
           "name": "Derik Queen",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 80,
           "threePoint": 66,
           "dunk": 70,
@@ -6422,6 +6362,9 @@
         {
           "name": "Herbert Jones",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 79,
           "threePoint": 73,
           "dunk": 75,
@@ -6442,6 +6385,9 @@
         {
           "name": "Yves Missi",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 78,
           "threePoint": 40,
           "dunk": 80,
@@ -6482,6 +6428,9 @@
         {
           "name": "Jordan Poole",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 76,
           "threePoint": 75,
           "dunk": 60,
@@ -6502,6 +6451,9 @@
         {
           "name": "Karlo Matkovic",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 76,
           "threePoint": 84,
           "dunk": 75,
@@ -6522,6 +6474,9 @@
         {
           "name": "Bryce McGowens",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 75,
           "threePoint": 84,
           "dunk": 80,
@@ -6540,8 +6495,31 @@
           }
         },
         {
+          "name": "Christian Koloko",
+          "position": "C",
+          "overall": 73,
+          "threePoint": 40,
+          "dunk": 75,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Christian-Koloko-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 27,
+            "minutes": 13.2,
+            "points": 2.7,
+            "rebounds": 3,
+            "assists": 0.7,
+            "steals": 0.5,
+            "blocks": 0.9,
+            "fgPct": 0.419,
+            "threePct": 0.111
+          }
+        },
+        {
           "name": "Jordan Hawkins",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 72,
           "threePoint": 77,
           "dunk": 60,
@@ -6562,6 +6540,9 @@
         {
           "name": "Micah Peavy",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 72,
           "threePoint": 69,
           "dunk": 80,
@@ -6598,26 +6579,6 @@
             "fgPct": 0.357,
             "threePct": 0
           }
-        },
-        {
-          "name": "Josh Oduro",
-          "position": "PF",
-          "overall": 68,
-          "threePoint": 66,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Josh-Oduro-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 3,
-            "minutes": 27.3,
-            "points": 8.3,
-            "rebounds": 7.7,
-            "assists": 1.3,
-            "steals": 0,
-            "blocks": 0,
-            "fgPct": 0.647,
-            "threePct": 0
-          }
         }
       ]
     },
@@ -6647,6 +6608,9 @@
         {
           "name": "Karl-Anthony Towns",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 91,
           "threePoint": 83,
           "dunk": 75,
@@ -6667,6 +6631,9 @@
         {
           "name": "OG Anunoby",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 88,
           "threePoint": 85,
           "dunk": 85,
@@ -6687,6 +6654,9 @@
         {
           "name": "Mikal Bridges",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 84,
           "threePoint": 82,
           "dunk": 75,
@@ -6707,6 +6677,9 @@
         {
           "name": "Josh Hart",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 82,
           "threePoint": 84,
           "dunk": 70,
@@ -6727,6 +6700,9 @@
         {
           "name": "Miles McBride",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 79,
           "threePoint": 86,
           "dunk": 65,
@@ -6747,6 +6723,9 @@
         {
           "name": "Jose Alvarado",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 78,
           "threePoint": 78,
           "dunk": 40,
@@ -6767,6 +6746,9 @@
         {
           "name": "Landry Shamet",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 77,
           "threePoint": 83,
           "dunk": 70,
@@ -6787,6 +6769,9 @@
         {
           "name": "Jordan Clarkson",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 77,
           "threePoint": 76,
           "dunk": 70,
@@ -6825,28 +6810,11 @@
           }
         },
         {
-          "name": "Jeremy Sochan",
-          "position": "PF",
-          "overall": 74,
-          "threePoint": 70,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jeremy-Sochan-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 44,
-            "minutes": 10.7,
-            "points": 3.6,
-            "rebounds": 2.4,
-            "assists": 0.9,
-            "steals": 0.4,
-            "blocks": 0.2,
-            "fgPct": 0.496,
-            "threePct": 0.244
-          }
-        },
-        {
           "name": "Tyler Kolek",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 74,
           "threePoint": 82,
           "dunk": 45,
@@ -6867,6 +6835,9 @@
         {
           "name": "Mohamed Diawara",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 74,
           "threePoint": 83,
           "dunk": 85,
@@ -6885,48 +6856,11 @@
           }
         },
         {
-          "name": "Trey Jemison III",
-          "position": "C",
-          "overall": 71,
-          "threePoint": 40,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Trey-Jemison-III-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 13,
-            "minutes": 6.3,
-            "points": 1,
-            "rebounds": 1.4,
-            "assists": 0.4,
-            "steals": 0.1,
-            "blocks": 0.2,
-            "fgPct": 0.6,
-            "threePct": 0
-          }
-        },
-        {
-          "name": "Kevin McCullar Jr.",
-          "position": "SF",
-          "overall": 71,
-          "threePoint": 74,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Kevin-McCullar-Jr-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 21,
-            "minutes": 7.4,
-            "points": 2.4,
-            "rebounds": 1.3,
-            "assists": 1,
-            "steals": 0.4,
-            "blocks": 0,
-            "fgPct": 0.426,
-            "threePct": 0.333
-          }
-        },
-        {
           "name": "Pacome Dadiet",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 69,
           "threePoint": 75,
           "dunk": 75,
@@ -6947,6 +6881,9 @@
         {
           "name": "Dillon Jones",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 69,
           "threePoint": 57,
           "dunk": 65,
@@ -6972,6 +6909,9 @@
         {
           "name": "Shai Gilgeous-Alexander",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 98,
           "threePoint": 82,
           "dunk": 75,
@@ -6992,6 +6932,9 @@
         {
           "name": "Chet Holmgren",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 87,
           "threePoint": 80,
           "dunk": 75,
@@ -7012,6 +6955,9 @@
         {
           "name": "Jalen Williams",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 87,
           "threePoint": 77,
           "dunk": 80,
@@ -7052,6 +6998,9 @@
         {
           "name": "Ajay Mitchell",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 84,
           "threePoint": 80,
           "dunk": 70,
@@ -7072,6 +7021,9 @@
         {
           "name": "Cason Wallace",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 83,
           "threePoint": 83,
           "dunk": 70,
@@ -7092,6 +7044,9 @@
         {
           "name": "Alex Caruso",
           "position": "SF",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 82,
           "threePoint": 82,
           "dunk": 75,
@@ -7110,28 +7065,11 @@
           }
         },
         {
-          "name": "Luguentz Dort",
-          "position": "SG",
-          "overall": 80,
-          "threePoint": 77,
-          "dunk": 85,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Luguentz-Dort-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 69,
-            "minutes": 26.8,
-            "points": 8.3,
-            "rebounds": 3.6,
-            "assists": 1.2,
-            "steals": 0.9,
-            "blocks": 0.4,
-            "fgPct": 0.385,
-            "threePct": 0.344
-          }
-        },
-        {
           "name": "Jared McCain",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 80,
           "threePoint": 86,
           "dunk": 70,
@@ -7172,6 +7110,9 @@
         {
           "name": "Kenrich Williams",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 78,
           "threePoint": 84,
           "dunk": 65,
@@ -7190,28 +7131,11 @@
           }
         },
         {
-          "name": "Aaron Wiggins",
-          "position": "SF",
-          "overall": 78,
-          "threePoint": 79,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Aaron-Wiggins-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 65,
-            "minutes": 21.8,
-            "points": 9.4,
-            "rebounds": 3.1,
-            "assists": 1.7,
-            "steals": 0.9,
-            "blocks": 0.4,
-            "fgPct": 0.431,
-            "threePct": 0.356
-          }
-        },
-        {
           "name": "Nikola Topic",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 73,
           "threePoint": 75,
           "dunk": 65,
@@ -7232,6 +7156,9 @@
         {
           "name": "Thomas Sorber",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 71,
           "threePoint": 60,
           "dunk": 75,
@@ -7240,6 +7167,9 @@
         {
           "name": "Brooks Barnhizer",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 69,
           "threePoint": 72,
           "dunk": 70,
@@ -7265,6 +7195,9 @@
         {
           "name": "Paolo Banchero",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 88,
           "threePoint": 78,
           "dunk": 85,
@@ -7285,6 +7218,9 @@
         {
           "name": "Franz Wagner",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 87,
           "threePoint": 80,
           "dunk": 80,
@@ -7305,6 +7241,9 @@
         {
           "name": "Desmond Bane",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 86,
           "threePoint": 86,
           "dunk": 75,
@@ -7325,6 +7264,9 @@
         {
           "name": "Anthony Black",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 82,
           "threePoint": 77,
           "dunk": 75,
@@ -7345,6 +7287,9 @@
         {
           "name": "Jalen Suggs",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 81,
           "threePoint": 76,
           "dunk": 80,
@@ -7365,6 +7310,9 @@
         {
           "name": "Wendell Carter Jr.",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 80,
           "threePoint": 75,
           "dunk": 75,
@@ -7405,6 +7353,9 @@
         {
           "name": "Tristan da Silva",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 78,
           "threePoint": 80,
           "dunk": 65,
@@ -7445,6 +7396,9 @@
         {
           "name": "Jevon Carter",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 75,
           "threePoint": 79,
           "dunk": 40,
@@ -7465,6 +7419,9 @@
         {
           "name": "Noah Penda",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 75,
           "threePoint": 76,
           "dunk": 75,
@@ -7485,6 +7442,9 @@
         {
           "name": "Jamal Cain",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 74,
           "threePoint": 83,
           "dunk": 75,
@@ -7503,28 +7463,11 @@
           }
         },
         {
-          "name": "Jett Howard",
-          "position": "SG",
-          "overall": 74,
-          "threePoint": 81,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jett-Howard-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 55,
-            "minutes": 12.6,
-            "points": 5.5,
-            "rebounds": 1.6,
-            "assists": 0.8,
-            "steals": 0.2,
-            "blocks": 0.2,
-            "fgPct": 0.418,
-            "threePct": 0.372
-          }
-        },
-        {
           "name": "Jonathan Isaac",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 73,
           "threePoint": 59,
           "dunk": 70,
@@ -7545,6 +7488,9 @@
         {
           "name": "Jase Richardson",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 73,
           "threePoint": 82,
           "dunk": 87,
@@ -7565,6 +7511,9 @@
         {
           "name": "Colin Castleton",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 70,
           "threePoint": 69,
           "dunk": 65,
@@ -7585,6 +7534,9 @@
         {
           "name": "Alex Morales",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 68,
           "threePoint": 76,
           "dunk": 75,
@@ -7610,6 +7562,9 @@
         {
           "name": "Jaylen Brown",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 95,
           "threePoint": 80,
           "dunk": 94,
@@ -7630,6 +7585,9 @@
         {
           "name": "Tyrese Maxey",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 93,
           "threePoint": 86,
           "dunk": 70,
@@ -7645,6 +7603,29 @@
             "blocks": 0.8,
             "fgPct": 0.462,
             "threePct": 0.367
+          }
+        },
+        {
+          "name": "LeBron James",
+          "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 92,
+          "threePoint": 76,
+          "dunk": 85,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/LeBron-James-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 60,
+            "minutes": 33.2,
+            "points": 20.9,
+            "rebounds": 6.1,
+            "assists": 7.2,
+            "steals": 1.2,
+            "blocks": 0.6,
+            "fgPct": 0.515,
+            "threePct": 0.317
           }
         },
         {
@@ -7670,6 +7651,9 @@
         {
           "name": "VJ Edgecombe",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 83,
           "threePoint": 81,
           "dunk": 89,
@@ -7690,6 +7674,9 @@
         {
           "name": "Anfernee Simons",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 80,
           "threePoint": 82,
           "dunk": 89,
@@ -7710,6 +7697,9 @@
         {
           "name": "Dean Wade",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 78,
           "threePoint": 79,
           "dunk": 75,
@@ -7728,48 +7718,11 @@
           }
         },
         {
-          "name": "Trendon Watford",
-          "position": "PF",
-          "overall": 76,
-          "threePoint": 68,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Trendon-Watford-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 53,
-            "minutes": 16.3,
-            "points": 6.5,
-            "rebounds": 3.3,
-            "assists": 2.5,
-            "steals": 0.3,
-            "blocks": 0.4,
-            "fgPct": 0.515,
-            "threePct": 0.2
-          }
-        },
-        {
-          "name": "Justin Edwards",
-          "position": "SF",
-          "overall": 76,
-          "threePoint": 80,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Justin-Edwards-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 64,
-            "minutes": 15.3,
-            "points": 6,
-            "rebounds": 1.5,
-            "assists": 1.3,
-            "steals": 0.8,
-            "blocks": 0.2,
-            "fgPct": 0.447,
-            "threePct": 0.372
-          }
-        },
-        {
           "name": "Dominick Barlow",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 76,
           "threePoint": 70,
           "dunk": 75,
@@ -7788,23 +7741,49 @@
           }
         },
         {
-          "name": "Caleb Love",
-          "position": "PG",
-          "overall": 75,
-          "threePoint": 76,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Caleb-Love-2K-Rating-80x80.png",
+          "name": "Justin Edwards",
+          "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
+          "overall": 76,
+          "threePoint": 80,
+          "dunk": 80,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Justin-Edwards-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 49,
-            "minutes": 20.7,
-            "points": 10.4,
-            "rebounds": 2.3,
-            "assists": 2.5,
-            "steals": 0.6,
-            "blocks": 0.1,
-            "fgPct": 0.388,
-            "threePct": 0.318
+            "gamesPlayed": 64,
+            "minutes": 15.3,
+            "points": 6,
+            "rebounds": 1.5,
+            "assists": 1.3,
+            "steals": 0.8,
+            "blocks": 0.2,
+            "fgPct": 0.447,
+            "threePct": 0.372
+          }
+        },
+        {
+          "name": "Kentavious Caldwell-Pope",
+          "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 75,
+          "threePoint": 80,
+          "dunk": 73,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Kentavious-Caldwell-Pope-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 51,
+            "minutes": 21.3,
+            "points": 8.4,
+            "rebounds": 2.5,
+            "assists": 2.7,
+            "steals": 0.8,
+            "blocks": 0.2,
+            "fgPct": 0.41,
+            "threePct": 0.316
           }
         },
         {
@@ -7828,8 +7807,34 @@
           }
         },
         {
+          "name": "Caleb Love",
+          "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 75,
+          "threePoint": 76,
+          "dunk": 65,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Caleb-Love-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 49,
+            "minutes": 20.7,
+            "points": 10.4,
+            "rebounds": 2.3,
+            "assists": 2.5,
+            "steals": 0.6,
+            "blocks": 0.1,
+            "fgPct": 0.388,
+            "threePct": 0.318
+          }
+        },
+        {
           "name": "Rayan Rupert",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 74,
           "threePoint": 77,
           "dunk": 70,
@@ -7850,6 +7855,9 @@
         {
           "name": "Ariel Hukporti",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 73,
           "threePoint": 47,
           "dunk": 75,
@@ -7868,48 +7876,11 @@
           }
         },
         {
-          "name": "Tyrese Martin",
-          "position": "SG",
-          "overall": 73,
-          "threePoint": 75,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Tyrese-Martin-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 46,
-            "minutes": 16.9,
-            "points": 6.3,
-            "rebounds": 2.5,
-            "assists": 1.7,
-            "steals": 0.5,
-            "blocks": 0.1,
-            "fgPct": 0.394,
-            "threePct": 0.321
-          }
-        },
-        {
-          "name": "Dalen Terry",
-          "position": "SG",
-          "overall": 73,
-          "threePoint": 79,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dalen-Terry-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 48,
-            "minutes": 11.5,
-            "points": 3.7,
-            "rebounds": 1.8,
-            "assists": 1.4,
-            "steals": 0.6,
-            "blocks": 0.3,
-            "fgPct": 0.439,
-            "threePct": 0.364
-          }
-        },
-        {
           "name": "Jabari Walker",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 72,
           "threePoint": 76,
           "dunk": 75,
@@ -7926,46 +7897,6 @@
             "fgPct": 0.455,
             "threePct": 0.337
           }
-        },
-        {
-          "name": "Johni Broome",
-          "position": "PF",
-          "overall": 70,
-          "threePoint": 69,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Johni-Broome-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 11,
-            "minutes": 5,
-            "points": 0.9,
-            "rebounds": 1.5,
-            "assists": 0.4,
-            "steals": 0.3,
-            "blocks": 0.2,
-            "fgPct": 0.167,
-            "threePct": 0
-          }
-        },
-        {
-          "name": "MarJon Beauchamp",
-          "position": "SF",
-          "overall": 70,
-          "threePoint": 78,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/MarJon-Beauchamp-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 14,
-            "minutes": 14,
-            "points": 6.8,
-            "rebounds": 2.3,
-            "assists": 1.1,
-            "steals": 0.6,
-            "blocks": 0.3,
-            "fgPct": 0.434,
-            "threePct": 0.34
-          }
         }
       ]
     },
@@ -7975,6 +7906,9 @@
         {
           "name": "Devin Booker",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 93,
           "threePoint": 86,
           "dunk": 75,
@@ -7995,6 +7929,9 @@
         {
           "name": "Dillon Brooks",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 84,
           "threePoint": 78,
           "dunk": 75,
@@ -8015,6 +7952,9 @@
         {
           "name": "Jalen Green",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 82,
           "threePoint": 79,
           "dunk": 91,
@@ -8055,6 +7995,9 @@
         {
           "name": "Miles Bridges",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 81,
           "threePoint": 76,
           "dunk": 88,
@@ -8095,6 +8038,9 @@
         {
           "name": "Luke Kennard",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 78,
           "threePoint": 93,
           "dunk": 60,
@@ -8115,6 +8061,9 @@
         {
           "name": "Jordan Goodwin",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 77,
           "threePoint": 79,
           "dunk": 40,
@@ -8135,6 +8084,9 @@
         {
           "name": "Oso Ighodaro",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 77,
           "threePoint": 40,
           "dunk": 80,
@@ -8155,6 +8107,9 @@
         {
           "name": "Pat Spencer",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 76,
           "threePoint": 80,
           "dunk": 75,
@@ -8175,6 +8130,9 @@
         {
           "name": "Rasheer Fleming",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 76,
           "threePoint": 78,
           "dunk": 75,
@@ -8190,26 +8148,6 @@
             "blocks": 0.4,
             "fgPct": 0.405,
             "threePct": 0.346
-          }
-        },
-        {
-          "name": "Ryan Dunn",
-          "position": "PF",
-          "overall": 75,
-          "threePoint": 76,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Ryan-Dunn-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 70,
-            "minutes": 19.4,
-            "points": 5.8,
-            "rebounds": 4.2,
-            "assists": 1.5,
-            "steals": 0.9,
-            "blocks": 0.4,
-            "fgPct": 0.453,
-            "threePct": 0.331
           }
         },
         {
@@ -8233,8 +8171,34 @@
           }
         },
         {
+          "name": "Ryan Dunn",
+          "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 75,
+          "threePoint": 76,
+          "dunk": 80,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Ryan-Dunn-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 70,
+            "minutes": 19.4,
+            "points": 5.8,
+            "rebounds": 4.2,
+            "assists": 1.5,
+            "steals": 0.9,
+            "blocks": 0.4,
+            "fgPct": 0.453,
+            "threePct": 0.331
+          }
+        },
+        {
           "name": "Jamaree Bouyea",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 74,
           "threePoint": 72,
           "dunk": 45,
@@ -8253,28 +8217,11 @@
           }
         },
         {
-          "name": "Amir Coffey",
-          "position": "SF",
-          "overall": 74,
-          "threePoint": 74,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Amir-Coffey-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 46,
-            "minutes": 10.7,
-            "points": 3.2,
-            "rebounds": 1.2,
-            "assists": 0.6,
-            "steals": 0.2,
-            "blocks": 0.1,
-            "fgPct": 0.487,
-            "threePct": 0.347
-          }
-        },
-        {
           "name": "Haywood Highsmith",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 73,
           "threePoint": 81,
           "dunk": 45,
@@ -8293,28 +8240,11 @@
           }
         },
         {
-          "name": "Isaiah Livers",
-          "position": "SF",
-          "overall": 71,
-          "threePoint": 77,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Isaiah-Livers-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 36,
-            "minutes": 9.6,
-            "points": 1.8,
-            "rebounds": 1.7,
-            "assists": 0.6,
-            "steals": 0.4,
-            "blocks": 0.2,
-            "fgPct": 0.344,
-            "threePct": 0.3
-          }
-        },
-        {
           "name": "Koby Brea",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 68,
           "threePoint": 84,
           "dunk": 60,
@@ -8335,6 +8265,9 @@
         {
           "name": "CJ Huntley",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 68,
           "threePoint": 72,
           "dunk": 80,
@@ -8358,8 +8291,19 @@
       "name": "Portland Trail Blazers",
       "players": [
         {
+          "name": "Damian Lillard",
+          "position": "PG",
+          "overall": 88,
+          "threePoint": 93,
+          "dunk": 85,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Damian-Lillard-2K-Rating-80x80.png"
+        },
+        {
           "name": "Deni Avdija",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 88,
           "threePoint": 75,
           "dunk": 75,
@@ -8378,16 +8322,11 @@
           }
         },
         {
-          "name": "Damian Lillard",
-          "position": "PG",
-          "overall": 88,
-          "threePoint": 86,
-          "dunk": 85,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Damian-Lillard-2K-Rating-80x80.png"
-        },
-        {
           "name": "Ja Morant",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 87,
           "threePoint": 72,
           "dunk": 96,
@@ -8403,26 +8342,6 @@
             "blocks": 0.3,
             "fgPct": 0.41,
             "threePct": 0.235
-          }
-        },
-        {
-          "name": "Shaedon Sharpe",
-          "position": "SG",
-          "overall": 83,
-          "threePoint": 76,
-          "dunk": 95,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Shaedon-Sharpe-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 50,
-            "minutes": 29.4,
-            "points": 20.8,
-            "rebounds": 4.3,
-            "assists": 2.6,
-            "steals": 1.4,
-            "blocks": 0.1,
-            "fgPct": 0.452,
-            "threePct": 0.337
           }
         },
         {
@@ -8446,8 +8365,34 @@
           }
         },
         {
+          "name": "Shaedon Sharpe",
+          "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
+          "overall": 83,
+          "threePoint": 76,
+          "dunk": 95,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Shaedon-Sharpe-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 50,
+            "minutes": 29.4,
+            "points": 20.8,
+            "rebounds": 4.3,
+            "assists": 2.6,
+            "steals": 1.4,
+            "blocks": 0.1,
+            "fgPct": 0.452,
+            "threePct": 0.337
+          }
+        },
+        {
           "name": "Jrue Holiday",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 82,
           "threePoint": 84,
           "dunk": 65,
@@ -8468,6 +8413,9 @@
         {
           "name": "Scoot Henderson",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 81,
           "threePoint": 79,
           "dunk": 88,
@@ -8488,6 +8436,9 @@
         {
           "name": "Toumani Camara",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 81,
           "threePoint": 81,
           "dunk": 75,
@@ -8508,6 +8459,9 @@
         {
           "name": "Robert Williams III",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 80,
           "threePoint": 74,
           "dunk": 75,
@@ -8526,28 +8480,34 @@
           }
         },
         {
-          "name": "Matisse Thybulle",
-          "position": "SG",
+          "name": "Micah Potter",
+          "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 76,
-          "threePoint": 83,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Matisse-Thybulle-2K-Rating-80x80.png",
+          "threePoint": 85,
+          "dunk": 65,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Micah-Potter-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 30,
-            "minutes": 16,
-            "points": 5.8,
-            "rebounds": 2,
-            "assists": 0.9,
-            "steals": 2,
-            "blocks": 0.5,
-            "fgPct": 0.433,
-            "threePct": 0.398
+            "gamesPlayed": 47,
+            "minutes": 19.3,
+            "points": 9.7,
+            "rebounds": 5,
+            "assists": 1.5,
+            "steals": 0.5,
+            "blocks": 0.3,
+            "fgPct": 0.515,
+            "threePct": 0.423
           }
         },
         {
           "name": "Vit Krejci",
           "position": "SF",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 75,
           "threePoint": 83,
           "dunk": 70,
@@ -8566,8 +8526,34 @@
           }
         },
         {
+          "name": "Jeremy Sochan",
+          "position": "PF",
+          "altPositions": [
+            "C"
+          ],
+          "overall": 74,
+          "threePoint": 70,
+          "dunk": 80,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jeremy-Sochan-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 44,
+            "minutes": 10.7,
+            "points": 3.6,
+            "rebounds": 2.4,
+            "assists": 0.9,
+            "steals": 0.4,
+            "blocks": 0.2,
+            "fgPct": 0.496,
+            "threePct": 0.244
+          }
+        },
+        {
           "name": "Sidy Cissoko",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 74,
           "threePoint": 72,
           "dunk": 75,
@@ -8583,26 +8569,6 @@
             "blocks": 0.3,
             "fgPct": 0.398,
             "threePct": 0.298
-          }
-        },
-        {
-          "name": "Blake Wesley",
-          "position": "PG",
-          "overall": 73,
-          "threePoint": 70,
-          "dunk": 86,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Blake-Wesley-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 31,
-            "minutes": 11.6,
-            "points": 4.8,
-            "rebounds": 1.3,
-            "assists": 2,
-            "steals": 0.5,
-            "blocks": 0.2,
-            "fgPct": 0.452,
-            "threePct": 0.278
           }
         },
         {
@@ -8646,8 +8612,34 @@
           }
         },
         {
+          "name": "John Tonje",
+          "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 69,
+          "threePoint": 81,
+          "dunk": 70,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/John-Tonje-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 6,
+            "minutes": 7,
+            "points": 2.5,
+            "rebounds": 1,
+            "assists": 0.3,
+            "steals": 0.3,
+            "blocks": 0,
+            "fgPct": 0.286,
+            "threePct": 0.3
+          }
+        },
+        {
           "name": "Chris Youngblood",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 68,
           "threePoint": 80,
           "dunk": 60,
@@ -8668,6 +8660,9 @@
         {
           "name": "Jayson Kent",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 68,
           "threePoint": 80,
           "dunk": 80,
@@ -8713,6 +8708,9 @@
         {
           "name": "Zach LaVine",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 83,
           "threePoint": 86,
           "dunk": 94,
@@ -8733,6 +8731,9 @@
         {
           "name": "Russell Westbrook",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 81,
           "threePoint": 77,
           "dunk": 80,
@@ -8773,6 +8774,9 @@
         {
           "name": "Malik Monk",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 80,
           "threePoint": 83,
           "dunk": 75,
@@ -8791,28 +8795,11 @@
           }
         },
         {
-          "name": "Keegan Murray",
-          "position": "PF",
-          "overall": 79,
-          "threePoint": 76,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Keegan-Murray-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 23,
-            "minutes": 34.5,
-            "points": 14,
-            "rebounds": 5.7,
-            "assists": 1.7,
-            "steals": 1,
-            "blocks": 1.6,
-            "fgPct": 0.42,
-            "threePct": 0.277
-          }
-        },
-        {
           "name": "De’Andre Hunter",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 79,
           "threePoint": 73,
           "dunk": 70,
@@ -8833,6 +8820,9 @@
         {
           "name": "Precious Achiuwa",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 79,
           "threePoint": 73,
           "dunk": 80,
@@ -8851,8 +8841,34 @@
           }
         },
         {
+          "name": "Keegan Murray",
+          "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 79,
+          "threePoint": 76,
+          "dunk": 80,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Keegan-Murray-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 23,
+            "minutes": 34.5,
+            "points": 14,
+            "rebounds": 5.7,
+            "assists": 1.7,
+            "steals": 1,
+            "blocks": 1.6,
+            "fgPct": 0.42,
+            "threePct": 0.277
+          }
+        },
+        {
           "name": "Nique Clifford",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 77,
           "threePoint": 77,
           "dunk": 70,
@@ -8873,6 +8889,9 @@
         {
           "name": "Dylan Cardwell",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 77,
           "threePoint": 40,
           "dunk": 80,
@@ -8891,28 +8910,11 @@
           }
         },
         {
-          "name": "Drew Eubanks",
-          "position": "C",
-          "overall": 75,
-          "threePoint": 77,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Drew-Eubanks-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 42,
-            "minutes": 13.1,
-            "points": 5.2,
-            "rebounds": 3,
-            "assists": 0.5,
-            "steals": 0.4,
-            "blocks": 0.6,
-            "fgPct": 0.596,
-            "threePct": 0.143
-          }
-        },
-        {
           "name": "Jonathan Mogbo",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 74,
           "threePoint": 70,
           "dunk": 80,
@@ -8933,6 +8935,9 @@
         {
           "name": "Daeqwon Plowden",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 73,
           "threePoint": 78,
           "dunk": 80,
@@ -8951,88 +8956,11 @@
           }
         },
         {
-          "name": "Killian Hayes",
-          "position": "PG",
-          "overall": 72,
-          "threePoint": 72,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Killian-Hayes-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 23,
-            "minutes": 17.7,
-            "points": 5.5,
-            "rebounds": 2.3,
-            "assists": 3.5,
-            "steals": 0.9,
-            "blocks": 0.2,
-            "fgPct": 0.304,
-            "threePct": 0.27
-          }
-        },
-        {
-          "name": "Patrick Baldwin Jr.",
-          "position": "PF",
-          "overall": 71,
-          "threePoint": 77,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Patrick-Baldwin-Jr-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 9,
-            "minutes": 11.3,
-            "points": 3.7,
-            "rebounds": 2.6,
-            "assists": 0.6,
-            "steals": 0.3,
-            "blocks": 0.6,
-            "fgPct": 0.407,
-            "threePct": 0.429
-          }
-        },
-        {
-          "name": "Doug McDermott",
-          "position": "SF",
-          "overall": 71,
-          "threePoint": 85,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Doug-McDermott-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 29,
-            "minutes": 15.1,
-            "points": 5.7,
-            "rebounds": 1.3,
-            "assists": 0.8,
-            "steals": 0.2,
-            "blocks": 0.1,
-            "fgPct": 0.388,
-            "threePct": 0.39
-          }
-        },
-        {
-          "name": "Isaiah Stevens",
-          "position": "PG",
-          "overall": 68,
-          "threePoint": 74,
-          "dunk": 40,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Isaiah-Stevens-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 3,
-            "minutes": 14.3,
-            "points": 3.3,
-            "rebounds": 1,
-            "assists": 3.3,
-            "steals": 1.7,
-            "blocks": 0,
-            "fgPct": 0.429,
-            "threePct": 0
-          }
-        },
-        {
           "name": "Adam Flagler",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 67,
           "threePoint": 70,
           "dunk": 45,
@@ -9046,6 +8974,9 @@
         {
           "name": "Victor Wembanyama",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 97,
           "threePoint": 83,
           "dunk": 85,
@@ -9066,6 +8997,9 @@
         {
           "name": "Stephon Castle",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 88,
           "threePoint": 79,
           "dunk": 88,
@@ -9086,6 +9020,9 @@
         {
           "name": "De’Aaron Fox",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 86,
           "threePoint": 77,
           "dunk": 80,
@@ -9106,6 +9043,9 @@
         {
           "name": "Dylan Harper",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 85,
           "threePoint": 81,
           "dunk": 86,
@@ -9126,6 +9066,9 @@
         {
           "name": "Tobias Harris",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 83,
           "threePoint": 79,
           "dunk": 75,
@@ -9144,28 +9087,11 @@
           }
         },
         {
-          "name": "Julian Champagnie",
-          "position": "PF",
-          "overall": 82,
-          "threePoint": 87,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Julian-Champagnie-2K-Rating-1-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 82,
-            "minutes": 27.6,
-            "points": 11.1,
-            "rebounds": 5.8,
-            "assists": 1.5,
-            "steals": 0.8,
-            "blocks": 0.5,
-            "fgPct": 0.437,
-            "threePct": 0.381
-          }
-        },
-        {
           "name": "Devin Vassell",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 82,
           "threePoint": 86,
           "dunk": 60,
@@ -9184,8 +9110,34 @@
           }
         },
         {
+          "name": "Julian Champagnie",
+          "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 82,
+          "threePoint": 87,
+          "dunk": 60,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Julian-Champagnie-2K-Rating-1-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 82,
+            "minutes": 27.6,
+            "points": 11.1,
+            "rebounds": 5.8,
+            "assists": 1.5,
+            "steals": 0.8,
+            "blocks": 0.5,
+            "fgPct": 0.437,
+            "threePct": 0.381
+          }
+        },
+        {
           "name": "Keldon Johnson",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 81,
           "threePoint": 81,
           "dunk": 75,
@@ -9226,6 +9178,9 @@
         {
           "name": "Harrison Barnes",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 77,
           "threePoint": 81,
           "dunk": 80,
@@ -9246,6 +9201,9 @@
         {
           "name": "Carter Bryant",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 77,
           "threePoint": 77,
           "dunk": 88,
@@ -9261,66 +9219,6 @@
             "blocks": 0.3,
             "fgPct": 0.408,
             "threePct": 0.335
-          }
-        },
-        {
-          "name": "Mason Plumlee",
-          "position": "C",
-          "overall": 76,
-          "threePoint": 58,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Mason-Plumlee-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 20,
-            "minutes": 8.6,
-            "points": 1.6,
-            "rebounds": 2.7,
-            "assists": 1,
-            "steals": 0.5,
-            "blocks": 0,
-            "fgPct": 0.786,
-            "threePct": 0
-          }
-        },
-        {
-          "name": "Kelly Olynyk",
-          "position": "C",
-          "overall": 75,
-          "threePoint": 74,
-          "dunk": 60,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Kelly-Olynyk-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 42,
-            "minutes": 8.6,
-            "points": 3.2,
-            "rebounds": 1.8,
-            "assists": 1.2,
-            "steals": 0.4,
-            "blocks": 0.1,
-            "fgPct": 0.49,
-            "threePct": 0.255
-          }
-        },
-        {
-          "name": "Lindy Waters III",
-          "position": "SG",
-          "overall": 73,
-          "threePoint": 77,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Lindy-Waters-III-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 40,
-            "minutes": 7.1,
-            "points": 2.4,
-            "rebounds": 0.7,
-            "assists": 0.5,
-            "steals": 0.2,
-            "blocks": 0,
-            "fgPct": 0.375,
-            "threePct": 0.342
           }
         },
         {
@@ -9346,6 +9244,9 @@
         {
           "name": "David Jones Garcia",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 71,
           "threePoint": 76,
           "dunk": 75,
@@ -9362,66 +9263,6 @@
             "fgPct": 0.52,
             "threePct": 0.6
           }
-        },
-        {
-          "name": "Bismack Biyombo",
-          "position": "C",
-          "overall": 70,
-          "threePoint": 40,
-          "dunk": 68,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Bismack-Biyombo-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 25,
-            "minutes": 5.6,
-            "points": 0.9,
-            "rebounds": 1,
-            "assists": 0.2,
-            "steals": 0.2,
-            "blocks": 0.1,
-            "fgPct": 0.6,
-            "threePct": 0
-          }
-        },
-        {
-          "name": "Harrison Ingram",
-          "position": "SF",
-          "overall": 69,
-          "threePoint": 74,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Harrison-Ingram-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 7,
-            "minutes": 3.7,
-            "points": 1.6,
-            "rebounds": 0.4,
-            "assists": 0.1,
-            "steals": 0,
-            "blocks": 0,
-            "fgPct": 0.833,
-            "threePct": 1
-          }
-        },
-        {
-          "name": "Emanuel Miller",
-          "position": "SF",
-          "overall": 68,
-          "threePoint": 74,
-          "dunk": 80,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Emanuel-Miller-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 5,
-            "minutes": 6.6,
-            "points": 3,
-            "rebounds": 0.6,
-            "assists": 0.8,
-            "steals": 0.4,
-            "blocks": 0,
-            "fgPct": 0.462,
-            "threePct": 0.333
-          }
         }
       ]
     },
@@ -9431,6 +9272,9 @@
         {
           "name": "Kawhi Leonard",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 95,
           "threePoint": 85,
           "dunk": 80,
@@ -9451,6 +9295,9 @@
         {
           "name": "Scottie Barnes",
           "position": "PF",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 89,
           "threePoint": 77,
           "dunk": 80,
@@ -9471,6 +9318,9 @@
         {
           "name": "Immanuel Quickley",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 84,
           "threePoint": 81,
           "dunk": 55,
@@ -9491,6 +9341,9 @@
         {
           "name": "RJ Barrett",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 83,
           "threePoint": 78,
           "dunk": 80,
@@ -9511,6 +9364,9 @@
         {
           "name": "Collin Murray-Boyles",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 81,
           "threePoint": 77,
           "dunk": 75,
@@ -9551,6 +9407,9 @@
         {
           "name": "Ja’Kobe Walter",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 78,
           "threePoint": 83,
           "dunk": 75,
@@ -9571,6 +9430,9 @@
         {
           "name": "Jamal Shead",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 78,
           "threePoint": 74,
           "dunk": 50,
@@ -9591,6 +9453,9 @@
         {
           "name": "Jamison Battle",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 76,
           "threePoint": 88,
           "dunk": 65,
@@ -9611,6 +9476,9 @@
         {
           "name": "Kyle Anderson",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 75,
           "threePoint": 79,
           "dunk": 45,
@@ -9629,28 +9497,11 @@
           }
         },
         {
-          "name": "A.J. Lawson",
-          "position": "SF",
-          "overall": 74,
-          "threePoint": 82,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/AJ-Lawson-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 24,
-            "minutes": 9.4,
-            "points": 4.2,
-            "rebounds": 1.8,
-            "assists": 0.3,
-            "steals": 0.5,
-            "blocks": 0.2,
-            "fgPct": 0.436,
-            "threePct": 0.422
-          }
-        },
-        {
           "name": "Kyle Lowry",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 73,
           "threePoint": 75,
           "dunk": 40,
@@ -9671,6 +9522,9 @@
         {
           "name": "Trayce Jackson-Davis",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 73,
           "threePoint": 44,
           "dunk": 85,
@@ -9689,8 +9543,31 @@
           }
         },
         {
+          "name": "Trey Jemison III",
+          "position": "C",
+          "overall": 71,
+          "threePoint": 40,
+          "dunk": 75,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Trey-Jemison-III-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 13,
+            "minutes": 6.3,
+            "points": 1,
+            "rebounds": 1.4,
+            "assists": 0.4,
+            "steals": 0.1,
+            "blocks": 0.2,
+            "fgPct": 0.6,
+            "threePct": 0
+          }
+        },
+        {
           "name": "Alijah Martin",
           "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
           "overall": 71,
           "threePoint": 76,
           "dunk": 85,
@@ -9706,26 +9583,6 @@
             "blocks": 0.2,
             "fgPct": 0.32,
             "threePct": 0.19
-          }
-        },
-        {
-          "name": "Garrett Temple",
-          "position": "SG",
-          "overall": 70,
-          "threePoint": 72,
-          "dunk": 40,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Garrett-Temple-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 22,
-            "minutes": 3.3,
-            "points": 0.8,
-            "rebounds": 0.4,
-            "assists": 0.4,
-            "steals": 0.2,
-            "blocks": 0.1,
-            "fgPct": 0.267,
-            "threePct": 0.25
           }
         },
         {
@@ -9756,6 +9613,9 @@
         {
           "name": "Lauri Markkanen",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 87,
           "threePoint": 82,
           "dunk": 80,
@@ -9776,6 +9636,9 @@
         {
           "name": "Keyonte George",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 87,
           "threePoint": 81,
           "dunk": 65,
@@ -9796,6 +9659,9 @@
         {
           "name": "Jaren Jackson Jr.",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 86,
           "threePoint": 79,
           "dunk": 80,
@@ -9816,6 +9682,9 @@
         {
           "name": "Isaiah Collier",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 82,
           "threePoint": 73,
           "dunk": 75,
@@ -9856,6 +9725,9 @@
         {
           "name": "Ace Bailey",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 81,
           "threePoint": 78,
           "dunk": 80,
@@ -9876,6 +9748,9 @@
         {
           "name": "Brice Sensabaugh",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 81,
           "threePoint": 80,
           "dunk": 60,
@@ -9896,6 +9771,9 @@
         {
           "name": "Kyle Filipowski",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 79,
           "threePoint": 76,
           "dunk": 70,
@@ -9916,6 +9794,9 @@
         {
           "name": "Jaxson Hayes",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 79,
           "threePoint": 60,
           "dunk": 88,
@@ -9934,28 +9815,34 @@
           }
         },
         {
-          "name": "Kevin Love",
-          "position": "C",
+          "name": "Svi Mykhailiuk",
+          "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 76,
-          "threePoint": 80,
-          "dunk": 50,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Kevin-Love-2K-Rating-80x80.png",
+          "threePoint": 84,
+          "dunk": 55,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Svi-Mykhailiuk-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 37,
-            "minutes": 16.6,
-            "points": 6.7,
-            "rebounds": 5.8,
-            "assists": 1.8,
-            "steals": 0.4,
-            "blocks": 0.2,
-            "fgPct": 0.397,
-            "threePct": 0.373
+            "gamesPlayed": 50,
+            "minutes": 23.1,
+            "points": 9.4,
+            "rebounds": 2.5,
+            "assists": 1.9,
+            "steals": 0.5,
+            "blocks": 0.1,
+            "fgPct": 0.478,
+            "threePct": 0.408
           }
         },
         {
           "name": "Cody Williams",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 76,
           "threePoint": 70,
           "dunk": 80,
@@ -9976,6 +9863,9 @@
         {
           "name": "John Konchar",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 76,
           "threePoint": 69,
           "dunk": 55,
@@ -9994,28 +9884,11 @@
           }
         },
         {
-          "name": "Svi Mykhailiuk",
-          "position": "SG",
-          "overall": 76,
-          "threePoint": 84,
-          "dunk": 55,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Svi-Mykhailiuk-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 50,
-            "minutes": 23.1,
-            "points": 9.4,
-            "rebounds": 2.5,
-            "assists": 1.9,
-            "steals": 0.5,
-            "blocks": 0.1,
-            "fgPct": 0.478,
-            "threePct": 0.408
-          }
-        },
-        {
           "name": "Josh Okogie",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 75,
           "threePoint": 83,
           "dunk": 75,
@@ -10034,28 +9907,11 @@
           }
         },
         {
-          "name": "Oscar Tshiebwe",
-          "position": "C",
-          "overall": 73,
-          "threePoint": 40,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Oscar-Tshiebwe-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 27,
-            "minutes": 16.6,
-            "points": 7.8,
-            "rebounds": 6.6,
-            "assists": 1.2,
-            "steals": 0.6,
-            "blocks": 0.2,
-            "fgPct": 0.634,
-            "threePct": 0
-          }
-        },
-        {
           "name": "Blake Hinson",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 73,
           "threePoint": 85,
           "dunk": 55,
@@ -10074,48 +9930,54 @@
           }
         },
         {
-          "name": "Elijah Harkless",
-          "position": "PG",
-          "overall": 72,
-          "threePoint": 75,
-          "dunk": 50,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Elijah-Harkless-2K-Rating-80x80.png",
+          "name": "Mo Bamba",
+          "position": "C",
+          "overall": 71,
+          "threePoint": 74,
+          "dunk": 70,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Mo-Bamba-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 26,
-            "minutes": 21,
-            "points": 6.8,
-            "rebounds": 2,
-            "assists": 2.9,
-            "steals": 1.2,
-            "blocks": 0.2,
-            "fgPct": 0.335,
-            "threePct": 0.239
+            "gamesPlayed": 4,
+            "minutes": 11,
+            "points": 2.5,
+            "rebounds": 5.5,
+            "assists": 0.3,
+            "steals": 0,
+            "blocks": 0.8,
+            "fgPct": 0.455,
+            "threePct": 0
           }
         },
         {
-          "name": "Bez Mbeng",
-          "position": "SG",
+          "name": "Harrison Ingram",
+          "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 69,
-          "threePoint": 67,
-          "dunk": 65,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Bez-Mbeng-Fultz-2K-Rating-80x80.png",
+          "threePoint": 74,
+          "dunk": 75,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Harrison-Ingram-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 15,
-            "minutes": 32.8,
-            "points": 8.1,
-            "rebounds": 3.8,
-            "assists": 4.1,
-            "steals": 2.3,
-            "blocks": 0.3,
-            "fgPct": 0.5,
-            "threePct": 0.194
+            "gamesPlayed": 7,
+            "minutes": 3.7,
+            "points": 1.6,
+            "rebounds": 0.4,
+            "assists": 0.1,
+            "steals": 0,
+            "blocks": 0,
+            "fgPct": 0.833,
+            "threePct": 1
           }
         },
         {
           "name": "Trey Alexander",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 68,
           "threePoint": 70,
           "dunk": 40,
@@ -10136,30 +9998,13 @@
         {
           "name": "Tamar Bates",
           "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 68,
           "threePoint": 82,
           "dunk": 65,
           "imageUrl": "https://www.2kratings.com/wp-content/uploads/Tamar-Bates-2K-Rating-80x80.png"
-        },
-        {
-          "name": "Hayden Gray",
-          "position": "SG",
-          "overall": 68,
-          "threePoint": 74,
-          "dunk": 55,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Hayden-Gray-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 1,
-            "minutes": 25,
-            "points": 6,
-            "rebounds": 0,
-            "assists": 1,
-            "steals": 1,
-            "blocks": 1,
-            "fgPct": 0.667,
-            "threePct": 0
-          }
         }
       ]
     },
@@ -10169,6 +10014,9 @@
         {
           "name": "Anthony Davis",
           "position": "PF",
+          "altPositions": [
+            "C"
+          ],
           "overall": 92,
           "threePoint": 71,
           "dunk": 85,
@@ -10209,6 +10057,9 @@
         {
           "name": "Alex Sarr",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 84,
           "threePoint": 76,
           "dunk": 85,
@@ -10229,6 +10080,9 @@
         {
           "name": "KyShawn George",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 82,
           "threePoint": 82,
           "dunk": 60,
@@ -10249,6 +10103,9 @@
         {
           "name": "Will Riley",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 81,
           "threePoint": 76,
           "dunk": 70,
@@ -10289,6 +10146,9 @@
         {
           "name": "Bilal Coulibaly",
           "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 79,
           "threePoint": 73,
           "dunk": 85,
@@ -10309,6 +10169,9 @@
         {
           "name": "Justin Champagnie",
           "position": "PF",
+          "altPositions": [
+            "SF"
+          ],
           "overall": 78,
           "threePoint": 75,
           "dunk": 75,
@@ -10327,28 +10190,11 @@
           }
         },
         {
-          "name": "Tre Johnson",
-          "position": "SG",
-          "overall": 78,
-          "threePoint": 80,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Tre-Johnson-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 60,
-            "minutes": 24.1,
-            "points": 12.2,
-            "rebounds": 2.8,
-            "assists": 2,
-            "steals": 0.6,
-            "blocks": 0.3,
-            "fgPct": 0.419,
-            "threePct": 0.358
-          }
-        },
-        {
           "name": "Bub Carrington",
           "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
           "overall": 78,
           "threePoint": 83,
           "dunk": 60,
@@ -10367,8 +10213,34 @@
           }
         },
         {
+          "name": "Tre Johnson",
+          "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
+          "overall": 78,
+          "threePoint": 80,
+          "dunk": 75,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Tre-Johnson-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 60,
+            "minutes": 24.1,
+            "points": 12.2,
+            "rebounds": 2.8,
+            "assists": 2,
+            "steals": 0.6,
+            "blocks": 0.3,
+            "fgPct": 0.419,
+            "threePct": 0.358
+          }
+        },
+        {
           "name": "Tristan Vukcevic",
           "position": "C",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 77,
           "threePoint": 78,
           "dunk": 65,
@@ -10387,48 +10259,11 @@
           }
         },
         {
-          "name": "Julian Reese",
-          "position": "C",
-          "overall": 76,
-          "threePoint": 40,
-          "dunk": 70,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Julian-Reese-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 13,
-            "minutes": 30.9,
-            "points": 11.8,
-            "rebounds": 10.5,
-            "assists": 1.8,
-            "steals": 1.4,
-            "blocks": 0.6,
-            "fgPct": 0.529,
-            "threePct": 0
-          }
-        },
-        {
-          "name": "Jamir Watkins",
-          "position": "SF",
-          "overall": 76,
-          "threePoint": 71,
-          "dunk": 85,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jamir-Watkins-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 50,
-            "minutes": 20.6,
-            "points": 7.4,
-            "rebounds": 3.9,
-            "assists": 1.3,
-            "steals": 1.1,
-            "blocks": 0.5,
-            "fgPct": 0.446,
-            "threePct": 0.297
-          }
-        },
-        {
           "name": "Khris Middleton",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 76,
           "threePoint": 78,
           "dunk": 65,
@@ -10447,8 +10282,57 @@
           }
         },
         {
+          "name": "Jamir Watkins",
+          "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
+          "overall": 76,
+          "threePoint": 71,
+          "dunk": 85,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jamir-Watkins-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 50,
+            "minutes": 20.6,
+            "points": 7.4,
+            "rebounds": 3.9,
+            "assists": 1.3,
+            "steals": 1.1,
+            "blocks": 0.5,
+            "fgPct": 0.446,
+            "threePct": 0.297
+          }
+        },
+        {
+          "name": "Julian Reese",
+          "position": "C",
+          "altPositions": [
+            "PF"
+          ],
+          "overall": 76,
+          "threePoint": 40,
+          "dunk": 70,
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Julian-Reese-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 13,
+            "minutes": 30.9,
+            "points": 11.8,
+            "rebounds": 10.5,
+            "assists": 1.8,
+            "steals": 1.4,
+            "blocks": 0.6,
+            "fgPct": 0.529,
+            "threePct": 0
+          }
+        },
+        {
           "name": "Cam Whitmore",
           "position": "SF",
+          "altPositions": [
+            "PF"
+          ],
           "overall": 75,
           "threePoint": 70,
           "dunk": 80,
@@ -10464,46 +10348,6 @@
             "blocks": 0.4,
             "fgPct": 0.456,
             "threePct": 0.286
-          }
-        },
-        {
-          "name": "Sharife Cooper",
-          "position": "PG",
-          "overall": 74,
-          "threePoint": 79,
-          "dunk": 40,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Sharife-Cooper-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 41,
-            "minutes": 17.1,
-            "points": 8.1,
-            "rebounds": 2.1,
-            "assists": 3,
-            "steals": 0.4,
-            "blocks": 0.1,
-            "fgPct": 0.514,
-            "threePct": 0.382
-          }
-        },
-        {
-          "name": "Anthony Gill",
-          "position": "PF",
-          "overall": 74,
-          "threePoint": 75,
-          "dunk": 75,
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Anthony-Gill-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 55,
-            "minutes": 17.3,
-            "points": 5.8,
-            "rebounds": 2.9,
-            "assists": 1.3,
-            "steals": 0.6,
-            "blocks": 0.4,
-            "fgPct": 0.628,
-            "threePct": 0.354
           }
         }
       ]

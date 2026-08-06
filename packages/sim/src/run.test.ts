@@ -2,10 +2,11 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { ROSTER_SIZE, type EventCard, type RunState } from '@perfect-season/shared';
-import { difficultyFor, MAX_ASCENSION } from './difficulty';
+import { validateRoster } from './cap';
+import { MAX_ASCENSION } from './difficulty';
 import { draftCandidates } from './draft';
 import {
-  CASUAL_CAP_BONUS,
+  CASUAL_CPU_REDUCTION,
   createRun,
   currentFreeAgents,
   playNextGame,
@@ -61,7 +62,7 @@ describe('createRun', () => {
     expect(a.status).toBe('drafting');
     expect(a.league).toHaveLength(29);
     expect(a.league.some((t) => t.id === a.draft!.rolledTeamId)).toBe(true);
-    expect(a.draft!.slots).toHaveLength(ROSTER_SIZE);
+    expect(a.draft!.roster).toHaveLength(0);
   });
 
   it('higher ascension produces stronger CPU teams', () => {
@@ -73,19 +74,41 @@ describe('createRun', () => {
     expect(avg(hard)).toBeGreaterThan(avg(base));
   });
 
-  it('casual mode relaxes the effective cap without changing the generated league', () => {
+  it('casual mode removes the cap and handicaps the CPU at season start', () => {
     const standard = createRun(9, 0);
     const casual = createRun(9, 0, undefined, true);
     expect(standard.casual).toBe(false);
     expect(casual.casual).toBe(true);
-    // Same seed, same world — casual only changes cap checks, not RNG streams.
+    // Same seed, same world at creation — you draft full-rated players.
     expect(casual.league).toEqual(standard.league);
     expect(runCapReduction(standard)).toBe(0);
-    expect(runCapReduction(casual)).toBe(-CASUAL_CAP_BONUS);
-    // At max ascension the relief exactly cancels the squeeze.
+    expect(runCapReduction(casual)).toBe(Number.NEGATIVE_INFINITY);
+
+    // At season start every remaining CPU player drops by the handicap
+    // (drafted players keep their ratings; fill-ins are new players).
+    const drafted = draftStrongRoster(casual);
+    const before = new Map(drafted.league.flatMap((t) => t.players).map((p) => [p.id, p.overall]));
+    const started = startSeason(drafted);
+    for (const p of started.league.flatMap((t) => t.players)) {
+      const original = before.get(p.id);
+      if (original !== undefined) {
+        expect(p.overall).toBe(Math.max(40, original - CASUAL_CPU_REDUCTION));
+      }
+    }
+    for (const p of started.roster) {
+      expect(p.overall).toBe(before.get(p.id));
+    }
+    // No cap even at max ascension — the squeeze doesn't apply in casual.
     expect(runCapReduction(createRun(9, MAX_ASCENSION, undefined, true))).toBe(
-      difficultyFor(MAX_ASCENSION).capReduction - CASUAL_CAP_BONUS,
+      Number.NEGATIVE_INFINITY,
     );
+    // Any roster passes the cap check: -Infinity reduction means infinite space.
+    const priciest = [...casual.league.flatMap((t) => t.players)]
+      .sort((a, b) => b.salary - a.salary)
+      .slice(0, 15);
+    expect(
+      validateRoster(priciest, runCapReduction(casual)).errors.some((e) => e.includes('cap')),
+    ).toBe(false);
   });
 });
 

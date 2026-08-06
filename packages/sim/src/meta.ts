@@ -77,7 +77,7 @@ export const BADGES: readonly BadgeDefinition[] = [
 
 /**
  * Fold a finished run (status 'won' or 'lost') into the meta progress.
- * Casual (relaxed-cap) runs count toward career counters but earn no badges
+ * Casual (no-cap) runs count toward career counters but earn no badges
  * and unlock no ascensions — those mark achievements at the real cap.
  */
 export function recordRun(meta: MetaProgress, run: RunState): MetaProgress {

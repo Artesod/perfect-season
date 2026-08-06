@@ -44,10 +44,29 @@
   opacity: 0.75;
 }
 
-.slot-chip.current {
-  color: var(--accent);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent);
+.slot-chip.need {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+
+.slot-note {
+  margin: 8px 0 0;
+}
+
+.need-pos {
+  color: var(--warn);
+  font-weight: 600;
+}
+
+/* Dual-position players: one pick button per eligible position */
+
+.pick-as-row {
+  display: flex;
+  gap: 6px;
+}
+
+.pick-as-btn {
+  flex: 1 1 0;
 }
 
 /* Slot-machine reel for the team roll */
@@ -273,6 +292,41 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* Draft-complete popup */
+
+.start-overlay {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: rgba(4, 3, 10, 0.6);
+}
+
+.start-modal {
+  max-width: 420px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-color: var(--accent-dim);
+  box-shadow: 0 0 42px var(--accent-bg), 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: card-in 260ms ease-out both;
+}
+
+.start-modal h2 {
+  margin: 0;
+}
+
+.start-modal p {
+  margin: 0;
+}
+
+.start-kicker {
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 .issue-list {

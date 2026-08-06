@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import type { PoolMode } from '@perfect-season/shared';
-import { BADGES, CASUAL_CAP_BONUS, difficultyFor, unlockedAscension } from '@perfect-season/sim';
+import {
+  BADGES,
+  CASUAL_CPU_REDUCTION,
+  difficultyFor,
+  runCpuBonus,
+  unlockedAscension,
+} from '@perfect-season/sim';
 import { LeaderboardPanel } from '../components/LeaderboardPanel';
 import { ERA_DATASET, NBA_DATASET, poolForMode } from '../nbaData';
 import { useGameStore } from '../store';
@@ -142,12 +148,20 @@ export function HomeScreen() {
               })}
             </div>
             <ul className="mods-list">
-              <li>CPU teams: {mods.cpuOverallBonus > 0 ? `+${mods.cpuOverallBonus} overall` : 'baseline'}</li>
+              <li>
+                CPU teams:{' '}
+                {(() => {
+                  const cpuBonus = runCpuBonus(ascension, casual);
+                  if (cpuBonus > 0) return `+${cpuBonus} overall`;
+                  if (cpuBonus < 0) return `−${-cpuBonus} overall (casual)`;
+                  return 'baseline';
+                })()}
+              </li>
               <li>Event chance: ×{mods.eventChanceMultiplier}</li>
               <li>
                 Salary cap:{' '}
                 {casual
-                  ? `+$${CASUAL_CAP_BONUS - mods.capReduction}M (casual)`
+                  ? 'none (casual)'
                   : mods.capReduction > 0
                     ? `−$${mods.capReduction}M`
                     : 'full'}
@@ -178,7 +192,7 @@ export function HomeScreen() {
             </div>
             <span className="field-hint">
               {casual
-                ? `Relaxed cap (+$${CASUAL_CAP_BONUS}M) — counts in career stats, but no badges, ascension unlocks, or leaderboard entries`
+                ? `No salary cap and softer CPU teams (−${CASUAL_CPU_REDUCTION} overall) — counts in career stats, but no badges, ascension unlocks, or leaderboard entries`
                 : 'The full cap squeeze — badges, unlocks, and leaderboard entries at stake'}
             </span>
           </div>

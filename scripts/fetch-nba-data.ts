@@ -117,15 +117,18 @@ async function fetchTeam(
     const name = $row.find('a.player-name').first().text().trim();
     if (!name) return; // decorative/placeholder rows
 
-    // Primary position = first position-list link in the row's subtext.
-    let position: Position | undefined;
+    // All position-list links in the row's subtext, in listed order: the
+    // first is the primary position, the rest are the player's alternates
+    // ("PG / SG" on the site becomes position PG + altPositions [SG]).
+    const positions: Position[] = [];
     $row.find('a[href*="/lists/"]').each((_, link) => {
-      if (position) return;
       const match = /\/lists\/([a-z-]+)/.exec($(link).attr('href') ?? '');
       const mapped = match ? POSITION_BY_LIST_SLUG[match[1]] : undefined;
-      if (mapped) position = mapped;
+      if (mapped && !positions.includes(mapped)) positions.push(mapped);
     });
-    if (!position) return;
+    if (positions.length === 0) return;
+    const position = positions[0];
+    const altPositions = positions.slice(1);
 
     const overall = Number.parseInt($row.find('td').eq(2).attr('data-sort') ?? '', 10);
     if (!Number.isFinite(overall) || overall < 40 || overall > 99) return;
@@ -145,6 +148,7 @@ async function fetchTeam(
     players.push({
       name,
       position,
+      ...(altPositions.length > 0 ? { altPositions } : {}),
       overall,
       threePoint: Number.isFinite(threePoint) ? clampRating(threePoint) : 50,
       dunk: Number.isFinite(dunk) ? clampRating(dunk) : 50,

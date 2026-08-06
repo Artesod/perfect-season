@@ -147,6 +147,9 @@ function toPlayer(
     id,
     name: team.nameSuffix ? `${record.name} ${team.nameSuffix}` : record.name,
     position: record.position,
+    ...(record.altPositions && record.altPositions.length > 0
+      ? { altPositions: record.altPositions }
+      : {}),
     overall,
     offense: clamp(overall + lean),
     defense: clamp(overall - lean),
@@ -309,6 +312,9 @@ function isValidPlayerRecord(p: RealPlayerRecord): boolean {
   return (
     typeof p.name === 'string' &&
     (POSITIONS as readonly string[]).includes(p.position) &&
+    (p.altPositions === undefined ||
+      (Array.isArray(p.altPositions) &&
+        p.altPositions.every((pos) => (POSITIONS as readonly string[]).includes(pos)))) &&
     typeof p.overall === 'number' &&
     typeof p.threePoint === 'number' &&
     typeof p.dunk === 'number'

@@ -45,8 +45,9 @@
 .ascension-btn.selected {
   background: var(--accent);
   border-color: var(--accent);
-  color: #14100b;
+  color: var(--on-accent);
   font-weight: 700;
+  box-shadow: 0 0 12px rgba(255, 46, 151, 0.3);
 }
 
 .ascension-btn:disabled {

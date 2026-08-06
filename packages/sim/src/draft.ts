@@ -1,13 +1,14 @@
 import {
   createRng,
   deriveSeed,
+  MIN_PER_POSITION,
   MIN_SALARY,
   POSITIONS,
   randInt,
   ROSTER_SIZE,
-  type DraftSlot,
   type DraftState,
   type Player,
+  type Position,
   type Team,
 } from '@perfect-season/shared';
 
@@ -17,24 +18,13 @@ export type { DraftState };
 
 /**
  * The team-roll draft: each round rolls a random league team (seeded) and
- * the player drafts exactly one of its players for that round's slot.
- * Rounds 1-10 demand each position twice, so the 2-per-position roster
- * minimum holds by construction; rounds 11-15 are flex — that's where you
- * gamble on rolling a loaded roster. A couple of reroll tokens (plus a free
- * reroll whenever a rolled team offers no legal pick) keep the RNG from
- * ever soft-locking a run.
+ * the player drafts any one of its players — you decide which roster hole
+ * to fill each round. The 2-per-position minimum is enforced by a
+ * feasibility check: a pick is blocked if it would leave too few remaining
+ * rounds to cover the positions still short. A couple of reroll tokens
+ * (plus a free reroll whenever a rolled team offers no legal pick) keep the
+ * RNG from ever soft-locking a run.
  */
-
-/** Slot order: every position twice, then five flex rounds. */
-export const DRAFT_SLOTS: readonly DraftSlot[] = [
-  ...POSITIONS,
-  ...POSITIONS,
-  'flex',
-  'flex',
-  'flex',
-  'flex',
-  'flex',
-];
 
 export const REROLL_TOKENS = 2;
 
@@ -52,7 +42,6 @@ function rollTeamId(seed: number, rollIndex: number, league: readonly Team[]): s
 
 export function createRollDraft(seed: number, league: readonly Team[]): DraftState {
   return {
-    slots: [...DRAFT_SLOTS],
     rolledTeamId: rollTeamId(seed, 0, league),
     rollIndex: 1,
     rerollsLeft: REROLL_TOKENS,
@@ -60,9 +49,37 @@ export function createRollDraft(seed: number, league: readonly Team[]): DraftSta
   };
 }
 
-/** The requirement of the round being drafted, or null once the roster is full. */
-export function currentSlot(state: DraftState): DraftSlot | null {
-  return state.roster.length >= state.slots.length ? null : state.slots[state.roster.length];
+/**
+ * How many more players each position still needs to hit the roster
+ * minimum. The draft's position guard and the UI's needs readout both
+ * derive from this.
+ */
+export function positionsNeeded(roster: readonly Player[]): Record<Position, number> {
+  const needed = {} as Record<Position, number>;
+  for (const position of POSITIONS) {
+    const count = roster.filter((p) => p.position === position).length;
+    needed[position] = Math.max(0, MIN_PER_POSITION - count);
+  }
+  return needed;
+}
+
+function totalNeeded(roster: readonly Player[]): number {
+  return Object.values(positionsNeeded(roster)).reduce((sum, n) => sum + n, 0);
+}
+
+/** Every position a player can fill: primary first, then alternates. */
+export function eligiblePositions(player: Player): Position[] {
+  const eligible = [player.position, ...(player.altPositions ?? [])];
+  return [...new Set(eligible)];
+}
+
+/** The player as rostered when picked for the given position. */
+function assignPosition(player: Player, position: Position): Player {
+  const others = eligiblePositions(player).filter((p) => p !== position);
+  const assigned: Player = { ...player, position };
+  if (others.length > 0) assigned.altPositions = others;
+  else delete assigned.altPositions;
+  return assigned;
 }
 
 /** The rolled team's roster, minus anyone already drafted. */
@@ -76,25 +93,29 @@ export function draftCandidates(state: DraftState, league: readonly Team[]): Pla
 export type PickBlockReason =
   | 'draft-complete'
   | 'not-offered'
-  | 'wrong-position'
+  | 'not-eligible'
+  | 'position-need'
   | 'duplicate-person'
   | 'cannot-afford';
 
 export type PickCheck = { ok: true } | { ok: false; reason: PickBlockReason; detail: string };
 
 /**
- * A pick must match the round's slot and — like the old pool draft — leave
- * enough cap space to pay league-minimum salaries for every remaining slot,
- * so the draft can never wander into an incompletable roster.
+ * Any player on the rolled team is fair game, as long as the pick leaves
+ * the roster completable: enough remaining rounds to cover every position
+ * still short of its minimum, and enough cap space to pay league-minimum
+ * salaries for every remaining slot. Dual-position players may be picked
+ * as any of their eligible positions: pass `asPosition` to check a
+ * specific one, or omit it to accept whichever works.
  */
 export function canPickPlayer(
   state: DraftState,
   league: readonly Team[],
   playerId: string,
   capReduction = 0,
+  asPosition?: Position,
 ): PickCheck {
-  const slot = currentSlot(state);
-  if (!slot) {
+  if (state.roster.length >= ROSTER_SIZE) {
     return { ok: false, reason: 'draft-complete', detail: 'The roster is already full' };
   }
   const player = draftCandidates(state, league).find((p) => p.id === playerId);
@@ -105,11 +126,11 @@ export function canPickPlayer(
       detail: `Player ${playerId} is not on the rolled team`,
     };
   }
-  if (slot !== 'flex' && player.position !== slot) {
+  if (asPosition && !eligiblePositions(player).includes(asPosition)) {
     return {
       ok: false,
-      reason: 'wrong-position',
-      detail: `This round needs a ${slot}, ${player.name} is a ${player.position}`,
+      reason: 'not-eligible',
+      detail: `${player.name} can't play ${asPosition} (plays ${eligiblePositions(player).join('/')})`,
     };
   }
   const samePerson = player.personKey
@@ -132,7 +153,26 @@ export function canPickPlayer(
       detail: `Signing $${player.salary}M leaves $${spaceAfter.toFixed(1)}M but $${reserveNeeded}M is needed to fill the remaining ${slotsRemaining} slots`,
     };
   }
-  return { ok: true };
+  // Position feasibility, for the requested position or any eligible one.
+  let firstFail: PickCheck | null = null;
+  for (const position of asPosition ? [asPosition] : eligiblePositions(player)) {
+    const rosterAfter = [...state.roster, assignPosition(player, position)];
+    if (totalNeeded(rosterAfter) <= slotsRemaining) {
+      return { ok: true };
+    }
+    if (!firstFail) {
+      const shortList = Object.entries(positionsNeeded(rosterAfter))
+        .filter(([, n]) => n > 0)
+        .map(([pos, n]) => `${n} ${pos}`)
+        .join(', ');
+      firstFail = {
+        ok: false,
+        reason: 'position-need',
+        detail: `Picking ${player.name} as a ${position} leaves ${slotsRemaining} rounds to fill ${shortList} — cover the position minimums first`,
+      };
+    }
+  }
+  return firstFail!;
 }
 
 /** Whether the rolled team offers at least one legal pick this round. */
@@ -146,21 +186,32 @@ export function hasLegalPick(
   );
 }
 
-/** Draft the player and, unless the roster is now full, roll the next team. */
+/**
+ * Draft the player and, unless the roster is now full, roll the next team.
+ * `asPosition` chooses which eligible position a dual-position player
+ * fills; omitted, the first eligible position that keeps the roster
+ * completable is assigned.
+ */
 export function pickPlayer(
   state: DraftState,
   league: readonly Team[],
   seed: number,
   playerId: string,
   capReduction = 0,
+  asPosition?: Position,
 ): DraftState {
-  const check = canPickPlayer(state, league, playerId, capReduction);
+  const check = canPickPlayer(state, league, playerId, capReduction, asPosition);
   if (!check.ok) {
     throw new Error(`Cannot pick: ${check.detail}`);
   }
   const player = draftCandidates(state, league).find((p) => p.id === playerId)!;
-  const roster = [...state.roster, player];
-  if (roster.length >= state.slots.length) {
+  const position =
+    asPosition ??
+    eligiblePositions(player).find(
+      (pos) => canPickPlayer(state, league, playerId, capReduction, pos).ok,
+    )!;
+  const roster = [...state.roster, assignPosition(player, position)];
+  if (roster.length >= ROSTER_SIZE) {
     return { ...state, roster };
   }
   return {
@@ -182,7 +233,7 @@ export function canReroll(
   league: readonly Team[],
   capReduction = 0,
 ): RerollCheck {
-  if (currentSlot(state) === null) return { allowed: false, free: false };
+  if (state.roster.length >= ROSTER_SIZE) return { allowed: false, free: false };
   const free = !hasLegalPick(state, league, capReduction);
   return { allowed: free || state.rerollsLeft > 0, free };
 }

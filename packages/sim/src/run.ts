@@ -4,6 +4,7 @@ import {
   type EventCard,
   type PendingCard,
   type Player,
+  type Position,
   type RunState,
   type Team,
 } from '@perfect-season/shared';
@@ -47,19 +48,30 @@ export const USER_TEAM_ID = 'user';
 export const FA_REFRESH_INTERVAL = 10;
 
 /**
- * Extra cap room in casual mode, in millions. Sized to cancel out even the
- * max-ascension squeeze; at ascension 0 it still leaves a real trade-off
- * (three supermax deals eat ~$150M of the $180M effective cap).
- */
-export const CASUAL_CAP_BONUS = 25;
-
-/**
- * Effective cap tightening for this run: ascension squeeze minus casual
- * relief. Negative means extra room. Every cap check (draft, signing,
- * validation) and the UI's cap math must go through this.
+ * Effective cap tightening for this run: the ascension squeeze, or -Infinity
+ * in casual mode — casual removes the cap entirely, so every cap check
+ * (which all compare against remaining space) trivially passes. Every cap
+ * check (draft, signing, validation) and the UI's cap math must go through
+ * this; UI code should special-case the non-finite value instead of
+ * rendering it.
  */
 export function runCapReduction(run: RunState): number {
-  return difficultyFor(run.ascension).capReduction - (run.casual ? CASUAL_CAP_BONUS : 0);
+  return run.casual ? Number.NEGATIVE_INFINITY : difficultyFor(run.ascension).capReduction;
+}
+
+/**
+ * Casual mode's CPU handicap, in overall points. Casual is the power-
+ * fantasy mode: no cap plus softer opponents, so a stacked roster actually
+ * stomps. Applied to CPU rosters at season start — after drafting — so the
+ * players you draft keep their full ratings; weakening the league at
+ * creation would weaken your own draft pool by the same amount and cancel
+ * itself out.
+ */
+export const CASUAL_CPU_REDUCTION = 4;
+
+/** Net CPU overall adjustment the user's opponents end up with in-season. */
+export function runCpuBonus(ascension: number, casual: boolean): number {
+  return difficultyFor(ascension).cpuOverallBonus - (casual ? CASUAL_CPU_REDUCTION : 0);
 }
 
 /**
@@ -104,17 +116,20 @@ function requireStatus(run: RunState, status: RunState['status'], action: string
   }
 }
 
-/** Draft the given player from the currently rolled team. */
-export function runPickPlayer(run: RunState, playerId: string): RunState {
+/**
+ * Draft the given player from the currently rolled team, optionally as a
+ * specific eligible position (dual-position players).
+ */
+export function runPickPlayer(run: RunState, playerId: string, asPosition?: Position): RunState {
   requireStatus(run, 'drafting', 'draft');
   return {
     ...run,
-    draft: pickPlayer(run.draft!, run.league, run.seed, playerId, runCapReduction(run)),
+    draft: pickPlayer(run.draft!, run.league, run.seed, playerId, runCapReduction(run), asPosition),
   };
 }
 
-export function runCanPick(run: RunState, playerId: string) {
-  return canPickPlayer(run.draft!, run.league, playerId, runCapReduction(run));
+export function runCanPick(run: RunState, playerId: string, asPosition?: Position) {
+  return canPickPlayer(run.draft!, run.league, playerId, runCapReduction(run), asPosition);
 }
 
 export function runCanReroll(run: RunState) {
@@ -133,7 +148,9 @@ const CPU_MIN_ROSTER = 10;
 /**
  * Lock the drafted roster and generate the season schedule. Drafted players
  * leave their CPU teams — taking a star weakens the team you'll face — with
- * seeded fill-ins keeping every roster at rotation depth.
+ * seeded fill-ins keeping every roster at rotation depth. Casual runs apply
+ * the CPU handicap here, after drafting, so drafted players keep their full
+ * ratings.
  */
 export function startSeason(run: RunState): RunState {
   requireStatus(run, 'drafting', 'start the season');
@@ -143,13 +160,23 @@ export function startSeason(run: RunState): RunState {
     throw new Error(`Roster is not legal: ${validation.errors.join('; ')}`);
   }
 
+  const clampRating = (n: number) => Math.min(99, Math.max(40, n));
+  const casualAdjust = run.casual ? -CASUAL_CPU_REDUCTION : 0;
   const draftedIds = new Set(roster.map((p) => p.id));
   const topUpRng = createRng(deriveSeed(run.seed, LEAGUE_TOPUP_STREAM));
   const league = run.league.map((team) => {
-    const players = team.players.filter((p) => !draftedIds.has(p.id));
+    let players = team.players.filter((p) => !draftedIds.has(p.id));
     // Length comparison alone can't detect changes: a short era roster that
     // loses a pick gets topped back up to the same size.
-    const untouched = players.length === team.players.length;
+    const untouched = players.length === team.players.length && casualAdjust === 0;
+    if (casualAdjust !== 0) {
+      players = players.map((p) => ({
+        ...p,
+        overall: clampRating(p.overall + casualAdjust),
+        offense: clampRating(p.offense + casualAdjust),
+        defense: clampRating(p.defense + casualAdjust),
+      }));
+    }
     while (players.length < CPU_MIN_ROSTER) {
       players.push(generatePlayer(topUpRng, { minOverall: 55, maxOverall: 70 }));
     }

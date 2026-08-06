@@ -100,7 +100,9 @@ export function SeasonScreen() {
           <span className="stat-inline-label">{run.livesRemaining === 1 ? 'Life' : 'Lives'}</span>
         </div>
         <div className="stat-inline">
-          <span className="stat-inline-value">{money(capSpace(run.roster, effectiveDeadCap))}</span>
+          <span className="stat-inline-value">
+            {run.casual ? 'No cap' : money(capSpace(run.roster, effectiveDeadCap))}
+          </span>
           <span className="stat-inline-label">Cap space</span>
         </div>
         <div className="season-topbar-actions">

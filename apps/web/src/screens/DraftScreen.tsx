@@ -10,8 +10,9 @@ import {
 import {
   computeChemistry,
   chemistryDelta,
-  currentSlot,
   draftCandidates,
+  eligiblePositions,
+  positionsNeeded,
   runCanPick,
   runCanReroll,
   runCapReduction,
@@ -37,6 +38,9 @@ export function DraftScreen() {
 
   const draft = run.draft!;
   const capReduction = runCapReduction(run);
+  // Casual runs have no cap: capReduction is -Infinity, so render "no cap"
+  // instead of doing arithmetic with it.
+  const noCap = !Number.isFinite(capReduction);
   const effectiveCap = SALARY_CAP - capReduction;
   const committed = totalSalary(draft.roster);
   const space = effectiveCap - committed;
@@ -44,27 +48,36 @@ export function DraftScreen() {
   const reserveNeeded = Math.max(0, slotsLeft - 1) * MIN_SALARY;
 
   const round = draft.roster.length + 1;
-  const slot = currentSlot(draft);
-  const drafting = slot !== null;
+  const drafting = draft.roster.length < ROSTER_SIZE;
   const rolledTeam = run.league.find((t) => t.id === draft.rolledTeamId)!;
   const reroll = runCanReroll(run);
 
   const validation = validateRoster(draft.roster, capReduction);
   const chemistry = computeChemistry(draft.roster);
+  const chemDelta = chemistryDelta(draft.roster);
 
-  // Only offer players who fit this round's slot (flex rounds show everyone).
-  const candidates = useMemo(() => {
-    const offered = draftCandidates(draft, run.league).filter(
-      (p) => slot === 'flex' || p.position === slot,
-    );
-    return offered.sort((a, b) => b.overall - a.overall);
-  }, [draft, run.league, slot]);
+  // Positions still short of the 2-per-position minimum; you pick anyone,
+  // but these have to be covered before the rounds run out.
+  const needed = positionsNeeded(draft.roster);
+  const requiredChips = POSITIONS.flatMap((pos) =>
+    Array.from({ length: needed[pos] }, () => pos),
+  );
+  const freePicks = Math.max(0, ROSTER_SIZE - draft.roster.length - requiredChips.length);
+
+  // The whole rolled roster is offered; the user decides which hole to fill.
+  const candidates = useMemo(
+    () => [...draftCandidates(draft, run.league)].sort((a, b) => b.overall - a.overall),
+    [draft, run.league],
+  );
 
   // Slot-machine reel: purely presentational — the rolled team is already
   // decided in state; we just cycle names before revealing it. Keyed on
   // rollIndex so every pick and reroll spins again.
   const [reel, setReel] = useState({ name: rolledTeam.name, spinning: false });
   const [infoPlayer, setInfoPlayer] = useState<Player | null>(null);
+  // Draft-complete popup; dismissable to review the roster (the sidebar's
+  // Start season button remains as the fallback).
+  const [startDismissed, setStartDismissed] = useState(false);
   useEffect(() => {
     if (!drafting) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -101,8 +114,7 @@ export function DraftScreen() {
             <h3>
               {drafting ? (
                 <>
-                  Round {round} of {ROSTER_SIZE} —{' '}
-                  {slot === 'flex' ? 'flex pick (any position)' : `draft a ${slot}`}
+                  Round {round} of {ROSTER_SIZE} — pick any player
                 </>
               ) : (
                 'Draft complete'
@@ -128,20 +140,35 @@ export function DraftScreen() {
           </div>
 
           <div className="slot-strip">
-            {draft.slots.map((s, i) => {
-              const filled = draft.roster[i];
-              const state = filled ? 'filled' : i === draft.roster.length ? 'current' : 'pending';
-              return (
-                <div
-                  key={i}
-                  className={`slot-chip ${state}`}
-                  title={filled ? filled.name : undefined}
-                >
-                  {s === 'flex' ? 'FLX' : s}
-                </div>
-              );
-            })}
+            {draft.roster.map((p, i) => (
+              <div key={`filled-${i}`} className="slot-chip filled" title={p.name}>
+                {p.position}
+              </div>
+            ))}
+            {Array.from({ length: freePicks }, (_, i) => (
+              <div key={`free-${i}`} className="slot-chip" title="Free pick — any position">
+                ANY
+              </div>
+            ))}
+            {requiredChips.map((pos, i) => (
+              <div
+                key={`need-${i}`}
+                className="slot-chip need"
+                title={`One of your remaining picks must be a ${pos} — not necessarily this round`}
+              >
+                {pos}
+              </div>
+            ))}
           </div>
+          {drafting && (
+            <p className="muted small slot-note">
+              {requiredChips.length > 0
+                ? `Still required: ${POSITIONS.filter((pos) => needed[pos] > 0)
+                    .map((pos) => `${needed[pos]} ${pos}`)
+                    .join(', ')} · ${freePicks} free ${freePicks === 1 ? 'pick' : 'picks'}`
+                : 'All position minimums covered — every remaining pick is free'}
+            </p>
+          )}
         </section>
 
         {drafting && (
@@ -156,20 +183,18 @@ export function DraftScreen() {
             {spinning ? (
               <div className="reel-wait muted">Spinning up the next roster…</div>
             ) : candidates.length === 0 ? (
-              <div className="reel-empty">
-                No {slot === 'flex' ? 'players' : `${slot}s`} left on this roster — the reroll is
-                free.
-              </div>
+              <div className="reel-empty">No players left on this roster — the reroll is free.</div>
             ) : (
               <>
                 {reroll.free && (
                   <div className="reel-empty">
-                    None of these players fit under the cap — the reroll is free.
+                    None of these players can be legally picked — the reroll is free.
                   </div>
                 )}
                 <div className="candidate-grid" key={draft.rollIndex}>
                   {candidates.map((player, idx) => {
                     const check = runCanPick(run, player.id);
+                    const eligible = eligiblePositions(player);
                     return (
                       <div
                         key={player.id}
@@ -181,8 +206,14 @@ export function DraftScreen() {
                           <div className="candidate-id">
                             <span className="candidate-name">{player.name}</span>
                             <span className="candidate-meta">
-                              {player.position} · {money(player.salary)} ·{' '}
-                              {player.pWAR.toFixed(1)} pWAR
+                              <span
+                                className={
+                                  eligible.some((pos) => needed[pos] > 0) ? 'need-pos' : undefined
+                                }
+                              >
+                                {eligible.join('/')}
+                              </span>{' '}
+                              · {money(player.salary)} · {player.pWAR.toFixed(1)} pWAR
                             </span>
                           </div>
                           <span className="candidate-ovr rating">{player.overall}</span>
@@ -196,15 +227,39 @@ export function DraftScreen() {
                           </button>
                         </div>
                         <TraitTags traits={player.traits} />
-                        <button
-                          type="button"
-                          className="btn btn-small btn-block"
-                          disabled={!check.ok}
-                          title={check.ok ? undefined : check.detail}
-                          onClick={() => pickPlayer(player.id)}
-                        >
-                          Pick
-                        </button>
+                        {eligible.length === 1 ? (
+                          <button
+                            type="button"
+                            className="btn btn-small btn-block"
+                            disabled={!check.ok}
+                            title={check.ok ? undefined : check.detail}
+                            onClick={() => pickPlayer(player.id)}
+                          >
+                            Pick
+                          </button>
+                        ) : (
+                          <div className="pick-as-row">
+                            {eligible.map((pos) => {
+                              const posCheck = runCanPick(run, player.id, pos);
+                              return (
+                                <button
+                                  key={pos}
+                                  type="button"
+                                  className="btn btn-small pick-as-btn"
+                                  disabled={!posCheck.ok}
+                                  title={
+                                    posCheck.ok
+                                      ? `Draft ${player.name} as a ${pos}`
+                                      : posCheck.detail
+                                  }
+                                  onClick={() => pickPlayer(player.id, pos)}
+                                >
+                                  Pick {pos}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        )}
                       </div>
                     );
                   })}
@@ -218,19 +273,28 @@ export function DraftScreen() {
       <div className="draft-side">
         <section className="panel">
           <h3>Cap sheet</h3>
-          <div className="cap-bar">
-            <div
-              className={`cap-bar-fill ${space < 0 ? 'over' : ''}`}
-              style={{ width: `${Math.min(100, (committed / effectiveCap) * 100)}%` }}
-            />
-          </div>
+          {!noCap && (
+            <div className="cap-bar">
+              <div
+                className={`cap-bar-fill ${space < 0 ? 'over' : ''}`}
+                style={{ width: `${Math.min(100, (committed / effectiveCap) * 100)}%` }}
+              />
+            </div>
+          )}
           <dl className="kv">
             <div>
               <dt>Effective cap</dt>
               <dd>
-                {money(effectiveCap)}
-                {capReduction > 0 && <span className="muted"> (−{money(capReduction)})</span>}
-                {capReduction < 0 && <span className="muted"> (+{money(-capReduction)} casual)</span>}
+                {noCap ? (
+                  <>
+                    None <span className="muted">(casual)</span>
+                  </>
+                ) : (
+                  <>
+                    {money(effectiveCap)}
+                    {capReduction > 0 && <span className="muted"> (−{money(capReduction)})</span>}
+                  </>
+                )}
               </dd>
             </div>
             <div>
@@ -239,9 +303,11 @@ export function DraftScreen() {
             </div>
             <div>
               <dt>Space</dt>
-              <dd className={space < 0 ? 'bad' : 'good'}>{money(space)}</dd>
+              <dd className={noCap || space >= 0 ? 'good' : 'bad'}>
+                {noCap ? 'Unlimited' : money(space)}
+              </dd>
             </div>
-            {slotsLeft > 0 && (
+            {!noCap && slotsLeft > 0 && (
               <div>
                 <dt>Reserve for {slotsLeft} open slots</dt>
                 <dd>{money(reserveNeeded + MIN_SALARY)}</dd>
@@ -288,7 +354,7 @@ export function DraftScreen() {
           })}
         </section>
 
-        <ChemistryPanel effects={chemistry} delta={chemistryDelta(draft.roster)} />
+        <ChemistryPanel effects={chemistry} delta={chemDelta} />
 
         <section className="panel">
           {!validation.valid && (
@@ -310,6 +376,38 @@ export function DraftScreen() {
       </div>
 
       {infoPlayer && <PlayerInfoModal player={infoPlayer} onClose={() => setInfoPlayer(null)} />}
+
+      {!drafting && !startDismissed && (
+        <div className="modal-backdrop start-overlay" onClick={() => setStartDismissed(true)}>
+          <div className="modal start-modal" onClick={(e) => e.stopPropagation()}>
+            <span className="start-kicker">Draft complete</span>
+            <h2>Your 15-man roster is set</h2>
+            <p className="muted">
+              {money(committed)} committed{noCap ? ' · no cap (casual)' : ` of ${money(effectiveCap)}`}
+              {' · '}chemistry {chemDelta >= 0 ? '+' : ''}
+              {chemDelta}
+            </p>
+            {validation.valid ? (
+              <button type="button" className="btn btn-primary btn-lg btn-block" onClick={beginSeason}>
+                Start season
+              </button>
+            ) : (
+              <ul className="issue-list">
+                {validation.errors.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            )}
+            <button
+              type="button"
+              className="btn btn-ghost btn-block"
+              onClick={() => setStartDismissed(true)}
+            >
+              Review roster first
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
