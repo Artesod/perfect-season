@@ -3,8 +3,10 @@ import type { PoolMode } from '@perfect-season/shared';
 import {
   BADGES,
   CASUAL_CPU_REDUCTION,
+  CASUAL_LIVES,
   difficultyFor,
   runCpuBonus,
+  runLives,
   unlockedAscension,
 } from '@perfect-season/sim';
 import { LeaderboardPanel } from '../components/LeaderboardPanel';
@@ -74,8 +76,8 @@ export function HomeScreen() {
       <section className="panel home-hero">
         <h2>Go 82–0. Or go home.</h2>
         <p className="muted">
-          Draft a 15-man roster under the cap, then survive an entire season without losing.
-          Injuries, slumps, and locker-room drama stand in your way. One loss ends the run.
+          Draft a 15-man roster under the cap, then survive an entire season. Injuries, slumps,
+          and locker-room drama stand in your way — run out of lives and the run is over.
         </p>
       </section>
 
@@ -167,7 +169,12 @@ export function HomeScreen() {
                     : 'full'}
               </li>
               <li>
-                Lives: {mods.lives} — {mods.lives === 1 ? 'one loss ends the run' : `${mods.lives} losses allowed`}
+                {(() => {
+                  const lives = runLives(ascension, casual);
+                  return lives === 1
+                    ? 'Lives: 1 — one loss ends the run'
+                    : `Lives: ${lives}${casual ? ' (casual)' : ''} — survives up to ${lives - 1} losses`;
+                })()}
               </li>
             </ul>
           </div>
@@ -192,7 +199,7 @@ export function HomeScreen() {
             </div>
             <span className="field-hint">
               {casual
-                ? `No salary cap and softer CPU teams (−${CASUAL_CPU_REDUCTION} overall) — counts in career stats, but no badges, ascension unlocks, or leaderboard entries`
+                ? `No salary cap, softer CPU teams (−${CASUAL_CPU_REDUCTION} overall), and ${CASUAL_LIVES} lives — counts in career stats, but no badges, ascension unlocks, or leaderboard entries`
                 : 'The full cap squeeze — badges, unlocks, and leaderboard entries at stake'}
             </span>
           </div>
@@ -216,7 +223,7 @@ export function HomeScreen() {
             </div>
             <div className="stat">
               <span className="stat-value">{meta.runsWon}</span>
-              <span className="stat-label">Perfect seasons</span>
+              <span className="stat-label">Seasons won</span>
             </div>
             <div className="stat">
               <span className="stat-value">{meta.bestWins}</span>

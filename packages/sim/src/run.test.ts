@@ -7,6 +7,7 @@ import { MAX_ASCENSION } from './difficulty';
 import { draftCandidates } from './draft';
 import {
   CASUAL_CPU_REDUCTION,
+  CASUAL_LIVES,
   createRun,
   currentFreeAgents,
   playNextGame,
@@ -83,6 +84,8 @@ describe('createRun', () => {
     expect(casual.league).toEqual(standard.league);
     expect(runCapReduction(standard)).toBe(0);
     expect(runCapReduction(casual)).toBe(Number.NEGATIVE_INFINITY);
+    expect(standard.livesRemaining).toBe(3);
+    expect(casual.livesRemaining).toBe(CASUAL_LIVES);
 
     // At season start every remaining CPU player drops by the handicap
     // (drafted players keep their ratings; fill-ins are new players).
@@ -103,7 +106,8 @@ describe('createRun', () => {
       Number.NEGATIVE_INFINITY,
     );
     // Any roster passes the cap check: -Infinity reduction means infinite space.
-    const priciest = [...casual.league.flatMap((t) => t.players)]
+    const priciest = casual.league
+      .flatMap((t) => t.players)
       .sort((a, b) => b.salary - a.salary)
       .slice(0, 15);
     expect(
@@ -142,13 +146,13 @@ describe('run lifecycle', () => {
     expect(replay).toEqual(done);
   });
 
-  it('a loss ends the run at base difficulty', () => {
-    // Find a seed whose run ends in a loss before 82-0.
+  it('the run ends when all lives are spent at base difficulty', () => {
+    // Find a seed whose run ends in a loss before the season completes.
     for (let seed = 1; seed < 50; seed++) {
       const done = playUntilDone(startSeason(draftStrongRoster(createRun(seed))));
       if (done.status === 'lost') {
         expect(done.livesRemaining).toBe(0);
-        expect(done.losses).toBe(1);
+        expect(done.losses).toBe(3);
         return;
       }
     }

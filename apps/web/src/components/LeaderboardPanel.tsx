@@ -55,7 +55,7 @@ export function LeaderboardPanel() {
               <tr key={entry.id}>
                 <td className="num muted">{i + 1}</td>
                 <td className={entry.userId === userId ? 'strong' : undefined}>
-                  {entry.won && <span title="Perfect season">🏆 </span>}
+                  {entry.won && <span title="Season won">🏆 </span>}
                   {entry.displayName}
                 </td>
                 <td className="num rating">

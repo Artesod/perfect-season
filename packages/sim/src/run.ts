@@ -69,9 +69,23 @@ export function runCapReduction(run: RunState): number {
  */
 export const CASUAL_CPU_REDUCTION = 4;
 
+/**
+ * Lives in casual mode: the season survives up to 7 losses instead of
+ * ending on the first. A well-drafted all-time superteam still drops 4-5
+ * games per 82 under the current sim, so with one life 82-0 is nearly
+ * impossible (~8%); eight lives make a dominant casual roster win ~85% of
+ * its runs while a mediocre one still fails.
+ */
+export const CASUAL_LIVES = 8;
+
 /** Net CPU overall adjustment the user's opponents end up with in-season. */
 export function runCpuBonus(ascension: number, casual: boolean): number {
   return difficultyFor(ascension).cpuOverallBonus - (casual ? CASUAL_CPU_REDUCTION : 0);
+}
+
+/** Lives a run starts with. */
+export function runLives(ascension: number, casual: boolean): number {
+  return casual ? CASUAL_LIVES : difficultyFor(ascension).lives;
 }
 
 /**
@@ -99,7 +113,7 @@ export function createRun(
     seed,
     ascension,
     casual,
-    livesRemaining: mods.lives,
+    livesRemaining: runLives(ascension, casual),
     league,
     draft: createRollDraft(seed, league),
     roster: [],

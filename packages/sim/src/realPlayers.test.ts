@@ -217,7 +217,6 @@ describe('duplicate era versions of one person', () => {
     const [a, b] = versions;
 
     const state: DraftState = {
-      slots: Array.from({ length: ROSTER_SIZE }, () => 'flex'),
       rolledTeamId: b.team.id,
       rollIndex: 1,
       rerollsLeft: 2,

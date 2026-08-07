@@ -38,8 +38,16 @@ export function RunSummaryScreen() {
   return (
     <div className="summary">
       <section className={`panel summary-banner ${won ? 'won' : 'lost'}`}>
-        <span className="summary-kicker">{won ? 'Perfect season' : 'Run over'}</span>
-        <h2>{won ? '82–0. Immortality.' : `The dream dies at ${run.wins}–${run.losses}.`}</h2>
+        <span className="summary-kicker">
+          {won ? (run.losses === 0 ? 'Perfect season' : 'Season complete') : 'Run over'}
+        </span>
+        <h2>
+          {won
+            ? run.losses === 0
+              ? '82–0. Immortality.'
+              : `Season survived at ${run.wins}–${run.losses}.`
+            : `The dream dies at ${run.wins}–${run.losses}.`}
+        </h2>
         <p className="muted">
           Ascension {run.ascension} · seed {run.seed}
           {run.casual && ' · casual (no cap)'}

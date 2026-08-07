@@ -10,6 +10,7 @@ import {
   createRun,
   draftCandidates,
   effectiveStrength,
+  playNextGame,
   runCanPick,
   runPickPlayer,
   runRerollTeam,
@@ -20,8 +21,7 @@ const eras: EraDataset = JSON.parse(
   readFileSync(join(__dirname, '../data/nba-players-eras.json'), 'utf-8'),
 );
 
-const factors = [6, 4.5, 3.5, 3];
-for (const seed of [1, 2, 3]) {
+function draftAndStart(seed: number) {
   let run = createRun(seed, 0, { mode: 'all-time', eras }, true);
   let guard = 0;
   while (run.draft!.roster.length < 15 && guard++ < 300) {
@@ -34,7 +34,12 @@ for (const seed of [1, 2, 3]) {
     }
     run = runPickPlayer(run, legal[0].id);
   }
-  run = startSeason(run);
+  return startSeason(run);
+}
+
+const factors = [6, 4.5, 3.5, 3];
+for (const seed of [1, 2, 3]) {
+  const run = draftAndStart(seed);
   const user: Team = { id: 'user', name: 'You', players: run.roster };
   const mine = effectiveStrength(user);
   const diffs = run.league.map((t) => mine - effectiveStrength(t));
@@ -52,3 +57,35 @@ for (const seed of [1, 2, 3]) {
     );
   }
 }
+
+// Full-season outcomes under the live sim (current constants + casual lives).
+const SEASONS = 40;
+let won = 0;
+const records: string[] = [];
+for (let seed = 1; seed <= SEASONS; seed++) {
+  let run = draftAndStart(seed);
+  let guard = 0;
+  while (run.status === 'in-season' && guard++ < 200) {
+    run = playNextGame(run);
+  }
+  if (run.status === 'won') won++;
+  records.push(`${run.wins}-${run.losses}`);
+}
+console.log(`\ncasual all-time, ${SEASONS} greedy seasons: ${won} won (${((won / SEASONS) * 100).toFixed(0)}%)`);
+console.log(`records: ${records.join(' ')}`);
+
+// Loss distribution over full 82-game seasons (unlimited lives) → win rate per lives setting.
+const lossCounts: number[] = [];
+for (let seed = 1; seed <= SEASONS; seed++) {
+  let run = { ...draftAndStart(seed), livesRemaining: 999 };
+  let guard = 0;
+  while (run.status === 'in-season' && guard++ < 200) {
+    run = playNextGame(run);
+  }
+  lossCounts.push(run.losses);
+}
+for (const lives of [3, 5, 8, 10, 12]) {
+  const w = lossCounts.filter((l) => l < lives).length;
+  console.log(`lives ${lives}: ${((w / SEASONS) * 100).toFixed(0)}% of seasons won`);
+}
+console.log(`full-season losses: ${[...lossCounts].sort((a, b) => a - b).join(' ')}`);

@@ -14,13 +14,15 @@ export interface DifficultyModifiers {
   lives: number;
 }
 
+// Lives are flat at 3 for now; dropping them (3 → 2 → 1) is a future
+// ascension lever once the other modifiers are tuned.
 export const ASCENSIONS: readonly DifficultyModifiers[] = [
-  { cpuOverallBonus: 0, eventChanceMultiplier: 1, capReduction: 0, lives: 1 },
-  { cpuOverallBonus: 1, eventChanceMultiplier: 1.2, capReduction: 0, lives: 1 },
-  { cpuOverallBonus: 2, eventChanceMultiplier: 1.4, capReduction: 10, lives: 1 },
-  { cpuOverallBonus: 3, eventChanceMultiplier: 1.6, capReduction: 15, lives: 1 },
-  { cpuOverallBonus: 4, eventChanceMultiplier: 1.8, capReduction: 20, lives: 1 },
-  { cpuOverallBonus: 5, eventChanceMultiplier: 2, capReduction: 25, lives: 1 },
+  { cpuOverallBonus: 0, eventChanceMultiplier: 1, capReduction: 0, lives: 3 },
+  { cpuOverallBonus: 1, eventChanceMultiplier: 1.2, capReduction: 0, lives: 3 },
+  { cpuOverallBonus: 2, eventChanceMultiplier: 1.4, capReduction: 10, lives: 3 },
+  { cpuOverallBonus: 3, eventChanceMultiplier: 1.6, capReduction: 15, lives: 3 },
+  { cpuOverallBonus: 4, eventChanceMultiplier: 1.8, capReduction: 20, lives: 3 },
+  { cpuOverallBonus: 5, eventChanceMultiplier: 2, capReduction: 25, lives: 3 },
 ];
 
 export const MAX_ASCENSION = ASCENSIONS.length - 1;
