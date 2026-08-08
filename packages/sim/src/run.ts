@@ -213,6 +213,8 @@ export function startSeason(run: RunState): RunState {
       effects: emptyActiveEffects(),
       deadCap: 0,
       pendingCard: null,
+      pendingNagging: null,
+      cohesion: 0,
     },
     status: 'in-season',
   };

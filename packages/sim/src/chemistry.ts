@@ -22,6 +22,7 @@ const RULES: readonly ChemistryRule[] = [
     if (playmakers.length >= 1 && shooters.length >= 2) {
       return {
         id: 'floor-general',
+        kind: 'synergy',
         label: 'Floor general: a playmaker feeding spot-up shooters',
         strengthDelta: 2,
         playerIds: ids([playmakers[0], ...shooters.slice(0, 2)]),
@@ -35,6 +36,7 @@ const RULES: readonly ChemistryRule[] = [
     if (posts.length >= 1 && spacers.length >= 2) {
       return {
         id: 'inside-out',
+        kind: 'synergy',
         label: 'Inside-out: post scoring with shooting around it',
         strengthDelta: 1.5,
         playerIds: ids([posts[0], ...spacers.slice(0, 2)]),
@@ -48,6 +50,7 @@ const RULES: readonly ChemistryRule[] = [
     if (anchors.length >= 1 && perimeter.length >= 1) {
       return {
         id: 'defensive-anchor',
+        kind: 'synergy',
         label: 'Defensive anchor: rim protection behind ball pressure',
         strengthDelta: 1.5,
         playerIds: ids([anchors[0], perimeter[0]]),
@@ -60,6 +63,7 @@ const RULES: readonly ChemistryRule[] = [
     if (boards.length >= 2) {
       return {
         id: 'glass-cleaners',
+        kind: 'synergy',
         label: 'Glass cleaners: dominant rebounding duo',
         strengthDelta: 1,
         playerIds: ids(boards.slice(0, 2)),
@@ -92,6 +96,7 @@ const RULES: readonly ChemistryRule[] = [
     if (!best) return null;
     return {
       id: 'ran-it-back',
+      kind: 'synergy',
       label: `Ran it back: ${best.members.length} teammates from the ${best.team}`,
       strengthDelta: Math.min(2, best.members.length - 1),
       playerIds: ids(best.members),
@@ -103,6 +108,7 @@ const RULES: readonly ChemistryRule[] = [
     if (dominant.length >= 2) {
       return {
         id: 'too-many-cooks',
+        kind: 'friction',
         label: 'Too many cooks: multiple ball-dominant stars',
         strengthDelta: -1.5 * (dominant.length - 1),
         playerIds: ids(dominant),
@@ -115,6 +121,7 @@ const RULES: readonly ChemistryRule[] = [
     if (players.length >= 8 && shooters.length < 3) {
       return {
         id: 'no-spacing',
+        kind: 'structural',
         label: 'No spacing: not enough shooting on the roster',
         strengthDelta: -2,
         playerIds: [],
@@ -128,6 +135,7 @@ const RULES: readonly ChemistryRule[] = [
     if (players.length >= 8 && rim.length === 0 && defense.length === 0) {
       return {
         id: 'matador-defense',
+        kind: 'structural',
         label: 'Matador defense: nobody guards anybody',
         strengthDelta: -2,
         playerIds: [],

@@ -36,6 +36,11 @@ export interface Player {
    * Chicago Bulls"), for display and era-based chemistry.
    */
   eraTeam?: string;
+  /**
+   * League team id the player was drafted off of (set at pick time).
+   * Powers revenge-game events; absent for FA signings and CPU players.
+   */
+  originTeamId?: string;
 }
 
 export interface Team {
@@ -92,11 +97,40 @@ export type SeasonEvent =
       gamesRemaining: number;
     }
   | {
+      type: 'illness';
+      playerId: string;
+      /** Short absence (flu, back spasms), distinct from injuries in the log */
+      gamesOut: number;
+    }
+  | {
+      type: 'suspension';
+      playerId: string;
+      gamesOut: number;
+    }
+  | {
+      type: 'revenge';
+      /** Player facing the team he was drafted off of next game */
+      playerId: string;
+      ratingDelta: number;
+      gamesRemaining: number;
+    }
+  | {
+      type: 'nagging';
+      /** Nagging injury: blocks the next game until play/sit is chosen */
+      playerId: string;
+      playHurtDelta: number;
+      playHurtGames: number;
+      sitGames: number;
+    }
+  | {
       type: 'morale';
       /** Reference into the authored event-card pool in data/ */
       cardId: string;
       playerIds: string[];
     };
+
+/** How a chemistry effect behaves as the team gels over a season. */
+export type ChemistryKind = 'synergy' | 'friction' | 'structural';
 
 /** A chemistry synergy/anti-synergy derived from roster composition. */
 export interface ChemistryEffect {
@@ -106,6 +140,11 @@ export interface ChemistryEffect {
   strengthDelta: number;
   /** Players producing the effect */
   playerIds: string[];
+  /**
+   * friction fades with cohesion (and flips positive once resolved);
+   * structural never fades; synergy deepens slightly with cohesion.
+   */
+  kind: ChemistryKind;
 }
 
 /**
@@ -113,6 +152,12 @@ export interface ChemistryEffect {
  * live as static data in data/ — AI-generated at design time, validated
  * against this schema — and the engine references them by id.
  */
+/**
+ * Who a card effect hits: the involved players, the whole roster, the
+ * highest-overall involved player (alpha), or every other involved player.
+ */
+export type CardTarget = 'involved' | 'team' | 'alpha' | 'supporting';
+
 export type CardEffect =
   | {
       type: 'rating';
@@ -120,8 +165,18 @@ export type CardEffect =
       delta: number;
       /** Games the effect lasts */
       games: number;
-      /** Who it hits: the players named in the event, or the whole roster */
-      target: 'involved' | 'team';
+      target: CardTarget;
+    }
+  | {
+      type: 'absence';
+      /** Games the targeted players sit */
+      games: number;
+      target: CardTarget;
+    }
+  | {
+      type: 'cohesion';
+      /** Added to season cohesion (0-1 scale), clamped */
+      delta: number;
     }
   | { type: 'none' };
 
@@ -136,6 +191,12 @@ export interface EventCard {
   title: string;
   /** Narrative text; may contain {player} placeholders for involved players */
   text: string;
+  /**
+   * Fire condition: "chemistry-effect:<id>" limits the card to seasons where
+   * that chemistry effect is currently active. Involved players become the
+   * effect's producers (sorted by overall, best first).
+   */
+  requires?: string;
   choices: EventCardChoice[];
 }
 
@@ -161,6 +222,34 @@ export interface RealPlayerStats {
   threePct: number;
 }
 
+/**
+ * The 2K attribute sheet scraped from team-page rows (see
+ * scripts/fetch-nba-data.ts). Optional on RealPlayerRecord: rows missing any
+ * attribute fall back to the legacy overall/3PT/dunk trait heuristics.
+ */
+export interface PlayerAttributes {
+  midRange: number;
+  closeShot: number;
+  layup: number;
+  standingDunk: number;
+  vertical: number;
+  speed: number;
+  ballHandle: number;
+  passAccuracy: number;
+  passVision: number;
+  passIq: number;
+  drawFoul: number;
+  postControl: number;
+  interiorDefense: number;
+  perimeterDefense: number;
+  steal: number;
+  block: number;
+  offensiveRebound: number;
+  defensiveRebound: number;
+  durability: number;
+  intangibles: number;
+}
+
 export interface RealPlayerRecord {
   name: string;
   /** Primary position (first listed on 2kratings) */
@@ -173,6 +262,8 @@ export interface RealPlayerRecord {
   threePoint: number;
   /** 2K dunk rating, used to derive athletic traits and off/def lean */
   dunk: number;
+  /** Full attribute sheet when the scrape captured it; enables deep traits */
+  attributes?: PlayerAttributes;
   /** Absolute headshot URL scraped alongside the ratings, when the site has one */
   imageUrl?: string;
   /** Last season's per-game averages, when the stats source has the player */
@@ -261,6 +352,14 @@ export interface PendingCard {
   playerIds: string[];
 }
 
+/** A rolled nagging injury waiting on the play-hurt/sit decision. */
+export interface PendingNagging {
+  playerId: string;
+  playHurtDelta: number;
+  playHurtGames: number;
+  sitGames: number;
+}
+
 export interface SeasonState {
   /** Full 82-game schedule, in order */
   schedule: ScheduledGame[];
@@ -273,6 +372,12 @@ export interface SeasonState {
   /** Dead cap accumulated from waived players, counts against the cap */
   deadCap: number;
   pendingCard: PendingCard | null;
+  pendingNagging: PendingNagging | null;
+  /**
+   * How gelled the roster is, 0-1. Grows with games (wins faster), drops on
+   * FA signings, jumps via card effects. Friction chemistry fades with it.
+   */
+  cohesion: number;
 }
 
 export interface RunState {

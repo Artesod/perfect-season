@@ -149,6 +149,10 @@ export function applyEvent(effects: ActiveEffects, event: SeasonEvent): ActiveEf
           event.gamesRemaining,
         ),
       };
+    case 'illness':
+    case 'suspension':
+    case 'revenge':
+    case 'nagging':
     case 'morale':
       return effects;
   }

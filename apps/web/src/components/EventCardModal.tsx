@@ -6,8 +6,21 @@ import './EventCardModal.css';
 
 function describeEffect(effect: CardEffect): string | null {
   if (effect.type === 'none') return null;
+  if (effect.type === 'cohesion') {
+    return effect.delta > 0 ? 'Team gels faster' : 'Team chemistry takes a hit';
+  }
+  const who =
+    effect.target === 'team'
+      ? 'whole team'
+      : effect.target === 'alpha'
+        ? 'your best player involved'
+        : effect.target === 'supporting'
+          ? 'the other involved players'
+          : 'involved player(s)';
+  if (effect.type === 'absence') {
+    return `${who} sit${effect.target === 'alpha' ? 's' : ''} ${effect.games} game${effect.games === 1 ? '' : 's'}`;
+  }
   const sign = effect.delta > 0 ? '+' : '';
-  const who = effect.target === 'team' ? 'whole team' : 'involved player(s)';
   return `${sign}${effect.delta} OVR to ${who} for ${effect.games} games`;
 }
 
