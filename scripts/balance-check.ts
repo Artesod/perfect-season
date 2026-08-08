@@ -14,8 +14,15 @@ import {
   runCanPick,
   runPickPlayer,
   runRerollTeam,
+  runResolveNagging,
   startSeason,
 } from '@perfect-season/sim';
+
+/** Play one game, sitting out any pending nagging injury (no card pool here). */
+function playThrough(run: ReturnType<typeof createRun>) {
+  if (run.season!.pendingNagging) run = runResolveNagging(run, 'sit');
+  return playNextGame(run);
+}
 
 const eras: EraDataset = JSON.parse(
   readFileSync(join(__dirname, '../data/nba-players-eras.json'), 'utf-8'),
@@ -66,7 +73,7 @@ for (let seed = 1; seed <= SEASONS; seed++) {
   let run = draftAndStart(seed);
   let guard = 0;
   while (run.status === 'in-season' && guard++ < 200) {
-    run = playNextGame(run);
+    run = playThrough(run);
   }
   if (run.status === 'won') won++;
   records.push(`${run.wins}-${run.losses}`);
@@ -80,7 +87,7 @@ for (let seed = 1; seed <= SEASONS; seed++) {
   let run = { ...draftAndStart(seed), livesRemaining: 999 };
   let guard = 0;
   while (run.status === 'in-season' && guard++ < 200) {
-    run = playNextGame(run);
+    run = playThrough(run);
   }
   lossCounts.push(run.losses);
 }

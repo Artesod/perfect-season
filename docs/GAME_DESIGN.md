@@ -23,17 +23,24 @@ A roguelike run-based game: draft an NBA roster, survive an 82-game season witho
 
 Dynamic modifiers based on roster composition, applied to team strength:
 
-- **Synergies**: e.g. elite playmaker + catch-and-shoot wings, rim protector + poor perimeter defenders, floor spacing around a post scorer.
-- **Anti-synergies**: ball-dominant stars together, overlapping positions, too many non-shooters.
-- Chemistry can evolve during the season (wins build it, events can break it).
+- **Synergies**: playmaker + catch-and-shoot wings, floor spacing around a post scorer, rim protection behind ball pressure, lob threats, switchable defensive wings, a strong bench unit.
+- **Anti-synergies**: ball-dominant stars together, too many non-shooters, no defenders, non-shooting bigs clogging the paint.
+- Chemistry evolves over the season via a **cohesion** scalar (0-1): wins build it faster than losses, mid-season signings knock 20% off, and some card choices move it. **Friction** problems (behavioral, like too-many-cooks) fade as cohesion grows and resolve into a small bonus once the team fully gels — superteams start rocky and sort out their pecking order. **Structural** flaws (no shooting on the roster) never fade; only roster moves fix them. Synergies deepen slightly as the team gels. CPU teams play as established rosters (fixed 0.75 cohesion).
+
+### Player traits
+
+Derived from the full 2K attribute sheet (~20 ratings per player): up to 3 archetype traits (sharpshooter, playmaker, ball-dominant, lob-threat, rim-protector, …) ranked by how far the player clears each threshold, plus at most one event-linked trait — `iron-man` / `injury-prone` (durability) and `hot-head` (low intangibles) — which shift event probabilities rather than ratings.
 
 ### RNG events
 
 Fired between games (and possibly mid-game later):
 
-- **Injuries** — severity tiers, games missed, forces free-agency scrambles.
+- **Injuries** — severity tiers, games missed, forces free-agency scrambles; injury-prone players get hit twice as often, iron men half as often.
+- **Illness & suspensions** — short absences; hot-heads are 3x as likely to be suspended.
+- **Nagging injuries** — a blocking decision: play him hurt (rating penalty for a stretch) or sit him (games missed).
+- **Revenge games** — a drafted player facing his old team gets up for it (+2 for that game).
 - **Performance swings** — hot streaks, career nights, slumps.
-- **Event cards** — locker-room and narrative events with player choices (risk/reward).
+- **Event cards** — locker-room and narrative events with player choices (risk/reward). Some cards only fire while a chemistry problem is active and can resolve it (e.g. naming an alpha to settle "whose team is this?").
 
 Event probability can scale with difficulty modifiers.
 
