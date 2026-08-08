@@ -22,6 +22,7 @@ import type {
   EraDataset,
   EraTeamRecord,
   NbaDataset,
+  PlayerAttributes,
   Position,
   RealPlayerRecord,
   RealPlayerStats,
@@ -101,6 +102,45 @@ async function fetchHtml(url: string): Promise<string> {
   return stdout;
 }
 
+/** Site data-attribute name for each PlayerAttributes field. */
+const ATTRIBUTE_SOURCES: Record<keyof PlayerAttributes, string> = {
+  midRange: 'mid-range-shot',
+  closeShot: 'close-shot',
+  layup: 'layup',
+  standingDunk: 'standing-dunk',
+  vertical: 'vertical',
+  speed: 'speed',
+  ballHandle: 'ball-handle',
+  passAccuracy: 'pass-accuracy',
+  passVision: 'pass-vision',
+  passIq: 'pass-iq',
+  drawFoul: 'draw-foul',
+  postControl: 'post-control',
+  interiorDefense: 'interior-defense',
+  perimeterDefense: 'perimeter-defense',
+  steal: 'steal',
+  block: 'block',
+  offensiveRebound: 'offensive-rebound',
+  defensiveRebound: 'defensive-rebound',
+  durability: 'overall-durability',
+  intangibles: 'intangibles',
+};
+
+/** All-or-nothing: a partial sheet falls back to legacy trait heuristics. */
+function parseAttributes(
+  attr: (name: string) => string | undefined,
+): PlayerAttributes | undefined {
+  const result = {} as PlayerAttributes;
+  for (const [field, source] of Object.entries(ATTRIBUTE_SOURCES)) {
+    const value = Number.parseInt(attr(source) ?? '', 10);
+    if (!Number.isFinite(value)) return undefined;
+    // No 40-floor here (unlike on-court ratings): trait derivation reads the
+    // low tails of durability/intangibles, which a floor would erase.
+    result[field as keyof PlayerAttributes] = Math.min(99, Math.max(0, value));
+  }
+  return result;
+}
+
 async function fetchTeam(
   slug: string,
   minPlayers = MIN_PLAYERS_PER_TEAM,
@@ -135,6 +175,7 @@ async function fetchTeam(
 
     const threePoint = Number.parseInt($row.attr('data-shot-3pt') ?? '', 10);
     const dunk = Number.parseInt($row.attr('data-driving-dunk') ?? '', 10);
+    const attributes = parseAttributes((name) => $row.attr(`data-${name}`));
 
     // Headshot: lazy-loaded via data-src; skip the generic placeholder image.
     const rawImage = $row.find('img.entry-photo').first().attr('data-src') ?? '';
@@ -152,6 +193,7 @@ async function fetchTeam(
       overall,
       threePoint: Number.isFinite(threePoint) ? clampRating(threePoint) : 50,
       dunk: Number.isFinite(dunk) ? clampRating(dunk) : 50,
+      ...(attributes ? { attributes } : {}),
       ...(imageUrl ? { imageUrl } : {}),
     });
   });
