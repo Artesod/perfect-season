@@ -122,9 +122,11 @@ const TRAITS_BY_POSITION: Record<Position, readonly string[]> = {
   PG: ['playmaker', 'sharpshooter', 'pest-defender', 'ball-dominant'],
   SG: ['sharpshooter', 'slasher', 'ball-dominant', 'catch-and-shoot'],
   SF: ['two-way', 'slasher', 'catch-and-shoot', 'point-forward'],
-  PF: ['stretch-big', 'rebounder', 'post-scorer', 'two-way'],
-  C: ['rim-protector', 'rebounder', 'post-scorer', 'stretch-big'],
+  PF: ['stretch-big', 'rebounder', 'post-scorer', 'lob-threat'],
+  C: ['rim-protector', 'rebounder', 'lob-threat', 'stretch-big'],
 };
+
+const EVENT_TRAITS = ['iron-man', 'injury-prone', 'hot-head'] as const;
 
 /** Salary in millions derived from overall, superstars get max-level deals. */
 export function salaryForOverall(overall: number): number {
@@ -157,6 +159,7 @@ export function generatePlayer(rng: Rng, options: GeneratePlayerOptions = {}): P
   const traitPool = TRAITS_BY_POSITION[position];
   const traitCount = randInt(rng, 1, 2);
   const traits = [...new Set(Array.from({ length: traitCount }, () => pick(rng, traitPool)))];
+  if (rng() < 0.1) traits.push(pick(rng, EVENT_TRAITS));
 
   // Id comes purely from the RNG stream so the same seed reproduces the
   // same league exactly. Two draws make collisions vanishingly unlikely.
