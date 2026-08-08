@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createRng, type Player, type Team } from '@perfect-season/shared';
-import { homeWinProbability, simulateGame, teamStrength } from './game';
+import { effectiveStrength, homeWinProbability, simulateGame, teamStrength } from './game';
 
 function makeTeam(id: string, overall: number): Team {
   const players: Player[] = Array.from({ length: 15 }, (_, i) => ({
@@ -37,6 +37,27 @@ describe('homeWinProbability', () => {
     const p = homeWinProbability(a, b);
     expect(p).toBeGreaterThan(0.5);
     expect(p).toBeLessThan(0.6);
+  });
+});
+
+describe('effectiveStrength', () => {
+  it('cohesion changes effective strength through chemistry', () => {
+    const cooks: Team = {
+      id: 't',
+      name: 'T',
+      players: ['a', 'b', 'c'].map((id) => ({
+        id,
+        name: id,
+        position: 'PG' as const,
+        overall: 90,
+        offense: 90,
+        defense: 90,
+        salary: 30,
+        pWAR: 8,
+        traits: ['ball-dominant'],
+      })),
+    };
+    expect(effectiveStrength(cooks, 1)).toBeGreaterThan(effectiveStrength(cooks, 0));
   });
 });
 

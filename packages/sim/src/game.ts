@@ -1,5 +1,5 @@
 import type { GameResult, Rng, Team } from '@perfect-season/shared';
-import { chemistryDelta } from './chemistry';
+import { chemistryDelta, CPU_COHESION } from './chemistry';
 
 /**
  * Game simulation: team strength from the top of the rotation plus chemistry
@@ -34,17 +34,31 @@ export function teamStrength(team: Team): number {
 }
 
 /** Ratings plus chemistry — what games are actually decided on. */
-export function effectiveStrength(team: Team): number {
-  return teamStrength(team) + chemistryDelta(team.players);
+export function effectiveStrength(team: Team, cohesion = CPU_COHESION): number {
+  return teamStrength(team) + chemistryDelta(team.players, cohesion);
 }
 
-export function homeWinProbability(home: Team, away: Team): number {
-  const diff = effectiveStrength(home) + HOME_COURT_BONUS - effectiveStrength(away);
+export function homeWinProbability(
+  home: Team,
+  away: Team,
+  homeCohesion = CPU_COHESION,
+  awayCohesion = CPU_COHESION,
+): number {
+  const diff =
+    effectiveStrength(home, homeCohesion) +
+    HOME_COURT_BONUS -
+    effectiveStrength(away, awayCohesion);
   return 1 / (1 + Math.exp(-diff / UPSET_FACTOR));
 }
 
-export function simulateGame(home: Team, away: Team, rng: Rng): GameResult {
-  const homeWinProb = homeWinProbability(home, away);
+export function simulateGame(
+  home: Team,
+  away: Team,
+  rng: Rng,
+  homeCohesion = CPU_COHESION,
+  awayCohesion = CPU_COHESION,
+): GameResult {
+  const homeWinProb = homeWinProbability(home, away, homeCohesion, awayCohesion);
   const homeWins = rng() < homeWinProb;
 
   const winnerScore = 95 + Math.floor(rng() * 40);

@@ -6,6 +6,7 @@ import {
   type ScheduledGame,
   type Team,
 } from '@perfect-season/shared';
+import { cohesionAfterGame, CPU_COHESION } from './chemistry';
 import { simulateGame } from './game';
 
 export const SEASON_LENGTH = 82;
@@ -49,10 +50,11 @@ export function simulateScheduledGame(
   game: ScheduledGame,
   opponent: Team,
   rng: Rng,
+  userCohesion = 0,
 ): GameResult {
   return game.isHome
-    ? simulateGame(userTeam, opponent, rng)
-    : simulateGame(opponent, userTeam, rng);
+    ? simulateGame(userTeam, opponent, rng, userCohesion, CPU_COHESION)
+    : simulateGame(opponent, userTeam, rng, CPU_COHESION, userCohesion);
 }
 
 export function simulateSeason(
@@ -68,16 +70,19 @@ export function simulateSeason(
   const results: GameResult[] = [];
   let wins = 0;
   let losses = 0;
+  let cohesion = 0;
 
   for (const game of schedule) {
     const opponent = teamsById.get(game.opponentTeamId);
     if (!opponent) {
       throw new Error(`Unknown opponent team id in schedule: ${game.opponentTeamId}`);
     }
-    const result = simulateScheduledGame(userTeam, game, opponent, rng);
+    const result = simulateScheduledGame(userTeam, game, opponent, rng, cohesion);
     results.push(result);
 
-    if (result.winnerTeamId === userTeam.id) {
+    const won = result.winnerTeamId === userTeam.id;
+    cohesion = cohesionAfterGame(cohesion, won);
+    if (won) {
       wins++;
     } else {
       losses++;
