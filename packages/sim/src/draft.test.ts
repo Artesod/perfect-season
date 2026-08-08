@@ -148,8 +148,17 @@ describe('pickPlayer', () => {
     const a = pickPlayer(state, league, SEED, player.id);
     const b = pickPlayer(state, league, SEED, player.id);
     expect(a).toEqual(b);
-    expect(a.roster).toContainEqual(player);
+    expect(a.roster).toContainEqual({ ...player, originTeamId: state.rolledTeamId });
     expect(a.rollIndex).toBe(state.rollIndex + 1);
+  });
+
+  it('stamps originTeamId with the team the player was drafted off of', () => {
+    const state = createRollDraft(SEED, league);
+    const player = draftCandidates(state, league).find(
+      (p) => canPickPlayer(state, league, p.id).ok,
+    )!;
+    const after = pickPlayer(state, league, SEED, player.id);
+    expect(after.roster[0].originTeamId).toBe(state.rolledTeamId);
   });
 
   it('excludes already-drafted players from later offers of the same team', () => {

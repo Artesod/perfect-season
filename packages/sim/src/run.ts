@@ -3,12 +3,14 @@ import {
   deriveSeed,
   type EventCard,
   type PendingCard,
+  type PendingNagging,
   type Player,
   type Position,
   type RunState,
   type Team,
 } from '@perfect-season/shared';
 import { validateRoster } from './cap';
+import { cohesionAfterGame, cohesionAfterSigning, computeChemistry } from './chemistry';
 import { difficultyFor } from './difficulty';
 import { canPickPlayer, canReroll, createRollDraft, pickPlayer, rerollTeam } from './draft';
 import {
@@ -17,6 +19,7 @@ import {
   BASE_EVENT_CHANCES,
   emptyActiveEffects,
   resolveCardChoice,
+  resolveNagging,
   rollEvents,
   scaleChances,
   tickEffects,
@@ -230,26 +233,28 @@ function userTeam(run: RunState): Team {
 
 /**
  * Play the next scheduled game, tick effects, then roll fresh events.
- * A pending morale card must be resolved first. Pass the authored card pool
- * so morale events can fire; omit it and they simply don't.
+ * Pending decisions (morale card, nagging injury) must be resolved first.
+ * Pass the authored card pool so morale events can fire; omit it and they
+ * simply don't.
  */
 export function playNextGame(run: RunState, cards: readonly EventCard[] = []): RunState {
   requireStatus(run, 'in-season', 'play a game');
   const season = run.season!;
-  if (season.pendingCard) {
-    throw new Error('Resolve the pending event card before playing the next game');
+  if (season.pendingCard || season.pendingNagging) {
+    throw new Error('Resolve the pending decision (event card / nagging injury) before playing');
   }
 
   const gameIndex = season.results.length;
   const scheduled = season.schedule[gameIndex];
   const opponent = run.league.find((t) => t.id === scheduled.opponentTeamId)!;
   const gameRng = createRng(deriveSeed(run.seed, GAME_STREAM_BASE + gameIndex));
-  const result = simulateScheduledGame(userTeam(run), scheduled, opponent, gameRng);
+  const result = simulateScheduledGame(userTeam(run), scheduled, opponent, gameRng, season.cohesion);
 
   const won = result.winnerTeamId === USER_TEAM_ID;
   const wins = run.wins + (won ? 1 : 0);
   const losses = run.losses + (won ? 0 : 1);
   const livesRemaining = run.livesRemaining - (won ? 0 : 1);
+  const cohesion = cohesionAfterGame(season.cohesion, won);
 
   let status: RunState['status'] = run.status;
   if (livesRemaining <= 0) {
@@ -263,18 +268,32 @@ export function playNextGame(run: RunState, cards: readonly EventCard[] = []): R
   let effects = tickEffects(season.effects);
   const events = [...season.events];
   let pendingCard: PendingCard | null = null;
+  let pendingNagging: PendingNagging | null = null;
 
   if (status === 'in-season') {
     const mods = difficultyFor(run.ascension);
     const eventRng = createRng(deriveSeed(run.seed, EVENT_STREAM_BASE + gameIndex));
-    const rolled = rollEvents(availableRoster(run.roster, effects), eventRng, {
+    const available = availableRoster(run.roster, effects);
+    const chemistry = new Map(
+      computeChemistry(available, cohesion).map((e) => [e.id, e.playerIds] as const),
+    );
+    const rolled = rollEvents(available, eventRng, {
       chances: scaleChances(BASE_EVENT_CHANCES, mods.eventChanceMultiplier),
       cards,
+      chemistry,
+      nextOpponentTeamId: season.schedule[gameIndex + 1]?.opponentTeamId,
     });
     for (const event of rolled) {
       events.push(event);
       if (event.type === 'morale') {
         pendingCard = { cardId: event.cardId, playerIds: event.playerIds };
+      } else if (event.type === 'nagging') {
+        pendingNagging = {
+          playerId: event.playerId,
+          playHurtDelta: event.playHurtDelta,
+          playHurtGames: event.playHurtGames,
+          sitGames: event.sitGames,
+        };
       } else {
         effects = applyEvent(effects, event);
       }
@@ -287,7 +306,15 @@ export function playNextGame(run: RunState, cards: readonly EventCard[] = []): R
     losses,
     livesRemaining,
     status,
-    season: { ...season, results: [...season.results, result], events, effects, pendingCard },
+    season: {
+      ...season,
+      results: [...season.results, result],
+      events,
+      effects,
+      pendingCard,
+      pendingNagging,
+      cohesion,
+    },
   };
 }
 
@@ -305,14 +332,32 @@ export function resolvePendingCard(
   if (!card) {
     throw new Error(`Unknown card id: ${season.pendingCard.cardId}`);
   }
-  const { effects } = resolveCardChoice(
+  const { effects, cohesionDelta } = resolveCardChoice(
     season.effects,
     card,
     choiceId,
     season.pendingCard.playerIds,
     run.roster.map((p) => p.id),
   );
-  return { ...run, season: { ...season, effects, pendingCard: null } };
+  return {
+    ...run,
+    season: {
+      ...season,
+      effects,
+      pendingCard: null,
+      cohesion: Math.min(1, Math.max(0, season.cohesion + cohesionDelta)),
+    },
+  };
+}
+
+/** Resolve a pending nagging-injury decision: play him hurt or sit him. */
+export function runResolveNagging(run: RunState, choice: 'play' | 'sit'): RunState {
+  const season = run.season;
+  if (!season?.pendingNagging) {
+    throw new Error('No pending nagging injury to resolve');
+  }
+  const effects = resolveNagging(season.effects, season.pendingNagging, choice);
+  return { ...run, season: { ...season, effects, pendingNagging: null } };
 }
 
 /**
@@ -349,7 +394,12 @@ export function runWaivePlayer(run: RunState, playerId: string): RunState {
   return {
     ...run,
     roster,
-    season: { ...season, deadCap: season.deadCap + deadCapIncurred, effects: cleaned },
+    season: {
+      ...season,
+      deadCap: season.deadCap + deadCapIncurred,
+      effects: cleaned,
+      pendingNagging: season.pendingNagging?.playerId === playerId ? null : season.pendingNagging,
+    },
   };
 }
 
@@ -361,5 +411,9 @@ export function runSignPlayer(run: RunState, player: Player): RunState {
   if (!check.ok) {
     throw new Error(`Cannot sign: ${check.detail}`);
   }
-  return { ...run, roster: signPlayer(run.roster, player, season.deadCap + capReduction) };
+  return {
+    ...run,
+    roster: signPlayer(run.roster, player, season.deadCap + capReduction),
+    season: { ...season, cohesion: cohesionAfterSigning(season.cohesion) },
+  };
 }

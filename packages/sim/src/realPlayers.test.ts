@@ -33,8 +33,15 @@ import {
   runCanPick,
   runPickPlayer,
   runRerollTeam,
+  runResolveNagging,
   startSeason,
 } from './run';
+
+/** Play one game, first clearing any pending nagging decision (no card pool). */
+function playThrough(run: RunState): RunState {
+  if (run.season!.pendingNagging) run = runResolveNagging(run, 'sit');
+  return playNextGame(run);
+}
 
 const REAL_DATASET = JSON.parse(
   readFileSync(join(__dirname, '../../../data/nba-players.json'), 'utf-8'),
@@ -455,7 +462,7 @@ describe('createRun with a real dataset', () => {
     expect(run.roster).toHaveLength(ROSTER_SIZE);
     let guard = 0;
     while (run.status === 'in-season' && guard++ < 100) {
-      run = playNextGame(run);
+      run = playThrough(run);
     }
     expect(['won', 'lost']).toContain(run.status);
   });
@@ -511,7 +518,7 @@ describe('createRun with era pools', () => {
     let run = startSeason(draftLegalRoster(createRun(555, 0, MIXED_POOL)));
     let guard = 0;
     while (run.status === 'in-season' && guard++ < 100) {
-      run = playNextGame(run);
+      run = playThrough(run);
     }
     expect(['won', 'lost']).toContain(run.status);
   });

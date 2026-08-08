@@ -16,6 +16,7 @@ import {
   runCapReduction,
   runPickPlayer,
   runRerollTeam,
+  runResolveNagging,
   runSignPlayer,
   runWaivePlayer,
   startSeason,
@@ -48,6 +49,9 @@ function playUntilDone(run: RunState, maxGames = 100): RunState {
     if (run.season!.pendingCard) {
       const card = CARDS.find((c) => c.id === run.season!.pendingCard!.cardId)!;
       run = resolvePendingCard(run, CARDS, card.choices[0].id);
+    }
+    if (run.season!.pendingNagging) {
+      run = runResolveNagging(run, 'sit');
     }
     run = playNextGame(run, CARDS);
     games++;
@@ -172,6 +176,54 @@ describe('run lifecycle', () => {
       const resolved = resolvePendingCard(run, CARDS, card.choices[0].id);
       expect(resolved.season!.pendingCard).toBeNull();
     }
+  });
+});
+
+describe('cohesion lifecycle', () => {
+  it('season starts at cohesion 0 and gels after games', () => {
+    const run = startSeason(draftStrongRoster(createRun(1)));
+    expect(run.season!.cohesion).toBe(0);
+    const after = playNextGame(run);
+    expect(after.season!.cohesion).toBeGreaterThan(0);
+  });
+
+  it('signing a free agent costs cohesion', () => {
+    // Casual run: no cap, so the signing below can never fail a cap check.
+    let run = startSeason(draftStrongRoster(createRun(1, 0, undefined, true)));
+    while (run.season!.cohesion === 0 && run.status === 'in-season') {
+      run = playNextGame(run);
+    }
+    const before = run.season!.cohesion;
+    const cut = [...run.roster].sort((a, b) => a.overall - b.overall)[0];
+    run = runWaivePlayer(run, cut.id);
+    expect(run.season!.cohesion).toBe(before);
+    const agent = [...currentFreeAgents(run)].sort((a, b) => a.salary - b.salary)[0];
+    run = runSignPlayer(run, agent);
+    expect(run.season!.cohesion).toBeCloseTo(before * 0.8);
+  });
+
+  it('a pending nagging decision blocks the next game and resolves', () => {
+    const run = startSeason(draftStrongRoster(createRun(1234)));
+    const playerId = run.roster[0].id;
+    const withPending: RunState = {
+      ...run,
+      season: {
+        ...run.season!,
+        pendingNagging: { playerId, playHurtDelta: -3, playHurtGames: 6, sitGames: 2 },
+      },
+    };
+    expect(() => playNextGame(withPending)).toThrow(/pending/i);
+
+    const sat = runResolveNagging(withPending, 'sit');
+    expect(sat.season!.pendingNagging).toBeNull();
+    expect(sat.season!.effects.injuries[playerId]).toBe(2);
+
+    const played = runResolveNagging(withPending, 'play');
+    expect(played.season!.pendingNagging).toBeNull();
+    expect(played.season!.effects.ratingMods[playerId]).toEqual({
+      delta: -3,
+      gamesRemaining: 6,
+    });
   });
 });
 

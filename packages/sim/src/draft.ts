@@ -210,7 +210,10 @@ export function pickPlayer(
     eligiblePositions(player).find(
       (pos) => canPickPlayer(state, league, playerId, capReduction, pos).ok,
     )!;
-  const roster = [...state.roster, assignPosition(player, position)];
+  const roster = [
+    ...state.roster,
+    { ...assignPosition(player, position), originTeamId: state.rolledTeamId },
+  ];
   if (roster.length >= ROSTER_SIZE) {
     return { ...state, roster };
   }
