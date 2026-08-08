@@ -6,6 +6,7 @@ import {
   resolvePendingCard,
   runPickPlayer,
   runRerollTeam,
+  runResolveNagging,
   runSignPlayer,
   runWaivePlayer,
   startSeason,
@@ -36,6 +37,8 @@ interface GameStore {
   playGame: () => void;
   simToNextEvent: () => void;
   resolveCard: (choiceId: string) => void;
+  /** Resolve a pending nagging injury: play him hurt or sit him */
+  resolveNagging: (choice: 'play' | 'sit') => void;
   signFreeAgent: (player: Player) => void;
   waivePlayer: (playerId: string) => void;
 }
@@ -114,7 +117,11 @@ export const useGameStore = create<GameStore>()(
         const { run, meta, runPool } = get();
         const eventsBefore = run!.season!.events.length;
         let next = run!;
-        while (next.status === 'in-season' && !next.season!.pendingCard) {
+        while (
+          next.status === 'in-season' &&
+          !next.season!.pendingCard &&
+          !next.season!.pendingNagging
+        ) {
           next = playNextGame(next, EVENT_CARDS);
         }
         const finished =
@@ -130,6 +137,8 @@ export const useGameStore = create<GameStore>()(
 
       resolveCard: (choiceId) =>
         set({ run: resolvePendingCard(get().run!, EVENT_CARDS, choiceId) }),
+
+      resolveNagging: (choice) => set({ run: runResolveNagging(get().run!, choice) }),
 
       signFreeAgent: (player) => set({ run: runSignPlayer(get().run!, player) }),
 

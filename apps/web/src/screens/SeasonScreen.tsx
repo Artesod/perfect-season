@@ -6,6 +6,7 @@ import {
   capSpace,
   chemistryDelta,
   computeChemistry,
+  CPU_COHESION,
   currentFreeAgents,
   DEAD_CAP_FRACTION,
   runCapReduction,
@@ -17,6 +18,7 @@ import {
 import { ChemistryPanel } from '../components/ChemistryPanel';
 import { EventCardModal } from '../components/EventCardModal';
 import { EventLine } from '../components/EventLine';
+import { NaggingModal } from '../components/NaggingModal';
 import { PlayerAvatar } from '../components/PlayerAvatar';
 import { PlayerInfoModal } from '../components/PlayerInfoModal';
 import { money, pct } from '../format';
@@ -41,7 +43,8 @@ export function SeasonScreen() {
   const gameNumber = season.results.length + 1;
   const capReduction = runCapReduction(run);
   const effectiveDeadCap = season.deadCap + capReduction;
-  const pendingCard = season.pendingCard !== null;
+  const pendingCard = season.pendingCard !== null || season.pendingNagging !== null;
+  const cohesion = season.cohesion;
 
   const onCourt = availableRoster(run.roster, season.effects);
   const userTeam: Team = { id: USER_TEAM_ID, name: 'Your Team', players: onCourt };
@@ -53,8 +56,8 @@ export function SeasonScreen() {
   const winProb =
     nextGame && opponent
       ? nextGame.isHome
-        ? homeWinProbability(userTeam, opponent)
-        : 1 - homeWinProbability(opponent, userTeam)
+        ? homeWinProbability(userTeam, opponent, cohesion)
+        : 1 - homeWinProbability(opponent, userTeam, CPU_COHESION, cohesion)
       : 0;
 
   const lastResult = season.results.at(-1);
@@ -80,6 +83,7 @@ export function SeasonScreen() {
   return (
     <div className="season">
       <EventCardModal />
+      <NaggingModal />
       {infoPlayer && <PlayerInfoModal player={infoPlayer} onClose={() => setInfoPlayer(null)} />}
 
       <div className="season-topbar panel">
@@ -187,7 +191,9 @@ export function SeasonScreen() {
               <div className="matchup">
                 <div className="matchup-team">
                   <span className="matchup-name">Your Team</span>
-                  <span className="matchup-strength">{effectiveStrength(userTeam).toFixed(1)}</span>
+                  <span className="matchup-strength">
+                    {effectiveStrength(userTeam, cohesion).toFixed(1)}
+                  </span>
                 </div>
                 <div className="matchup-vs">
                   <span className="matchup-prob good">{pct(winProb)}</span>
@@ -339,7 +345,11 @@ export function SeasonScreen() {
             </table>
           </section>
 
-          <ChemistryPanel effects={computeChemistry(run.roster)} delta={chemistryDelta(run.roster)} />
+          <ChemistryPanel
+            effects={computeChemistry(run.roster, cohesion)}
+            delta={chemistryDelta(run.roster, cohesion)}
+            cohesion={cohesion}
+          />
 
           <section className="panel">
             <h3>Power rankings</h3>
