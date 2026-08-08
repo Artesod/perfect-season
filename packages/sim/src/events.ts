@@ -4,20 +4,25 @@ import {
   type ActiveEffects,
   type EventCard,
   type InjurySeverity,
+  type PendingNagging,
   type Player,
   type Rng,
   type SeasonEvent,
 } from '@perfect-season/shared';
 
 /**
- * RNG event engine: rolled between games. Injuries/streaks/slumps apply
- * automatically; morale events surface an authored card the player must
- * resolve with a choice. All content is data — the engine only rolls and
+ * RNG event engine: rolled between games. Injuries, illnesses, suspensions,
+ * streaks/slumps, and revenge boosts apply automatically; morale events
+ * surface an authored card and nagging injuries a play/sit decision the
+ * player must resolve. All content is data — the engine only rolls and
  * applies, keeping runs deterministic.
  */
 
 export interface EventChances {
   injury: number;
+  illness: number;
+  suspension: number;
+  nagging: number;
   hotStreak: number;
   slump: number;
   morale: number;
@@ -26,18 +31,62 @@ export interface EventChances {
 /** Per-game base probabilities; difficulty modifiers scale these. */
 export const BASE_EVENT_CHANCES: EventChances = {
   injury: 0.05,
+  illness: 0.03,
+  suspension: 0.015,
+  nagging: 0.02,
   hotStreak: 0.08,
   slump: 0.06,
   morale: 0.06,
 };
 
 export function scaleChances(chances: EventChances, multiplier: number): EventChances {
-  return {
-    injury: chances.injury * multiplier,
-    hotStreak: chances.hotStreak * multiplier,
-    slump: chances.slump * multiplier,
-    morale: chances.morale * multiplier,
-  };
+  return Object.fromEntries(
+    Object.entries(chances).map(([key, value]) => [key, value * multiplier]),
+  ) as unknown as EventChances;
+}
+
+/** Chance a revenge boost fires when a player faces his old team. */
+export const REVENGE_CHANCE = 0.25;
+
+export interface EventContext {
+  chances?: EventChances;
+  cards?: readonly EventCard[];
+  /** Active chemistry effects on the roster: id -> producing player ids */
+  chemistry?: ReadonlyMap<string, readonly string[]>;
+  /** Next game's opponent, for revenge events */
+  nextOpponentTeamId?: string;
+}
+
+const injuryWeight = (p: Player) =>
+  p.traits.includes('iron-man') ? 0.5 : p.traits.includes('injury-prone') ? 2 : 1;
+const suspensionWeight = (p: Player) => (p.traits.includes('hot-head') ? 3 : 1);
+
+function weightedPick(
+  rng: Rng,
+  players: readonly Player[],
+  weight: (p: Player) => number,
+): Player {
+  const total = players.reduce((sum, p) => sum + weight(p), 0);
+  let roll = rng() * total;
+  for (const p of players) {
+    roll -= weight(p);
+    if (roll <= 0) return p;
+  }
+  return players[players.length - 1];
+}
+
+function requiredEffectId(card: EventCard): string | null {
+  return card.requires?.startsWith('chemistry-effect:')
+    ? card.requires.slice('chemistry-effect:'.length)
+    : null;
+}
+
+function cardEligible(card: EventCard, chemistry: EventContext['chemistry']): boolean {
+  const effectId = requiredEffectId(card);
+  if (!effectId) return !card.requires;
+  // Needs at least two producers: alpha/supporting targets are meaningless
+  // for a lone player.
+  return (chemistry?.get(effectId)?.length ?? 0) >= 2;
 }
 
 const INJURY_TABLE: readonly {
@@ -71,19 +120,45 @@ function rollInjury(rng: Rng, playerId: string): SeasonEvent {
 
 /**
  * Roll the between-game events. `availablePlayers` should exclude anyone
- * already injured. Morale events fire only when a card pool is provided.
+ * already sidelined. Morale events fire only when a card pool is provided;
+ * cards with `requires` also need the matching chemistry effect active.
+ * Roll order is fixed (injury, illness, suspension, nagging, hot-streak,
+ * slump, revenge, morale) so seeds stay reproducible.
  */
 export function rollEvents(
   availablePlayers: readonly Player[],
   rng: Rng,
-  chances: EventChances = BASE_EVENT_CHANCES,
-  cards: readonly EventCard[] = [],
+  context: EventContext = {},
 ): SeasonEvent[] {
   if (availablePlayers.length === 0) return [];
+  const chances = context.chances ?? BASE_EVENT_CHANCES;
   const events: SeasonEvent[] = [];
 
   if (rng() < chances.injury) {
-    events.push(rollInjury(rng, pick(rng, availablePlayers).id));
+    events.push(rollInjury(rng, weightedPick(rng, availablePlayers, injuryWeight).id));
+  }
+  if (rng() < chances.illness) {
+    events.push({
+      type: 'illness',
+      playerId: weightedPick(rng, availablePlayers, injuryWeight).id,
+      gamesOut: randInt(rng, 1, 2),
+    });
+  }
+  if (rng() < chances.suspension) {
+    events.push({
+      type: 'suspension',
+      playerId: weightedPick(rng, availablePlayers, suspensionWeight).id,
+      gamesOut: 1,
+    });
+  }
+  if (rng() < chances.nagging) {
+    events.push({
+      type: 'nagging',
+      playerId: pick(rng, availablePlayers).id,
+      playHurtDelta: -3,
+      playHurtGames: randInt(rng, 5, 8),
+      sitGames: randInt(rng, 2, 3),
+    });
   }
   if (rng() < chances.hotStreak) {
     events.push({
@@ -101,15 +176,39 @@ export function rollEvents(
       gamesRemaining: randInt(rng, 3, 8),
     });
   }
+  if (context.nextOpponentTeamId) {
+    const returning = availablePlayers.filter(
+      (p) => p.originTeamId === context.nextOpponentTeamId,
+    );
+    if (returning.length > 0 && rng() < REVENGE_CHANCE) {
+      events.push({
+        type: 'revenge',
+        playerId: pick(rng, returning).id,
+        ratingDelta: 2,
+        gamesRemaining: 1,
+      });
+    }
+  }
+  const cards = (context.cards ?? []).filter((c) => cardEligible(c, context.chemistry));
   if (cards.length > 0 && rng() < chances.morale) {
     const card = pick(rng, cards);
-    const involvedCount = Math.min(randInt(rng, 1, 2), availablePlayers.length);
-    const involved: string[] = [];
-    while (involved.length < involvedCount) {
-      const candidate = pick(rng, availablePlayers).id;
-      if (!involved.includes(candidate)) involved.push(candidate);
+    const effectId = requiredEffectId(card);
+    let involved: string[];
+    if (effectId) {
+      const producers = new Set(context.chemistry!.get(effectId)!);
+      involved = availablePlayers
+        .filter((p) => producers.has(p.id))
+        .sort((a, b) => b.overall - a.overall)
+        .map((p) => p.id);
+    } else {
+      const involvedCount = Math.min(randInt(rng, 1, 2), availablePlayers.length);
+      involved = [];
+      while (involved.length < involvedCount) {
+        const candidate = pick(rng, availablePlayers).id;
+        if (!involved.includes(candidate)) involved.push(candidate);
+      }
     }
-    events.push({ type: 'morale', cardId: card.id, playerIds: involved });
+    if (involved.length > 0) events.push({ type: 'morale', cardId: card.id, playerIds: involved });
   }
   return events;
 }
@@ -133,13 +232,26 @@ function mergeRatingMod(
   };
 }
 
-/** Fold an auto-applied event into the active effects. Morale cards are resolved separately. */
+/**
+ * Fold an auto-applied event into the active effects. Morale cards and
+ * nagging injuries are decisions, resolved separately.
+ */
 export function applyEvent(effects: ActiveEffects, event: SeasonEvent): ActiveEffects {
   switch (event.type) {
     case 'injury':
-      return { ...effects, injuries: { ...effects.injuries, [event.playerId]: event.gamesOut } };
+    case 'illness':
+    case 'suspension':
+      // Merge with max so two same-game absences can't shorten each other.
+      return {
+        ...effects,
+        injuries: {
+          ...effects.injuries,
+          [event.playerId]: Math.max(effects.injuries[event.playerId] ?? 0, event.gamesOut),
+        },
+      };
     case 'hot-streak':
     case 'slump':
+    case 'revenge':
       return {
         ...effects,
         ratingMods: mergeRatingMod(
@@ -149,13 +261,33 @@ export function applyEvent(effects: ActiveEffects, event: SeasonEvent): ActiveEf
           event.gamesRemaining,
         ),
       };
-    case 'illness':
-    case 'suspension':
-    case 'revenge':
     case 'nagging':
     case 'morale':
       return effects;
   }
+}
+
+/** Apply the play-hurt/sit decision on a nagging injury. */
+export function resolveNagging(
+  effects: ActiveEffects,
+  pending: PendingNagging,
+  choice: 'play' | 'sit',
+): ActiveEffects {
+  if (choice === 'play') {
+    return {
+      ...effects,
+      ratingMods: mergeRatingMod(
+        effects.ratingMods,
+        pending.playerId,
+        pending.playHurtDelta,
+        pending.playHurtGames,
+      ),
+    };
+  }
+  return {
+    ...effects,
+    injuries: { ...effects.injuries, [pending.playerId]: pending.sitGames },
+  };
 }
 
 /** Apply the player's choice on a morale card. */

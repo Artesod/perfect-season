@@ -267,12 +267,10 @@ export function playNextGame(run: RunState, cards: readonly EventCard[] = []): R
   if (status === 'in-season') {
     const mods = difficultyFor(run.ascension);
     const eventRng = createRng(deriveSeed(run.seed, EVENT_STREAM_BASE + gameIndex));
-    const rolled = rollEvents(
-      availableRoster(run.roster, effects),
-      eventRng,
-      scaleChances(BASE_EVENT_CHANCES, mods.eventChanceMultiplier),
+    const rolled = rollEvents(availableRoster(run.roster, effects), eventRng, {
+      chances: scaleChances(BASE_EVENT_CHANCES, mods.eventChanceMultiplier),
       cards,
-    );
+    });
     for (const event of rolled) {
       events.push(event);
       if (event.type === 'morale') {
