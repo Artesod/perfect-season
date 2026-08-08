@@ -305,7 +305,7 @@ export function resolvePendingCard(
   if (!card) {
     throw new Error(`Unknown card id: ${season.pendingCard.cardId}`);
   }
-  const effects = resolveCardChoice(
+  const { effects } = resolveCardChoice(
     season.effects,
     card,
     choiceId,

@@ -239,12 +239,62 @@ describe('active effects lifecycle', () => {
     const all = roster.map((p) => p.id);
 
     const single = resolveCardChoice(emptyActiveEffects(), CARD, 'good', involved, all);
-    expect(Object.keys(single.ratingMods)).toEqual(involved);
+    expect(Object.keys(single.effects.ratingMods)).toEqual(involved);
 
     const teamWide = resolveCardChoice(emptyActiveEffects(), CARD, 'team-wide', involved, all);
-    expect(Object.keys(teamWide.ratingMods)).toHaveLength(roster.length);
+    expect(Object.keys(teamWide.effects.ratingMods)).toHaveLength(roster.length);
 
     expect(() => resolveCardChoice(emptyActiveEffects(), CARD, 'nope', involved, all)).toThrow();
+  });
+});
+
+describe('resolveCardChoice extensions', () => {
+  const card: EventCard = {
+    id: 'alpha-card',
+    title: 'T',
+    text: 't',
+    choices: [
+      {
+        id: 'pick-alpha',
+        label: 'Name the alpha',
+        effects: [
+          { type: 'rating', delta: 2, games: 6, target: 'alpha' },
+          { type: 'rating', delta: -2, games: 4, target: 'supporting' },
+          { type: 'cohesion', delta: 0.3 },
+        ],
+      },
+      {
+        id: 'bench',
+        label: 'Sit them down',
+        effects: [{ type: 'absence', games: 2, target: 'involved' }],
+      },
+    ],
+  };
+
+  it('resolves alpha/supporting targets and returns the cohesion delta', () => {
+    const { effects, cohesionDelta } = resolveCardChoice(
+      emptyActiveEffects(),
+      card,
+      'pick-alpha',
+      ['best', 'second', 'third'],
+      ['best', 'second', 'third', 'role'],
+    );
+    expect(effects.ratingMods.best).toEqual({ delta: 2, gamesRemaining: 6 });
+    expect(effects.ratingMods.second).toEqual({ delta: -2, gamesRemaining: 4 });
+    expect(effects.ratingMods.role).toBeUndefined();
+    expect(cohesionDelta).toBeCloseTo(0.3);
+  });
+
+  it('applies absence effects', () => {
+    const { effects, cohesionDelta } = resolveCardChoice(
+      emptyActiveEffects(),
+      card,
+      'bench',
+      ['a', 'b'],
+      ['a', 'b', 'c'],
+    );
+    expect(effects.injuries).toEqual({ a: 2, b: 2 });
+    expect(cohesionDelta).toBe(0);
   });
 });
 
@@ -276,5 +326,24 @@ describe('validateEventCards', () => {
     expect(errors.some((e) => e.includes('at least 2 choices'))).toBe(true);
     expect(errors.some((e) => e.includes('delta of 0'))).toBe(true);
     expect(errors.some((e) => e.includes('games must be >= 1'))).toBe(true);
+  });
+
+  it('rejects bad requires, zero-cohesion, and bad absence games', () => {
+    const bad: EventCard[] = [
+      {
+        id: 'x',
+        title: 'X',
+        text: 'x',
+        requires: 'weather:rainy',
+        choices: [
+          { id: 'a', label: 'A', effects: [{ type: 'cohesion', delta: 0 }] },
+          { id: 'b', label: 'B', effects: [{ type: 'absence', games: 0, target: 'involved' }] },
+        ],
+      },
+    ];
+    const errors = validateEventCards(bad);
+    expect(errors.some((e) => e.includes('requires'))).toBe(true);
+    expect(errors.some((e) => e.includes('cohesion'))).toBe(true);
+    expect(errors.some((e) => e.includes('absence') || e.includes('games'))).toBe(true);
   });
 });

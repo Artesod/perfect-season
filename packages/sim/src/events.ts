@@ -2,6 +2,7 @@ import {
   pick,
   randInt,
   type ActiveEffects,
+  type CardTarget,
   type EventCard,
   type InjurySeverity,
   type PendingNagging,
@@ -290,30 +291,63 @@ export function resolveNagging(
   };
 }
 
-/** Apply the player's choice on a morale card. */
+function targetIds(
+  target: CardTarget,
+  involved: readonly string[],
+  roster: readonly string[],
+): readonly string[] {
+  switch (target) {
+    case 'team':
+      return roster;
+    case 'involved':
+      return involved;
+    case 'alpha':
+      return involved.slice(0, 1);
+    case 'supporting':
+      return involved.slice(1);
+  }
+}
+
+/**
+ * Apply the player's choice on a card. Involved ids arrive sorted by
+ * overall (best first), which is what makes 'alpha' meaningful.
+ */
 export function resolveCardChoice(
   effects: ActiveEffects,
   card: EventCard,
   choiceId: string,
   involvedPlayerIds: readonly string[],
   rosterPlayerIds: readonly string[],
-): ActiveEffects {
+): { effects: ActiveEffects; cohesionDelta: number } {
   const choice = card.choices.find((c) => c.id === choiceId);
   if (!choice) {
     throw new Error(`Card ${card.id} has no choice ${choiceId}`);
   }
   let next = effects;
+  let cohesionDelta = 0;
   for (const effect of choice.effects) {
-    if (effect.type !== 'rating') continue;
-    const targets = effect.target === 'involved' ? involvedPlayerIds : rosterPlayerIds;
-    for (const playerId of targets) {
-      next = {
-        ...next,
-        ratingMods: mergeRatingMod(next.ratingMods, playerId, effect.delta, effect.games),
-      };
+    if (effect.type === 'cohesion') {
+      cohesionDelta += effect.delta;
+    } else if (effect.type === 'rating') {
+      for (const playerId of targetIds(effect.target, involvedPlayerIds, rosterPlayerIds)) {
+        next = {
+          ...next,
+          ratingMods: mergeRatingMod(next.ratingMods, playerId, effect.delta, effect.games),
+        };
+      }
+    } else if (effect.type === 'absence') {
+      for (const playerId of targetIds(effect.target, involvedPlayerIds, rosterPlayerIds)) {
+        next = {
+          ...next,
+          injuries: {
+            ...next.injuries,
+            [playerId]: Math.max(next.injuries[playerId] ?? 0, effect.games),
+          },
+        };
+      }
     }
   }
-  return next;
+  return { effects: next, cohesionDelta };
 }
 
 /** Count down one game: injuries heal, streaks and slumps fade. */
@@ -348,6 +382,8 @@ export function availableRoster(players: readonly Player[], effects: ActiveEffec
     });
 }
 
+const VALID_TARGETS: readonly CardTarget[] = ['involved', 'team', 'alpha', 'supporting'];
+
 /** Structural validation for authored card content in data/. */
 export function validateEventCards(cards: readonly EventCard[]): string[] {
   const errors: string[] = [];
@@ -357,6 +393,9 @@ export function validateEventCards(cards: readonly EventCard[]): string[] {
     if (seen.has(card.id)) errors.push(`Duplicate card id: ${card.id}`);
     seen.add(card.id);
     if (!card.title || !card.text) errors.push(`Card ${card.id}: missing title or text`);
+    if (card.requires !== undefined && !/^chemistry-effect:[a-z][a-z-]*$/.test(card.requires)) {
+      errors.push(`Card ${card.id}: bad requires "${card.requires}"`);
+    }
     if (!Array.isArray(card.choices) || card.choices.length < 2) {
       errors.push(`Card ${card.id}: needs at least 2 choices`);
       continue;
@@ -373,8 +412,20 @@ export function validateEventCards(cards: readonly EventCard[]): string[] {
         if (effect.type === 'rating') {
           if (effect.delta === 0) errors.push(`Card ${card.id}/${choice.id}: rating delta of 0`);
           if (effect.games < 1) errors.push(`Card ${card.id}/${choice.id}: games must be >= 1`);
-          if (effect.target !== 'involved' && effect.target !== 'team') {
+          if (!VALID_TARGETS.includes(effect.target)) {
             errors.push(`Card ${card.id}/${choice.id}: bad target`);
+          }
+        } else if (effect.type === 'absence') {
+          if (effect.games < 1) {
+            errors.push(`Card ${card.id}/${choice.id}: absence games must be >= 1`);
+          }
+          if (!VALID_TARGETS.includes(effect.target)) {
+            errors.push(`Card ${card.id}/${choice.id}: bad target`);
+          }
+        } else if (effect.type === 'cohesion') {
+          if (effect.delta === 0) errors.push(`Card ${card.id}/${choice.id}: cohesion delta of 0`);
+          if (Math.abs(effect.delta) > 1) {
+            errors.push(`Card ${card.id}/${choice.id}: cohesion delta out of range`);
           }
         } else if (effect.type !== 'none') {
           errors.push(`Card ${card.id}/${choice.id}: unknown effect type`);

@@ -217,5 +217,27 @@
         "effects": [{ "type": "rating", "delta": -1, "games": 2, "target": "involved" }]
       }
     ]
+  },
+  {
+    "id": "whose-team-is-this",
+    "title": "Whose Team Is This?",
+    "requires": "chemistry-effect:too-many-cooks",
+    "text": "Beat writers keep asking who the offense runs through, and {player} answered \"me\" on live TV. The other stars saw the clip before the bus left.",
+    "choices": [
+      {
+        "id": "name-alpha",
+        "label": "Name your alpha — the offense runs through your best player",
+        "effects": [
+          { "type": "rating", "delta": 2, "games": 6, "target": "alpha" },
+          { "type": "rating", "delta": -2, "games": 4, "target": "supporting" },
+          { "type": "cohesion", "delta": 0.3 }
+        ]
+      },
+      {
+        "id": "let-them-sort",
+        "label": "Say nothing — let the hierarchy sort itself out on the court",
+        "effects": [{ "type": "none" }]
+      }
+    ]
   }
 ]
