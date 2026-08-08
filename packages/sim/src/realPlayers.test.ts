@@ -6,7 +6,9 @@ import {
   MIN_SALARY,
   ROSTER_SIZE,
   type DraftState,
+  type PlayerAttributes,
   type PlayerPool,
+  type RealPlayerRecord,
   type RunState,
   type Team,
 } from '@perfect-season/shared';
@@ -17,6 +19,7 @@ import { canPickPlayer, draftCandidates } from './draft';
 import { canSign } from './freeAgency';
 import {
   buildRealLeague,
+  deriveTraits,
   isValidEraDataset,
   isValidNbaDataset,
   mapPoolPlayers,
@@ -73,6 +76,121 @@ function samePersonPair(pool: PlayerPool) {
   expect(versions).toBeDefined();
   return [versions![0], versions![1]] as const;
 }
+
+const baseAttributes: PlayerAttributes = {
+  midRange: 70,
+  closeShot: 70,
+  layup: 70,
+  standingDunk: 50,
+  vertical: 60,
+  speed: 70,
+  ballHandle: 70,
+  passAccuracy: 70,
+  passVision: 70,
+  passIq: 70,
+  drawFoul: 60,
+  postControl: 50,
+  interiorDefense: 60,
+  perimeterDefense: 60,
+  steal: 60,
+  block: 50,
+  offensiveRebound: 50,
+  defensiveRebound: 60,
+  durability: 80,
+  intangibles: 70,
+};
+
+const record = (
+  overrides: Partial<RealPlayerRecord>,
+  attrs: Partial<PlayerAttributes> = {},
+): RealPlayerRecord => ({
+  name: 'Test Player',
+  position: 'PG',
+  overall: 80,
+  threePoint: 70,
+  dunk: 60,
+  attributes: { ...baseAttributes, ...attrs },
+  ...overrides,
+});
+
+describe('deriveTraits (attribute sheet)', () => {
+  it('elite off-ball shooter is not ball-dominant', () => {
+    const traits = deriveTraits(
+      record(
+        { overall: 96, threePoint: 95 },
+        { ballHandle: 95, passAccuracy: 88, passVision: 88, passIq: 88 },
+      ),
+    );
+    expect(traits).toContain('sharpshooter');
+    expect(traits).not.toContain('ball-dominant');
+  });
+
+  it('on-ball engine without an elite three is ball-dominant', () => {
+    const traits = deriveTraits(
+      record({ overall: 94, threePoint: 78 }, { ballHandle: 95, drawFoul: 85 }),
+    );
+    expect(traits).toContain('ball-dominant');
+  });
+
+  it('a pass-first handle without foul-drawing is not ball-dominant', () => {
+    const traits = deriveTraits(
+      record({ overall: 90, threePoint: 70 }, { ballHandle: 95, drawFoul: 50 }),
+    );
+    expect(traits).not.toContain('ball-dominant');
+  });
+
+  it('lob finisher big gets lob-threat', () => {
+    const traits = deriveTraits(
+      record({ position: 'C', overall: 85, threePoint: 40 }, { standingDunk: 95, vertical: 88 }),
+    );
+    expect(traits).toContain('lob-threat');
+  });
+
+  it('caps archetypes at 3 and adds at most one event-linked trait', () => {
+    const traits = deriveTraits(
+      record(
+        { overall: 95, threePoint: 90 },
+        {
+          ballHandle: 95,
+          passAccuracy: 95,
+          passVision: 95,
+          passIq: 95,
+          speed: 90,
+          standingDunk: 90,
+          vertical: 90,
+          steal: 90,
+          perimeterDefense: 90,
+          interiorDefense: 85,
+          block: 88,
+          postControl: 90,
+          offensiveRebound: 90,
+          defensiveRebound: 90,
+          durability: 95,
+        },
+      ),
+    );
+    const eventLinked = traits.filter((t) => ['iron-man', 'injury-prone', 'hot-head'].includes(t));
+    expect(traits.length - eventLinked.length).toBeLessThanOrEqual(3);
+    expect(eventLinked).toEqual(['iron-man']);
+  });
+
+  it('low durability outranks other event traits', () => {
+    const traits = deriveTraits(record({}, { durability: 55, intangibles: 30 }));
+    expect(traits).toContain('injury-prone');
+    expect(traits).not.toContain('hot-head');
+  });
+
+  it('falls back to legacy heuristics without an attribute sheet', () => {
+    const legacy = deriveTraits({
+      name: 'Old Row',
+      position: 'C',
+      overall: 85,
+      threePoint: 40,
+      dunk: 70,
+    });
+    expect(legacy).toContain('rim-protector');
+  });
+});
 
 describe('mapPoolPlayers', () => {
   it('maps every record with unique stable ids and derived fields', () => {

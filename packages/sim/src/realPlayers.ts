@@ -57,11 +57,10 @@ function nameKey(name: string): string {
 }
 
 /**
- * Deterministic traits from ratings + position, using the chemistry
- * vocabulary from league.ts so synergies keep working. 1-2 traits per
- * player, mirroring the procedural generator.
+ * Legacy traits from overall/3PT/dunk + position, for records scraped
+ * before the full attribute sheet (and any row the sheet parse misses).
  */
-function deriveTraits(record: RealPlayerRecord): string[] {
+function deriveTraitsLegacy(record: RealPlayerRecord): string[] {
   const { position, overall, threePoint, dunk } = record;
   const traits: string[] = [];
 
@@ -98,6 +97,70 @@ function deriveTraits(record: RealPlayerRecord): string[] {
   const unique = [...new Set(traits)];
   if (unique.length === 0) unique.push('two-way');
   return unique.slice(0, 2);
+}
+
+/**
+ * Deep traits from the scraped attribute sheet: up to 3 archetype traits
+ * (strongest margins over their thresholds win) plus at most one
+ * event-linked trait. Rows without a sheet use the legacy heuristics.
+ * Thresholds are calibrated with scripts/trait-audit.ts.
+ */
+export function deriveTraits(record: RealPlayerRecord): string[] {
+  const a = record.attributes;
+  if (!a) return deriveTraitsLegacy(record);
+
+  const { position, overall, threePoint, dunk } = record;
+  const isBig = position === 'PF' || position === 'C';
+  const passing = (a.passAccuracy + a.passVision + a.passIq) / 3;
+
+  const candidates: { trait: string; margin: number }[] = [];
+  const add = (trait: string, ...margins: number[]) =>
+    candidates.push({ trait, margin: Math.min(...margins) });
+
+  if (threePoint >= 88) add('sharpshooter', threePoint - 88);
+  else if (threePoint >= 80) add(isBig ? 'stretch-big' : 'catch-and-shoot', threePoint - 80);
+  if (passing >= 85) {
+    add(position === 'PG' || position === 'SG' ? 'playmaker' : 'point-forward', passing - 85);
+  }
+  // Ball-dominant = usage-hungry on-ball creator: elite handle on a star who
+  // isn't primarily an off-ball shooter. Foul-drawing is the sheet's best
+  // proxy for on-ball creation — it keeps pass-first floor generals
+  // (Stockton/Rondo types) and tiny-usage handle wizards out.
+  if (a.ballHandle >= 90 && overall >= 87 && threePoint < 88 && a.drawFoul >= 75) {
+    add('ball-dominant', a.ballHandle - 90, overall - 87);
+  }
+  if (dunk >= 85 && a.speed >= 80) add('slasher', dunk - 85, a.speed - 80);
+  if (a.standingDunk >= 85 && a.vertical >= 80) {
+    add('lob-threat', a.standingDunk - 85, a.vertical - 80);
+  }
+  if (a.postControl >= 85) add('post-scorer', a.postControl - 85);
+  if (a.block >= 85 && a.interiorDefense >= 85) {
+    add('rim-protector', a.block - 85, a.interiorDefense - 85);
+  }
+  if (a.steal >= 85 && a.perimeterDefense >= 85) {
+    add('pest-defender', a.steal - 85, a.perimeterDefense - 85);
+  }
+  if (a.perimeterDefense >= 80 && a.interiorDefense >= 80) {
+    add('two-way', a.perimeterDefense - 80, a.interiorDefense - 80);
+  }
+  if ((a.offensiveRebound + a.defensiveRebound) / 2 >= 85) {
+    add('rebounder', (a.offensiveRebound + a.defensiveRebound) / 2 - 85);
+  }
+
+  candidates.sort((x, y) => y.margin - x.margin);
+  const traits = [...new Set(candidates.map((c) => c.trait))].slice(0, 3);
+  if (traits.length === 0) {
+    // Legacy fallback guarantees at least one trait, but must never hand out
+    // ball-dominant — that gate is calibrated above and the legacy path
+    // stamps it on any high-overall guard.
+    traits.push(deriveTraitsLegacy(record).find((t) => t !== 'ball-dominant') ?? 'two-way');
+  }
+
+  if (a.durability <= 65) traits.push('injury-prone');
+  else if (a.durability >= 95) traits.push('iron-man');
+  else if (a.intangibles <= 35) traits.push('hot-head');
+
+  return traits;
 }
 
 /** A team contributing players to the pool, with era metadata resolved. */
@@ -317,7 +380,11 @@ function isValidPlayerRecord(p: RealPlayerRecord): boolean {
         p.altPositions.every((pos) => (POSITIONS as readonly string[]).includes(pos)))) &&
     typeof p.overall === 'number' &&
     typeof p.threePoint === 'number' &&
-    typeof p.dunk === 'number'
+    typeof p.dunk === 'number' &&
+    (p.attributes === undefined ||
+      (typeof p.attributes === 'object' &&
+        typeof p.attributes.durability === 'number' &&
+        typeof p.attributes.ballHandle === 'number'))
   );
 }
 
