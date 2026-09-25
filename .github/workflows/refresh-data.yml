@@ -11,7 +11,17 @@ permissions:
 
 jobs:
   refresh:
-    runs-on: ubuntu-latest
+    # Self-hosted, not ubuntu-latest: 2kratings.com sits behind Cloudflare,
+    # which 403s requests from GitHub's hosted-runner (Azure datacenter) IPs
+    # regardless of User-Agent. A runner on a residential connection passes.
+    # If the runner is offline at the scheduled time the job queues for up
+    # to 24h and runs once it comes online.
+    runs-on: self-hosted
+    defaults:
+      run:
+        # The runner may be Windows; keep the shell-scripted steps portable
+        # (Git Bash ships with Git for Windows).
+        shell: bash
     steps:
       - uses: actions/checkout@v4
 

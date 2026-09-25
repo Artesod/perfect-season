@@ -91,7 +91,9 @@ function clampRating(n: number): number {
 /**
  * Fetch via the system curl binary: the site's CDN rejects Node's fetch by
  * TLS fingerprint (403) but accepts curl. curl ships with Windows 10+ and
- * all GitHub Actions runners.
+ * all GitHub Actions runners. The CDN also 403s datacenter IPs (including
+ * GitHub-hosted runners) regardless of client, so the weekly workflow runs
+ * on a self-hosted runner.
  */
 async function fetchHtml(url: string): Promise<string> {
   const { stdout } = await execFileAsync(
