@@ -17,11 +17,6 @@ jobs:
     # If the runner is offline at the scheduled time the job queues for up
     # to 24h and runs once it comes online.
     runs-on: self-hosted
-    defaults:
-      run:
-        # The runner may be Windows; keep the shell-scripted steps portable
-        # (Git Bash ships with Git for Windows).
-        shell: bash
     steps:
       - uses: actions/checkout@v4
 
@@ -41,12 +36,17 @@ jobs:
       - name: Verify dataset against the sim's schema
         run: npm test --workspace @perfect-season/sim
 
+      # Windows PowerShell rather than bash: the runner is a Windows PC whose
+      # service account only sees the system PATH, which has git but not
+      # Git-for-Windows bash. powershell is always present on Windows.
       - name: Commit and push if changed
+        shell: powershell
         run: |
-          if git diff --quiet data/nba-players.json; then
-            echo "No roster changes this week."
+          git diff --quiet data/nba-players.json
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "No roster changes this week."
             exit 0
-          fi
+          }
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/nba-players.json
