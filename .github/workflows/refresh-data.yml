@@ -2,8 +2,10 @@ name: Refresh NBA data
 
 on:
   schedule:
-    # Mondays 09:00 UTC — after the weekend's roster moves
-    - cron: '0 9 * * 1'
+    # Mondays 9 AM Central Standard Time (15:00 UTC) — after the weekend's
+    # roster moves. Cron is fixed to UTC, so this is 10 AM during daylight
+    # time (mid-March to early November).
+    - cron: '0 15 * * 1'
   workflow_dispatch:
 
 permissions:
