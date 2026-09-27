@@ -24,6 +24,7 @@ import { PlayerAvatar } from '../components/PlayerAvatar';
 import { PlayerInfoModal } from '../components/PlayerInfoModal';
 import { TraitTags } from '../components/TraitTags';
 import { money } from '../format';
+import { useTour } from '../onboarding/useTour';
 import { useGameStore } from '../store';
 import './DraftScreen.css';
 
@@ -105,6 +106,8 @@ export function DraftScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [draft.rollIndex]);
   const spinning = drafting && reel.spinning;
+  // Hold the tour until the reel lands so the candidate cards exist.
+  useTour('draft', drafting && !spinning);
 
   return (
     <div className="draft">
@@ -124,6 +127,7 @@ export function DraftScreen() {
               <button
                 type="button"
                 className={`btn btn-small ${reroll.free && !spinning ? 'btn-primary' : ''}`}
+                data-tour="draft-reroll"
                 disabled={!reroll.allowed || spinning}
                 title={
                   reroll.allowed
@@ -139,7 +143,7 @@ export function DraftScreen() {
             )}
           </div>
 
-          <div className="slot-strip">
+          <div className="slot-strip" data-tour="draft-slots">
             {draft.roster.map((p, i) => (
               <div key={`filled-${i}`} className="slot-chip filled" title={p.name}>
                 {p.position}
@@ -173,7 +177,7 @@ export function DraftScreen() {
 
         {drafting && (
           <section className="panel">
-            <div className={`team-reel ${spinning ? 'spinning' : 'landed'}`}>
+            <div className={`team-reel ${spinning ? 'spinning' : 'landed'}`} data-tour="draft-reel">
               <span className="team-reel-label">{spinning ? 'Rolling' : 'You rolled'}</span>
               <span key={`${draft.rollIndex}-${reel.name}`} className="team-reel-name">
                 {reel.name}
@@ -191,7 +195,7 @@ export function DraftScreen() {
                     None of these players can be legally picked — the reroll is free.
                   </div>
                 )}
-                <div className="candidate-grid" key={draft.rollIndex}>
+                <div className="candidate-grid" key={draft.rollIndex} data-tour="draft-candidate">
                   {candidates.map((player, idx) => {
                     const check = runCanPick(run, player.id);
                     const eligible = eligiblePositions(player);
@@ -271,7 +275,7 @@ export function DraftScreen() {
       </div>
 
       <div className="draft-side">
-        <section className="panel">
+        <section className="panel" data-tour="draft-cap">
           <h3>Cap sheet</h3>
           {!noCap && (
             <div className="cap-bar">
@@ -354,7 +358,9 @@ export function DraftScreen() {
           })}
         </section>
 
-        <ChemistryPanel effects={chemistry} delta={chemDelta} />
+        <div data-tour="draft-chemistry">
+          <ChemistryPanel effects={chemistry} delta={chemDelta} />
+        </div>
 
         <section className="panel">
           {!validation.valid && (

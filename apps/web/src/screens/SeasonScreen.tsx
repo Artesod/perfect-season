@@ -22,6 +22,7 @@ import { NaggingModal } from '../components/NaggingModal';
 import { PlayerAvatar } from '../components/PlayerAvatar';
 import { PlayerInfoModal } from '../components/PlayerInfoModal';
 import { money, pct } from '../format';
+import { useTour } from '../onboarding/useTour';
 import { useGameStore } from '../store';
 import './SeasonScreen.css';
 
@@ -38,6 +39,7 @@ export function SeasonScreen() {
 
   const [showFreeAgency, setShowFreeAgency] = useState(false);
   const [infoPlayer, setInfoPlayer] = useState<Player | null>(null);
+  useTour('season');
 
   const season = run.season!;
   const gameNumber = season.results.length + 1;
@@ -86,7 +88,7 @@ export function SeasonScreen() {
       <NaggingModal />
       {infoPlayer && <PlayerInfoModal player={infoPlayer} onClose={() => setInfoPlayer(null)} />}
 
-      <div className="season-topbar panel">
+      <div className="season-topbar panel" data-tour="season-stats">
         <div className="stat-inline">
           <span className="stat-inline-value">
             {run.wins}–{run.losses}
@@ -113,6 +115,7 @@ export function SeasonScreen() {
           <button
             type="button"
             className="btn btn-ghost"
+            data-tour="season-free-agency"
             onClick={() => setShowFreeAgency((v) => !v)}
           >
             {showFreeAgency ? 'Hide free agency' : 'Free agency'}
@@ -183,7 +186,7 @@ export function SeasonScreen() {
       <div className="season-grid">
         <div className="season-main">
           {nextGame && opponent && (
-            <section className="panel next-game">
+            <section className="panel next-game" data-tour="season-matchup">
               <div className="panel-head">
                 <h3>Game {gameNumber}</h3>
                 <span className="muted">{nextGame.isHome ? 'Home' : 'Away'}</span>
@@ -204,7 +207,7 @@ export function SeasonScreen() {
                   <span className="matchup-strength">{effectiveStrength(opponent).toFixed(1)}</span>
                 </div>
               </div>
-              <div className="next-game-actions">
+              <div className="next-game-actions" data-tour="season-play">
                 <button
                   type="button"
                   className="btn btn-primary btn-lg"
@@ -291,7 +294,7 @@ export function SeasonScreen() {
             </div>
           </section>
 
-          <section className="panel">
+          <section className="panel" data-tour="season-events">
             <h3>Event log</h3>
             {recentEvents.length === 0 ? (
               <p className="muted">Quiet so far. It won't stay that way.</p>
@@ -306,7 +309,7 @@ export function SeasonScreen() {
         </div>
 
         <div className="season-side">
-          <section className="panel">
+          <section className="panel" data-tour="season-roster">
             <div className="panel-head">
               <h3>
                 Roster <span className="muted">({run.roster.length})</span>

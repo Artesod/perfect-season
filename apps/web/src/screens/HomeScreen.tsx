@@ -11,6 +11,7 @@ import {
 } from '@perfect-season/sim';
 import { LeaderboardPanel } from '../components/LeaderboardPanel';
 import { ERA_DATASET, NBA_DATASET, poolForMode } from '../nbaData';
+import { useTour } from '../onboarding/useTour';
 import { useGameStore } from '../store';
 import './HomeScreen.css';
 
@@ -51,6 +52,7 @@ const POOL_CHOICES: { mode: PoolChoice; label: string; hint: string }[] = [
 export function HomeScreen() {
   const meta = useGameStore((s) => s.meta);
   const newRun = useGameStore((s) => s.newRun);
+  useTour('home');
 
   const maxUnlocked = unlockedAscension(meta);
   const [seedText, setSeedText] = useState(() => String(randomSeed()));
@@ -73,7 +75,7 @@ export function HomeScreen() {
 
   return (
     <div className="home">
-      <section className="panel home-hero">
+      <section className="panel home-hero" data-tour="home-hero">
         <h2>Go 82–0. Or go home.</h2>
         <p className="muted">
           Draft a 15-man roster under the cap, then survive an entire season. Injuries, slumps,
@@ -105,7 +107,7 @@ export function HomeScreen() {
             <span className="field-hint">Same seed + ascension = same run. Share it.</span>
           </label>
 
-          <div className="field">
+          <div className="field" data-tour="home-pool">
             <span className="field-label">Player pool</span>
             <div className="seg">
               {POOL_CHOICES.map((choice) => {
@@ -130,7 +132,7 @@ export function HomeScreen() {
             </span>
           </div>
 
-          <div className="field">
+          <div className="field" data-tour="home-ascension">
             <span className="field-label">Ascension</span>
             <div className="ascension-picker">
               {Array.from({ length: 6 }, (_, level) => {
@@ -179,7 +181,7 @@ export function HomeScreen() {
             </ul>
           </div>
 
-          <div className="field">
+          <div className="field" data-tour="home-cap-style">
             <span className="field-label">Cap style</span>
             <div className="seg">
               <button
@@ -207,6 +209,7 @@ export function HomeScreen() {
           <button
             type="button"
             className="btn btn-primary btn-lg"
+            data-tour="home-start"
             disabled={!seedValid}
             onClick={() => newRun(seed, ascension, poolForMode(poolMode), casual)}
           >
