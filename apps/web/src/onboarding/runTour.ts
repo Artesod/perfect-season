@@ -42,8 +42,19 @@ export function runTour(id: TourId): boolean {
   }
 
   let silent = false;
+  // User-initiated end (Done, Skip, Esc, close, overlay). Marks seen here, not
+  // only in onDestroyed: driver.js skips onDestroyed when destroyed before the
+  // first step finishes animating.
+  const finish = () => {
+    if (active?.tour === tour) active = null;
+    if (!silent) markSeen(id);
+    tour.destroy();
+  };
   const tour = driver({
     showProgress: true,
+    // A click on the highlighted element (e.g. Start run, Pick) would unmount
+    // the screen mid-tour and end it silently, so the tour would come back.
+    disableActiveInteraction: true,
     popoverClass: 'ps-tour',
     nextBtnText: 'Next',
     prevBtnText: 'Back',
@@ -58,14 +69,15 @@ export function runTour(id: TourId): boolean {
       const row = document.createElement('div');
       row.className = 'ps-tour-skips';
       row.append(
-        skipButton('ps-tour-skip', 'Skip tour', () => tour.destroy()),
+        skipButton('ps-tour-skip', 'Skip tour', finish),
         skipButton('ps-tour-skip-all', 'Skip all tours', () => {
           skipAllTours();
-          tour.destroy();
+          finish();
         }),
       );
       popover.footer.before(row);
     },
+    onDestroyStarted: finish,
     onDestroyed: () => {
       if (active?.tour === tour) active = null;
       if (!silent) markSeen(id);

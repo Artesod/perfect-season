@@ -7,6 +7,8 @@ import { TOURS } from './tours';
 const mock = vi.hoisted(() => ({
   configs: [] as Config[],
   drive: vi.fn(),
+  /** driver.js skips onDestroyed if destroyed before the first step finishes animating. */
+  firesOnDestroyed: true,
 }));
 
 // jsdom has no layout (and no scrollIntoView), so the real driver.js cannot
@@ -16,7 +18,9 @@ vi.mock('driver.js', () => ({
     mock.configs.push(config);
     return {
       drive: mock.drive,
-      destroy: () => (config.onDestroyed as (() => void) | undefined)?.(),
+      destroy: () => {
+        if (mock.firesOnDestroyed) (config.onDestroyed as (() => void) | undefined)?.();
+      },
     };
   },
 }));
@@ -37,6 +41,7 @@ beforeEach(() => {
   stopTour();
   mock.configs.length = 0;
   mock.drive.mockClear();
+  mock.firesOnDestroyed = true;
   useOnboardingStore.setState({ seen: {}, skipAll: false });
 });
 
@@ -93,6 +98,34 @@ describe('runTour', () => {
     expect(wrapper.querySelector('.ps-tour-skip')).toHaveTextContent('Skip tour');
     skipAll.click();
     expect(useOnboardingStore.getState().skipAll).toBe(true);
+    expect(useOnboardingStore.getState().seen.home).toBe(true);
+  });
+  it('keeps highlighted elements unclickable so a click cannot tear the tour down', () => {
+    addTargets('home-hero');
+    runTour('home');
+    expect(lastConfig().disableActiveInteraction).toBe(true);
+  });
+
+  it('marks the tour seen when Skip tour is pressed before the first step settles', () => {
+    mock.firesOnDestroyed = false;
+    addTargets('home-hero');
+    runTour('home');
+    const wrapper = document.createElement('div');
+    const footer = document.createElement('div');
+    wrapper.appendChild(footer);
+    const render = lastConfig().onPopoverRender as unknown as (popover: {
+      footer: HTMLElement;
+    }) => void;
+    render({ footer });
+    wrapper.querySelector<HTMLButtonElement>('.ps-tour-skip')!.click();
+    expect(useOnboardingStore.getState().seen.home).toBe(true);
+  });
+
+  it('marks the tour seen when closed with Esc, the close button, or the overlay', () => {
+    mock.firesOnDestroyed = false;
+    addTargets('home-hero');
+    runTour('home');
+    (lastConfig().onDestroyStarted as unknown as () => void)();
     expect(useOnboardingStore.getState().seen.home).toBe(true);
   });
 });
