@@ -1,5 +1,8 @@
 import { useGameStore } from './store';
 import { AccountBar } from './components/AccountBar';
+import { GlossaryPanel } from './onboarding/GlossaryPanel';
+import { HelpMenu } from './onboarding/HelpMenu';
+import { tourForStatus } from './onboarding/tours';
 import { DraftScreen } from './screens/DraftScreen';
 import { HomeScreen } from './screens/HomeScreen';
 import { RunSummaryScreen } from './screens/RunSummaryScreen';
@@ -50,12 +53,14 @@ function App() {
               )}
             </>
           )}
+          <HelpMenu tourId={tourForStatus(run?.status ?? null)} />
           <AccountBar />
         </div>
       </header>
       <main className="app-main">
         <CurrentScreen />
       </main>
+      <GlossaryPanel />
     </div>
   );
 }

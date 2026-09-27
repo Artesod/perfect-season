@@ -1,0 +1,44 @@
+.help-menu {
+  position: relative;
+}
+
+.help-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.help-menu-list {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 40;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.help-menu-list button {
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: var(--text);
+  font: 14px var(--sans);
+  text-align: left;
+  cursor: pointer;
+}
+
+.help-menu-list button:hover,
+.help-menu-list button:focus-visible {
+  background: var(--accent-2-bg);
+  color: var(--heading);
+  outline: none;
+}
