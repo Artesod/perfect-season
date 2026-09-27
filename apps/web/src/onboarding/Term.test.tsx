@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { GLOSSARY } from './glossary';
@@ -40,7 +40,7 @@ describe('Term', () => {
     await userEvent.hover(screen.getByRole('button', { name: 'OVR' }));
     expect(screen.getByRole('tooltip')).toBeInTheDocument();
     await userEvent.unhover(screen.getByRole('button', { name: 'OVR' }));
-    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());
   });
 
   it('"More in glossary" opens the panel at this term', async () => {
@@ -70,9 +70,33 @@ describe('Term', () => {
     });
     render(<Term id="pwar">pWAR</Term>);
     await userEvent.click(screen.getByRole('button', { name: 'pWAR' }));
-    // right 460 - (320 - 8) = 148 over; left has 200 - 8 = 192 room → shift 148
-    expect(screen.getByRole('tooltip')).toHaveStyle({ left: '-148px' });
+    // Trigger starts at x=200, but a 260px popover must end 8px inside a
+    // 320px screen: 320 - 260 - 8 = 52.
+    expect(screen.getByRole('tooltip')).toHaveStyle({ left: '52px' });
     rect.mockRestore();
     Object.defineProperty(window, 'innerWidth', { configurable: true, value: originalWidth });
+  });
+
+  it('renders the popover on document.body so parent layers cannot cover or clip it', async () => {
+    const { container } = render(<Term id="pwar">pWAR</Term>);
+    await userEvent.click(screen.getByRole('button', { name: 'pWAR' }));
+    const tooltip = screen.getByRole('tooltip');
+    expect(container.contains(tooltip)).toBe(false);
+    expect(tooltip.parentElement).toBe(document.body);
+  });
+
+  it('stays open while the pointer moves from the term onto the popover', async () => {
+    render(<Term id="cohesion">Cohesion</Term>);
+    await userEvent.hover(screen.getByRole('button', { name: 'Cohesion' }));
+    await userEvent.hover(screen.getByRole('tooltip'));
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    expect(screen.getByRole('tooltip')).toBeInTheDocument();
+  });
+
+  it('closes when the page scrolls', async () => {
+    render(<Term id="ovr">OVR</Term>);
+    await userEvent.click(screen.getByRole('button', { name: 'OVR' }));
+    fireEvent.scroll(window);
+    await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());
   });
 });

@@ -34,7 +34,7 @@
   text-shadow: none;
 }
 
-.driver-popover.ps-tour .driver-popover-next-btn {
+.driver-popover.ps-tour .driver-popover-footer .driver-popover-next-btn {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--on-accent);

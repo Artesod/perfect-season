@@ -21,7 +21,7 @@
   margin: 0;
 }
 
-.glossary-search {
+.glossary-panel .glossary-search {
   width: 100%;
   flex: none;
   font-family: var(--sans);

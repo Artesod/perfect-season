@@ -24,16 +24,19 @@ export const TOURS: Record<TourId, TourStep[]> = {
     {
       target: 'home-ascension',
       title: 'Ascension = difficulty',
+      side: 'right',
       body: 'Start at 0. Winning a run unlocks the next level, with tougher CPU teams, more events, and a smaller cap.',
     },
     {
       target: 'home-cap-style',
       title: 'Standard or Casual',
+      side: 'right',
       body: 'Standard is the real challenge. Casual removes the cap and gives extra lives, but earns no badges or leaderboard spots.',
     },
     {
       target: 'home-start',
       title: 'Start your run',
+      side: 'right',
       body: 'Ready? Start the run to begin the draft. Tap the ? button in the header any time to replay this tour or open the glossary.',
     },
   ],
