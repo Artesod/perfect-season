@@ -19,6 +19,8 @@
     "fetch:nba-eras": "tsx scripts/fetch-nba-data.ts eras"
   },
   "devDependencies": {
+    "@emnapi/core": "^1.11.3",
+    "@emnapi/runtime": "^1.11.3",
     "@types/node": "^26.1.0",
     "cheerio": "^1.2.0",
     "oxlint": "^1.71.0",

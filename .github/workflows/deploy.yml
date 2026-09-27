@@ -10,6 +10,8 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # Delete stale Pages artifacts before re-upload (re-runs keep the same run_id).
+  actions: write
 
 concurrency:
   group: pages
@@ -40,6 +42,29 @@ jobs:
           VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: npm run build --workspace apps/web -- --base "/${{ github.event.repository.name }}/"
+
+      # Re-running this job uploads another artifact named "github-pages" for the
+      # same workflow run; deploy-pages then fails with "Artifact count is 2".
+      - name: Remove stale Pages artifact from prior attempts
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const name = 'github-pages';
+            const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+            });
+            for (const artifact of artifacts) {
+              if (artifact.name === name) {
+                core.info(`Deleting stale artifact ${artifact.id}`);
+                await github.rest.actions.deleteArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: artifact.id,
+                });
+              }
+            }
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
