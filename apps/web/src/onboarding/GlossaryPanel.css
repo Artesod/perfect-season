@@ -1,0 +1,71 @@
+/* Above other modals so "More in glossary" works from inside player info. */
+.glossary-backdrop {
+  z-index: 70;
+}
+
+.glossary-panel {
+  max-width: 560px;
+  max-height: min(80vh, 720px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.glossary-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.glossary-head h3 {
+  margin: 0;
+}
+
+.glossary-search {
+  width: 100%;
+  flex: none;
+  font-family: var(--sans);
+}
+
+.glossary-list {
+  margin: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.glossary-item {
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.glossary-item.focused {
+  background: var(--accent-2-bg);
+  outline: 1px solid var(--accent-2-dim);
+}
+
+.glossary-item dt {
+  font-weight: 600;
+  color: var(--heading);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.glossary-group {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+}
+
+.glossary-item dd {
+  margin: 2px 0 0;
+  font-size: 14px;
+}
+
+.glossary-long {
+  color: var(--muted);
+}

@@ -227,7 +227,8 @@ p {
   color: var(--muted);
 }
 
-input[type='text'] {
+input[type='text'],
+input[type='search'] {
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -238,7 +239,8 @@ input[type='text'] {
   min-width: 0;
 }
 
-input[type='text']:focus {
+input[type='text']:focus,
+input[type='search']:focus {
   outline: none;
   border-color: var(--accent);
 }
