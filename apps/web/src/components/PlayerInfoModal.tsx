@@ -1,10 +1,12 @@
+import type { ReactNode } from 'react';
 import type { Player } from '@perfect-season/shared';
 import { money } from '../format';
+import { Term } from '../onboarding/Term';
 import { PlayerAvatar } from './PlayerAvatar';
 import { TraitTags } from './TraitTags';
 import './PlayerInfoModal.css';
 
-function StatTile({ label, value }: { label: string; value: string }) {
+function StatTile({ label, value }: { label: ReactNode; value: string }) {
   return (
     <div className="stat-tile">
       <span className="stat-tile-value">{value}</span>
@@ -32,7 +34,8 @@ export function PlayerInfoModal({ player, onClose }: { player: Player; onClose: 
           <div className="player-info-id">
             <h3>{player.name}</h3>
             <span className="muted">
-              {player.position} · {money(player.salary)} · {player.pWAR.toFixed(1)} pWAR
+              {player.position} · {money(player.salary)} · {player.pWAR.toFixed(1)}{' '}
+              <Term id="pwar">pWAR</Term>
             </span>
             <TraitTags traits={player.traits} />
           </div>
@@ -44,9 +47,9 @@ export function PlayerInfoModal({ player, onClose }: { player: Player; onClose: 
         <div className="player-info-section">
           <h4>Ratings</h4>
           <div className="stat-grid">
-            <StatTile label="Overall" value={String(player.overall)} />
-            <StatTile label="Offense" value={String(player.offense)} />
-            <StatTile label="Defense" value={String(player.defense)} />
+            <StatTile label={<Term id="ovr">Overall</Term>} value={String(player.overall)} />
+            <StatTile label={<Term id="offense">Offense</Term>} value={String(player.offense)} />
+            <StatTile label={<Term id="defense">Defense</Term>} value={String(player.defense)} />
           </div>
         </div>
 
@@ -54,15 +57,15 @@ export function PlayerInfoModal({ player, onClose }: { player: Player; onClose: 
           <h4>{stats ? `${stats.season} per game` : 'Per-game stats'}</h4>
           {stats ? (
             <div className="stat-grid">
-              <StatTile label="PPG" value={stats.points.toFixed(1)} />
-              <StatTile label="RPG" value={stats.rebounds.toFixed(1)} />
-              <StatTile label="APG" value={stats.assists.toFixed(1)} />
-              <StatTile label="SPG" value={stats.steals.toFixed(1)} />
-              <StatTile label="BPG" value={stats.blocks.toFixed(1)} />
-              <StatTile label="MPG" value={stats.minutes.toFixed(1)} />
-              <StatTile label="FG%" value={pctText(stats.fgPct)} />
-              <StatTile label="3P%" value={pctText(stats.threePct)} />
-              <StatTile label="GP" value={String(stats.gamesPlayed)} />
+              <StatTile label={<Term id="ppg">PPG</Term>} value={stats.points.toFixed(1)} />
+              <StatTile label={<Term id="rpg">RPG</Term>} value={stats.rebounds.toFixed(1)} />
+              <StatTile label={<Term id="apg">APG</Term>} value={stats.assists.toFixed(1)} />
+              <StatTile label={<Term id="spg">SPG</Term>} value={stats.steals.toFixed(1)} />
+              <StatTile label={<Term id="bpg">BPG</Term>} value={stats.blocks.toFixed(1)} />
+              <StatTile label={<Term id="mpg">MPG</Term>} value={stats.minutes.toFixed(1)} />
+              <StatTile label={<Term id="fg-pct">FG%</Term>} value={pctText(stats.fgPct)} />
+              <StatTile label={<Term id="three-pct">3P%</Term>} value={pctText(stats.threePct)} />
+              <StatTile label={<Term id="gp">GP</Term>} value={String(stats.gamesPlayed)} />
             </div>
           ) : (
             <p className="muted player-info-none">

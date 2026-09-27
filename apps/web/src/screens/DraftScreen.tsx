@@ -24,6 +24,7 @@ import { PlayerAvatar } from '../components/PlayerAvatar';
 import { PlayerInfoModal } from '../components/PlayerInfoModal';
 import { TraitTags } from '../components/TraitTags';
 import { money } from '../format';
+import { Term } from '../onboarding/Term';
 import { useTour } from '../onboarding/useTour';
 import { useGameStore } from '../store';
 import './DraftScreen.css';
@@ -217,7 +218,8 @@ export function DraftScreen() {
                               >
                                 {eligible.join('/')}
                               </span>{' '}
-                              · {money(player.salary)} · {player.pWAR.toFixed(1)} pWAR
+                              · {money(player.salary)} · {player.pWAR.toFixed(1)}{' '}
+                              <Term id="pwar">pWAR</Term>
                             </span>
                           </div>
                           <span className="candidate-ovr rating">{player.overall}</span>
@@ -287,7 +289,9 @@ export function DraftScreen() {
           )}
           <dl className="kv">
             <div>
-              <dt>Effective cap</dt>
+              <dt>
+                <Term id="effective-cap">Effective cap</Term>
+              </dt>
               <dd>
                 {noCap ? (
                   <>
@@ -302,18 +306,24 @@ export function DraftScreen() {
               </dd>
             </div>
             <div>
-              <dt>Committed</dt>
+              <dt>
+                <Term id="committed">Committed</Term>
+              </dt>
               <dd>{money(committed)}</dd>
             </div>
             <div>
-              <dt>Space</dt>
+              <dt>
+                <Term id="cap-space">Space</Term>
+              </dt>
               <dd className={noCap || space >= 0 ? 'good' : 'bad'}>
                 {noCap ? 'Unlimited' : money(space)}
               </dd>
             </div>
             {!noCap && slotsLeft > 0 && (
               <div>
-                <dt>Reserve for {slotsLeft} open slots</dt>
+                <dt>
+                  <Term id="reserve">Reserve</Term> for {slotsLeft} open slots
+                </dt>
                 <dd>{money(reserveNeeded + MIN_SALARY)}</dd>
               </div>
             )}

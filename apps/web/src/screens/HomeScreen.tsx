@@ -11,6 +11,7 @@ import {
 } from '@perfect-season/sim';
 import { LeaderboardPanel } from '../components/LeaderboardPanel';
 import { ERA_DATASET, NBA_DATASET, poolForMode } from '../nbaData';
+import { Term } from '../onboarding/Term';
 import { useTour } from '../onboarding/useTour';
 import { useGameStore } from '../store';
 import './HomeScreen.css';
@@ -133,7 +134,9 @@ export function HomeScreen() {
           </div>
 
           <div className="field" data-tour="home-ascension">
-            <span className="field-label">Ascension</span>
+            <span className="field-label">
+              <Term id="ascension">Ascension</Term>
+            </span>
             <div className="ascension-picker">
               {Array.from({ length: 6 }, (_, level) => {
                 const locked = level > maxUnlocked;
@@ -163,7 +166,7 @@ export function HomeScreen() {
               </li>
               <li>Event chance: ×{mods.eventChanceMultiplier}</li>
               <li>
-                Salary cap:{' '}
+                <Term id="salary-cap">Salary cap</Term>:{' '}
                 {casual
                   ? 'none (casual)'
                   : mods.capReduction > 0
@@ -171,18 +174,21 @@ export function HomeScreen() {
                     : 'full'}
               </li>
               <li>
+                <Term id="lives">Lives</Term>
                 {(() => {
                   const lives = runLives(ascension, casual);
                   return lives === 1
-                    ? 'Lives: 1 — one loss ends the run'
-                    : `Lives: ${lives}${casual ? ' (casual)' : ''} — survives up to ${lives - 1} losses`;
+                    ? ': 1 — one loss ends the run'
+                    : `: ${lives}${casual ? ' (casual)' : ''} — survives up to ${lives - 1} losses`;
                 })()}
               </li>
             </ul>
           </div>
 
           <div className="field" data-tour="home-cap-style">
-            <span className="field-label">Cap style</span>
+            <span className="field-label">
+              Cap style (<Term id="casual">what is Casual?</Term>)
+            </span>
             <div className="seg">
               <button
                 type="button"
@@ -234,7 +240,9 @@ export function HomeScreen() {
             </div>
           </div>
 
-          <h3>Badges</h3>
+          <h3>
+            <Term id="badges">Badges</Term>
+          </h3>
           <ul className="badge-list">
             {BADGES.map((badge) => {
               const earned = meta.badges.includes(badge.id);

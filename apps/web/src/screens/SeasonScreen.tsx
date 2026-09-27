@@ -22,6 +22,7 @@ import { NaggingModal } from '../components/NaggingModal';
 import { PlayerAvatar } from '../components/PlayerAvatar';
 import { PlayerInfoModal } from '../components/PlayerInfoModal';
 import { money, pct } from '../format';
+import { Term } from '../onboarding/Term';
 import { useTour } from '../onboarding/useTour';
 import { useGameStore } from '../store';
 import './SeasonScreen.css';
@@ -103,13 +104,17 @@ export function SeasonScreen() {
         </div>
         <div className="stat-inline">
           <span className="stat-inline-value">{run.livesRemaining}</span>
-          <span className="stat-inline-label">{run.livesRemaining === 1 ? 'Life' : 'Lives'}</span>
+          <span className="stat-inline-label">
+            <Term id="lives">{run.livesRemaining === 1 ? 'Life' : 'Lives'}</Term>
+          </span>
         </div>
         <div className="stat-inline">
           <span className="stat-inline-value">
             {run.casual ? 'No cap' : money(capSpace(run.roster, effectiveDeadCap))}
           </span>
-          <span className="stat-inline-label">Cap space</span>
+          <span className="stat-inline-label">
+            <Term id="cap-space">Cap space</Term>
+          </span>
         </div>
         <div className="season-topbar-actions">
           <button
@@ -128,8 +133,8 @@ export function SeasonScreen() {
           <div className="panel-head">
             <h3>Free agents</h3>
             <span className="muted">
-              Pool refreshes in {gamesUntilRefresh} game{gamesUntilRefresh === 1 ? '' : 's'} · dead
-              cap {money(season.deadCap)}
+              Pool refreshes in {gamesUntilRefresh} game{gamesUntilRefresh === 1 ? '' : 's'} ·{' '}
+              <Term id="dead-cap">dead cap</Term> {money(season.deadCap)}
             </span>
           </div>
           <table className="table">
@@ -137,7 +142,9 @@ export function SeasonScreen() {
               <tr>
                 <th>Player</th>
                 <th>Pos</th>
-                <th className="num">OVR</th>
+                <th className="num">
+                  <Term id="ovr">OVR</Term>
+                </th>
                 <th className="num">Salary</th>
                 <th></th>
               </tr>
@@ -200,7 +207,9 @@ export function SeasonScreen() {
                 </div>
                 <div className="matchup-vs">
                   <span className="matchup-prob good">{pct(winProb)}</span>
-                  <span className="muted">win chance</span>
+                  <span className="muted">
+                    <Term id="win-chance">win chance</Term>
+                  </span>
                 </div>
                 <div className="matchup-team">
                   <span className="matchup-name">{opponent.name}</span>
@@ -319,7 +328,9 @@ export function SeasonScreen() {
               <thead>
                 <tr>
                   <th>Player</th>
-                  <th className="num">OVR</th>
+                  <th className="num">
+                  <Term id="ovr">OVR</Term>
+                </th>
                   <th>Status</th>
                   <th></th>
                 </tr>
@@ -355,7 +366,12 @@ export function SeasonScreen() {
           />
 
           <section className="panel">
-            <h3>Power rankings</h3>
+            <h3>
+              Power rankings{' '}
+              <span className="muted small">
+                by <Term id="strength">strength</Term>
+              </span>
+            </h3>
             <ol className="rankings">
               {rankings.map(({ team, strength }, i) => (
                 <li

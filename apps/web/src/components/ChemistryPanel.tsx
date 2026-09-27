@@ -1,4 +1,5 @@
 import type { ChemistryEffect } from '@perfect-season/shared';
+import { Term } from '../onboarding/Term';
 
 export function ChemistryPanel({
   effects,
@@ -12,7 +13,9 @@ export function ChemistryPanel({
   return (
     <section className="panel">
       <div className="panel-head">
-        <h3>Chemistry</h3>
+        <h3>
+          <Term id="chemistry">Chemistry</Term>
+        </h3>
         <span className={`chem-total ${delta > 0 ? 'good' : delta < 0 ? 'bad' : 'muted'}`}>
           {delta > 0 ? '+' : ''}
           {delta.toFixed(1)}
@@ -20,7 +23,7 @@ export function ChemistryPanel({
       </div>
       {cohesion !== undefined && (
         <p className="muted chem-cohesion">
-          Cohesion {Math.round(cohesion * 100)}% — friction fades as the team gels
+          <Term id="cohesion">Cohesion</Term> {Math.round(cohesion * 100)}% — friction fades as the team gels
         </p>
       )}
       {effects.length === 0 ? (
@@ -36,10 +39,16 @@ export function ChemistryPanel({
               <span>
                 {effect.label}
                 {effect.kind === 'friction' && effect.strengthDelta < 0 && (
-                  <span className="muted"> · resolving with wins</span>
+                  <span className="muted">
+                    {' '}
+                    · <Term id="friction">resolving with wins</Term>
+                  </span>
                 )}
                 {effect.kind === 'structural' && (
-                  <span className="muted"> · fix via roster moves</span>
+                  <span className="muted">
+                    {' '}
+                    · <Term id="structural">fix via roster moves</Term>
+                  </span>
                 )}
               </span>
             </li>
