@@ -48,3 +48,22 @@ describe('onboarding store', () => {
     spy.mockRestore();
   });
 });
+
+describe('glossary panel state', () => {
+  beforeEach(() => {
+    useOnboardingStore.setState({ glossaryOpen: false, glossaryFocus: null });
+  });
+
+  it('opens at a term and closes again', () => {
+    useOnboardingStore.getState().openGlossary('pwar');
+    expect(useOnboardingStore.getState()).toMatchObject({ glossaryOpen: true, glossaryFocus: 'pwar' });
+    useOnboardingStore.getState().closeGlossary();
+    expect(useOnboardingStore.getState()).toMatchObject({ glossaryOpen: false, glossaryFocus: null });
+  });
+
+  it('does not persist panel state', () => {
+    useOnboardingStore.getState().openGlossary();
+    const raw = JSON.parse(localStorage.getItem(ONBOARDING_STORAGE_KEY) ?? '{"state":{}}');
+    expect(raw.state).not.toHaveProperty('glossaryOpen');
+  });
+});

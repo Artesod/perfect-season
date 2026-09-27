@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist, type StateStorage } from 'zustand/middleware';
+import type { TermId } from './glossary';
 
 export type TourId = 'home' | 'draft' | 'season';
 
@@ -37,9 +38,14 @@ export const safeStorage: StateStorage = {
 interface OnboardingStore {
   seen: Partial<Record<TourId, boolean>>;
   skipAll: boolean;
+  /** Glossary panel UI state — session only, never persisted. */
+  glossaryOpen: boolean;
+  glossaryFocus: TermId | null;
   markSeen: (id: TourId) => void;
   skipAllTours: () => void;
   resetTours: () => void;
+  openGlossary: (focus?: TermId) => void;
+  closeGlossary: () => void;
 }
 
 /**
@@ -54,6 +60,10 @@ export const useOnboardingStore = create<OnboardingStore>()(
       markSeen: (id) => set((s) => ({ seen: { ...s.seen, [id]: true } })),
       skipAllTours: () => set({ skipAll: true }),
       resetTours: () => set({ seen: {}, skipAll: false }),
+      glossaryOpen: false,
+      glossaryFocus: null,
+      openGlossary: (focus) => set({ glossaryOpen: true, glossaryFocus: focus ?? null }),
+      closeGlossary: () => set({ glossaryOpen: false, glossaryFocus: null }),
     }),
     {
       name: ONBOARDING_STORAGE_KEY,
