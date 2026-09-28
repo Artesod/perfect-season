@@ -21,6 +21,19 @@ function finishedRun(overrides: Partial<RunState> = {}): RunState {
 }
 
 describe('recordRun', () => {
+  it('gives unranked runs career credit but no badges or unlocks', () => {
+    const before = emptyMetaProgress();
+    const meta = recordRun(
+      before,
+      finishedRun({ status: 'won', wins: 82, losses: 0, ascension: 2, unranked: true }),
+    );
+    expect(meta.totalRuns).toBe(1);
+    expect(meta.runsWon).toBe(1);
+    expect(meta.bestWins).toBe(82);
+    expect(meta.badges).toEqual([]);
+    expect(meta.highestAscensionBeaten).toBe(before.highestAscensionBeaten);
+  });
+
   it('rejects unfinished runs', () => {
     expect(() => recordRun(emptyMetaProgress(), finishedRun({ status: 'in-season' }))).toThrow();
   });

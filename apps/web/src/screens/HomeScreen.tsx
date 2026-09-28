@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import type { PoolMode } from '@perfect-season/shared';
 import {
   BADGES,
   CASUAL_CPU_REDUCTION,
@@ -9,9 +8,12 @@ import {
   runLives,
   unlockedAscension,
 } from '@perfect-season/sim';
+import { ChallengeBanner } from '../components/ChallengeBanner';
 import { LeaderboardPanel } from '../components/LeaderboardPanel';
 import { ERA_DATASET, NBA_DATASET, poolForMode } from '../nbaData';
 import { Term } from '../onboarding/Term';
+import type { PoolChoice } from '../share/challengeLink';
+import { prefillFromChallenge } from '../share/prefill';
 import { useTour } from '../onboarding/useTour';
 import { useGameStore } from '../store';
 import './HomeScreen.css';
@@ -19,8 +21,6 @@ import './HomeScreen.css';
 function randomSeed(): number {
   return Math.floor(Math.random() * 1_000_000);
 }
-
-type PoolChoice = PoolMode | 'procedural';
 
 const POOL_CHOICES: { mode: PoolChoice; label: string; hint: string }[] = [
   {
@@ -53,13 +53,28 @@ const POOL_CHOICES: { mode: PoolChoice; label: string; hint: string }[] = [
 export function HomeScreen() {
   const meta = useGameStore((s) => s.meta);
   const newRun = useGameStore((s) => s.newRun);
-  useTour('home');
 
   const maxUnlocked = unlockedAscension(meta);
-  const [seedText, setSeedText] = useState(() => String(randomSeed()));
-  const [ascension, setAscension] = useState(0);
-  const [poolMode, setPoolMode] = useState<PoolChoice>(NBA_DATASET ? 'current' : 'procedural');
-  const [casual, setCasual] = useState(false);
+  const challenge = useGameStore((s) => s.challenge);
+  // A pending challenge takes the screen first; the tour waits until it's dismissed
+  useTour('home', !challenge);
+  const [initial] = useState(() =>
+    prefillFromChallenge(
+      challenge,
+      {
+        seedText: String(randomSeed()),
+        ascension: 0,
+        poolMode: NBA_DATASET ? 'current' : 'procedural',
+        casual: false,
+      },
+      maxUnlocked,
+      (mode) => mode === 'procedural' || poolForMode(mode) !== null,
+    ),
+  );
+  const [seedText, setSeedText] = useState(initial.seedText);
+  const [ascension, setAscension] = useState(initial.ascension);
+  const [poolMode, setPoolMode] = useState<PoolChoice>(initial.poolMode);
+  const [casual, setCasual] = useState(initial.casual);
 
   const seed = Number.parseInt(seedText, 10);
   const seedValid = Number.isFinite(seed);
@@ -83,6 +98,8 @@ export function HomeScreen() {
           and locker-room drama stand in your way — run out of lives and the run is over.
         </p>
       </section>
+
+      <ChallengeBanner />
 
       <div className="home-grid">
         <section className="panel">

@@ -1,0 +1,32 @@
+.challenge-banner {
+  border-color: var(--accent-2);
+  background: linear-gradient(180deg, var(--accent-2-bg), var(--surface));
+}
+
+.challenge-banner h3 {
+  margin: 4px 0;
+  font-size: 28px;
+}
+
+.challenge-kicker {
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+
+.challenge-note {
+  margin: 6px 0 0;
+  color: var(--warn);
+}
+
+.challenge-note.bad {
+  color: var(--bad);
+}
+
+.challenge-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}

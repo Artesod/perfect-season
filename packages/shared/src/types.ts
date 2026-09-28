@@ -380,6 +380,13 @@ export interface SeasonState {
   cohesion: number;
 }
 
+/** The sharer's result a challenge run is measured against */
+export interface ChallengeTarget {
+  wins: number;
+  losses: number;
+  result: 'won' | 'lost';
+}
+
 export interface RunState {
   seed: number;
   /** Difficulty level; 0 is the base game */
@@ -403,4 +410,12 @@ export interface RunState {
   wins: number;
   losses: number;
   status: 'drafting' | 'in-season' | 'playoffs' | 'won' | 'lost';
+  /** Set when the run was started from a challenge link */
+  challenge?: ChallengeTarget;
+  /**
+   * Unranked: a challenge played above the player's unlocked ascension.
+   * Like casual, it counts in career stats but earns no badges, unlocks no
+   * ascensions, and never posts to the leaderboard.
+   */
+  unranked?: boolean;
 }

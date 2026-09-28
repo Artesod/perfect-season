@@ -1,4 +1,11 @@
-import type { Player, PlayerPool, Position, RunState, SeasonEvent } from '@perfect-season/shared';
+import type {
+  ChallengeTarget,
+  Player,
+  PlayerPool,
+  Position,
+  RunState,
+  SeasonEvent,
+} from '@perfect-season/shared';
 import {
   createRun,
   playNextGame,
@@ -11,12 +18,14 @@ import {
   runWaivePlayer,
   startSeason,
   emptyMetaProgress,
+  unlockedAscension,
   type MetaProgress,
 } from '@perfect-season/sim';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { EVENT_CARDS } from './cards';
 import { syncFinishedRun } from './cloud';
+import type { ChallengeParams } from './share/challengeLink';
 
 interface GameStore {
   run: RunState | null;
@@ -27,8 +36,18 @@ interface GameStore {
   newBadges: string[];
   /** Events that fired during the last play action (single game or sim burst) */
   lastGameEvents: SeasonEvent[];
+  /** Challenge read from a shared link, waiting on the Home screen; never persisted */
+  challenge: ChallengeParams | null;
 
-  newRun: (seed: number, ascension: number, pool: PlayerPool | null, casual?: boolean) => void;
+  newRun: (
+    seed: number,
+    ascension: number,
+    pool: PlayerPool | null,
+    casual?: boolean,
+    options?: { challenge?: ChallengeTarget },
+  ) => void;
+  setChallenge: (challenge: ChallengeParams) => void;
+  dismissChallenge: () => void;
   exitRun: () => void;
   /** Draft a player; asPosition picks which role a dual-position player fills */
   pickPlayer: (playerId: string, asPosition?: Position) => void;
@@ -48,11 +67,16 @@ interface GameStore {
  * exact datasets later. Current-only runs keep the bare date (the pre-era
  * format); era modes prefix the mode.
  */
-function poolVersion(pool: PlayerPool | null): string | null {
+export function poolVersion(pool: PlayerPool | null): string | null {
   if (!pool) return null;
   if (pool.mode === 'current') return pool.nba?.fetchedAt ?? null;
   const dates = [pool.nba?.fetchedAt, pool.eras?.fetchedAt].filter(Boolean).join('+');
   return `${pool.mode}@${dates}`;
+}
+
+/** Casual and unranked runs are leaderboard-ineligible: never posted */
+export function shouldPostRun(run: RunState): boolean {
+  return !run.casual && !run.unranked;
 }
 
 /**
@@ -67,8 +91,7 @@ function finishRun(
 ): { meta: MetaProgress; newBadges: string[] } {
   const next = recordRun(meta, run);
   const before = new Set(meta.badges);
-  // Casual (no-cap) runs are leaderboard-ineligible: never posted.
-  if (!run.casual) void syncFinishedRun(run, next, poolVersion(pool));
+  if (shouldPostRun(run)) void syncFinishedRun(run, next, poolVersion(pool));
   return { meta: next, newBadges: next.badges.filter((id) => !before.has(id)) };
 }
 
@@ -80,14 +103,23 @@ export const useGameStore = create<GameStore>()(
       meta: emptyMetaProgress(),
       newBadges: [],
       lastGameEvents: [],
+      challenge: null,
 
-      newRun: (seed, ascension, pool, casual = false) =>
-        set({
-          run: createRun(seed, ascension, pool ?? undefined, casual),
-          runPool: pool,
-          newBadges: [],
-          lastGameEvents: [],
-        }),
+      newRun: (seed, ascension, pool, casual = false, options = {}) => {
+        const created = createRun(seed, ascension, pool ?? undefined, casual);
+        const run: RunState = options.challenge
+          ? {
+              ...created,
+              challenge: options.challenge,
+              unranked: ascension > unlockedAscension(get().meta),
+            }
+          : created;
+        set({ run, runPool: pool, newBadges: [], lastGameEvents: [], challenge: null });
+      },
+
+      setChallenge: (challenge) => set({ challenge }),
+
+      dismissChallenge: () => set({ challenge: null }),
 
       exitRun: () => set({ run: null, runPool: null, lastGameEvents: [] }),
 

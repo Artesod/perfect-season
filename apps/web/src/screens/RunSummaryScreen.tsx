@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { BADGES, USER_TEAM_ID } from '@perfect-season/sim';
+import { SharePanel } from '../components/SharePanel';
+import { compareResults, outcomeLabel } from '../share/compare';
 import { useGameStore } from '../store';
 import './RunSummaryScreen.css';
 
@@ -7,7 +9,7 @@ export function RunSummaryScreen() {
   const run = useGameStore((s) => s.run)!;
   const newBadges = useGameStore((s) => s.newBadges);
   const exitRun = useGameStore((s) => s.exitRun);
-  const [copied, setCopied] = useState(false);
+  const [sharing, setSharing] = useState(false);
 
   const won = run.status === 'won';
   const season = run.season!;
@@ -22,18 +24,6 @@ export function RunSummaryScreen() {
       const userProb = r.homeTeamId === USER_TEAM_ID ? r.homeWinProbability : 1 - r.homeWinProbability;
       return best === null ? userProb : Math.min(best, userProb);
     }, null);
-
-  const shareText = `Perfect Season — seed ${run.seed}, ascension ${run.ascension}${run.casual ? ', casual' : ''}`;
-
-  const copyShare = async () => {
-    try {
-      await navigator.clipboard.writeText(shareText);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      window.prompt('Copy your run seed:', shareText);
-    }
-  };
 
   return (
     <div className="summary">
@@ -52,6 +42,18 @@ export function RunSummaryScreen() {
           Ascension {run.ascension} · seed {run.seed}
           {run.casual && ' · casual (no cap)'}
         </p>
+        {run.challenge && (
+          <p className="summary-challenge">
+            You {run.wins}–{run.losses} vs challenger {run.challenge.wins}–{run.challenge.losses} —{' '}
+            {outcomeLabel(
+              compareResults(
+                { wins: run.wins, losses: run.losses, result: won ? 'won' : 'lost' },
+                run.challenge,
+              ),
+            )}
+            {run.unranked && ' · unranked'}
+          </p>
+        )}
       </section>
 
       <div className="summary-grid">
@@ -107,13 +109,14 @@ export function RunSummaryScreen() {
       </div>
 
       <div className="summary-actions">
-        <button type="button" className="btn" onClick={copyShare}>
-          {copied ? 'Copied!' : 'Copy seed to share'}
+        <button type="button" className="btn" onClick={() => setSharing(true)}>
+          Share run
         </button>
         <button type="button" className="btn btn-primary btn-lg" onClick={exitRun}>
           New run
         </button>
       </div>
+      {sharing && <SharePanel onClose={() => setSharing(false)} />}
     </div>
   );
 }

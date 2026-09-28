@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="pink" cx="12%" cy="-10%" r="70%">
+      <stop offset="0" stop-color="#ff2e97" stop-opacity="0.28" />
+      <stop offset="1" stop-color="#ff2e97" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="cyan" cx="88%" cy="-10%" r="70%">
+      <stop offset="0" stop-color="#29d8f2" stop-opacity="0.22" />
+      <stop offset="1" stop-color="#29d8f2" stop-opacity="0" />
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+  </defs>
+  <rect width="1200" height="630" fill="#08070d" />
+  <rect width="1200" height="630" fill="url(#pink)" />
+  <rect width="1200" height="630" fill="url(#cyan)" />
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#ff2e97" stroke-width="4" />
+  <g font-family="'Segoe UI Semibold', 'Arial Narrow', system-ui, sans-serif" text-anchor="middle">
+    <text x="600" y="290" font-size="120" font-weight="700" fill="#f4f2fc">Perfect <tspan fill="#ff2e97" filter="url(#glow)">Season</tspan></text>
+    <text x="600" y="380" font-size="44" fill="#29d8f2" filter="url(#glow)">Go 82–0. Or go home.</text>
+    <text x="600" y="460" font-size="30" fill="#c9c6da">Draft a roster · survive the season · challenge your friends</text>
+  </g>
+</svg>
