@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-25",
+  "fetchedAt": "2026-09-28",
   "source": "https://www.2kratings.com",
   "teams": [
     {
@@ -360,48 +360,48 @@
           }
         },
         {
-          "name": "Buddy Hield",
-          "position": "SG",
+          "name": "Dorian Finney-Smith",
+          "position": "PF",
           "altPositions": [
             "SF"
           ],
           "overall": 74,
-          "threePoint": 88,
-          "dunk": 65,
+          "threePoint": 73,
+          "dunk": 84,
           "attributes": {
-            "midRange": 50,
-            "closeShot": 97,
-            "layup": 78,
-            "standingDunk": 25,
-            "vertical": 78,
-            "speed": 75,
-            "ballHandle": 79,
-            "passAccuracy": 70,
-            "passVision": 44,
-            "passIq": 70,
-            "drawFoul": 59,
-            "postControl": 48,
-            "interiorDefense": 48,
-            "perimeterDefense": 69,
-            "steal": 70,
-            "block": 51,
-            "offensiveRebound": 43,
-            "defensiveRebound": 53,
-            "durability": 83,
-            "intangibles": 70
+            "midRange": 71,
+            "closeShot": 80,
+            "layup": 84,
+            "standingDunk": 40,
+            "vertical": 83,
+            "speed": 67,
+            "ballHandle": 60,
+            "passAccuracy": 65,
+            "passVision": 32,
+            "passIq": 68,
+            "drawFoul": 58,
+            "postControl": 54,
+            "interiorDefense": 72,
+            "perimeterDefense": 83,
+            "steal": 41,
+            "block": 47,
+            "offensiveRebound": 56,
+            "defensiveRebound": 51,
+            "durability": 70,
+            "intangibles": 60
           },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Buddy-Hield-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dorian-Finney-Smith-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 51,
-            "minutes": 16.1,
-            "points": 7.6,
-            "rebounds": 2.3,
-            "assists": 1.4,
-            "steals": 0.8,
+            "gamesPlayed": 37,
+            "minutes": 16.8,
+            "points": 3.3,
+            "rebounds": 2.5,
+            "assists": 1,
+            "steals": 0.4,
             "blocks": 0.2,
-            "fgPct": 0.437,
-            "threePct": 0.349
+            "fgPct": 0.333,
+            "threePct": 0.27
           }
         },
         {
@@ -570,48 +570,6 @@
             "blocks": 0.5,
             "fgPct": 0.452,
             "threePct": 0.308
-          }
-        },
-        {
-          "name": "Ryan Nembhard",
-          "position": "PG",
-          "overall": 72,
-          "threePoint": 80,
-          "dunk": 40,
-          "attributes": {
-            "midRange": 79,
-            "closeShot": 82,
-            "layup": 78,
-            "standingDunk": 25,
-            "vertical": 68,
-            "speed": 80,
-            "ballHandle": 86,
-            "passAccuracy": 89,
-            "passVision": 81,
-            "passIq": 89,
-            "drawFoul": 35,
-            "postControl": 30,
-            "interiorDefense": 31,
-            "perimeterDefense": 66,
-            "steal": 36,
-            "block": 30,
-            "offensiveRebound": 30,
-            "defensiveRebound": 50,
-            "durability": 87,
-            "intangibles": 25
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Ryan-Nembhard-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 60,
-            "minutes": 19.5,
-            "points": 6.6,
-            "rebounds": 2.2,
-            "assists": 5.3,
-            "steals": 0.4,
-            "blocks": 0,
-            "fgPct": 0.415,
-            "threePct": 0.356
           }
         },
         {
@@ -2688,51 +2646,6 @@
           }
         },
         {
-          "name": "Dorian Finney-Smith",
-          "position": "PF",
-          "altPositions": [
-            "SF"
-          ],
-          "overall": 74,
-          "threePoint": 73,
-          "dunk": 84,
-          "attributes": {
-            "midRange": 71,
-            "closeShot": 80,
-            "layup": 84,
-            "standingDunk": 40,
-            "vertical": 83,
-            "speed": 67,
-            "ballHandle": 60,
-            "passAccuracy": 65,
-            "passVision": 32,
-            "passIq": 68,
-            "drawFoul": 58,
-            "postControl": 54,
-            "interiorDefense": 72,
-            "perimeterDefense": 83,
-            "steal": 41,
-            "block": 47,
-            "offensiveRebound": 56,
-            "defensiveRebound": 51,
-            "durability": 70,
-            "intangibles": 60
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dorian-Finney-Smith-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 37,
-            "minutes": 16.8,
-            "points": 3.3,
-            "rebounds": 2.5,
-            "assists": 1,
-            "steals": 0.4,
-            "blocks": 0.2,
-            "fgPct": 0.333,
-            "threePct": 0.27
-          }
-        },
-        {
           "name": "Sion James",
           "position": "SG",
           "altPositions": [
@@ -2775,6 +2688,51 @@
             "blocks": 0.2,
             "fgPct": 0.371,
             "threePct": 0.352
+          }
+        },
+        {
+          "name": "Buddy Hield",
+          "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 74,
+          "threePoint": 88,
+          "dunk": 65,
+          "attributes": {
+            "midRange": 50,
+            "closeShot": 97,
+            "layup": 78,
+            "standingDunk": 25,
+            "vertical": 78,
+            "speed": 75,
+            "ballHandle": 79,
+            "passAccuracy": 70,
+            "passVision": 44,
+            "passIq": 70,
+            "drawFoul": 59,
+            "postControl": 48,
+            "interiorDefense": 48,
+            "perimeterDefense": 69,
+            "steal": 70,
+            "block": 51,
+            "offensiveRebound": 43,
+            "defensiveRebound": 53,
+            "durability": 83,
+            "intangibles": 70
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Buddy-Hield-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 51,
+            "minutes": 16.1,
+            "points": 7.6,
+            "rebounds": 2.3,
+            "assists": 1.4,
+            "steals": 0.8,
+            "blocks": 0.2,
+            "fgPct": 0.437,
+            "threePct": 0.349
           }
         },
         {
@@ -2821,6 +2779,39 @@
             "fgPct": 0.426,
             "threePct": 0.388
           }
+        },
+        {
+          "name": "Robert Dillingham",
+          "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 73,
+          "threePoint": 74,
+          "dunk": 75,
+          "attributes": {
+            "midRange": 74,
+            "closeShot": 67,
+            "layup": 70,
+            "standingDunk": 30,
+            "vertical": 85,
+            "speed": 89,
+            "ballHandle": 90,
+            "passAccuracy": 69,
+            "passVision": 70,
+            "passIq": 68,
+            "drawFoul": 45,
+            "postControl": 39,
+            "interiorDefense": 34,
+            "perimeterDefense": 63,
+            "steal": 70,
+            "block": 37,
+            "offensiveRebound": 36,
+            "defensiveRebound": 53,
+            "durability": 84,
+            "intangibles": 70
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Robert-Dillingham-2K-Rating-80x80.png"
         },
         {
           "name": "Tidjane Salaün",
@@ -3591,39 +3582,6 @@
             "fgPct": 0.553,
             "threePct": 0.323
           }
-        },
-        {
-          "name": "Robert Dillingham",
-          "position": "PG",
-          "altPositions": [
-            "SG"
-          ],
-          "overall": 73,
-          "threePoint": 74,
-          "dunk": 75,
-          "attributes": {
-            "midRange": 74,
-            "closeShot": 67,
-            "layup": 70,
-            "standingDunk": 30,
-            "vertical": 85,
-            "speed": 89,
-            "ballHandle": 90,
-            "passAccuracy": 69,
-            "passVision": 70,
-            "passIq": 68,
-            "drawFoul": 45,
-            "postControl": 39,
-            "interiorDefense": 34,
-            "perimeterDefense": 63,
-            "steal": 70,
-            "block": 37,
-            "offensiveRebound": 36,
-            "defensiveRebound": 53,
-            "durability": 84,
-            "intangibles": 70
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Rob-Dillingham-2K-Rating-80x80.png"
         },
         {
           "name": "Noa Essengue",
@@ -4479,6 +4437,39 @@
       "name": "Dallas Mavericks",
       "players": [
         {
+          "name": "Kyrie Irving",
+          "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 87,
+          "threePoint": 86,
+          "dunk": 40,
+          "attributes": {
+            "midRange": 98,
+            "closeShot": 91,
+            "layup": 97,
+            "standingDunk": 25,
+            "vertical": 81,
+            "speed": 83,
+            "ballHandle": 99,
+            "passAccuracy": 80,
+            "passVision": 70,
+            "passIq": 80,
+            "drawFoul": 75,
+            "postControl": 54,
+            "interiorDefense": 32,
+            "perimeterDefense": 67,
+            "steal": 53,
+            "block": 51,
+            "offensiveRebound": 43,
+            "defensiveRebound": 51,
+            "durability": 53,
+            "intangibles": 30
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Kyrie-Irving-2K-Rating-80x80.png"
+        },
+        {
           "name": "Cooper Flagg",
           "position": "SF",
           "altPositions": [
@@ -4522,39 +4513,6 @@
             "fgPct": 0.468,
             "threePct": 0.295
           }
-        },
-        {
-          "name": "Kyrie Irving",
-          "position": "PG",
-          "altPositions": [
-            "SG"
-          ],
-          "overall": 87,
-          "threePoint": 86,
-          "dunk": 40,
-          "attributes": {
-            "midRange": 98,
-            "closeShot": 91,
-            "layup": 97,
-            "standingDunk": 25,
-            "vertical": 81,
-            "speed": 83,
-            "ballHandle": 99,
-            "passAccuracy": 80,
-            "passVision": 70,
-            "passIq": 80,
-            "drawFoul": 75,
-            "postControl": 54,
-            "interiorDefense": 32,
-            "perimeterDefense": 67,
-            "steal": 53,
-            "block": 51,
-            "offensiveRebound": 43,
-            "defensiveRebound": 51,
-            "durability": 53,
-            "intangibles": 30
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Kyrie-Irving-2K-Rating-80x80.png"
         },
         {
           "name": "P.J. Washington",
@@ -4602,44 +4560,44 @@
           }
         },
         {
-          "name": "Daniel Gafford",
+          "name": "Dereck Lively II",
           "position": "C",
           "overall": 79,
-          "threePoint": 40,
-          "dunk": 75,
+          "threePoint": 52,
+          "dunk": 83,
           "attributes": {
-            "midRange": 65,
-            "closeShot": 91,
-            "layup": 73,
+            "midRange": 60,
+            "closeShot": 97,
+            "layup": 82,
             "standingDunk": 85,
-            "vertical": 80,
-            "speed": 75,
-            "ballHandle": 35,
-            "passAccuracy": 37,
-            "passVision": 33,
-            "passIq": 37,
-            "drawFoul": 57,
-            "postControl": 67,
-            "interiorDefense": 84,
+            "vertical": 67,
+            "speed": 50,
+            "ballHandle": 52,
+            "passAccuracy": 69,
+            "passVision": 61,
+            "passIq": 68,
+            "drawFoul": 40,
+            "postControl": 59,
+            "interiorDefense": 83,
             "perimeterDefense": 57,
-            "steal": 46,
-            "block": 83,
-            "offensiveRebound": 81,
-            "defensiveRebound": 79,
-            "durability": 76,
+            "steal": 38,
+            "block": 90,
+            "offensiveRebound": 78,
+            "defensiveRebound": 80,
+            "durability": 57,
             "intangibles": 50
           },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Daniel-Gafford-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dereck-Lively-II-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 55,
-            "minutes": 21.7,
-            "points": 9.5,
-            "rebounds": 6.9,
-            "assists": 1.1,
-            "steals": 0.8,
-            "blocks": 1.3,
-            "fgPct": 0.655,
+            "gamesPlayed": 7,
+            "minutes": 16.4,
+            "points": 4.3,
+            "rebounds": 5.3,
+            "assists": 1.9,
+            "steals": 0.6,
+            "blocks": 1.6,
+            "fgPct": 0.611,
             "threePct": 0
           }
         },
@@ -4689,44 +4647,44 @@
           }
         },
         {
-          "name": "Dereck Lively II",
+          "name": "Daniel Gafford",
           "position": "C",
           "overall": 79,
-          "threePoint": 52,
-          "dunk": 83,
+          "threePoint": 40,
+          "dunk": 75,
           "attributes": {
-            "midRange": 60,
-            "closeShot": 97,
-            "layup": 82,
+            "midRange": 65,
+            "closeShot": 91,
+            "layup": 73,
             "standingDunk": 85,
-            "vertical": 67,
-            "speed": 50,
-            "ballHandle": 52,
-            "passAccuracy": 69,
-            "passVision": 61,
-            "passIq": 68,
-            "drawFoul": 40,
-            "postControl": 59,
-            "interiorDefense": 83,
+            "vertical": 80,
+            "speed": 75,
+            "ballHandle": 35,
+            "passAccuracy": 37,
+            "passVision": 33,
+            "passIq": 37,
+            "drawFoul": 57,
+            "postControl": 67,
+            "interiorDefense": 84,
             "perimeterDefense": 57,
-            "steal": 38,
-            "block": 90,
-            "offensiveRebound": 78,
-            "defensiveRebound": 80,
-            "durability": 57,
+            "steal": 46,
+            "block": 83,
+            "offensiveRebound": 81,
+            "defensiveRebound": 79,
+            "durability": 76,
             "intangibles": 50
           },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dereck-Lively-II-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Daniel-Gafford-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 7,
-            "minutes": 16.4,
-            "points": 4.3,
-            "rebounds": 5.3,
-            "assists": 1.9,
-            "steals": 0.6,
-            "blocks": 1.6,
-            "fgPct": 0.611,
+            "gamesPlayed": 55,
+            "minutes": 21.7,
+            "points": 9.5,
+            "rebounds": 6.9,
+            "assists": 1.1,
+            "steals": 0.8,
+            "blocks": 1.3,
+            "fgPct": 0.655,
             "threePct": 0
           }
         },
@@ -4944,6 +4902,48 @@
           "imageUrl": "https://www.2kratings.com/wp-content/uploads/Morez-Johnson-Jr-2K-Rating-80x80.png"
         },
         {
+          "name": "Dwight Powell",
+          "position": "C",
+          "overall": 72,
+          "threePoint": 75,
+          "dunk": 65,
+          "attributes": {
+            "midRange": 69,
+            "closeShot": 96,
+            "layup": 71,
+            "standingDunk": 75,
+            "vertical": 67,
+            "speed": 71,
+            "ballHandle": 60,
+            "passAccuracy": 55,
+            "passVision": 36,
+            "passIq": 64,
+            "drawFoul": 43,
+            "postControl": 79,
+            "interiorDefense": 74,
+            "perimeterDefense": 45,
+            "steal": 49,
+            "block": 60,
+            "offensiveRebound": 74,
+            "defensiveRebound": 69,
+            "durability": 74,
+            "intangibles": 30
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dwight-Powell-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 63,
+            "minutes": 14.3,
+            "points": 3.3,
+            "rebounds": 4.1,
+            "assists": 1.1,
+            "steals": 0.5,
+            "blocks": 0.3,
+            "fgPct": 0.644,
+            "threePct": 0.286
+          }
+        },
+        {
           "name": "Caleb Martin",
           "position": "PF",
           "altPositions": [
@@ -4989,39 +4989,6 @@
           }
         },
         {
-          "name": "Tarik Biberovic",
-          "position": "SF",
-          "altPositions": [
-            "SG"
-          ],
-          "overall": 71,
-          "threePoint": 85,
-          "dunk": 65,
-          "attributes": {
-            "midRange": 78,
-            "closeShot": 76,
-            "layup": 70,
-            "standingDunk": 30,
-            "vertical": 54,
-            "speed": 68,
-            "ballHandle": 69,
-            "passAccuracy": 54,
-            "passVision": 42,
-            "passIq": 55,
-            "drawFoul": 52,
-            "postControl": 44,
-            "interiorDefense": 49,
-            "perimeterDefense": 61,
-            "steal": 40,
-            "block": 25,
-            "offensiveRebound": 37,
-            "defensiveRebound": 46,
-            "durability": 80,
-            "intangibles": 40
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Tarik-Biberovic-2K-Rating-80x80.png"
-        },
-        {
           "name": "Jett Howard",
           "position": "SG",
           "altPositions": [
@@ -5065,6 +5032,39 @@
             "fgPct": 0.418,
             "threePct": 0.372
           }
+        },
+        {
+          "name": "Tarik Biberovic",
+          "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 71,
+          "threePoint": 85,
+          "dunk": 65,
+          "attributes": {
+            "midRange": 78,
+            "closeShot": 76,
+            "layup": 70,
+            "standingDunk": 30,
+            "vertical": 54,
+            "speed": 68,
+            "ballHandle": 69,
+            "passAccuracy": 54,
+            "passVision": 42,
+            "passIq": 55,
+            "drawFoul": 52,
+            "postControl": 44,
+            "interiorDefense": 49,
+            "perimeterDefense": 61,
+            "steal": 40,
+            "block": 25,
+            "offensiveRebound": 37,
+            "defensiveRebound": 46,
+            "durability": 80,
+            "intangibles": 40
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Tarik-Biberovic-2K-Rating-80x80.png"
         },
         {
           "name": "Moussa Cisse",
@@ -7383,51 +7383,6 @@
           "imageUrl": "https://www.2kratings.com/wp-content/uploads/Yaxel-Lendeborg-2K-Rating-80x80.png"
         },
         {
-          "name": "Dalen Terry",
-          "position": "SG",
-          "altPositions": [
-            "SF"
-          ],
-          "overall": 71,
-          "threePoint": 79,
-          "dunk": 80,
-          "attributes": {
-            "midRange": 72,
-            "closeShot": 62,
-            "layup": 76,
-            "standingDunk": 25,
-            "vertical": 69,
-            "speed": 76,
-            "ballHandle": 80,
-            "passAccuracy": 76,
-            "passVision": 62,
-            "passIq": 78,
-            "drawFoul": 54,
-            "postControl": 42,
-            "interiorDefense": 43,
-            "perimeterDefense": 69,
-            "steal": 76,
-            "block": 67,
-            "offensiveRebound": 48,
-            "defensiveRebound": 56,
-            "durability": 83,
-            "intangibles": 55
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dalen-Terry-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 48,
-            "minutes": 11.5,
-            "points": 3.7,
-            "rebounds": 1.8,
-            "assists": 1.4,
-            "steals": 0.6,
-            "blocks": 0.3,
-            "fgPct": 0.439,
-            "threePct": 0.364
-          }
-        },
-        {
           "name": "Charles Bassey",
           "position": "C",
           "overall": 71,
@@ -7512,6 +7467,51 @@
           }
         },
         {
+          "name": "Dalen Terry",
+          "position": "SG",
+          "altPositions": [
+            "SF"
+          ],
+          "overall": 71,
+          "threePoint": 79,
+          "dunk": 80,
+          "attributes": {
+            "midRange": 72,
+            "closeShot": 62,
+            "layup": 76,
+            "standingDunk": 25,
+            "vertical": 69,
+            "speed": 76,
+            "ballHandle": 80,
+            "passAccuracy": 76,
+            "passVision": 62,
+            "passIq": 78,
+            "drawFoul": 54,
+            "postControl": 42,
+            "interiorDefense": 43,
+            "perimeterDefense": 69,
+            "steal": 76,
+            "block": 67,
+            "offensiveRebound": 48,
+            "defensiveRebound": 56,
+            "durability": 83,
+            "intangibles": 55
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dalen-Terry-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 48,
+            "minutes": 11.5,
+            "points": 3.7,
+            "rebounds": 1.8,
+            "assists": 1.4,
+            "steals": 0.6,
+            "blocks": 0.3,
+            "fgPct": 0.439,
+            "threePct": 0.364
+          }
+        },
+        {
           "name": "Georges Niang",
           "position": "PF",
           "overall": 71,
@@ -7585,6 +7585,39 @@
             "fgPct": 0.444,
             "threePct": 0.25
           }
+        },
+        {
+          "name": "Graham Ike",
+          "position": "PF",
+          "altPositions": [
+            "C"
+          ],
+          "overall": 68,
+          "threePoint": 73,
+          "dunk": 70,
+          "attributes": {
+            "midRange": 74,
+            "closeShot": 75,
+            "layup": 67,
+            "standingDunk": 65,
+            "vertical": 68,
+            "speed": 54,
+            "ballHandle": 59,
+            "passAccuracy": 60,
+            "passVision": 49,
+            "passIq": 61,
+            "drawFoul": 40,
+            "postControl": 67,
+            "interiorDefense": 60,
+            "perimeterDefense": 54,
+            "steal": 44,
+            "block": 47,
+            "offensiveRebound": 67,
+            "defensiveRebound": 67,
+            "durability": 80,
+            "intangibles": 40
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Graham-Ike-2K-Rating-80x80.png"
         }
       ]
     },
@@ -7964,7 +7997,7 @@
             "durability": 63,
             "intangibles": 30
           },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Steven-Adams2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Steven-Adams-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
             "gamesPlayed": 32,
@@ -8051,7 +8084,7 @@
             "durability": 71,
             "intangibles": 60
           },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Bogdan-Bogdanovic-Tate-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Bogdan-Bogdanovic-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
             "gamesPlayed": 23,
@@ -9435,39 +9468,6 @@
           }
         },
         {
-          "name": "Keaton Wagler",
-          "position": "SG",
-          "altPositions": [
-            "PG"
-          ],
-          "overall": 75,
-          "threePoint": 80,
-          "dunk": 40,
-          "attributes": {
-            "midRange": 81,
-            "closeShot": 73,
-            "layup": 73,
-            "standingDunk": 25,
-            "vertical": 76,
-            "speed": 73,
-            "ballHandle": 82,
-            "passAccuracy": 80,
-            "passVision": 79,
-            "passIq": 82,
-            "drawFoul": 59,
-            "postControl": 52,
-            "interiorDefense": 43,
-            "perimeterDefense": 68,
-            "steal": 42,
-            "block": 37,
-            "offensiveRebound": 35,
-            "defensiveRebound": 46,
-            "durability": 80,
-            "intangibles": 65
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Keaton-Wagler-2K-Rating-80x80.png"
-        },
-        {
           "name": "Kris Dunn",
           "position": "PG",
           "altPositions": [
@@ -9511,6 +9511,39 @@
             "fgPct": 0.476,
             "threePct": 0.374
           }
+        },
+        {
+          "name": "Keaton Wagler",
+          "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
+          "overall": 75,
+          "threePoint": 80,
+          "dunk": 40,
+          "attributes": {
+            "midRange": 81,
+            "closeShot": 73,
+            "layup": 73,
+            "standingDunk": 25,
+            "vertical": 76,
+            "speed": 73,
+            "ballHandle": 82,
+            "passAccuracy": 80,
+            "passVision": 79,
+            "passIq": 82,
+            "drawFoul": 59,
+            "postControl": 52,
+            "interiorDefense": 43,
+            "perimeterDefense": 68,
+            "steal": 42,
+            "block": 37,
+            "offensiveRebound": 35,
+            "defensiveRebound": 46,
+            "durability": 80,
+            "intangibles": 65
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Keaton-Wagler-2K-Rating-80x80.png"
         },
         {
           "name": "Isaiah Jackson",
@@ -9648,48 +9681,48 @@
           }
         },
         {
-          "name": "Jalen Pickett",
-          "position": "PG",
+          "name": "Gradey Dick",
+          "position": "SF",
           "altPositions": [
             "SG"
           ],
           "overall": 73,
-          "threePoint": 81,
-          "dunk": 60,
+          "threePoint": 72,
+          "dunk": 75,
           "attributes": {
-            "midRange": 70,
-            "closeShot": 91,
-            "layup": 75,
-            "standingDunk": 25,
-            "vertical": 67,
-            "speed": 72,
+            "midRange": 82,
+            "closeShot": 66,
+            "layup": 73,
+            "standingDunk": 35,
+            "vertical": 78,
+            "speed": 76,
             "ballHandle": 75,
-            "passAccuracy": 72,
-            "passVision": 70,
-            "passIq": 74,
-            "drawFoul": 50,
-            "postControl": 58,
-            "interiorDefense": 47,
-            "perimeterDefense": 62,
-            "steal": 37,
-            "block": 37,
-            "offensiveRebound": 40,
-            "defensiveRebound": 60,
-            "durability": 81,
-            "intangibles": 90
+            "passAccuracy": 67,
+            "passVision": 32,
+            "passIq": 65,
+            "drawFoul": 60,
+            "postControl": 40,
+            "interiorDefense": 55,
+            "perimeterDefense": 73,
+            "steal": 59,
+            "block": 40,
+            "offensiveRebound": 47,
+            "defensiveRebound": 53,
+            "durability": 86,
+            "intangibles": 40
           },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jalen-Pickett-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Gradey-Dick-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 50,
-            "minutes": 16.1,
-            "points": 5.2,
-            "rebounds": 2.3,
-            "assists": 2.3,
-            "steals": 0.3,
+            "gamesPlayed": 76,
+            "minutes": 14,
+            "points": 6,
+            "rebounds": 1.9,
+            "assists": 0.7,
+            "steals": 0.6,
             "blocks": 0.1,
-            "fgPct": 0.422,
-            "threePct": 0.386
+            "fgPct": 0.419,
+            "threePct": 0.301
           }
         },
         {
@@ -9738,93 +9771,48 @@
           }
         },
         {
-          "name": "Gradey Dick",
-          "position": "SF",
+          "name": "Jalen Pickett",
+          "position": "PG",
           "altPositions": [
             "SG"
           ],
           "overall": 73,
-          "threePoint": 72,
-          "dunk": 75,
-          "attributes": {
-            "midRange": 82,
-            "closeShot": 66,
-            "layup": 73,
-            "standingDunk": 35,
-            "vertical": 78,
-            "speed": 76,
-            "ballHandle": 75,
-            "passAccuracy": 67,
-            "passVision": 32,
-            "passIq": 65,
-            "drawFoul": 60,
-            "postControl": 40,
-            "interiorDefense": 55,
-            "perimeterDefense": 73,
-            "steal": 59,
-            "block": 40,
-            "offensiveRebound": 47,
-            "defensiveRebound": 53,
-            "durability": 86,
-            "intangibles": 40
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Gradey-Dick-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 76,
-            "minutes": 14,
-            "points": 6,
-            "rebounds": 1.9,
-            "assists": 0.7,
-            "steals": 0.6,
-            "blocks": 0.1,
-            "fgPct": 0.419,
-            "threePct": 0.301
-          }
-        },
-        {
-          "name": "Johni Broome",
-          "position": "PF",
-          "altPositions": [
-            "C"
-          ],
-          "overall": 70,
-          "threePoint": 69,
+          "threePoint": 81,
           "dunk": 60,
           "attributes": {
-            "midRange": 75,
-            "closeShot": 75,
-            "layup": 73,
-            "standingDunk": 50,
-            "vertical": 51,
-            "speed": 60,
-            "ballHandle": 67,
-            "passAccuracy": 69,
-            "passVision": 42,
-            "passIq": 69,
-            "drawFoul": 55,
-            "postControl": 70,
-            "interiorDefense": 70,
-            "perimeterDefense": 60,
-            "steal": 49,
-            "block": 72,
-            "offensiveRebound": 69,
-            "defensiveRebound": 69,
-            "durability": 68,
-            "intangibles": 35
+            "midRange": 70,
+            "closeShot": 91,
+            "layup": 75,
+            "standingDunk": 25,
+            "vertical": 67,
+            "speed": 72,
+            "ballHandle": 75,
+            "passAccuracy": 72,
+            "passVision": 70,
+            "passIq": 74,
+            "drawFoul": 50,
+            "postControl": 58,
+            "interiorDefense": 47,
+            "perimeterDefense": 62,
+            "steal": 37,
+            "block": 37,
+            "offensiveRebound": 40,
+            "defensiveRebound": 60,
+            "durability": 81,
+            "intangibles": 90
           },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Johni-Broome-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jalen-Pickett-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 11,
-            "minutes": 5,
-            "points": 0.9,
-            "rebounds": 1.5,
-            "assists": 0.4,
+            "gamesPlayed": 50,
+            "minutes": 16.1,
+            "points": 5.2,
+            "rebounds": 2.3,
+            "assists": 2.3,
             "steals": 0.3,
-            "blocks": 0.2,
-            "fgPct": 0.167,
-            "threePct": 0
+            "blocks": 0.1,
+            "fgPct": 0.422,
+            "threePct": 0.386
           }
         },
         {
@@ -9937,36 +9925,6 @@
             "intangibles": 40
           },
           "imageUrl": "https://www.2kratings.com/wp-content/uploads/Nick-Martinelli-2K-Rating-80x80.png"
-        },
-        {
-          "name": "Jamarion Sharp",
-          "position": "C",
-          "overall": 67,
-          "threePoint": 40,
-          "dunk": 65,
-          "attributes": {
-            "midRange": 30,
-            "closeShot": 69,
-            "layup": 50,
-            "standingDunk": 75,
-            "vertical": 30,
-            "speed": 25,
-            "ballHandle": 27,
-            "passAccuracy": 35,
-            "passVision": 30,
-            "passIq": 35,
-            "drawFoul": 70,
-            "postControl": 54,
-            "interiorDefense": 70,
-            "perimeterDefense": 30,
-            "steal": 42,
-            "block": 82,
-            "offensiveRebound": 67,
-            "defensiveRebound": 70,
-            "durability": 65,
-            "intangibles": 90
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jamarion-Sharp-2K-Rating-80x80.png"
         }
       ]
     },
@@ -10831,48 +10789,6 @@
           }
         },
         {
-          "name": "Zach Edey",
-          "position": "C",
-          "overall": 80,
-          "threePoint": 74,
-          "dunk": 70,
-          "attributes": {
-            "midRange": 78,
-            "closeShot": 98,
-            "layup": 61,
-            "standingDunk": 80,
-            "vertical": 66,
-            "speed": 46,
-            "ballHandle": 39,
-            "passAccuracy": 58,
-            "passVision": 32,
-            "passIq": 63,
-            "drawFoul": 50,
-            "postControl": 82,
-            "interiorDefense": 79,
-            "perimeterDefense": 37,
-            "steal": 38,
-            "block": 94,
-            "offensiveRebound": 92,
-            "defensiveRebound": 91,
-            "durability": 57,
-            "intangibles": 45
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Zach-Edey-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 11,
-            "minutes": 25.8,
-            "points": 13.6,
-            "rebounds": 11.1,
-            "assists": 1.1,
-            "steals": 0.6,
-            "blocks": 1.9,
-            "fgPct": 0.633,
-            "threePct": 0.2
-          }
-        },
-        {
           "name": "Cedric Coward",
           "position": "SG",
           "altPositions": [
@@ -10918,6 +10834,81 @@
           }
         },
         {
+          "name": "Zach Edey",
+          "position": "C",
+          "overall": 80,
+          "threePoint": 74,
+          "dunk": 70,
+          "attributes": {
+            "midRange": 78,
+            "closeShot": 98,
+            "layup": 61,
+            "standingDunk": 80,
+            "vertical": 66,
+            "speed": 46,
+            "ballHandle": 39,
+            "passAccuracy": 58,
+            "passVision": 32,
+            "passIq": 63,
+            "drawFoul": 50,
+            "postControl": 82,
+            "interiorDefense": 79,
+            "perimeterDefense": 37,
+            "steal": 38,
+            "block": 94,
+            "offensiveRebound": 92,
+            "defensiveRebound": 91,
+            "durability": 57,
+            "intangibles": 45
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Zach-Edey-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 11,
+            "minutes": 25.8,
+            "points": 13.6,
+            "rebounds": 11.1,
+            "assists": 1.1,
+            "steals": 0.6,
+            "blocks": 1.9,
+            "fgPct": 0.633,
+            "threePct": 0.2
+          }
+        },
+        {
+          "name": "Cameron Boozer",
+          "position": "PF",
+          "altPositions": [
+            "C"
+          ],
+          "overall": 79,
+          "threePoint": 79,
+          "dunk": 70,
+          "attributes": {
+            "midRange": 81,
+            "closeShot": 85,
+            "layup": 75,
+            "standingDunk": 65,
+            "vertical": 71,
+            "speed": 68,
+            "ballHandle": 67,
+            "passAccuracy": 68,
+            "passVision": 57,
+            "passIq": 75,
+            "drawFoul": 68,
+            "postControl": 78,
+            "interiorDefense": 64,
+            "perimeterDefense": 59,
+            "steal": 47,
+            "block": 41,
+            "offensiveRebound": 70,
+            "defensiveRebound": 79,
+            "durability": 80,
+            "intangibles": 65
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Cameron-Boozer-2K-Rating-80x80.png"
+        },
+        {
           "name": "Jerami Grant",
           "position": "SF",
           "altPositions": [
@@ -10961,39 +10952,6 @@
             "fgPct": 0.453,
             "threePct": 0.389
           }
-        },
-        {
-          "name": "Cameron Boozer",
-          "position": "PF",
-          "altPositions": [
-            "C"
-          ],
-          "overall": 79,
-          "threePoint": 79,
-          "dunk": 70,
-          "attributes": {
-            "midRange": 81,
-            "closeShot": 85,
-            "layup": 75,
-            "standingDunk": 65,
-            "vertical": 71,
-            "speed": 68,
-            "ballHandle": 67,
-            "passAccuracy": 68,
-            "passVision": 57,
-            "passIq": 75,
-            "drawFoul": 68,
-            "postControl": 78,
-            "interiorDefense": 64,
-            "perimeterDefense": 59,
-            "steal": 47,
-            "block": 41,
-            "offensiveRebound": 70,
-            "defensiveRebound": 79,
-            "durability": 80,
-            "intangibles": 65
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Cameron-Boozer-2K-Rating-80x80.png"
         },
         {
           "name": "Jaylen Wells",
@@ -11176,51 +11134,6 @@
           }
         },
         {
-          "name": "Scotty Pippen Jr.",
-          "position": "PG",
-          "altPositions": [
-            "SG"
-          ],
-          "overall": 75,
-          "threePoint": 75,
-          "dunk": 65,
-          "attributes": {
-            "midRange": 79,
-            "closeShot": 74,
-            "layup": 81,
-            "standingDunk": 25,
-            "vertical": 79,
-            "speed": 82,
-            "ballHandle": 86,
-            "passAccuracy": 85,
-            "passVision": 82,
-            "passIq": 85,
-            "drawFoul": 50,
-            "postControl": 31,
-            "interiorDefense": 31,
-            "perimeterDefense": 62,
-            "steal": 93,
-            "block": 62,
-            "offensiveRebound": 47,
-            "defensiveRebound": 39,
-            "durability": 61,
-            "intangibles": 50
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Scotty-Pippen-Jr-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 10,
-            "minutes": 21.2,
-            "points": 11.4,
-            "rebounds": 2.2,
-            "assists": 4.7,
-            "steals": 1.9,
-            "blocks": 0.4,
-            "fgPct": 0.448,
-            "threePct": 0.313
-          }
-        },
-        {
           "name": "Olivier-Maxence Prosper",
           "position": "C",
           "altPositions": [
@@ -11266,48 +11179,48 @@
           }
         },
         {
-          "name": "Javon Small",
+          "name": "Scotty Pippen Jr.",
           "position": "PG",
           "altPositions": [
             "SG"
           ],
-          "overall": 74,
-          "threePoint": 82,
-          "dunk": 80,
+          "overall": 75,
+          "threePoint": 75,
+          "dunk": 65,
           "attributes": {
-            "midRange": 78,
-            "closeShot": 71,
-            "layup": 77,
-            "standingDunk": 35,
-            "vertical": 89,
-            "speed": 87,
-            "ballHandle": 79,
-            "passAccuracy": 75,
-            "passVision": 73,
-            "passIq": 75,
-            "drawFoul": 60,
-            "postControl": 32,
-            "interiorDefense": 44,
-            "perimeterDefense": 64,
-            "steal": 56,
-            "block": 50,
-            "offensiveRebound": 48,
-            "defensiveRebound": 56,
-            "durability": 73,
-            "intangibles": 65
+            "midRange": 79,
+            "closeShot": 74,
+            "layup": 81,
+            "standingDunk": 25,
+            "vertical": 79,
+            "speed": 82,
+            "ballHandle": 86,
+            "passAccuracy": 85,
+            "passVision": 82,
+            "passIq": 85,
+            "drawFoul": 50,
+            "postControl": 31,
+            "interiorDefense": 31,
+            "perimeterDefense": 62,
+            "steal": 93,
+            "block": 62,
+            "offensiveRebound": 47,
+            "defensiveRebound": 39,
+            "durability": 61,
+            "intangibles": 50
           },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Javon-Small-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Scotty-Pippen-Jr-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 41,
-            "minutes": 20.2,
-            "points": 9.7,
-            "rebounds": 3.1,
-            "assists": 3.7,
-            "steals": 0.8,
-            "blocks": 0.2,
-            "fgPct": 0.465,
-            "threePct": 0.423
+            "gamesPlayed": 10,
+            "minutes": 21.2,
+            "points": 11.4,
+            "rebounds": 2.2,
+            "assists": 4.7,
+            "steals": 1.9,
+            "blocks": 0.4,
+            "fgPct": 0.448,
+            "threePct": 0.313
           }
         },
         {
@@ -11401,48 +11314,48 @@
           }
         },
         {
-          "name": "D’Angelo Russell",
+          "name": "Javon Small",
           "position": "PG",
           "altPositions": [
             "SG"
           ],
-          "overall": 73,
-          "threePoint": 76,
-          "dunk": 45,
+          "overall": 74,
+          "threePoint": 82,
+          "dunk": 80,
           "attributes": {
-            "midRange": 92,
-            "closeShot": 94,
-            "layup": 85,
-            "standingDunk": 25,
-            "vertical": 71,
-            "speed": 81,
-            "ballHandle": 86,
-            "passAccuracy": 82,
-            "passVision": 82,
-            "passIq": 82,
-            "drawFoul": 67,
-            "postControl": 60,
-            "interiorDefense": 40,
-            "perimeterDefense": 57,
-            "steal": 40,
-            "block": 37,
-            "offensiveRebound": 35,
-            "defensiveRebound": 53,
-            "durability": 79,
-            "intangibles": 30
+            "midRange": 78,
+            "closeShot": 71,
+            "layup": 77,
+            "standingDunk": 35,
+            "vertical": 89,
+            "speed": 87,
+            "ballHandle": 79,
+            "passAccuracy": 75,
+            "passVision": 73,
+            "passIq": 75,
+            "drawFoul": 60,
+            "postControl": 32,
+            "interiorDefense": 44,
+            "perimeterDefense": 64,
+            "steal": 56,
+            "block": 50,
+            "offensiveRebound": 48,
+            "defensiveRebound": 56,
+            "durability": 73,
+            "intangibles": 65
           },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/DAngelo-Russell-2K-Rating-1-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Javon-Small-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 26,
-            "minutes": 19,
-            "points": 10.2,
-            "rebounds": 2.3,
-            "assists": 4,
-            "steals": 0.5,
-            "blocks": 0.1,
-            "fgPct": 0.405,
-            "threePct": 0.295
+            "gamesPlayed": 41,
+            "minutes": 20.2,
+            "points": 9.7,
+            "rebounds": 3.1,
+            "assists": 3.7,
+            "steals": 0.8,
+            "blocks": 0.2,
+            "fgPct": 0.465,
+            "threePct": 0.423
           }
         },
         {
@@ -11611,51 +11524,6 @@
           "imageUrl": "https://www.2kratings.com/wp-content/uploads/Karim-Lopez-2K-Rating-80x80.png"
         },
         {
-          "name": "Micah Peavy",
-          "position": "SF",
-          "altPositions": [
-            "SG"
-          ],
-          "overall": 71,
-          "threePoint": 69,
-          "dunk": 80,
-          "attributes": {
-            "midRange": 75,
-            "closeShot": 59,
-            "layup": 76,
-            "standingDunk": 40,
-            "vertical": 78,
-            "speed": 85,
-            "ballHandle": 76,
-            "passAccuracy": 75,
-            "passVision": 38,
-            "passIq": 75,
-            "drawFoul": 42,
-            "postControl": 47,
-            "interiorDefense": 59,
-            "perimeterDefense": 71,
-            "steal": 66,
-            "block": 47,
-            "offensiveRebound": 53,
-            "defensiveRebound": 47,
-            "durability": 85,
-            "intangibles": 40
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Micah-Peavy-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 61,
-            "minutes": 15,
-            "points": 4.3,
-            "rebounds": 1.9,
-            "assists": 1,
-            "steals": 0.7,
-            "blocks": 0.1,
-            "fgPct": 0.385,
-            "threePct": 0.259
-          }
-        },
-        {
           "name": "Jordan Hawkins",
           "position": "SG",
           "altPositions": [
@@ -11698,6 +11566,51 @@
             "blocks": 0.2,
             "fgPct": 0.366,
             "threePct": 0.348
+          }
+        },
+        {
+          "name": "Micah Peavy",
+          "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 71,
+          "threePoint": 69,
+          "dunk": 80,
+          "attributes": {
+            "midRange": 75,
+            "closeShot": 59,
+            "layup": 76,
+            "standingDunk": 40,
+            "vertical": 78,
+            "speed": 85,
+            "ballHandle": 76,
+            "passAccuracy": 75,
+            "passVision": 38,
+            "passIq": 75,
+            "drawFoul": 42,
+            "postControl": 47,
+            "interiorDefense": 59,
+            "perimeterDefense": 71,
+            "steal": 66,
+            "block": 47,
+            "offensiveRebound": 53,
+            "defensiveRebound": 47,
+            "durability": 85,
+            "intangibles": 40
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Micah-Peavy-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 61,
+            "minutes": 15,
+            "points": 4.3,
+            "rebounds": 1.9,
+            "assists": 1,
+            "steals": 0.7,
+            "blocks": 0.1,
+            "fgPct": 0.385,
+            "threePct": 0.259
           }
         }
       ]
@@ -12111,51 +12024,6 @@
           }
         },
         {
-          "name": "Dru Smith",
-          "position": "PG",
-          "altPositions": [
-            "SG"
-          ],
-          "overall": 73,
-          "threePoint": 71,
-          "dunk": 45,
-          "attributes": {
-            "midRange": 77,
-            "closeShot": 84,
-            "layup": 79,
-            "standingDunk": 40,
-            "vertical": 62,
-            "speed": 70,
-            "ballHandle": 79,
-            "passAccuracy": 78,
-            "passVision": 69,
-            "passIq": 78,
-            "drawFoul": 60,
-            "postControl": 40,
-            "interiorDefense": 40,
-            "perimeterDefense": 74,
-            "steal": 95,
-            "block": 56,
-            "offensiveRebound": 51,
-            "defensiveRebound": 51,
-            "durability": 72,
-            "intangibles": 70
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dru-Smith-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 70,
-            "minutes": 16.3,
-            "points": 5.6,
-            "rebounds": 2.5,
-            "assists": 2.6,
-            "steals": 1.4,
-            "blocks": 0.3,
-            "fgPct": 0.415,
-            "threePct": 0.295
-          }
-        },
-        {
           "name": "Nikola Jovic",
           "position": "C",
           "altPositions": [
@@ -12198,6 +12066,51 @@
             "blocks": 0.4,
             "fgPct": 0.366,
             "threePct": 0.269
+          }
+        },
+        {
+          "name": "Dru Smith",
+          "position": "PG",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 73,
+          "threePoint": 71,
+          "dunk": 45,
+          "attributes": {
+            "midRange": 77,
+            "closeShot": 84,
+            "layup": 79,
+            "standingDunk": 40,
+            "vertical": 62,
+            "speed": 70,
+            "ballHandle": 79,
+            "passAccuracy": 78,
+            "passVision": 69,
+            "passIq": 78,
+            "drawFoul": 60,
+            "postControl": 40,
+            "interiorDefense": 40,
+            "perimeterDefense": 74,
+            "steal": 95,
+            "block": 56,
+            "offensiveRebound": 51,
+            "defensiveRebound": 51,
+            "durability": 72,
+            "intangibles": 70
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Dru-Smith-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 70,
+            "minutes": 16.3,
+            "points": 5.6,
+            "rebounds": 2.5,
+            "assists": 2.6,
+            "steals": 1.4,
+            "blocks": 0.3,
+            "fgPct": 0.415,
+            "threePct": 0.295
           }
         },
         {
@@ -12330,6 +12243,51 @@
             "blocks": 0.3,
             "fgPct": 0.49,
             "threePct": 0.295
+          }
+        },
+        {
+          "name": "Bez Mbeng",
+          "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
+          "overall": 70,
+          "threePoint": 67,
+          "dunk": 65,
+          "attributes": {
+            "midRange": 66,
+            "closeShot": 78,
+            "layup": 67,
+            "standingDunk": 30,
+            "vertical": 75,
+            "speed": 75,
+            "ballHandle": 69,
+            "passAccuracy": 67,
+            "passVision": 51,
+            "passIq": 68,
+            "drawFoul": 47,
+            "postControl": 38,
+            "interiorDefense": 55,
+            "perimeterDefense": 73,
+            "steal": 86,
+            "block": 53,
+            "offensiveRebound": 44,
+            "defensiveRebound": 45,
+            "durability": 85,
+            "intangibles": 70
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Bez-Mbeng-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 15,
+            "minutes": 32.8,
+            "points": 8.1,
+            "rebounds": 3.8,
+            "assists": 4.1,
+            "steals": 2.3,
+            "blocks": 0.3,
+            "fgPct": 0.5,
+            "threePct": 0.194
           }
         },
         {
@@ -14178,48 +14136,48 @@
           }
         },
         {
-          "name": "Derik Queen",
-          "position": "PF",
+          "name": "Jeremiah Fears",
+          "position": "PG",
           "altPositions": [
-            "C"
+            "SG"
           ],
           "overall": 79,
-          "threePoint": 66,
+          "threePoint": 79,
           "dunk": 70,
           "attributes": {
-            "midRange": 71,
-            "closeShot": 85,
+            "midRange": 75,
+            "closeShot": 73,
             "layup": 82,
-            "standingDunk": 65,
-            "vertical": 62,
-            "speed": 54,
-            "ballHandle": 69,
-            "passAccuracy": 79,
-            "passVision": 70,
-            "passIq": 82,
-            "drawFoul": 75,
-            "postControl": 78,
-            "interiorDefense": 69,
-            "perimeterDefense": 52,
-            "steal": 59,
-            "block": 73,
-            "offensiveRebound": 60,
-            "defensiveRebound": 83,
+            "standingDunk": 40,
+            "vertical": 75,
+            "speed": 93,
+            "ballHandle": 88,
+            "passAccuracy": 78,
+            "passVision": 69,
+            "passIq": 79,
+            "drawFoul": 79,
+            "postControl": 40,
+            "interiorDefense": 38,
+            "perimeterDefense": 62,
+            "steal": 63,
+            "block": 53,
+            "offensiveRebound": 39,
+            "defensiveRebound": 56,
             "durability": 94,
-            "intangibles": 45
+            "intangibles": 70
           },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Derik-Queen-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jeremiah-Fears-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 81,
-            "minutes": 25,
-            "points": 11.7,
-            "rebounds": 7.1,
-            "assists": 3.7,
-            "steals": 1,
-            "blocks": 0.9,
-            "fgPct": 0.473,
-            "threePct": 0.261
+            "gamesPlayed": 82,
+            "minutes": 25.8,
+            "points": 14.3,
+            "rebounds": 3.7,
+            "assists": 3.4,
+            "steals": 1.2,
+            "blocks": 0.4,
+            "fgPct": 0.434,
+            "threePct": 0.33
           }
         },
         {
@@ -14268,48 +14226,48 @@
           }
         },
         {
-          "name": "Jeremiah Fears",
-          "position": "PG",
+          "name": "Derik Queen",
+          "position": "PF",
           "altPositions": [
-            "SG"
+            "C"
           ],
           "overall": 79,
-          "threePoint": 79,
+          "threePoint": 66,
           "dunk": 70,
           "attributes": {
-            "midRange": 75,
-            "closeShot": 73,
+            "midRange": 71,
+            "closeShot": 85,
             "layup": 82,
-            "standingDunk": 40,
-            "vertical": 75,
-            "speed": 93,
-            "ballHandle": 88,
-            "passAccuracy": 78,
-            "passVision": 69,
-            "passIq": 79,
-            "drawFoul": 79,
-            "postControl": 40,
-            "interiorDefense": 38,
-            "perimeterDefense": 62,
-            "steal": 63,
-            "block": 53,
-            "offensiveRebound": 39,
-            "defensiveRebound": 56,
+            "standingDunk": 65,
+            "vertical": 62,
+            "speed": 54,
+            "ballHandle": 69,
+            "passAccuracy": 79,
+            "passVision": 70,
+            "passIq": 82,
+            "drawFoul": 75,
+            "postControl": 78,
+            "interiorDefense": 69,
+            "perimeterDefense": 52,
+            "steal": 59,
+            "block": 73,
+            "offensiveRebound": 60,
+            "defensiveRebound": 83,
             "durability": 94,
-            "intangibles": 70
+            "intangibles": 45
           },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Jeremiah-Fears-2K-Rating-80x80.png",
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Derik-Queen-2K-Rating-80x80.png",
           "stats": {
             "season": "2025-26",
-            "gamesPlayed": 82,
-            "minutes": 25.8,
-            "points": 14.3,
-            "rebounds": 3.7,
-            "assists": 3.4,
-            "steals": 1.2,
-            "blocks": 0.4,
-            "fgPct": 0.434,
-            "threePct": 0.33
+            "gamesPlayed": 81,
+            "minutes": 25,
+            "points": 11.7,
+            "rebounds": 7.1,
+            "assists": 3.7,
+            "steals": 1,
+            "blocks": 0.9,
+            "fgPct": 0.473,
+            "threePct": 0.261
           }
         },
         {
@@ -14448,48 +14406,6 @@
           }
         },
         {
-          "name": "DeAndre Jordan",
-          "position": "C",
-          "overall": 74,
-          "threePoint": 40,
-          "dunk": 75,
-          "attributes": {
-            "midRange": 25,
-            "closeShot": 75,
-            "layup": 57,
-            "standingDunk": 75,
-            "vertical": 83,
-            "speed": 65,
-            "ballHandle": 30,
-            "passAccuracy": 25,
-            "passVision": 28,
-            "passIq": 66,
-            "drawFoul": 44,
-            "postControl": 52,
-            "interiorDefense": 70,
-            "perimeterDefense": 57,
-            "steal": 35,
-            "block": 85,
-            "offensiveRebound": 90,
-            "defensiveRebound": 94,
-            "durability": 75,
-            "intangibles": 65
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/DeAndre-Jordan-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 12,
-            "minutes": 16.6,
-            "points": 4.4,
-            "rebounds": 6.3,
-            "assists": 0.9,
-            "steals": 0.3,
-            "blocks": 0.8,
-            "fgPct": 0.656,
-            "threePct": 0
-          }
-        },
-        {
           "name": "Karlo Matkovic",
           "position": "PF",
           "altPositions": [
@@ -14532,6 +14448,48 @@
             "blocks": 0.9,
             "fgPct": 0.604,
             "threePct": 0.422
+          }
+        },
+        {
+          "name": "DeAndre Jordan",
+          "position": "C",
+          "overall": 74,
+          "threePoint": 40,
+          "dunk": 75,
+          "attributes": {
+            "midRange": 25,
+            "closeShot": 75,
+            "layup": 57,
+            "standingDunk": 75,
+            "vertical": 83,
+            "speed": 65,
+            "ballHandle": 30,
+            "passAccuracy": 25,
+            "passVision": 28,
+            "passIq": 66,
+            "drawFoul": 44,
+            "postControl": 52,
+            "interiorDefense": 70,
+            "perimeterDefense": 57,
+            "steal": 35,
+            "block": 85,
+            "offensiveRebound": 90,
+            "defensiveRebound": 94,
+            "durability": 75,
+            "intangibles": 65
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/DeAndre-Jordan-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 12,
+            "minutes": 16.6,
+            "points": 4.4,
+            "rebounds": 6.3,
+            "assists": 0.9,
+            "steals": 0.3,
+            "blocks": 0.8,
+            "fgPct": 0.656,
+            "threePct": 0
           }
         },
         {
@@ -14625,6 +14583,51 @@
           }
         },
         {
+          "name": "Julian Reese",
+          "position": "C",
+          "altPositions": [
+            "PF"
+          ],
+          "overall": 73,
+          "threePoint": 40,
+          "dunk": 70,
+          "attributes": {
+            "midRange": 66,
+            "closeShot": 73,
+            "layup": 78,
+            "standingDunk": 70,
+            "vertical": 75,
+            "speed": 68,
+            "ballHandle": 62,
+            "passAccuracy": 47,
+            "passVision": 37,
+            "passIq": 48,
+            "drawFoul": 65,
+            "postControl": 66,
+            "interiorDefense": 67,
+            "perimeterDefense": 59,
+            "steal": 43,
+            "block": 51,
+            "offensiveRebound": 90,
+            "defensiveRebound": 87,
+            "durability": 85,
+            "intangibles": 30
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Julian-Reese-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 13,
+            "minutes": 30.9,
+            "points": 11.8,
+            "rebounds": 10.5,
+            "assists": 1.8,
+            "steals": 1.4,
+            "blocks": 0.6,
+            "fgPct": 0.529,
+            "threePct": 0
+          }
+        },
+        {
           "name": "Christian Koloko",
           "position": "C",
           "overall": 71,
@@ -14664,51 +14667,6 @@
             "blocks": 0.9,
             "fgPct": 0.419,
             "threePct": 0.111
-          }
-        },
-        {
-          "name": "Kobe Bufkin",
-          "position": "SG",
-          "altPositions": [
-            "PG"
-          ],
-          "overall": 70,
-          "threePoint": 70,
-          "dunk": 75,
-          "attributes": {
-            "midRange": 79,
-            "closeShot": 80,
-            "layup": 80,
-            "standingDunk": 30,
-            "vertical": 80,
-            "speed": 86,
-            "ballHandle": 87,
-            "passAccuracy": 72,
-            "passVision": 67,
-            "passIq": 73,
-            "drawFoul": 40,
-            "postControl": 43,
-            "interiorDefense": 48,
-            "perimeterDefense": 64,
-            "steal": 38,
-            "block": 56,
-            "offensiveRebound": 46,
-            "defensiveRebound": 61,
-            "durability": 73,
-            "intangibles": 40
-          },
-          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Kobe-Bufkin-2K-Rating-80x80.png",
-          "stats": {
-            "season": "2025-26",
-            "gamesPlayed": 16,
-            "minutes": 7.4,
-            "points": 2.9,
-            "rebounds": 0.8,
-            "assists": 0.6,
-            "steals": 0.1,
-            "blocks": 0.2,
-            "fgPct": 0.3,
-            "threePct": 0.192
           }
         },
         {
@@ -14799,6 +14757,51 @@
             "blocks": 0.1,
             "fgPct": 0.324,
             "threePct": 0.211
+          }
+        },
+        {
+          "name": "Kobe Bufkin",
+          "position": "SG",
+          "altPositions": [
+            "PG"
+          ],
+          "overall": 70,
+          "threePoint": 70,
+          "dunk": 75,
+          "attributes": {
+            "midRange": 79,
+            "closeShot": 80,
+            "layup": 80,
+            "standingDunk": 30,
+            "vertical": 80,
+            "speed": 86,
+            "ballHandle": 87,
+            "passAccuracy": 72,
+            "passVision": 67,
+            "passIq": 73,
+            "drawFoul": 40,
+            "postControl": 43,
+            "interiorDefense": 48,
+            "perimeterDefense": 64,
+            "steal": 38,
+            "block": 56,
+            "offensiveRebound": 46,
+            "defensiveRebound": 61,
+            "durability": 73,
+            "intangibles": 40
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Kobe-Bufkin-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 16,
+            "minutes": 7.4,
+            "points": 2.9,
+            "rebounds": 0.8,
+            "assists": 0.6,
+            "steals": 0.1,
+            "blocks": 0.2,
+            "fgPct": 0.3,
+            "threePct": 0.192
           }
         },
         {
@@ -15440,6 +15443,51 @@
             "blocks": 0.1,
             "fgPct": 0.423,
             "threePct": 0.369
+          }
+        },
+        {
+          "name": "Kevin McCullar Jr.",
+          "position": "SF",
+          "altPositions": [
+            "SG"
+          ],
+          "overall": 70,
+          "threePoint": 74,
+          "dunk": 75,
+          "attributes": {
+            "midRange": 75,
+            "closeShot": 76,
+            "layup": 76,
+            "standingDunk": 45,
+            "vertical": 75,
+            "speed": 75,
+            "ballHandle": 66,
+            "passAccuracy": 68,
+            "passVision": 33,
+            "passIq": 67,
+            "drawFoul": 45,
+            "postControl": 60,
+            "interiorDefense": 52,
+            "perimeterDefense": 72,
+            "steal": 56,
+            "block": 63,
+            "offensiveRebound": 74,
+            "defensiveRebound": 55,
+            "durability": 84,
+            "intangibles": 30
+          },
+          "imageUrl": "https://www.2kratings.com/wp-content/uploads/Kevin-McCullar-Jr-2K-Rating-80x80.png",
+          "stats": {
+            "season": "2025-26",
+            "gamesPlayed": 21,
+            "minutes": 7.4,
+            "points": 2.4,
+            "rebounds": 1.3,
+            "assists": 1,
+            "steals": 0.4,
+            "blocks": 0,
+            "fgPct": 0.426,
+            "threePct": 0.333
           }
         },
         {
